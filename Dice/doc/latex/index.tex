@@ -1,0 +1,42 @@
+{\itshape Implementation of the \hyperlink{class_dice}{Dice} in d20 game}
+
+Submited by\+: Samuel R\+RJ Masuy -\/ 26590624.
+
+{\itshape I certify that this submission is my original work and meets the Faculty\textquotesingle{}s Expectations of Originality}
+
+\subsubsection*{\hyperlink{class_dice}{Dice} Rule}
+
+
+\begin{DoxyEnumerate}
+\item User input a string matching the following pattern\+: {\bfseries xdy\mbox{[}+z\mbox{]}}.
+\begin{DoxyItemize}
+\item Where {\bfseries x} is the number of times the dice has to be rolled.
+\item {\bfseries d} is a constant,
+\item {\bfseries y} is the kind of dice (number of sides on dice).
+\item $\ast$$\ast$+/-\/$\ast$$\ast$ is the operation of the modifier.
+\item And {\bfseries z} is a modifier to be applied, once all dice are rolled.
+\end{DoxyItemize}
+\item {\bfseries x} number of dice get created.
+\item All dice get rolled and produce a result of random(1, {\bfseries y}).
+\item Then, depending on the operation, we add or substract {\bfseries z}.
+\end{DoxyEnumerate}
+
+For example, {\bfseries 2d4\mbox{[}+5\mbox{]}} would result into\+: {\itshape random(1, 4) + random(1, 4) + 5}
+
+\subsubsection*{Design}
+
+
+\begin{DoxyItemize}
+\item {\bfseries N\+O\+TE\+:} All Code is formated according to \href{https://google.github.io/styleguide/cppguide.html}{\tt Google C++ style guide}.
+\item {\bfseries N\+O\+TE\+:} We have never been provided with documented {\itshape doxygen} tests. Therefore, I did my best to come up with tests, and provide the appropriate documentation. It might not exactly reflect what is expected.
+\end{DoxyItemize}
+
+I have decided to create a class, ({\bfseries \hyperlink{class_dice_roller}{Dice\+Roller}}), that parse the user input, and create the dices that will be rolled during the game.
+
+Once the {\bfseries \hyperlink{class_dice}{Dice}} are created, the {\bfseries \hyperlink{class_dice_roller}{Dice\+Roller}} rolls them all, and finally add or substract the modifier to output the result.
+
+\subsubsection*{Run}
+
+The main program, is in {\bfseries \hyperlink{_run_app_8cpp}{Run\+App.\+cpp}}.
+
+In the main program, we first execute the test suite, and then we execute, a sample program that goes over the main feature of this Implementation. 

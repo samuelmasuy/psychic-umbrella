@@ -1,0 +1,40 @@
+\hypertarget{class_dice_roller}{}\section{Dice\+Roller Class Reference}
+\label{class_dice_roller}\index{Dice\+Roller@{Dice\+Roller}}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+int \hyperlink{class_dice_roller_ac4af563d61e9fbc000b88081a8da3fee}{roll} (const std\+::string \&)
+\begin{DoxyCompactList}\small\item\em Roll a series of dice. \end{DoxyCompactList}\item 
+\hypertarget{class_dice_roller_aed8245bbdff7ebaf1946cbcdd44a76b2}{}\label{class_dice_roller_aed8245bbdff7ebaf1946cbcdd44a76b2} 
+std\+::vector$<$ \hyperlink{class_dice}{Dice} $\ast$ $>$ \& {\bfseries get\+Dices} ()
+\item 
+\hypertarget{class_dice_roller_a2e5652cc8b7f4ef78ef075e159bfd9ba}{}\label{class_dice_roller_a2e5652cc8b7f4ef78ef075e159bfd9ba} 
+int {\bfseries get\+Modifier} ()
+\end{DoxyCompactItemize}
+
+
+\subsection{Member Function Documentation}
+\hypertarget{class_dice_roller_ac4af563d61e9fbc000b88081a8da3fee}{}\label{class_dice_roller_ac4af563d61e9fbc000b88081a8da3fee} 
+\index{Dice\+Roller@{Dice\+Roller}!roll@{roll}}
+\index{roll@{roll}!Dice\+Roller@{Dice\+Roller}}
+\subsubsection{\texorpdfstring{roll()}{roll()}}
+{\footnotesize\ttfamily int Dice\+Roller\+::roll (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{rules }\end{DoxyParamCaption})}
+
+
+
+Roll a series of dice. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em rules} & string\+: a pattern that match the following {\ttfamily xdy\mbox{[}+z\mbox{]}}. Where x is the number of times the dice has to be rolled, d is a constant, y is the kind of dice (number of sides on dice). And z is a modifier to applied, once all dice are rolled.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Final result. 
+\end{DoxyReturn}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+\hyperlink{_dice_roller_8h}{Dice\+Roller.\+h}\item 
+\hyperlink{_dice_roller_8cpp}{Dice\+Roller.\+cpp}\end{DoxyCompactItemize}
