@@ -2,9 +2,6 @@
 
 Submited by: Samuel RRJ Masuy - 26590624.
 
-*I certify that this submission is my original work and meets the Faculty's
-Expectations of Originality*
-
 ### Dice Rule
 
 1. User input a string matching the following pattern: **xdy[+z]**.
