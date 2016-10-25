@@ -1,0 +1,121 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.12">
+  <compounddef id="class_dice" kind="class" language="C++" prot="public">
+    <compoundname>Dice</compoundname>
+    <includes refid="_dice_8h" local="yes">Dice.h</includes>
+      <sectiondef kind="private-static-attrib">
+      <memberdef kind="variable" id="class_dice_afb857d94c4abede11939a308770ea72b_1afb857d94c4abede11939a308770ea72b" prot="private" static="yes" mutable="no">
+        <type>const int</type>
+        <definition>const int Dice::DICEKIND</definition>
+        <argsstring></argsstring>
+        <name>DICEKIND</name>
+        <initializer>= 7</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>This indicates the number of different kinds of dice we have </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/Asma Laaribi/Documents/Visual Studio 2015/Projects/Project1/Project1/Dice.h" line="33" column="1" bodyfile="C:/Users/Asma Laaribi/Documents/Visual Studio 2015/Projects/Project1/Project1/Dice.h" bodystart="33" bodyend="-1"/>
+        <referencedby refid="class_dice_a7fb1c52019fa79aa3b73e6610da9139c_1a7fb1c52019fa79aa3b73e6610da9139c" compoundref="_dice_8cpp" startline="62" endline="163">parse</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="class_dice_a0a00c7ba6e7486d9cbcf7c8c64c65b1a_1a0a00c7ba6e7486d9cbcf7c8c64c65b1a" prot="private" static="yes" mutable="no">
+        <type>const int</type>
+        <definition>const int Dice::DICENUM</definition>
+        <argsstring>[DICEKIND]</argsstring>
+        <name>DICENUM</name>
+        <initializer>= { 4, 6, 8, 10, 12, 20, 100 }</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>contains the y value for each dy dice </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/Asma Laaribi/Documents/Visual Studio 2015/Projects/Project1/Project1/Dice.h" line="37" column="1" bodyfile="C:/Users/Asma Laaribi/Documents/Visual Studio 2015/Projects/Project1/Project1/Dice.h" bodystart="37" bodyend="-1"/>
+        <referencedby refid="class_dice_a7fb1c52019fa79aa3b73e6610da9139c_1a7fb1c52019fa79aa3b73e6610da9139c" compoundref="_dice_8cpp" startline="62" endline="163">parse</referencedby>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="class_dice_a6b9eadd945ad8fd3840379c8824e5d48_1a6b9eadd945ad8fd3840379c8824e5d48" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>Dice::Dice</definition>
+        <argsstring>()</argsstring>
+        <name>Dice</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>include &quot;Dice.h&quot; this is included as it is where we created and specificed the <ref refid="class_dice" kindref="compound">Dice</ref> Class include &quot;stdlib.h&quot; This Library includes several marcos, functions, and variable types needed, such as the NULL macro, and the rand function include &quot;iosstream&quot; This library includes basic input and output services such as &quot;cout&quot; in this case include &quot;time.h&quot; This library includes the variables and functions used to start the projects random number generator using srand(time) </para>        </detaileddescription>
+        <inbodydescription>
+<para>This starts the random number generator</para>        </inbodydescription>
+        <location file="C:/Users/Asma Laaribi/Documents/Visual Studio 2015/Projects/Project1/Project1/Dice.h" line="21" column="1" bodyfile="C:/Users/Asma Laaribi/Documents/Visual Studio 2015/Projects/Project1/Project1/Dice.cpp" bodystart="16" bodyend="22"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-static-func">
+      <memberdef kind="function" id="class_dice_a4ca42849612d2c9182f1d93deaa4cfb1_1a4ca42849612d2c9182f1d93deaa4cfb1" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>int</type>
+        <definition>int Dice::roll</definition>
+        <argsstring>(const string &amp;Expr)</argsstring>
+        <name>roll</name>
+        <param>
+          <type>const string &amp;</type>
+          <declname>Expr</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>rolls x dy dice, adds up the values and optionally adds z to it, returns the result Expr: regular expression in the format xdy[+z] returns -1 if the regular expression was not in the correct format </para>        </detaileddescription>
+        <inbodydescription>
+<para>Below are the variables</para><para>parsing the xdy+ z expression provided</para><para>if it is not in the right format this is the output</para><para>for each dice</para><para>outputs a random number in the range 1-diceKind and add it to the result</para><para>add the final addition to the result</para>        </inbodydescription>
+        <location file="C:/Users/Asma Laaribi/Documents/Visual Studio 2015/Projects/Project1/Project1/Dice.h" line="27" column="1" bodyfile="C:/Users/Asma Laaribi/Documents/Visual Studio 2015/Projects/Project1/Project1/Dice.cpp" bodystart="25" bodyend="60"/>
+        <references refid="class_dice_a7fb1c52019fa79aa3b73e6610da9139c_1a7fb1c52019fa79aa3b73e6610da9139c" compoundref="_dice_8cpp" startline="62" endline="163">parse</references>
+        <referencedby refid="main_8cpp_ae66f6b31b5ad750f1fe042a706a4e3d4_1ae66f6b31b5ad750f1fe042a706a4e3d4" compoundref="main_8cpp" startline="9" endline="38">main</referencedby>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="private-static-func">
+      <memberdef kind="function" id="class_dice_a7fb1c52019fa79aa3b73e6610da9139c_1a7fb1c52019fa79aa3b73e6610da9139c" prot="private" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool Dice::parse</definition>
+        <argsstring>(const string &amp;Expr, int &amp;diceNumber, int &amp;diceKind, int &amp;addition)</argsstring>
+        <name>parse</name>
+        <param>
+          <type>const string &amp;</type>
+          <declname>Expr</declname>
+        </param>
+        <param>
+          <type>int &amp;</type>
+          <declname>diceNumber</declname>
+        </param>
+        <param>
+          <type>int &amp;</type>
+          <declname>diceKind</declname>
+        </param>
+        <param>
+          <type>int &amp;</type>
+          <declname>addition</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>parses the expression given to us Expr: expression provided is xdy[+z] diceNumber: the x value gets saved here diceType: the y value gets saved here addition: the z value gets saved here if it is specified, otherwise it is set to 0 returns true if the expression was in the correct format, false otherwise </para>        </detaileddescription>
+        <inbodydescription>
+<para>the variables</para><para>this is the index of the current character in the expression</para><para>this reads the first part of the expression (x)</para><para>this updates the value of the number based on the current number</para><para>here we tell it to go to the next part of the expression</para><para>if no number was read, then the expression will not be valid</para><para>here if d is not first then it is not valid</para><para>here we tell it to go to the next part of the expression</para><para>read the next value in the regular expression (y)</para><para>value is updated based on the inputed value</para><para>here we tell it to go to the next expression</para><para>here we go through all the different kinds of dice</para><para>if the right kind of dice is inputed then everything will valid</para><para>if something is inputed other than the mentioned types then it is not valid and returns -1</para><para>here we see the third value of the expression which is z</para><para>this updates the value based on the inputed number</para><para>if everything is inputed correctly then it should return the random value</para>        </inbodydescription>
+        <location file="C:/Users/Asma Laaribi/Documents/Visual Studio 2015/Projects/Project1/Project1/Dice.h" line="46" column="1" bodyfile="C:/Users/Asma Laaribi/Documents/Visual Studio 2015/Projects/Project1/Project1/Dice.cpp" bodystart="62" bodyend="163"/>
+        <references refid="class_dice_afb857d94c4abede11939a308770ea72b_1afb857d94c4abede11939a308770ea72b" compoundref="_dice_8h" startline="33">DICEKIND</references>
+        <references refid="class_dice_a0a00c7ba6e7486d9cbcf7c8c64c65b1a_1a0a00c7ba6e7486d9cbcf7c8c64c65b1a" compoundref="_dice_8h" startline="37">DICENUM</references>
+        <referencedby refid="class_dice_a4ca42849612d2c9182f1d93deaa4cfb1_1a4ca42849612d2c9182f1d93deaa4cfb1" compoundref="_dice_8cpp" startline="25" endline="60">roll</referencedby>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+<para>include &quot;Dice.h&quot; this is included as it is where we created and specificed the <ref refid="class_dice" kindref="compound">Dice</ref> Class include &quot;stdlib.h&quot; This Library includes several marcos, functions, and variable types needed, such as the NULL macro, and the rand function include &quot;iosstream&quot; This library includes basic input and output services such as &quot;cout&quot; in this case include &quot;time.h&quot; This library includes the variables and functions used to start the projects random number generator using srand(time) </para>    </detaileddescription>
+    <location file="C:/Users/Asma Laaribi/Documents/Visual Studio 2015/Projects/Project1/Project1/Dice.h" line="18" column="1" bodyfile="C:/Users/Asma Laaribi/Documents/Visual Studio 2015/Projects/Project1/Project1/Dice.h" bodystart="17" bodyend="47"/>
+    <listofallmembers>
+      <member refid="class_dice_a6b9eadd945ad8fd3840379c8824e5d48_1a6b9eadd945ad8fd3840379c8824e5d48" prot="public" virt="non-virtual"><scope>Dice</scope><name>Dice</name></member>
+      <member refid="class_dice_afb857d94c4abede11939a308770ea72b_1afb857d94c4abede11939a308770ea72b" prot="private" virt="non-virtual"><scope>Dice</scope><name>DICEKIND</name></member>
+      <member refid="class_dice_a0a00c7ba6e7486d9cbcf7c8c64c65b1a_1a0a00c7ba6e7486d9cbcf7c8c64c65b1a" prot="private" virt="non-virtual"><scope>Dice</scope><name>DICENUM</name></member>
+      <member refid="class_dice_a7fb1c52019fa79aa3b73e6610da9139c_1a7fb1c52019fa79aa3b73e6610da9139c" prot="private" virt="non-virtual"><scope>Dice</scope><name>parse</name></member>
+      <member refid="class_dice_a4ca42849612d2c9182f1d93deaa4cfb1_1a4ca42849612d2c9182f1d93deaa4cfb1" prot="public" virt="non-virtual"><scope>Dice</scope><name>roll</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

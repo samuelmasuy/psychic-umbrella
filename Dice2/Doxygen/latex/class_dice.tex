@@ -1,0 +1,139 @@
+\hypertarget{class_dice}{}\section{Dice Class Reference}
+\label{class_dice}\index{Dice@{Dice}}
+
+
+{\ttfamily \#include \char`\"{}Dice.\+h\char`\"{}}
+
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{class_dice_a6b9eadd945ad8fd3840379c8824e5d48_a6b9eadd945ad8fd3840379c8824e5d48}{Dice} ()
+\end{DoxyCompactItemize}
+\subsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static int \hyperlink{class_dice_a4ca42849612d2c9182f1d93deaa4cfb1_a4ca42849612d2c9182f1d93deaa4cfb1}{roll} (const string \&Expr)
+\end{DoxyCompactItemize}
+\subsection*{Static Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static bool \hyperlink{class_dice_a7fb1c52019fa79aa3b73e6610da9139c_a7fb1c52019fa79aa3b73e6610da9139c}{parse} (const string \&Expr, int \&dice\+Number, int \&dice\+Kind, int \&addition)
+\end{DoxyCompactItemize}
+\subsection*{Static Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+static const int \hyperlink{class_dice_afb857d94c4abede11939a308770ea72b_afb857d94c4abede11939a308770ea72b}{D\+I\+C\+E\+K\+I\+ND} = 7
+\item 
+static const int \hyperlink{class_dice_a0a00c7ba6e7486d9cbcf7c8c64c65b1a_a0a00c7ba6e7486d9cbcf7c8c64c65b1a}{D\+I\+C\+E\+N\+UM} \mbox{[}\hyperlink{class_dice_afb857d94c4abede11939a308770ea72b_afb857d94c4abede11939a308770ea72b}{D\+I\+C\+E\+K\+I\+ND}\mbox{]} = \{ 4, 6, 8, 10, 12, 20, 100 \}
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+include \char`\"{}\+Dice.\+h\char`\"{} this is included as it is where we created and specificed the \hyperlink{class_dice}{Dice} Class include \char`\"{}stdlib.\+h\char`\"{} This Library includes several marcos, functions, and variable types needed, such as the N\+U\+LL macro, and the rand function include \char`\"{}iosstream\char`\"{} This library includes basic input and output services such as \char`\"{}cout\char`\"{} in this case include \char`\"{}time.\+h\char`\"{} This library includes the variables and functions used to start the projects random number generator using srand(time) 
+
+\subsection{Constructor \& Destructor Documentation}
+\hypertarget{class_dice_a6b9eadd945ad8fd3840379c8824e5d48_a6b9eadd945ad8fd3840379c8824e5d48}{}\label{class_dice_a6b9eadd945ad8fd3840379c8824e5d48_a6b9eadd945ad8fd3840379c8824e5d48} 
+\index{Dice@{Dice}!Dice@{Dice}}
+\index{Dice@{Dice}!Dice@{Dice}}
+\subsubsection{\texorpdfstring{Dice()}{Dice()}}
+{\footnotesize\ttfamily Dice\+::\+Dice (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+include \char`\"{}\+Dice.\+h\char`\"{} this is included as it is where we created and specificed the \hyperlink{class_dice}{Dice} Class include \char`\"{}stdlib.\+h\char`\"{} This Library includes several marcos, functions, and variable types needed, such as the N\+U\+LL macro, and the rand function include \char`\"{}iosstream\char`\"{} This library includes basic input and output services such as \char`\"{}cout\char`\"{} in this case include \char`\"{}time.\+h\char`\"{} This library includes the variables and functions used to start the projects random number generator using srand(time) This starts the random number generator
+
+\subsection{Member Function Documentation}
+\hypertarget{class_dice_a7fb1c52019fa79aa3b73e6610da9139c_a7fb1c52019fa79aa3b73e6610da9139c}{}\label{class_dice_a7fb1c52019fa79aa3b73e6610da9139c_a7fb1c52019fa79aa3b73e6610da9139c} 
+\index{Dice@{Dice}!parse@{parse}}
+\index{parse@{parse}!Dice@{Dice}}
+\subsubsection{\texorpdfstring{parse()}{parse()}}
+{\footnotesize\ttfamily bool Dice\+::parse (\begin{DoxyParamCaption}\item[{const string \&}]{Expr,  }\item[{int \&}]{dice\+Number,  }\item[{int \&}]{dice\+Kind,  }\item[{int \&}]{addition }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
+
+parses the expression given to us Expr\+: expression provided is xdy\mbox{[}+z\mbox{]} dice\+Number\+: the x value gets saved here dice\+Type\+: the y value gets saved here addition\+: the z value gets saved here if it is specified, otherwise it is set to 0 returns true if the expression was in the correct format, false otherwise the variables
+
+this is the index of the current character in the expression
+
+this reads the first part of the expression (x)
+
+this updates the value of the number based on the current number
+
+here we tell it to go to the next part of the expression
+
+if no number was read, then the expression will not be valid
+
+here if d is not first then it is not valid
+
+here we tell it to go to the next part of the expression
+
+read the next value in the regular expression (y)
+
+value is updated based on the inputed value
+
+here we tell it to go to the next expression
+
+here we go through all the different kinds of dice
+
+if the right kind of dice is inputed then everything will valid
+
+if something is inputed other than the mentioned types then it is not valid and returns -\/1
+
+here we see the third value of the expression which is z
+
+this updates the value based on the inputed number
+
+if everything is inputed correctly then it should return the random valueHere is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=311pt]{class_dice_a7fb1c52019fa79aa3b73e6610da9139c_a7fb1c52019fa79aa3b73e6610da9139c_icgraph}
+\end{center}
+\end{figure}
+\hypertarget{class_dice_a4ca42849612d2c9182f1d93deaa4cfb1_a4ca42849612d2c9182f1d93deaa4cfb1}{}\label{class_dice_a4ca42849612d2c9182f1d93deaa4cfb1_a4ca42849612d2c9182f1d93deaa4cfb1} 
+\index{Dice@{Dice}!roll@{roll}}
+\index{roll@{roll}!Dice@{Dice}}
+\subsubsection{\texorpdfstring{roll()}{roll()}}
+{\footnotesize\ttfamily int Dice\+::roll (\begin{DoxyParamCaption}\item[{const string \&}]{Expr }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+rolls x dy dice, adds up the values and optionally adds z to it, returns the result Expr\+: regular expression in the format xdy\mbox{[}+z\mbox{]} returns -\/1 if the regular expression was not in the correct format Below are the variables
+
+parsing the xdy+ z expression provided
+
+if it is not in the right format this is the output
+
+for each dice
+
+outputs a random number in the range 1-\/dice\+Kind and add it to the result
+
+add the final addition to the resultHere is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=237pt]{class_dice_a4ca42849612d2c9182f1d93deaa4cfb1_a4ca42849612d2c9182f1d93deaa4cfb1_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=209pt]{class_dice_a4ca42849612d2c9182f1d93deaa4cfb1_a4ca42849612d2c9182f1d93deaa4cfb1_icgraph}
+\end{center}
+\end{figure}
+
+
+\subsection{Member Data Documentation}
+\hypertarget{class_dice_afb857d94c4abede11939a308770ea72b_afb857d94c4abede11939a308770ea72b}{}\label{class_dice_afb857d94c4abede11939a308770ea72b_afb857d94c4abede11939a308770ea72b} 
+\index{Dice@{Dice}!D\+I\+C\+E\+K\+I\+ND@{D\+I\+C\+E\+K\+I\+ND}}
+\index{D\+I\+C\+E\+K\+I\+ND@{D\+I\+C\+E\+K\+I\+ND}!Dice@{Dice}}
+\subsubsection{\texorpdfstring{D\+I\+C\+E\+K\+I\+ND}{DICEKIND}}
+{\footnotesize\ttfamily const int Dice\+::\+D\+I\+C\+E\+K\+I\+ND = 7\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
+
+This indicates the number of different kinds of dice we have \hypertarget{class_dice_a0a00c7ba6e7486d9cbcf7c8c64c65b1a_a0a00c7ba6e7486d9cbcf7c8c64c65b1a}{}\label{class_dice_a0a00c7ba6e7486d9cbcf7c8c64c65b1a_a0a00c7ba6e7486d9cbcf7c8c64c65b1a} 
+\index{Dice@{Dice}!D\+I\+C\+E\+N\+UM@{D\+I\+C\+E\+N\+UM}}
+\index{D\+I\+C\+E\+N\+UM@{D\+I\+C\+E\+N\+UM}!Dice@{Dice}}
+\subsubsection{\texorpdfstring{D\+I\+C\+E\+N\+UM}{DICENUM}}
+{\footnotesize\ttfamily const int Dice\+::\+D\+I\+C\+E\+N\+UM = \{ 4, 6, 8, 10, 12, 20, 100 \}\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
+
+contains the y value for each dy dice 
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+C\+:/\+Users/\+Asma Laaribi/\+Documents/\+Visual Studio 2015/\+Projects/\+Project1/\+Project1/\hyperlink{_dice_8h}{Dice.\+h}\item 
+C\+:/\+Users/\+Asma Laaribi/\+Documents/\+Visual Studio 2015/\+Projects/\+Project1/\+Project1/\hyperlink{_dice_8cpp}{Dice.\+cpp}\end{DoxyCompactItemize}

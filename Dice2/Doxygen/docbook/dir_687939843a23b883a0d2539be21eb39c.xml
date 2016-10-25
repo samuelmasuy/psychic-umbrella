@@ -1,0 +1,29 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xml:id="dir_687939843a23b883a0d2539be21eb39c">
+    <title>C:/Users/Asma Laaribi/Documents/Visual Studio 2015 Directory Reference</title>
+<para>Directory dependency diagram for C:/Users/Asma Laaribi/Documents/Visual Studio 2015</para>
+<para>
+    <figure>
+        <title>Directory Dependency diagram</title>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="1" fileref="dir_687939843a23b883a0d2539be21eb39c_dep.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </figure>
+</para>
+        <simplesect>
+            <title> Directories </title>
+            <para>
+                <itemizedlist>
+                    <listitem>
+                        <para>dir <link linkend="dir_5073a1c123ea1b85914c914bb5881024">C:/Users/Asma Laaribi/Documents/Visual Studio 2015/Projects</link></para>
+                    </listitem>
+                </itemizedlist>
+            </para>
+        </simplesect>
+    <simplesect>
+        <title>Detailed Description</title>
+    <para>Directory location is C:/Users/Asma Laaribi/Documents/Visual Studio 2015/</para>
+    </simplesect>
+</section>
