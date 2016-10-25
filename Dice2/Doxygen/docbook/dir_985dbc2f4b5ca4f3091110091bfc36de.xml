@@ -1,0 +1,43 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xml:id="dir_985dbc2f4b5ca4f3091110091bfc36de">
+    <title>C:/Users/Asma Laaribi/Documents/Visual Studio 2015/Projects/Project1/Project1 Directory Reference</title>
+<para>Directory dependency diagram for C:/Users/Asma Laaribi/Documents/Visual Studio 2015/Projects/Project1/Project1</para>
+<para>
+    <figure>
+        <title>Directory Dependency diagram</title>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="1" fileref="dir_985dbc2f4b5ca4f3091110091bfc36de_dep.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </figure>
+</para>
+        <simplesect>
+            <title> File </title>
+            <para>
+                <itemizedlist>
+                    <listitem>
+                        <para>file <link linkend="_dice_8cpp">Dice.cpp</link></para>
+                    </listitem>
+                </itemizedlist>
+            </para>
+            <para>
+                <itemizedlist>
+                    <listitem>
+                        <para>file <link linkend="_dice_8h">Dice.h</link></para>
+                    </listitem>
+                </itemizedlist>
+            </para>
+            <para>
+                <itemizedlist>
+                    <listitem>
+                        <para>file <link linkend="main_8cpp">main.cpp</link></para>
+                    </listitem>
+                </itemizedlist>
+            </para>
+        </simplesect>
+    <simplesect>
+        <title>Detailed Description</title>
+    <para>Directory location is C:/Users/Asma Laaribi/Documents/Visual Studio 2015/Projects/Project1/Project1/</para>
+    </simplesect>
+</section>

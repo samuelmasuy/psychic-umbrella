@@ -1,0 +1,88 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.12">
+  <compounddef id="_dice_8h" kind="file" language="C++">
+    <compoundname>Dice.h</compoundname>
+    <includes local="no">stdlib.h</includes>
+    <includes local="no">iostream</includes>
+    <includes local="no">time.h</includes>
+    <includes local="no">string</includes>
+    <includedby refid="_dice_8cpp" local="yes">C:/Users/Asma Laaribi/Documents/Visual Studio 2015/Projects/Project1/Project1/Dice.cpp</includedby>
+    <includedby refid="main_8cpp" local="yes">C:/Users/Asma Laaribi/Documents/Visual Studio 2015/Projects/Project1/Project1/main.cpp</includedby>
+    <incdepgraph>
+      <node id="8">
+        <label>stdlib.h</label>
+      </node>
+      <node id="11">
+        <label>string</label>
+      </node>
+      <node id="10">
+        <label>time.h</label>
+      </node>
+      <node id="9">
+        <label>iostream</label>
+      </node>
+      <node id="7">
+        <label>C:/Users/Asma Laaribi/Documents/Visual Studio 2015/Projects/Project1/Project1/Dice.h</label>
+        <link refid="_dice_8h"/>
+        <childnode refid="8" relation="include">
+        </childnode>
+        <childnode refid="9" relation="include">
+        </childnode>
+        <childnode refid="10" relation="include">
+        </childnode>
+        <childnode refid="11" relation="include">
+        </childnode>
+      </node>
+    </incdepgraph>
+    <invincdepgraph>
+      <node id="13">
+        <label>C:/Users/Asma Laaribi/Documents/Visual Studio 2015/Projects/Project1/Project1/Dice.cpp</label>
+        <link refid="_dice_8cpp"/>
+      </node>
+      <node id="14">
+        <label>C:/Users/Asma Laaribi/Documents/Visual Studio 2015/Projects/Project1/Project1/main.cpp</label>
+        <link refid="main_8cpp"/>
+      </node>
+      <node id="12">
+        <label>C:/Users/Asma Laaribi/Documents/Visual Studio 2015/Projects/Project1/Project1/Dice.h</label>
+        <link refid="_dice_8h"/>
+        <childnode refid="13" relation="include">
+        </childnode>
+        <childnode refid="14" relation="include">
+        </childnode>
+      </node>
+    </invincdepgraph>
+    <innerclass refid="class_dice" prot="public">Dice</innerclass>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <programlisting>
+<codeline lineno="1"><highlight class="normal"></highlight></codeline>
+<codeline lineno="2"><highlight class="normal"></highlight><highlight class="preprocessor">#ifndef<sp/>DICE_H</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="3"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>DICE_H</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="4"><highlight class="normal"></highlight></codeline>
+<codeline lineno="5"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;stdlib.h&gt;</highlight><highlight class="normal"><sp/></highlight></codeline>
+<codeline lineno="6"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;iostream&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="7"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;time.h&gt;</highlight><highlight class="normal"><sp/></highlight></codeline>
+<codeline lineno="8"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;string&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="9"><highlight class="normal"></highlight></codeline>
+<codeline lineno="10"><highlight class="normal"></highlight><highlight class="keyword">using</highlight><highlight class="normal"><sp/>std::string;</highlight></codeline>
+<codeline lineno="17" refid="class_dice" refkind="compound"><highlight class="keyword">class<sp/></highlight><highlight class="normal"><ref refid="class_dice" kindref="compound">Dice</ref></highlight></codeline>
+<codeline lineno="18"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="19"><highlight class="normal"></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="20"><highlight class="normal"></highlight></codeline>
+<codeline lineno="21"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="class_dice_a6b9eadd945ad8fd3840379c8824e5d48_1a6b9eadd945ad8fd3840379c8824e5d48" kindref="member">Dice</ref>();</highlight></codeline>
+<codeline lineno="27"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/><ref refid="class_dice_a4ca42849612d2c9182f1d93deaa4cfb1_1a4ca42849612d2c9182f1d93deaa4cfb1" kindref="member">roll</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">string</highlight><highlight class="normal"><sp/>&amp;<sp/>Expr);</highlight></codeline>
+<codeline lineno="28"><highlight class="normal"></highlight></codeline>
+<codeline lineno="29"><highlight class="normal"></highlight><highlight class="keyword">private</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="33" refid="class_dice_afb857d94c4abede11939a308770ea72b_1afb857d94c4abede11939a308770ea72b" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/><ref refid="class_dice_afb857d94c4abede11939a308770ea72b_1afb857d94c4abede11939a308770ea72b" kindref="member">DICEKIND</ref><sp/>=<sp/>7;</highlight></codeline>
+<codeline lineno="37" refid="class_dice_a0a00c7ba6e7486d9cbcf7c8c64c65b1a_1a0a00c7ba6e7486d9cbcf7c8c64c65b1a" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/><ref refid="class_dice_a0a00c7ba6e7486d9cbcf7c8c64c65b1a_1a0a00c7ba6e7486d9cbcf7c8c64c65b1a" kindref="member">DICENUM</ref>[<ref refid="class_dice_afb857d94c4abede11939a308770ea72b_1afb857d94c4abede11939a308770ea72b" kindref="member">DICEKIND</ref>];</highlight></codeline>
+<codeline lineno="46"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/><ref refid="class_dice_a7fb1c52019fa79aa3b73e6610da9139c_1a7fb1c52019fa79aa3b73e6610da9139c" kindref="member">parse</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">string</highlight><highlight class="normal"><sp/>&amp;<sp/>Expr,<sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>&amp;<sp/>diceNumber,<sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>&amp;<sp/>diceKind,<sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>&amp;<sp/>addition);</highlight></codeline>
+<codeline lineno="47"><highlight class="normal">};</highlight></codeline>
+<codeline lineno="48"><highlight class="normal"></highlight></codeline>
+<codeline lineno="49"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight></codeline>
+    </programlisting>
+    <location file="C:/Users/Asma Laaribi/Documents/Visual Studio 2015/Projects/Project1/Project1/Dice.h"/>
+  </compounddef>
+</doxygen>
