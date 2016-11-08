@@ -112,7 +112,13 @@ void Game::openChest() {
   cg->setChestBuilder(new ConcreteChestBuilder());
   cg->constructChest();
   Chest* chest = cg->getChest();
-  chest->print();
+  Item* item = chest->getItem();
+  item->print();
+  cout << "Would you like your character to be equiped with this item? ('y'/'n'): " << endl;
+  if ((choice = getch()) == 'y') {
+    character->equipItem(item);
+    map->setCell(chest->positionY, chest->postionX, EMPTY);
+  }
   delete cg;
 }
 
