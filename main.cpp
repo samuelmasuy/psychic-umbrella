@@ -61,7 +61,7 @@ void main() {
     delete md;
     md = NULL;
     break;
-  case 3:
+  case 2:
     string filename = get_filename();
 
     Map* map = new Map(filename);

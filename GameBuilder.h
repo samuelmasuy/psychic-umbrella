@@ -1,3 +1,7 @@
+/**
+ * @file GameBuilder.h
+ * @brief Definition of the Builder Pattern for the game.
+ */
 #pragma once
 
 #include "Game.h"

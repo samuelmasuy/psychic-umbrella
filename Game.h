@@ -1,5 +1,10 @@
+/**
+ * @file Game.h
+ * @brief Definition of the Game walkthought.
+ */
 #pragma once
 
+#include <conio.h>
 #include <iostream>
 #include <fstream>
 #include <string>
@@ -11,6 +16,11 @@
 #include <ChestBuilder.h>
 
 using namespace std;
+
+#define KEY_UP 72
+#define KEY_DOWN 80
+#define KEY_LEFT 75
+#define KEY_RIGHT 77
 
 class Game {
  public:
@@ -25,7 +35,7 @@ class Game {
   Map* map;
   Character* character;
   void initializeCharacterPositionOnMap();
-  void move(int, int, int);
+  void move(int, int, int, int);
   void openChest();
   void fightMonster();
   ItemDirector* id;

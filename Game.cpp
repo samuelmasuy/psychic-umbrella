@@ -1,3 +1,7 @@
+/**
+ * @file Game.cpp
+ * @brief Implementation of the Game walkthought.
+ */
 #include "Game.h"
 
 void Game::play() {
@@ -14,15 +18,21 @@ void Game::play() {
     characterPositionX = character->getPostionX();
     characterPositionY = character->getPostionY();
     // check if character at the exit
-    if (map->getCell(characterPositionX, characterPositionY) != "exit") {
+    if (map->getCell(characterPositionX, characterPositionY) != EXIT) {
       map->print();
 
       switch (choice = getch()) {
       case KEY_RIGHT:
+        move(characterPositionX + 1, characterPositionY);
+        break;
       case KEY_LEFT:
+        move(characterPositionX - 1, characterPositionY);
+        break;
       case KEY_UP:
+        move(characterPositionX, characterPositionY + 1);
+        break;
       case KEY_DOWN:
-        move(choice, characterPositionX, characterPositionY);
+        move(characterPositionX, characterPositionY - 1);
         break;
       case 'q':
         cout << "Do you want to quit the game? ('y'/'n'): " << endl;
@@ -44,8 +54,8 @@ void Game::play() {
 void Game::stop() {
   int characterPositionX = character->getPostionX();
   int characterPositionY = character->getPostionY();
-  if (map->getCell(characterPositionX, characterPositionY) != "exit") {
-    map->setCell(characterPositionX, characterPositionY, "empty");
+  if (map->getCell(characterPositionX, characterPositionY) != EXIT) {
+    map->setCell(characterPositionX, characterPositionY, EMPTY);
   }
   // might need to put back character original coordinate  + for map
   map->save();
@@ -54,31 +64,65 @@ void Game::stop() {
 void Game::initializeCharacterPositionOnMap() {
   for (int y = 0; y < map->getRows(); y++) {
     for (int x = 0; x < map->getColumns(); x++) {
-      if (map->getCell(y, x) == "character") {
+      if (map->getCell(y, x) == CHARACTER) {
         player->setPostionX(x);
         player->setPostionY(y);
+        return;
       }
     }
   }
 }
 
-void Game::move(int choice, int characterPositionX, int characterPositionY) {
-  switch (choice) {
-  case KEY_RIGHT:
-    break;
-  case KEY_LEFT:
-    break;
-  case KEY_UP:
-    break;
-  case KEY_DOWN:
-    break;
+void Game::move(int old_x, int old_y, int new_x, int new_y) {
+  int mapRows = map->getRows();
+  int mapColumns = map->getColumns();
+  // Check for valid move
+  if (!(new_x >= mapRows || new_x < 0 || new_y >= mapColumns || new_y < 0)) {
+    char new_cell_type = map->getCell(new_x, new_y)
+    switch (map->getCell(new_x, new_y)) {
+    case WALL:
+      break;
+    case EMPTY:
+      // set previous cell to empty
+      map->setCell(old_x, old_y, EMPTY);
+      // set character location to the new cell
+      character->setPostionX(new_x);
+      character->setPostionY(new_y);
+      map->setCell(old_x, old_y, CHARACTER);
+      break;
+    case EXIT:
+      // set previous cell to empty
+      map->setCell(old_x, old_y, EMPTY);
+      // set character location to the new cell
+      character->setPostionX(new_x);
+      character->setPostionY(new_y);
+      break;
+    case CHEST:
+      openChest();
+      break;
+    case MONSTER:
+      fightMonster();
+      break;
+    }
   }
 }
 
 void Game::openChest() {
+  ChestDirector* cg = new ChestDirector();
+  cg->setChestBuilder(new ConcreteChestBuilder());
+  cg->constructChest();
+  Chest* chest = cg->getChest();
+  chest->print();
+  delete cg;
 }
 
 void Game::fightMonster() {
+  CharacterDirector* cd = new CharacterDirector();
+  cd->setCharacterBuilder(new ConcreteMonsterBuilder());
+  cd->constructCharacter();
+  Character* monster = cg->getCharacter();
+  monster->print();
+  delete cd;
 }
 
 void Game::setMap(Map* n_map) {
