@@ -147,29 +147,33 @@ int Character::generateStats()
 
 void Character::saveCharacter(Character* character)
 {
-	/*
+	
 	ofstream ofs("savedCharacter.ros", ios::binary);
 	ofs.write((char *)&character, sizeof(character));
 	ofs.close();
-	*/
 	
+	/*
 	ofstream outfile;
 	outfile.open(filename.c_str(), ios::out | ios::app | ios::binary);
 	outfile.write((char *)(&character), sizeof(character));
 	outfile.close();
+	*/
 
 }
 void Character::loadCharacter(Character* character)
 {
-	/*ifstream ifs("savedCharacter.ros", ios::binary);
+	ifstream ifs("savedCharacter.ros", ios::binary);
 	ifs.read((char *)&character, sizeof(character));
 	ifs.close();
-	*/
+	
+	
+	/*
 	ifstream infile;
 	infile.open(filename.c_str(), ios::binary);
 
 	while (infile.read((char *)&character, sizeof(character)))
 	infile.close();
+	*/
 }
 
 void Character::playerInfo()
@@ -224,26 +228,28 @@ bool Character::equipItem(Item item)
 	else
 		return false;
 
-	backpack.removeItem(type);
+	if(backpack.getSize() > 0)
+		backpack.removeItem(type); //takes it out of backpack
 	return true;
+	
 }
 
-bool Character::unequipItem(string itemToRemove)
+bool Character::unequipItem(string item)
 {
-	string type = itemToRemove;
+	string type = item;
 
 	//remove item from correct slot
-	if (type == "Helmet")
+	if (type == "Helmet") 
 	{
 		backpack.addItem(equipment[Helmet]);
 		equipment[Helmet] = emptyItem;
 	}
-	else if (type == "Armor")
+	else if (type == "Armor") 
 	{
 		backpack.addItem(equipment[Armor]);
 		equipment[Armor] = emptyItem;
 	}
-	else if (type == "Weapon")
+	else if (type == "Weapon") 
 	{
 		backpack.addItem(equipment[Weapon]);
 		equipment[Weapon] = emptyItem;
@@ -253,17 +259,17 @@ bool Character::unequipItem(string itemToRemove)
 		backpack.addItem(equipment[Shield]);
 		equipment[Shield] = emptyItem;
 	}
-	else if (type == "Ring")
+	else if (type == "Ring") 
 	{
 		backpack.addItem(equipment[Ring]);
 		equipment[Ring] = emptyItem;
 	}
-	else if (type == "Belt")
+	else if (type == "Belt") 
 	{
 		backpack.addItem(equipment[Belt]);
 		equipment[Belt] = emptyItem;
 	}
-	else if (type == "Boots")
+	else if (type == "Boots") 
 	{
 		backpack.addItem(equipment[Boots]);
 		equipment[Boots] = emptyItem;

@@ -25,8 +25,8 @@ public:
 	int armorModifier();
 	int attackBonus();
 	int damageBonus();
-	void saveCharacter(Character* character);
-	void loadCharacter(Character* character);
+	void saveCharacter(Character* );
+	void loadCharacter(Character* );
 	void playerInfo();
 	bool equipItem(Item);
 	bool unequipItem(string);

@@ -22,10 +22,9 @@ void Subject::detach(Observer* o){
 
 //Informs observers associated with subject of state change by call update method on each observer
 void Subject::notify(){
-		list<Observer *>::iterator iterate_observers = observers->begin();
-		list<Observer *>::iterator end = observers->end();
-		for (; iterate_observers != end; ++iterate_observers){
-			(*iterate_observers)->update();
-		}
-	}
+	list<Observer *>::iterator i = observers->begin();
+	for (; i != observers->end(); ++i)
+		(*i)->update();
+};
+
 
