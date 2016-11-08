@@ -1,3 +1,7 @@
+/**
+ * @file main.cpp
+ * @brief Driver for d20 game.
+ */
 #include <iostream>
 #include <string>
 #include <fstream>
@@ -11,13 +15,12 @@
 using namespace std;
 
 // Definitions of helper functions
-int validate_choice(int min, int max);
+int validate_choice(int, int);
 string get_filename();
-bool has_ending(string const &str, string const &ending);
+bool has_ending(string const &, string const &);
 
 void main() {
   cout << "Dungeons And Dragons Game" << endl;
-
 
   // Create a character
   CharacterDirector* cd = new CharacterDirector();
@@ -38,18 +41,18 @@ void main() {
   cout << "2. Play a custom game" << endl;
   cout << "3. Edit a map" << endl;
 
-  int choice = validate_choice(1, 2);
+  int choice = validate_choice(1, 3);
 
   switch (choice) {
-  case 1: {
+  case 1:
     MapDirector* md = new MapDirector();
     md->setMapBuilder(new ConcreteMapBuilder());
     md->constructMap();
     Map* map = mg->getMap()
 
-    GameBuilder* gb = new GameBuilder();
+               GameBuilder* gb = new GameBuilder();
     gb->constructGame();
-    gb->setPlayerAndMap(player, map);
+    gb->setCharacterAndMap(player, map);
     Game* game = gb->getGame();
     game->play();
 
@@ -58,28 +61,25 @@ void main() {
     delete md;
     md = NULL;
     break;
-  }
-  case 3: {
+  case 3:
     string filename = get_filename();
 
     Map* map = new Map(filename);
 
     GameBuilder* gb = new GameBuilder();
     gb->constructGame();
-    gb->setPlayerAndMap(player, map);
+    gb->setCharacterAndMap(player, map);
     Game* game = gb->getGame();
     game->play();
 
     delete gb;
     gb = NULL;
-  }
-  case 3: {
+  case 3:
     cout << "Enter a map name: " << endl;
     string name;
     getline(cin, name);
     MapEditor* editor = new MapEditor(name);
     break;
-  }
   }
 }
 
