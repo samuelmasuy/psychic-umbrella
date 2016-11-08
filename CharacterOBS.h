@@ -7,6 +7,7 @@ public:
 	CharacterOBS();
 	CharacterOBS(Character* theCharacter);
 	virtual ~CharacterOBS();
+	void printPlayerInfo();
 	void update();
 private:
 	Character* character;

@@ -11,12 +11,15 @@ CharacterOBS::CharacterOBS(Character* theCharacter)
 	character = theCharacter;
 	character->attach(this);
 
+}void CharacterOBS::printPlayerInfo()
+{
+	system("CLS");
+	character->playerInfo();
 }
 
 void CharacterOBS::update()
 {
-	system("CLS");
-	character->playerInfo();
+	printPlayerInfo();
 	
 }
 
