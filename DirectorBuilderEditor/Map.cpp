@@ -1,7 +1,6 @@
 #include "Map.h"
 
-// we need  a large stack size for backtracking
-//#pragma comment(linker, "/STACK:16000000")
+
 
 // default constructor
 Map::Map()
@@ -116,7 +115,6 @@ bool Map::Backtracking(CELL_TYPE **v, int row0, int col0, int row1, int col1)
 	if (row0 == row1 && col0 == col1)
 		return true;
 	v[row0][col0] = true;
-	// check around (4 neighbourhood)
 	bool ret = 
 		Backtracking(v, row0 + 1, col0, row1, col1) ||
 		Backtracking(v, row0 - 1, col0, row1, col1) ||
