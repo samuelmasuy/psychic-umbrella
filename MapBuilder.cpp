@@ -178,13 +178,14 @@ bool Map::ValidCell(CELL_TYPE x)
 		x == CHAR_WALL ||
 		x == CHAR_ENTRY ||
 		x == CHAR_EXIT ||
-		x == CHAR_CHEST ||
-		x == CHAR_ARMOR ||
-		x == CHAR_SHIELD ||
-		x == CHAR_WEAPON ||
-		x == CHAR_BOOTS ||
-		x == CHAR_RING ||
-		x == CHAR_HELMET;
+		x == CHAR_CHEST;
+  // ||
+		// x == CHAR_ARMOR ||
+		// x == CHAR_SHIELD ||
+		// x == CHAR_WEAPON ||
+		// x == CHAR_BOOTS ||
+		// x == CHAR_RING ||
+		// x == CHAR_HELMET;
 }
 ///
 /// Sets to save map
@@ -516,12 +517,12 @@ string Map::CellToString(CELL_TYPE x)
 	case CHAR_ENTRY: return "Entrance"; break;
 	case CHAR_EXIT: return "Exit"; break;
 	case CHAR_CHEST: return "Chest"; break;
-	case CHAR_ARMOR: return  "Armor"; break;
-	case CHAR_SHIELD: return "Shield"; break;
-	case CHAR_WEAPON: return "Weapon"; break;
-	case CHAR_BOOTS: return "Boots"; break;
-	case CHAR_RING: return "Ring"; break;
-	case CHAR_HELMET: return "Helmet"; break;
+	// case CHAR_ARMOR: return  "Armor"; break;
+	// case CHAR_SHIELD: return "Shield"; break;
+	// case CHAR_WEAPON: return "Weapon"; break;
+	// case CHAR_BOOTS: return "Boots"; break;
+	// case CHAR_RING: return "Ring"; break;
+	// case CHAR_HELMET: return "Helmet"; break;
 	}
 	return "Invalid";
 }

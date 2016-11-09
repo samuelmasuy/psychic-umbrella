@@ -18,14 +18,14 @@ class MapObserver;
 #define CHAR_ENEMY   'E'
 #define CHAR_WALL    '*'
 #define CHAR_ENTRY	 'I'
-#define CHAR_EXIT	 'O'
+#define CHAR_EXIT	   'O'
 #define CHAR_CHEST   'c'
-#define CHAR_ARMOR   'a'
-#define CHAR_SHIELD  's'
-#define CHAR_WEAPON  'w'
-#define CHAR_BOOTS   'b'
-#define CHAR_RING    'r'
-#define CHAR_HELMET  'h'
+// #define CHAR_ARMOR   'a'
+// #define CHAR_SHIELD  's'
+// #define CHAR_WEAPON  'w'
+// #define CHAR_BOOTS   'b'
+// #define CHAR_RING    'r'
+// #define CHAR_HELMET  'h'
 
 
 
