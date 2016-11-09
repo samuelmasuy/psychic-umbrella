@@ -28,6 +28,12 @@ int Enhancement::getBonus()
 	return bonus;
 }
 
+void Enhancement::setEnhacement(string type_name, int bonus_val)
+{
+	type = type_name;
+	bonus = bonus_val;
+}
+
 Enhancement::~Enhancement()
 {
 }

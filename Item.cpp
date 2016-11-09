@@ -4,11 +4,13 @@
 #include <vector>
 #include <algorithm>
 #include "Item.h"
+#include <fstream>
+#include <iostream>
 
 using namespace std;
 
 
-
+const string fileName = "items.ros";
 
 Item::Item()
 {
@@ -87,12 +89,17 @@ bool Item::validateItem()
 
 	return true;
 }
-	/* TO DO
+
+void Item::setType(string newType){
+	type = newType;
+}
+void Item::setInfluences(Enhancement newEnhancement){
+	influence.insert(influence.begin(), newEnhancement);
+}
+ 
 void Item::saveItem(Item* item)
 {
-	string fileName;
-	cout << "File Name: ";
-	cin >> fileName;
+	
 	ofstream ofs(fileName, ios::binary);
 
 	ofs.write((char*)&item, sizeof(item));
@@ -100,14 +107,12 @@ void Item::saveItem(Item* item)
 
 void Item::loadItem(Item* item)
 {
-	string fileName;
-	cout << "Load File: ";
-	cin >> fileName;
+	
 
 	ifstream ifs(fileName, ios::binary);
 	ifs.read((char *)&item, sizeof(item));
 }
-*/
+
 
 /*
 

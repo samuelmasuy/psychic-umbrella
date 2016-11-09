@@ -14,6 +14,7 @@ public:
 	Enhancement(string type, int bonus);
 	string getType();
 	int getBonus();
+	void setEnhacement(string, int);
 	~Enhancement();
 	
 

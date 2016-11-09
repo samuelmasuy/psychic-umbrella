@@ -21,6 +21,7 @@ public:
 	int getSize();
 	void removeItem(string itemType);
 	int getItemIndex(string);
+	void printBackpack();
 
 private:
 	vector<Item> items;

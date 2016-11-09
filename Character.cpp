@@ -228,8 +228,8 @@ bool Character::equipItem(Item item)
 	else
 		return false;
 
-	if(backpack.getSize() > 0)
-		backpack.removeItem(type); //takes it out of backpack
+	//if(backpack.getSize() > 0)
+	//	backpack.removeItem(type); //takes it out of backpack
 	return true;
 	
 }
@@ -278,4 +278,9 @@ bool Character::unequipItem(string item)
 		return false;
 
 	return true;
+}
+
+void Character::printEquippedItems()
+{
+
 }

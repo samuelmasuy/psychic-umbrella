@@ -30,6 +30,7 @@ public:
 	void playerInfo();
 	bool equipItem(Item);
 	bool unequipItem(string);
+	void printEquippedItems();
 private: 
 	string characterType;
 	int abilityScores[6];

@@ -1,4 +1,5 @@
 #include "ItemContainer.h"
+#include <iostream>
 
 
 
@@ -55,13 +56,32 @@ int ItemContainer::getSize(){
 }
 
 int ItemContainer::getItemIndex(string itemType){
-	for (int i = 0; i < items.size(); i++)
-	if (items[i].getType() == itemType)
-		return i;
+	int j = 0;
+	for (; j < items.size(); j++)
+	{
+		if (items[j].getType() == itemType)
+		{
+			return j;
+		}
+	}
+			
 }
 
 void ItemContainer::removeItem(string itemType){
 
 	int index = getItemIndex(itemType);
 	items.erase(items.begin() + index);
+}
+
+void ItemContainer::printBackpack()
+{
+	if (items.size() > 0)
+	{
+		for (int i = 0; i < items.size(); i++)
+		{
+			cout << items[i].getType() << "{ " << items.at(i).getInfluences().at(0).getType() << " +" << items.at(i).getInfluences().at(0).getBonus() << " }";
+		}
+	}
+	else
+		cout << "Backpack is empty\n";
 }
