@@ -18,7 +18,7 @@ void Game::play() {
     characterPositionX = character->getPostionX();
     characterPositionY = character->getPostionY();
     // check if character at the exit
-    if (map->getCell(characterPositionX, characterPositionY) != EXIT) {
+    if (map->getCell(characterPositionX, characterPositionY) != CHAR_EXIT) {
       map->print();
 
       switch (choice = getch()) {
@@ -54,8 +54,8 @@ void Game::play() {
 void Game::stop() {
   int characterPositionX = character->getPostionX();
   int characterPositionY = character->getPostionY();
-  if (map->getCell(characterPositionX, characterPositionY) != EXIT) {
-    map->setCell(characterPositionX, characterPositionY, EMPTY);
+  if (map->getCell(characterPositionX, characterPositionY) != CHAR_EXIT) {
+    map->setCell(characterPositionX, characterPositionY, CHAR_EMPTY);
   }
   // might need to put back character original coordinate  + for map
   map->save();
@@ -64,7 +64,7 @@ void Game::stop() {
 void Game::initializeCharacterPositionOnMap() {
   for (int y = 0; y < map->getRows(); y++) {
     for (int x = 0; x < map->getColumns(); x++) {
-      if (map->getCell(y, x) == CHARACTER) {
+      if (map->getCell(y, x) == CHAR_PLAYER) {
         player->setPostionX(x);
         player->setPostionY(y);
         return;
@@ -82,25 +82,25 @@ void Game::move(int old_x, int old_y, int new_x, int new_y) {
     switch (map->getCell(new_x, new_y)) {
     case WALL:
       break;
-    case EMPTY:
+    case CHAR_EMPTY:
       // set previous cell to empty
-      map->setCell(old_x, old_y, EMPTY);
+      map->setCell(old_x, old_y, CHAR_EMPTY);
       // set character location to the new cell
       character->setPostionX(new_x);
       character->setPostionY(new_y);
-      map->setCell(old_x, old_y, CHARACTER);
+      map->setCell(old_x, old_y, CHAR_PLAYER);
       break;
-    case EXIT:
+    case CHAR_EXIT:
       // set previous cell to empty
-      map->setCell(old_x, old_y, EMPTY);
+      map->setCell(old_x, old_y, CHAR_EMPTY);
       // set character location to the new cell
       character->setPostionX(new_x);
       character->setPostionY(new_y);
       break;
-    case CHEST:
+    case CHAR_CHEST:
       openChest();
       break;
-    case MONSTER:
+    case CHAR_MONSTER:
       fightMonster();
       break;
     }
@@ -117,7 +117,7 @@ void Game::openChest() {
   cout << "Would you like your character to be equiped with this item? ('y'/'n'): " << endl;
   if ((choice = getch()) == 'y') {
     character->equipItem(item);
-    map->setCell(chest->positionY, chest->postionX, EMPTY);
+    map->setCell(chest->positionX, chest->postionY, CHAR_EMPTY);
   }
   delete cg;
 }

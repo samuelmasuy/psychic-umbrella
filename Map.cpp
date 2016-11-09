@@ -176,7 +176,7 @@ bool Map::ValidCell(CELL_TYPE x)
 		x == CHAR_PLAYER ||
 		x == CHAR_ENEMY ||
 		x == CHAR_WALL ||
-		x == CHAR_ENTRY ||
+		x == CHAR_MONSTER ||
 		x == CHAR_EXIT ||
 		x == CHAR_CHEST;
   // ||
@@ -334,7 +334,7 @@ int Map::LoadMap(const char *filename)
 ///
 /// Here we store a cell into the map. It will notify the change to the observer.
 ///
-void Map::StoreCell(int i, int j, CELL_TYPE value)
+void Map::setCell(int i, int j, CELL_TYPE value)
 {
 	if (ValidPos(i, j) && ValidCell(value) && value != CHAR_EXIT && value != CHAR_ENTRY && value != CHAR_PLAYER)
 	{
@@ -361,7 +361,7 @@ void Map::RemoveCell(int i, int j)
 ///
 /// Here we can retrieve a cell value
 ///
-CELL_TYPE Map::GetCell(int i, int j)
+CELL_TYPE Map::getCell(int i, int j)
 {
 	if (ValidPos(i, j))
 	{
@@ -514,7 +514,7 @@ string Map::CellToString(CELL_TYPE x)
 	case CHAR_PLAYER: return "Player"; break;
 	case CHAR_ENEMY: return "Enemy"; break;
 	case CHAR_WALL: return "Wall"; break;
-	case CHAR_ENTRY: return "Entrance"; break;
+	case CHAR_MONSTER: return "Monster"; break;
 	case CHAR_EXIT: return "Exit"; break;
 	case CHAR_CHEST: return "Chest"; break;
 	// case CHAR_ARMOR: return  "Armor"; break;

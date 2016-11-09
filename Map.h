@@ -17,9 +17,10 @@ class MapObserver;
 #define CHAR_PLAYER  'P'
 #define CHAR_ENEMY   'E'
 #define CHAR_WALL    '*'
-#define CHAR_ENTRY	 'I'
+// #define CHAR_ENTRY	 'I'
 #define CHAR_EXIT	   'O'
 #define CHAR_CHEST   'c'
+#define CHAR_MONSTER   'm'
 // #define CHAR_ARMOR   'a'
 // #define CHAR_SHIELD  's'
 // #define CHAR_WEAPON  'w'
@@ -75,7 +76,12 @@ public:
 	///
 	/// Here we can retrieve a cell value
 	///
-	CELL_TYPE GetCell(int i, int j);
+	CELL_TYPE getCell(int, int);
+
+	///
+	/// Here we can store a cell into the map. It will notify the change to all observers based on the notify method above
+	///
+	void setCell(int, int, CELL_TYPE);
 	///
 	/// This are our getters
 	///
@@ -85,10 +91,6 @@ public:
 	inline void GetEntrancePos(int &r, int &c) { r = m_i0; c = m_j0; }
 	inline void GetExitPos(int &r, int &c) { r = m_i1; c = m_j1; }
 
-	///
-	/// Here we can store a cell into the map. It will notify the change to all observers based on the notify method above
-	///
-	void StoreCell(int i, int j, CELL_TYPE value);
 	///
 	/// remove a item into the cell. It will notify the change to all observers!
 	///

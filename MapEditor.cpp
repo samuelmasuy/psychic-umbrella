@@ -48,7 +48,7 @@ MapEditor::MapEditor(string name) {
     cin >> opc;
     Flush();
     if (opc.compare("1") == 0) {
-      m.StoreCell(row, col, CHAR_EMPTY);
+      m.setCell(row, col, CHAR_EMPTY);
       break;
     } else if (opc.compare("2") == 0) {
       if (m.SetPlayerPos(row, col) == false)
@@ -56,10 +56,10 @@ MapEditor::MapEditor(string name) {
       else
         break;
     } else if (opc.compare("3") == 0) {
-      m.StoreCell(row, col, CHAR_ENEMY);
+      m.setCell(row, col, CHAR_ENEMY);
       break;
     } else if (opc.compare("4") == 0) {
-      m.StoreCell(row, col, CHAR_WALL);
+      m.setCell(row, col, CHAR_WALL);
       break;
     } else if (opc.compare("5") == 0) {
       if (m.SetEntrance(row, col))
@@ -72,25 +72,25 @@ MapEditor::MapEditor(string name) {
       else
         cout << "Invalid position for exit: This position contains an entrance or wall" << endl;
     } else if (opc.compare("7") == 0) {
-      m.StoreCell(row, col, CHAR_CHEST);
+      m.setCell(row, col, CHAR_CHEST);
       break;
     } else if (opc.compare("8") == 0) {
-      m.StoreCell(row, col, CHAR_ARMOR);
+      m.setCell(row, col, CHAR_ARMOR);
       break;
     } else if (opc.compare("9") == 0) {
-      m.StoreCell(row, col, CHAR_SHIELD);
+      m.setCell(row, col, CHAR_SHIELD);
       break;
     } else if (opc.compare("10") == 0) {
-      m.StoreCell(row, col, CHAR_WEAPON);
+      m.setCell(row, col, CHAR_WEAPON);
       break;
     } else if (opc.compare("11") == 0) {
-      m.StoreCell(row, col, CHAR_BOOTS);
+      m.setCell(row, col, CHAR_BOOTS);
       break;
     } else if (opc.compare("12") == 0) {
-      m.StoreCell(row, col, CHAR_RING);
+      m.setCell(row, col, CHAR_RING);
       break;
     } else if (opc.compare("13") == 0) {
-      m.StoreCell(row, col, CHAR_HELMET);
+      m.setCell(row, col, CHAR_HELMET);
       break;
     } else if (opc.compare("14") == 0)
       break;
