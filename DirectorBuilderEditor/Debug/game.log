@@ -1,0 +1,4 @@
+﻿C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V140\Microsoft.CppBuild.targets(392,5): warning MSB8028: The intermediate directory (Debug\) contains files shared from another project (game.vcxproj).  This can lead to incorrect clean and rebuild behavior.
+  Director.cpp
+  game.vcxproj -> C:\Users\Abdulla Daoud\Documents\my builder pattern5\DirectorBuilderEditor\Debug\Map.exe
+  game.vcxproj -> C:\Users\Abdulla Daoud\Documents\my builder pattern5\DirectorBuilderEditor\Debug\Map.pdb (Full PDB)
