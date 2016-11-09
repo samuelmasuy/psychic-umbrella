@@ -71,15 +71,18 @@ void ItemContainer::removeItem(string itemType){
 
 	int index = getItemIndex(itemType);
 	items.erase(items.begin() + index);
+	size--;
+
 }
 
 void ItemContainer::printBackpack()
 {
 	if (items.size() > 0)
 	{
+		cout << "---BACKPACK ITEMS---\n";
 		for (int i = 0; i < items.size(); i++)
 		{
-			cout << items[i].getType() << "{ " << items.at(i).getInfluences().at(0).getType() << " +" << items.at(i).getInfluences().at(0).getBonus() << " }";
+			cout << items[i].getType() << " {" << items.at(i).getInfluences().at(0).getType() << " +" << items.at(i).getInfluences().at(0).getBonus() << "}" << endl;
 		}
 	}
 	else

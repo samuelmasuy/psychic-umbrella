@@ -25,11 +25,13 @@ public:
 	int armorModifier();
 	int attackBonus();
 	int damageBonus();
-	void saveCharacter(Character* );
-	void loadCharacter(Character* );
+	void saveCharacter();
+	void loadCharacter();
 	void playerInfo();
 	bool equipItem(Item);
 	bool unequipItem(string);
+	void printBackPackItems();
+	void addToBackpack(Item);
 	void printEquippedItems();
 private: 
 	string characterType;

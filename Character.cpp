@@ -145,28 +145,68 @@ int Character::generateStats()
 	return total;
 }
 
-void Character::saveCharacter(Character* character)
+void Character::saveCharacter()
 {
 	
-	ofstream ofs("savedCharacter.ros", ios::binary);
+ /*	ofstream ofs("savedCharacter.ros", ios::binary);
 	ofs.write((char *)&character, sizeof(character));
 	ofs.close();
-	
+*/
 	/*
 	ofstream outfile;
 	outfile.open(filename.c_str(), ios::out | ios::app | ios::binary);
 	outfile.write((char *)(&character), sizeof(character));
 	outfile.close();
 	*/
+	string type = "";
+	string saveFile;
+	cout << "Enter name of file being saved: ";
+	cin >> saveFile;
+
+	
+	ofstream ofs(saveFile);
+	ofs << "CharFile" << endl;	//define type of save file
+	ofs << level << endl;
+	ofs << currentHitPoints << endl;
+	for (int i = 0; i < 6; i++)
+		ofs << abilityScores[i] << endl;
+	
+	for (int i = 0; i < MAX_ITEMS_EQUIPPED; i++)
+	{
+		type = equipment[i].getType();
+		if (type != "")
+		{
+			ofs << equipment[i].getType() << endl;
+			for (int j = 0; j < equipment[i].getInfluences().size(); j++)
+			{
+				ofs << equipment[i].getInfluences().at(0).getType() << endl;
+				ofs << equipment[i].getInfluences().at(0).getBonus() << endl;
+			}
+		}
+	}
+
+	if (backpack.getSize() != 0){
+		ofs << backpack.getSize();
+		for (int i = 0; i < backpack.getSize(); i++)
+		{
+			ofs << backpack.getItems().at(i).getType() << endl;
+			for (int j = 0; j < backpack.getItems()[i].getInfluences().size(); j++)
+			{
+				ofs << backpack.getItems()[i].getInfluences().at(0).getType() << endl;
+				ofs << backpack.getItems()[i].getInfluences().at(0).getBonus() << endl;
+			}
+		}
+	}
+	else
+		ofs << 0;
+	ofs.close();
+
+
 
 }
-void Character::loadCharacter(Character* character)
+void Character::loadCharacter()
 {
-	ifstream ifs("savedCharacter.ros", ios::binary);
-	ifs.read((char *)&character, sizeof(character));
-	ifs.close();
-	
-	
+
 	/*
 	ifstream infile;
 	infile.open(filename.c_str(), ios::binary);
@@ -174,6 +214,70 @@ void Character::loadCharacter(Character* character)
 	while (infile.read((char *)&character, sizeof(character)))
 	infile.close();
 	*/
+
+	string loadFile;
+	string Validation;
+	string type;
+	bool chooseFileName = false;
+	int backpackSize;
+	int bonus;
+	cout << "Load File: ";
+	cin >> loadFile;
+
+	ifstream ifs(loadFile);
+	do{
+		while (!ifs.good()){
+			cout << "File does not exist, try again: ";
+			cin >> loadFile;
+			ifs.open(loadFile);
+		}
+		ifs >> Validation;
+		if (Validation == "CharFile")//check if it is an item save file
+			chooseFileName = true;
+		else{
+			ifs.close();
+			chooseFileName = false;
+			cout << "Incorrect File Loaded, select another File: " << endl;
+			cin >> loadFile;
+			ifs.open(loadFile);
+		}
+	} while (chooseFileName == false);
+			
+
+	ifs >> level;
+	ifs >> currentHitPoints;
+		for (int i = 0; i < 6; i++){
+			ifs >> abilityScores[i];
+		}
+		for (int i = 0; i < MAX_ITEMS_EQUIPPED; i++)			//save equipped items
+		{
+			ifs >> equipment[i].getType();
+			for (int j = 0; j < equipment[i].getInfluences().size(); j++)
+			{
+				ifs >> type;
+				ifs >> bonus;
+				equipment[i].getInfluences()[j].setEnhacement(type, bonus);
+				
+				
+			}
+		}
+		ifs >> backpackSize;
+		if (backpackSize != 0)
+		{
+
+			for (int i = 0; i < backpack.getSize(); i++)		//save inventory/backpack
+			{
+				ifs >> backpack.getItems().at(i).getType();
+				for (int j = 0; j < backpack.getItems()[i].getInfluences().size(); j++)
+				{
+					ifs >> type;
+					ifs >> bonus;
+					backpack.getItems()[i].getInfluences()[j].setEnhacement(type, bonus);
+				}
+
+			}
+		}
+		ifs.close();
 }
 
 void Character::playerInfo()
@@ -229,7 +333,8 @@ bool Character::equipItem(Item item)
 		return false;
 
 	//if(backpack.getSize() > 0)
-	//	backpack.removeItem(type); //takes it out of backpack
+		backpack.removeItem(type);
+						//takes it out of backpack
 	return true;
 	
 }
@@ -280,7 +385,24 @@ bool Character::unequipItem(string item)
 	return true;
 }
 
+void Character::printBackPackItems()
+{
+	backpack.printBackpack();
+}
+
+void Character::addToBackpack(Item newItem){
+	backpack.addItem(newItem);
+}
+
 void Character::printEquippedItems()
 {
-
+	string type;
+	cout << "---EQUIPPED ITEMS---\n";
+	for (int i= 0; i < MAX_ITEMS_EQUIPPED; i++)
+	{
+		type = equipment[i].getType();
+		if ( type != "")
+			cout << equipment[i].getType() << " {" << equipment[i].getInfluences().at(0).getType() << " +" << equipment[i].getInfluences().at(0).getBonus() << "}" << endl;
+			
+	}
 }
