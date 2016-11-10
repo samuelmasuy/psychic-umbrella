@@ -20,7 +20,7 @@ void MapEditor::Flush()
 
 
 // edit the current map 
-void MapEditor::EditMap(Map *pMap) 
+void MapEditor::EditMap(Map *pMap, const string &filename)
 {
 	cout << "Current map is " << pMap->GetRows() << ", " << pMap->GetCols() << endl;
 	do
@@ -28,12 +28,22 @@ void MapEditor::EditMap(Map *pMap)
 		pMap->Display();
 		cout << "Select an option:" << endl;
 		cout << "  [1] Modify a cell" << endl;
-		cout << "  [2] Back to main menu" << endl;
+		cout << "  [2] Save  " << filename << endl;
+		cout << "  [3] Back to main menu (All changes not saved will be lost)" << endl;
 		string opc;
 		cin >> opc;
 		Flush();
-		if (opc.compare("2") == 0)	// exit pressed!
+		if (opc.compare("3") == 0)	// exit pressed!
 			break;
+		else if (opc.compare("2") == 0)	// save map pressed
+		{
+			MapBuilderB mb(*pMap);
+			if (mb.SaveLevel(filename.c_str()) == 0)
+				cout << "File " << filename << " has been updated" << endl;
+			else
+				cout << "File " << filename << " cannot be updated. Check if the file is opened in a text editor, and it is not read-only." << endl;
+
+		}
 		else if (opc.compare("1") == 0)	// modify a cell
 		{
 			int row = -1, col = -1;
@@ -116,7 +126,7 @@ void MapEditor::EditMap(Map *pMap)
 				else if (opc.compare("8") == 0)
 					break;
 				else
-					cout << "Invalid opcion: " << opc << endl;
+					cout << "Invalid option: " << opc << endl;
 			} while (true);
 		}
 
