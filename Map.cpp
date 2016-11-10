@@ -185,6 +185,19 @@ void Map::setCell(int i, int j, CELL_TYPE value)
 		cout << "Invalid position or cell type" << endl;
 }
 
+// fill a freaking cell into the map.
+void Map::fillCell(int i, int j, CELL_TYPE value)
+{
+    m_scene[i][j] = value;
+
+}
+// retrieve a freaking cell into the map.
+CELL_TYPE Map::retrieveCell(int i, int j)
+{
+  return m_scene[i][j];
+  
+}
+
 CELL_TYPE &Map::GetCellByRef(int i, int j)
 {
 	if (ValidPos(i, j))
@@ -396,4 +409,36 @@ void Map::Display()
 		cout << endl;
 	}
 	cout << endl;
+}
+
+void Map::reinitializeMap()
+{
+  int i0, j0, i1, j1, ip, jp;
+  GetPlayerPos(ip, jp);
+  GetEntrancePos(i0, j0);
+  GetExitPos(i1, j1);
+  
+  for (int r = 0; r < GetRows(); r++)
+  {
+    for (int c = 0; c < GetCols(); c++)
+    {
+      if (r == ip && c == jp)
+        m_scene[r][c] = CHAR_PLAYER;
+      else if (r == i0 && c == j0)
+        m_scene[r][c] = CHAR_ENTRY;
+      else if (r == i1 && c == j1)
+        m_scene[r][c] = CHAR_EXIT;
+    }
+  }
+}
+
+void Map::print()
+{
+  cout << endl;
+  for (int i = 0; i < m_rows; i++) {
+    for (int j = 0; j < m_cols; j++) {
+      cout << m_scene[i][j];
+    }
+    cout << endl;
+  }
 }

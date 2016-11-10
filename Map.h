@@ -67,6 +67,14 @@ public:
 
 	// store a cell into the map. 
 	void setCell(int i, int j, CELL_TYPE value);
+  
+  void fillCell(int i, int j, CELL_TYPE value);
+  
+  CELL_TYPE retrieveCell(int i, int j);
+
+  void print();
+  
+  void reinitializeMap();
 
 	// retrieve a cell value, by ref
 	CELL_TYPE &GetCellByRef(int i, int j);
