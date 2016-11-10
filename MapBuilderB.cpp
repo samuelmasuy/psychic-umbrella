@@ -18,7 +18,7 @@ MapBuilderB::MapBuilderB(Map &m)
 	m_scene = AllocMem(m_rows, m_cols);
 	CELL_TYPE **p = m.GetMatrix();
 	for (int r = 0; r < m_rows; r++)
-		memcpy(m_scene[r], p[r], m_cols);
+		memcpy(m_scene[r], p[r], m_cols * sizeof(CELL_TYPE));
 }
 
 
@@ -27,13 +27,7 @@ MapBuilderB::MapBuilderB(Map &m)
 ///
 MapBuilderB::~MapBuilderB()
 {
-
-	if (m_scene && m_rows>0)
-	{
-		for (int i = 0; i < m_rows; i++)
-			delete[] m_scene[i];
-		delete[] m_scene;
-	}
+	FreeMem();
 }
 ///
 /// Set to return the size of the map
@@ -161,7 +155,7 @@ int MapBuilderB::LoadMap(const char *filename, int levelNumber)
 	{
 		int i = rand() % m_rows;
 		int j = rand() & m_cols;
-		if ((i != m_i0 || i != m_j0) && (i != m_i1 || i != m_j1) && (i != m_iPlayer || i != m_jPlayer))
+		if ((i != m_i0 || j != m_j0) && (i != m_i1 || j != m_j1) && (i != m_iPlayer || j != m_jPlayer))
 		{
 			// adding a wall or enemy
 			if (rand() & 1)
