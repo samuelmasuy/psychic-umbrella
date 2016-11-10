@@ -185,6 +185,16 @@ void Map::setCell(int i, int j, CELL_TYPE value)
 		cout << "Invalid position or cell type" << endl;
 }
 
+CELL_TYPE &Map::GetCellByRef(int i, int j)
+{
+	if (ValidPos(i, j))
+	{
+		return m_scene[i][j];
+	}
+	cout << "Invalid position " << i << "," << j << endl;
+	return m_scene[0][0];
+}
+
 void Map::RemoveCell(int i, int j)
 {
 	if (ValidPos(i, j))
