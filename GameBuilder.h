@@ -10,8 +10,22 @@
 
 class GameBuilder {
  public:
+   /**
+    * @brief Get the game, once it has been constructed
+    *
+    * @return a game.
+    */
   Game* getGame();
+  /**
+   * @brief Create a new Game.
+   */
   void constructGame();
+  /**
+   * @brief Set character an map of the game.
+   *
+   * @param Character pointer to character.
+   * @param Map pointer to map.
+   */
   void setCharacterAndMap(Character*, Map*);
  private:
   Game* game;

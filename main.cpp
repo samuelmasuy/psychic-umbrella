@@ -81,7 +81,7 @@ int main(int argc, char const* argv[]) {
 
   cout << "TIME TO PLAY" << endl;
 
-Map map;
+  Map map;
   char filename[240];
   do {
     cout << "Indicate map name --> ";
@@ -93,13 +93,13 @@ Map map;
     MapBuilderB mb;
     if (mb.LoadMap(filename, 1))
       continue;
-   
+
 
     // set this builder to director
     d.SetBuilder(&mb);
     // get the map from director
     d.GetMap(map);
-	break;
+    break;
   } while (true);
 
   map.Display();
