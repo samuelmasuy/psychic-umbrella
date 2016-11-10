@@ -39,13 +39,16 @@ void Game::play() {
       case 'i':
         character->printEquippedItems();
         character->printBackpackItems();
+        map->Display();
       case 'e':
         int level = 1;
         character->setLevel(level);
+        map->Display();
       case 'u':
         string itemType;
         // unequip from character
         character->unequipItem(itemType);
+        map->Display();
       case 'q':
         cout << "Do you want to quit the game? ('y'/'n'): " << endl;
         if ((choice = getch()) == 'y') {
@@ -92,7 +95,7 @@ void Game::move(int old_x, int old_y, int new_x, int new_y) {
   if (!(new_x >= mapRows || new_x < 0 || new_y >= mapColumns || new_y < 0)) {
     char new_cell_type = map->getCell(new_x, new_y)
     switch (map->getCell(new_x, new_y)) {
-    case WALL:
+    case CHAR_WALL:
       break;
     case CHAR_EMPTY:
       // set previous cell to empty
@@ -101,6 +104,7 @@ void Game::move(int old_x, int old_y, int new_x, int new_y) {
       character->setPostionX(new_x);
       character->setPostionY(new_y);
       map->setCell(old_x, old_y, CHAR_PLAYER);
+      map->Display();
       break;
     case CHAR_EXIT:
       // set previous cell to empty
@@ -108,12 +112,11 @@ void Game::move(int old_x, int old_y, int new_x, int new_y) {
       // set character location to the new cell
       character->setPostionX(new_x);
       character->setPostionY(new_y);
+      map->Display();
       break;
     case CHAR_CHEST:
       openChest();
-      break;
-    case CHAR_MONSTER:
-      // fightMonster();
+      map->Display();
       break;
     }
   }

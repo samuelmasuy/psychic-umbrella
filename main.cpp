@@ -40,59 +40,70 @@ void main() {
 
   // create items
   ItemDirector* id = new ItemDirector();
-  id->setArmorBuilder(new ConcreteArmorBuilder());
-  id->constructArmor("name");
-  // ........... many more items
-  player->setInventoryItem(id->getArmor());
+  id->setItemBuilder(new ConcreteArmorBuilder());
+  id->makeItem();
+  Item* item = id->getItem();
+  cout << "Here is a new Item: " << endl;
+  cout << item->printItem();
 
+  cout << "Would you like to edit this item? ('y'/'n'): " << endl;
+  int choice;
+  if ((choice = getch()) == 'y') {
+    item->editItem();
+    item->saveItem();
+  }
+
+  cout << "Would you like your character to be equiped with this item? ('y'/'n'): " << endl;
+  if ((choice = getch()) == 'y') {
+    player->equipItem(item);
+  }
+  delete id;
+
+  cout << "Here are the stats of your character" << endl;
+  character->playerInfo();
+  cout << endl;
+  character->printEquippedItems();
+  cout << endl;
+  character->printBackpackItems();
+  cout << endl;
+
+  // ........... many more items
+  cout << "Let's take care of the map." << endl;
+
+  // map management
   manageMap();
 
-  // cout << "You can chose one of the following option: " << endl;
-  // cout << "1. Play a predefined game" << endl;
-  // cout << "2. Play a custom game" << endl;
-  // cout << "3. Edit a map" << endl;
+  cout << endl;
 
-  int choice = validate_choice(1, 3);
+  cout << "TIME TO PLAY" << endl;
 
-  switch (choice) {
-  case 1:
-    MapDirector* md = new MapDirector();
-    md->setMapBuilder(new ConcreteMapBuilder());
-    md->constructMap();
-    Map* map = mg->getMap();
+  char filename[240];
+  cout << "Indicate map name --> ";
+  cin.getline(filename, 240);
+  NormalizeString(filename);
+  MapDirector d;
 
-    GameBuilder* gb = new GameBuilder();
-    gb->constructGame();
-    gb->setCharacterAndMap(player, map);
-    Game* game = gb->getGame();
-    game->play();
-
-    delete gb;
-    gb = NULL;
-    delete md;
-    md = NULL;
+  // load map from file
+  MapBuilderB mb;
+  do {
+    if (mb.LoadMap(filename, 1))
+      continue;
     break;
-  case 2:
-    string filename = get_filename();
+  } while (true);
 
-    Map* map = new Map(filename);
+  // set this builder to director
+  d.SetBuilder(&mb);
+  Map map;
+  // get the map from director
+  d.GetMap(map);
 
-    GameBuilder* gb = new GameBuilder();
-    gb->constructGame();
-    gb->setCharacterAndMap(player, map);
-    Game* game = gb->getGame();
-    game->play();
+  map.Display();
 
-    delete gb;
-    gb = NULL;
-  case 3:
-    cout << "Enter a map name: " << endl;
-    string name;
-    getline(cin, name);
-    MapEditor me;
-    MapEditor* editor = new MapEditor(name);
-    break;
-  }
+  GameBuilder* gb = new GameBuilder();
+  gb->constructGame();
+  gb->setCharacterAndMap(player, *map);
+  Game* game = gb->getGame();
+  game->play();
 }
 
 int validate_choice(int min, int max) {
@@ -115,7 +126,7 @@ string get_filename() {
     string s;
     getline(cin, s);
     ifstream file(s);
-    if (file && has_ending(s, "map")) {
+    if (file) {
       return s;
     }
     cout << "Invalid filename." << endl;

@@ -19,7 +19,9 @@ public:
 	void setInfluences(Enhancement);
 	void saveItem(Item*);
 	void loadItem(Item*);
-	
+
+  void editItem();
+  void printItem();
 	//~Item();
 
 private:
