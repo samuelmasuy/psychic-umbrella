@@ -81,25 +81,25 @@ void main() {
 
   cout << "TIME TO PLAY" << endl;
 
+  Map map;
   char filename[240];
-  cout << "Indicate map name --> ";
-  cin.getline(filename, 240);
-  NormalizeString(filename);
-  MapDirector d;
-
-  // load map from file
-  MapBuilderB mb;
   do {
+    cout << "Indicate map name --> ";
+    cin.getline(filename, 240);
+    NormalizeString(filename);
+    MapDirector d;
+
+    // load map from file
+    MapBuilderB mb;
     if (mb.LoadMap(filename, 1))
       continue;
     break;
-  } while (true);
 
-  // set this builder to director
-  d.SetBuilder(&mb);
-  Map map;
-  // get the map from director
-  d.GetMap(map);
+    // set this builder to director
+    d.SetBuilder(&mb);
+    // get the map from director
+    d.GetMap(map);
+  } while (true);
 
   map.Display();
 
