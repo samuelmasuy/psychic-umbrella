@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Map.h"
+#include "MapBuilderB.h"
 
 class MapEditor
 {
@@ -12,7 +13,7 @@ public:
 	~MapEditor();
 
 	// edit the current map 
-	void EditMap(Map *pMap);
+	void EditMap(Map *pMap, const string &filename);
 
 private:
 	// flush the keyboard buffer
