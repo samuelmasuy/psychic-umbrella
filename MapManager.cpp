@@ -209,7 +209,7 @@ void manageMap()
 					}
 					// edit using our map editor class
 					MapEditor me;
-					me.EditMap(c.GetMap(level));
+					me.EditMap(c.GetMap(level), c.GetFileName(level)); 
 					break;
 				} while (true);
 
