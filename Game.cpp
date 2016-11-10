@@ -44,13 +44,13 @@ void Game::play() {
         character->printBackPackItems();
         map->Display();
       case 'e':
-		  cout << "Enter level: ";
-		  cin >> level;
+        cout << "Enter level: ";
+        cin >> level;
         character->setLevel(level);
         map->Display();
       case 'u':
-		  cout << "Enter item type to unequip: ";
-		  cin >> itemType;
+        cout << "Enter item type to unequip: ";
+        cin >> itemType;
         // unequip from character
         character->unequipItem(itemType);
         map->Display();
@@ -87,7 +87,7 @@ void Game::initializeCharacterPositionOnMap() {
     for (int x = 0; x < map->GetCols(); x++) {
       if (map->GetCell(y, x) == CHAR_PLAYER) {
         character->setPositionX(x);
-		character->setPositionY(y);
+        character->setPositionY(y);
         return;
       }
     }

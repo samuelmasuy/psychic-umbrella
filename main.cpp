@@ -13,9 +13,6 @@
 #include "GameBuilder.h"
 #include "Game.h"
 
-
-
-
 using namespace std;
 
 // Definitions of helper functions
@@ -24,10 +21,9 @@ string get_filename();
 bool has_ending(string const &, string const &);
 
 void main() {
-	Character* character = NULL;
-	
-	cout << "Dungeons And Dragons Game" << endl;
+  cout << "Dungeons And Dragons Game" << endl;
 
+  Character* character = NULL;
   cout << "Let's create a character, would you like to play with a fighter[1] or a regular character[2]: " << endl;
   int character_choice = validate_choice(1, 2);
   switch (character_choice) {
@@ -37,7 +33,6 @@ void main() {
     character = new Character();
   }
 
-  
   // Create a character
   // CharacterDirector* cd = new CharacterDirector();
   // cd->setCharacterBuilder(new Warrior());
@@ -53,7 +48,7 @@ void main() {
   item->printItem();
   cout << endl;
 
-  cout << "Would you like to edit this item? ('y'/'n'): " << endl;
+  cout << "Would you like to edit this item? ('y'/'n'): ";
   char choice;
   cin >> choice;
   if (choice == 'y') {
@@ -61,7 +56,7 @@ void main() {
     //item->saveItem();
   }
 
-  cout << "Would you like your character to be equiped with this item? ('y'/'n'): " << endl;
+  cout << "Would you like your character to be equiped with this item? ('y'/'n'): ";
   cin >> choice;
   if (choice== 'y') {
     character->equipItem(item);
