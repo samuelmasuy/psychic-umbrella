@@ -1,5 +1,5 @@
-//! @file 
-//! @brief Implementation file for the Character class  
+//! @file
+//! @brief Implementation file for the Character class
 //!
 
 #include "Character.h"
@@ -28,17 +28,21 @@ Character::Character(int str, int dex, int con, int intel, int wis, int cha)
 
 	//and set hit points to 10
 	currentHitPoints = 10;
+	positionX = 0;
+	positionY = 0;
+	level = 0;
+
 }
 
 Character::Character()
 {
 	characterType = "fighter";
-	
+
 	for (int i = 0; i < TOT_STATS; i++)
 		abilityScores[i] = generateStats();
 	for (int i = 0; i < MAX_ITEMS_EQUIPPED; i++)
 		equipment[i] = emptyItem;
-	
+
 	//and set hit points to 10
 	currentHitPoints = 10;
 	notify();
@@ -108,10 +112,12 @@ int Character::damageBonus()
 
 int Character::attackBonus()
 {
-	if (characterType != "fighter")
 		return level + abilityModifier(0) + abilityModifier(1);
-	else
-		return (level * 2) + abilityModifier(0) + abilityModifier(1);
+
+}
+
+void Character::levelUp(){
+	level++;
 }
 
 int Character::generateStats()
@@ -147,7 +153,7 @@ int Character::generateStats()
 
 void Character::saveCharacter()
 {
-	
+
  /*	ofstream ofs("savedCharacter.ros", ios::binary);
 	ofs.write((char *)&character, sizeof(character));
 	ofs.close();
@@ -163,14 +169,14 @@ void Character::saveCharacter()
 	cout << "Enter name of file being saved: ";
 	cin >> saveFile;
 
-	
+
 	ofstream ofs(saveFile);
 	ofs << "CharFile" << endl;	//define type of save file
 	ofs << level << endl;
 	ofs << currentHitPoints << endl;
 	for (int i = 0; i < 6; i++)
 		ofs << abilityScores[i] << endl;
-	
+
 	for (int i = 0; i < MAX_ITEMS_EQUIPPED; i++)
 	{
 		type = equipment[i].getType();
@@ -242,7 +248,7 @@ void Character::loadCharacter()
 			ifs.open(loadFile);
 		}
 	} while (chooseFileName == false);
-			
+
 
 	ifs >> level;
 	ifs >> currentHitPoints;
@@ -257,8 +263,8 @@ void Character::loadCharacter()
 				ifs >> type;
 				ifs >> bonus;
 				equipment[i].getInfluences()[j].setEnhacement(type, bonus);
-				
-				
+
+
 			}
 		}
 		ifs >> backpackSize;
@@ -284,6 +290,7 @@ void Character::playerInfo()
 {
 	cout << "-------------------------------\n";
 	cout << "Class Type: " << characterType << endl;
+	cout << "Level" << getLevel()<<endl;
 	cout << "Total HP: " << currentHitPoints << endl;
 	cout << "Total armor: " << armorModifier() << endl;
 	cout << "Strenght: " << abilityScores[0] << endl;
@@ -336,7 +343,7 @@ bool Character::equipItem(Item item)
 		backpack.removeItem(type);
 						//takes it out of backpack
 	return true;
-	
+
 }
 
 bool Character::unequipItem(string item)
@@ -344,17 +351,18 @@ bool Character::unequipItem(string item)
 	string type = item;
 
 	//remove item from correct slot
-	if (type == "Helmet") 
+	if (type == "Helmet")
 	{
 		backpack.addItem(equipment[Helmet]);
 		equipment[Helmet] = emptyItem;
 	}
-	else if (type == "Armor") 
+	else if (type == "Armor")
 	{
 		backpack.addItem(equipment[Armor]);
 		equipment[Armor] = emptyItem;
+
 	}
-	else if (type == "Weapon") 
+	else if (type == "Weapon")
 	{
 		backpack.addItem(equipment[Weapon]);
 		equipment[Weapon] = emptyItem;
@@ -364,17 +372,17 @@ bool Character::unequipItem(string item)
 		backpack.addItem(equipment[Shield]);
 		equipment[Shield] = emptyItem;
 	}
-	else if (type == "Ring") 
+	else if (type == "Ring")
 	{
 		backpack.addItem(equipment[Ring]);
 		equipment[Ring] = emptyItem;
 	}
-	else if (type == "Belt") 
+	else if (type == "Belt")
 	{
 		backpack.addItem(equipment[Belt]);
 		equipment[Belt] = emptyItem;
 	}
-	else if (type == "Boots") 
+	else if (type == "Boots")
 	{
 		backpack.addItem(equipment[Boots]);
 		equipment[Boots] = emptyItem;
@@ -403,6 +411,71 @@ void Character::printEquippedItems()
 		type = equipment[i].getType();
 		if ( type != "")
 			cout << equipment[i].getType() << " {" << equipment[i].getInfluences().at(0).getType() << " +" << equipment[i].getInfluences().at(0).getBonus() << "}" << endl;
-			
+
 	}
 }
+
+void Character::setPositionX(int x){
+	positionX = x;
+}
+
+void Character::setPositionY(int y){
+	positionY = y;
+}
+
+int Character::getPositionX(){
+	return positionX;
+}
+
+int Character::getPositionY(){
+	return positionY;
+}
+
+
+Fighter::Fighter() : Character(){
+
+		for (int i = 0; i < TOT_STATS; i++)
+			abilityScores[i] = generateStats();
+		for (int i = 0; i < MAX_ITEMS_EQUIPPED; i++)
+			equipment[i] = emptyItem;
+
+		//and set hit points to 10
+		currentHitPoints = 10;
+		notify();
+}
+Fighter::Fighter(int str, int dex, int con, int intel, int wis, int cha)
+{
+
+	abilityScores[0] = str;
+	abilityScores[1] = dex;
+	abilityScores[2] = con;
+	abilityScores[3] = intel;
+	abilityScores[4] = wis;
+	abilityScores[5] = cha;
+
+	//and set hit points to 10
+	currentHitPoints = 10;
+}
+
+int Fighter::attackBonus(){
+	return (level * 2) + abilityModifier(0) + abilityModifier(1);
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
