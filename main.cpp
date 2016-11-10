@@ -20,7 +20,7 @@ int validate_choice(int, int);
 string get_filename();
 bool has_ending(string const &, string const &);
 
-void main() {
+int main(int argc, char const* argv[]) {
   cout << "Dungeons And Dragons Game" << endl;
 
   Character* character = NULL;
@@ -93,12 +93,13 @@ void main() {
     MapBuilderB mb;
     if (mb.LoadMap(filename, 1))
       continue;
-    break;
 
     // set this builder to director
     d.SetBuilder(&mb);
     // get the map from director
     d.GetMap(map);
+
+    break;
   } while (true);
 
   map.Display();
@@ -108,6 +109,8 @@ void main() {
   gb->setCharacterAndMap(character, &map);
   Game* game = gb->getGame();
   game->play();
+
+  return 0;
 }
 
 int validate_choice(int min, int max) {
