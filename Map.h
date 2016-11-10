@@ -68,6 +68,9 @@ public:
 	// store a cell into the map. 
 	void setCell(int i, int j, CELL_TYPE value);
 
+	// retrieve a cell value, by ref
+	CELL_TYPE &GetCellByRef(int i, int j);
+	
 	// remove a cell, leave it empty. 
 	void RemoveCell(int i, int j);
 
