@@ -1,8 +1,10 @@
 #pragma once
 #include "Item.h"
+#include "Enhancement.h"
 #include <stdio.h>
 #include <stdlib.h>     /* srand, rand */
 #include <time.h>       /* time */
+
 
 using namespace std;
 
@@ -14,6 +16,7 @@ public:
 	Item * getItem() { return item; }
 	void createNewItem() { item = new Item(); }
 	virtual void buildType() = 0;
+	virtual void buildEnhancement() = 0;
 	~ItemBuilder();
 
 protected:
