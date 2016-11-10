@@ -6,6 +6,7 @@
 #include <string>
 #include <fstream>
 
+#include "MapMangager.h"
 #include "MapBuilder.h"
 #include "ChestBuilder.h"
 #include "CharacterBuilder.h"
@@ -22,11 +23,20 @@ bool has_ending(string const &, string const &);
 void main() {
   cout << "Dungeons And Dragons Game" << endl;
 
+  cout << "Let's create a character, would you like to play with a fighter[1] or a regular character[2]: " << endl;
+  int character_choice = validate_choice(1, 2);
+  switch (choice) {
+  case 1:
+    Character* character = new Fighter();
+  case 2:
+    Character* character = new Character();
+  }
+
   // Create a character
-  CharacterDirector* cd = new CharacterDirector();
-  cd->setCharacterBuilder(new Warrior());
-  cd->createNewCharacter("Umbrella");
-  Character* character = cd->getCharacter();
+  // CharacterDirector* cd = new CharacterDirector();
+  // cd->setCharacterBuilder(new Warrior());
+  // cd->createNewCharacter("Umbrella");
+  // Character* character = cd->getCharacter();
 
   // create items
   ItemDirector* id = new ItemDirector();
@@ -35,11 +45,12 @@ void main() {
   // ........... many more items
   player->setInventoryItem(id->getArmor());
 
+  manageMap();
 
-  cout << "You can chose one of the following option: " << endl;
-  cout << "1. Play a predefined game" << endl;
-  cout << "2. Play a custom game" << endl;
-  cout << "3. Edit a map" << endl;
+  // cout << "You can chose one of the following option: " << endl;
+  // cout << "1. Play a predefined game" << endl;
+  // cout << "2. Play a custom game" << endl;
+  // cout << "3. Edit a map" << endl;
 
   int choice = validate_choice(1, 3);
 
@@ -48,9 +59,9 @@ void main() {
     MapDirector* md = new MapDirector();
     md->setMapBuilder(new ConcreteMapBuilder());
     md->constructMap();
-    Map* map = mg->getMap()
+    Map* map = mg->getMap();
 
-               GameBuilder* gb = new GameBuilder();
+    GameBuilder* gb = new GameBuilder();
     gb->constructGame();
     gb->setCharacterAndMap(player, map);
     Game* game = gb->getGame();
@@ -78,6 +89,7 @@ void main() {
     cout << "Enter a map name: " << endl;
     string name;
     getline(cin, name);
+    MapEditor me;
     MapEditor* editor = new MapEditor(name);
     break;
   }

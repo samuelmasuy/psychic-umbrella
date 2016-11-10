@@ -5,7 +5,7 @@
 #include "Game.h"
 
 void Game::play() {
-  character->attachCharacterObserver(this);
+  CharacterOBS* observerCharacter = new CharacterOBS(character);
 
   initializeCharacterPositionOnMap();
 
@@ -19,7 +19,7 @@ void Game::play() {
     characterPositionY = character->getPostionY();
     // check if character at the exit
     if (map->getCell(characterPositionX, characterPositionY) != CHAR_EXIT) {
-      map->print();
+      map->Display();
 
       switch (choice = getch()) {
       case KEY_RIGHT:
@@ -34,6 +34,18 @@ void Game::play() {
       case KEY_DOWN:
         move(characterPositionX, characterPositionY - 1);
         break;
+      case 'c':
+        character->playerInfo();
+      case 'i':
+        character->printEquippedItems();
+        character->printBackpackItems();
+      case 'e':
+        int level = 1;
+        character->setLevel(level);
+      case 'u':
+        string itemType;
+        // unequip from character
+        character->unequipItem(itemType);
       case 'q':
         cout << "Do you want to quit the game? ('y'/'n'): " << endl;
         if ((choice = getch()) == 'y') {
@@ -101,7 +113,7 @@ void Game::move(int old_x, int old_y, int new_x, int new_y) {
       openChest();
       break;
     case CHAR_MONSTER:
-      fightMonster();
+      // fightMonster();
       break;
     }
   }
@@ -109,8 +121,8 @@ void Game::move(int old_x, int old_y, int new_x, int new_y) {
 
 void Game::openChest() {
   ChestDirector* cg = new ChestDirector();
-  cg->setChestBuilder(new ConcreteChestBuilder());
-  cg->constructChest();
+  cg->setChestBuilder(new ChestBuilder());
+  cg->makeChest();
   Chest* chest = cg->getChest();
   Item* item = chest->getItem();
   item->print();
@@ -122,14 +134,14 @@ void Game::openChest() {
   delete cg;
 }
 
-void Game::fightMonster() {
-  CharacterDirector* cd = new CharacterDirector();
-  cd->setCharacterBuilder(new ConcreteMonsterBuilder());
-  cd->constructCharacter();
-  Character* monster = cg->getCharacter();
-  monster->print();
-  delete cd;
-}
+// void Game::fightMonster() {
+//   CharacterDirector* cd = new CharacterDirector();
+//   cd->setCharacterBuilder(new ConcreteMonsterBuilder());
+//   cd->constructCharacter();
+//   Character* monster = cg->getCharacter();
+//   monster->print();
+//   delete cd;
+// }
 
 void Game::setMap(Map* n_map) {
   map = n_map;

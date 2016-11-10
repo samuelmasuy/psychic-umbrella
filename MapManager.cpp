@@ -4,18 +4,9 @@
 // it saves the campaign, u can load it and display the maps in it,
 // and the actual map itself..
 //
-#include <stdlib.h>
-#include <stdio.h>
-#include "map.h"
-#include "mapBuilderA.h"
-#include "mapBuilderB.h"
-#include "mapEditor.h"
-#include "MapDirector.h"
-#include "Campaign.h"
-
 void Flush()
 {
-	
+
 	cin.clear();
 	cin.ignore(numeric_limits<streamsize>::max(), '\n');
 }
@@ -46,7 +37,7 @@ void GetSize(int &r, int &c)
 	} while (true);
 }
 
-int main()
+void manageMap()
 {
 	Campaign c;
 	int currentLevel = -1;

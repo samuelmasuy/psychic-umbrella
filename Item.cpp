@@ -113,6 +113,23 @@ void Item::loadItem(Item* item)
 	ifs.read((char *)&item, sizeof(item));
 }
 
+void Item::printItem(){
+	cout << type << endl;
+	for (int i = 0; i < influence.size(); i++){
+		cout << influence[i].getType() << endl;
+		cout << influence[i].getBonus() << endl;
+	}
+
+}
+
+void Item::editItem(){
+	cout << "Here is the current item" << endl;
+	printItem();
+		for (int i = 0; i < influence.size(); i++) {
+			influence[i].setEn;
+		}
+	""
+}
 
 /*
 

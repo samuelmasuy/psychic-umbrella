@@ -1,5 +1,4 @@
-#ifndef ENHANCEMENT_H
-#define ENHANCEMENT_H
+#pragma once
 
 #include <string>
 #include <vector>
@@ -22,5 +21,3 @@ private:
 	string type;
 	int bonus;
 };
-
-#endif
