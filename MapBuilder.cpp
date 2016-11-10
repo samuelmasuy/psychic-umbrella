@@ -11,6 +11,7 @@ MapBuilder::MapBuilder()
 // destructor
 MapBuilder::~MapBuilder()
 {
+	FreeMem(); 
 }
 
 // release memory of m_scene
@@ -18,9 +19,9 @@ void MapBuilder::FreeMem()
 {
 	if (m_rows>0 && m_scene)
 	{
-		for (int i = 0; i < m_rows; i++)
-			delete[] m_scene[i];
-		delete[] m_scene;
+		//for (int i = 0; i < m_rows; i++)
+	//		delete[] m_scene[i];
+		//delete[] m_scene;
 	}
 	m_scene = NULL;
 	m_rows = m_cols = 0;
