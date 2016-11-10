@@ -5,6 +5,7 @@
 #include "Game.h"
 
 
+
 void Game::play() {
   CharacterOBS* observerCharacter = new CharacterOBS(character);
 
@@ -21,39 +22,42 @@ void Game::play() {
     characterPositionY = character->getPositionY();
     // check if character at the exit
     if (map->GetCell(characterPositionX, characterPositionY) != CHAR_EXIT) {
+      cin >> choice;
+
+      system("clear");
       map->Display();
 
-      cin >> choice;
       switch (choice) {
-      case KEY_RIGHT:
+      case 'd':
         move(characterPositionX, characterPositionY, characterPositionX + 1, characterPositionY);
         break;
-      case KEY_LEFT:
+      case 'a':
         move(characterPositionX, characterPositionY, characterPositionX - 1, characterPositionY);
         break;
-      case KEY_UP:
+      case 'w':
         move(characterPositionX, characterPositionY, characterPositionX, characterPositionY + 1);
         break;
-      case KEY_DOWN:
+      case 's':
         move(characterPositionX, characterPositionY, characterPositionX, characterPositionY - 1);
         break;
       case 'c':
         character->playerInfo();
+        break;
       case 'i':
         character->printEquippedItems();
         character->printBackPackItems();
-        map->Display();
+        break;
       case 'e':
         cout << "Enter level: ";
         cin >> level;
         character->setLevel(level);
-        map->Display();
+        break;
       case 'u':
         cout << "Enter item type to unequip: ";
         cin >> itemType;
         // unequip from character
         character->unequipItem(itemType);
-        map->Display();
+        break;
       case 'q':
         cout << "Do you want to quit the game? ('y'/'n'): ";
         cin >> choice;
@@ -100,7 +104,8 @@ void Game::move(int old_x, int old_y, int new_x, int new_y) {
   // Check for valid move
   if (!(new_x >= mapRows || new_x < 0 || new_y >= mapColumns || new_y < 0)) {
     char new_cell_type = map->GetCell(new_x, new_y);
-    switch (map->GetCell(new_x, new_y)) {
+    cout << new_cell_type;
+    switch (new_cell_type) {
     case CHAR_WALL:
       break;
     case CHAR_EMPTY:
@@ -110,7 +115,6 @@ void Game::move(int old_x, int old_y, int new_x, int new_y) {
       character->setPositionX(new_x);
       character->setPositionY(new_y);
       map->setCell(old_x, old_y, CHAR_PLAYER);
-      map->Display();
       break;
     case CHAR_EXIT:
       // set previous cell to empty
@@ -118,11 +122,9 @@ void Game::move(int old_x, int old_y, int new_x, int new_y) {
       // set character location to the new cell
       character->setPositionX(new_x);
       character->setPositionY(new_y);
-      map->Display();
       break;
     case CHAR_CHEST:
       openChest();
-      map->Display();
       break;
     }
   }

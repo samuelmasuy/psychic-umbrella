@@ -1,6 +1,9 @@
 #pragma once
 #include "Item.h"
 #include <stdio.h>
+#include <stdlib.h>     /* srand, rand */
+#include <time.h>       /* time */
+
 using namespace std;
 
 class ItemBuilder

@@ -34,6 +34,7 @@ Item ItemContainer::getItem(string itemType)
 		if (items[i].getType() == itemType)
 			return items[i];
 	}
+  throw "Item type not found";
 }
 
 
@@ -64,7 +65,7 @@ int ItemContainer::getItemIndex(string itemType){
 			return j;
 		}
 	}
-			
+  return -1;
 }
 
 void ItemContainer::removeItem(string itemType){

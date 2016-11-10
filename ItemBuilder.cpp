@@ -9,6 +9,7 @@ ItemBuilder::~ItemBuilder(){
 }
 
 void RandomBuilder::buildType(){
+      srand(time(NULL));
 			int i = rand() % 7;
 			switch (i) {
 				case 0:

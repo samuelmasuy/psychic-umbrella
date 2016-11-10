@@ -102,7 +102,7 @@ Map map;
 	break;
   } while (true);
 
-  //map.Display();
+  map.Display();
 
   GameBuilder* gb = new GameBuilder();
   gb->constructGame();
