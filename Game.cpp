@@ -13,7 +13,7 @@ void Game::play() {
   int characterPositionX = character->getPositionX();
   int characterPositionY = character->getPositionY();
 
-  int choice;
+  char choice;
   string itemType;
   int level = 1;
   while (true) {
@@ -23,7 +23,8 @@ void Game::play() {
     if (map->GetCell(characterPositionX, characterPositionY) != CHAR_EXIT) {
       map->Display();
 
-      switch (choice = getchar()) {
+      cin >> choice;
+      switch (choice) {
       case KEY_RIGHT:
         move(characterPositionX, characterPositionY, characterPositionX + 1, characterPositionY);
         break;
@@ -54,8 +55,9 @@ void Game::play() {
         character->unequipItem(itemType);
         map->Display();
       case 'q':
-        cout << "Do you want to quit the game? ('y'/'n'): " << endl;
-        if ((choice = getchar()) == 'y') {
+        cout << "Do you want to quit the game? ('y'/'n'): ";
+        cin >> choice;
+        if (choice == 'y') {
           stop();
           return;
         }
@@ -97,7 +99,7 @@ void Game::move(int old_x, int old_y, int new_x, int new_y) {
   int mapColumns = map->GetCols();
   // Check for valid move
   if (!(new_x >= mapRows || new_x < 0 || new_y >= mapColumns || new_y < 0)) {
-	  char new_cell_type = map->GetCell(new_x, new_y);
+    char new_cell_type = map->GetCell(new_x, new_y);
     switch (map->GetCell(new_x, new_y)) {
     case CHAR_WALL:
       break;
@@ -133,11 +135,12 @@ void Game::openChest() {
   Chest* chest = cg->getChest();
   Item* item = chest->getItem();
   item->printItem();
-  cout << "Would you like your character to be equiped with this item? ('y'/'n'): " << endl;
-  int choice;
-  if ((choice = getchar()) == 'y') {
+  cout << "Would you like your character to be equiped with this item? ('y'/'n'): ";
+  char choice;
+  cin >> choice;
+  if (choice == 'y') {
     character->equipItem(item);
-    //map->setCell(chest->positionX, chest->postionY, CHAR_EMPTY);
+    // map->setCell(chest->positionX, chest->postionY, CHAR_EMPTY);
   }
   delete cg;
 }
