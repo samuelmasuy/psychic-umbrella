@@ -260,7 +260,8 @@ void Character::loadCharacter()
 		}
 		for (int i = 0; i < MAX_ITEMS_EQUIPPED; i++)			//save equipped items
 		{
-			ifs >> equipment[i].getType();
+			ifs >> type;
+			equipment[i].setType(type);
 			for (int j = 0; j < equipment[i].getInfluences().size(); j++)
 			{
 				ifs >> type;
@@ -276,7 +277,9 @@ void Character::loadCharacter()
 
 			for (int i = 0; i < backpack.getSize(); i++)		//save inventory/backpack
 			{
-				ifs >> backpack.getItems().at(i).getType();
+				ifs >> type;
+				backpack.getItems().at(i).setType(type);
+
 				for (int j = 0; j < backpack.getItems()[i].getInfluences().size(); j++)
 				{
 					ifs >> type;
