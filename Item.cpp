@@ -114,41 +114,26 @@ void Item::loadItem(Item* item)
 }
 
 void Item::printItem(){
-	cout << type << endl;
+	cout << type;
 	for (int i = 0; i < influence.size(); i++){
-		cout << influence[i].getType() << endl;
-		cout << influence[i].getBonus() << endl;
+		cout << " {" << influence[i].getType() << " +" << influence[i].getBonus() << "}";
 	}
 
 }
 
 void Item::editItem(){
+	string enhacementType;
+	int bonus;
+	
 	cout << "Here is the current item" << endl;
 	printItem();
+	cout << " Enter enhacement you want to set: ";
+	cin >> enhacementType;
+	cout << endl;
+	cout << " Enter bonus for the enhacement: ";
+	cin >> bonus;
 		for (int i = 0; i < influence.size(); i++) {
-			influence[i].setEn;
+			influence[i].setEnhacement(enhacementType, bonus);
+			validateItem();
 		}
-	""
 }
-
-/*
-
-vector<string> found = it->second;
-
-for (auto inf: influence) {
-std::string enhancement_type = inf.getType();
-std::transform(enhancement_type.begin(), enhancement_type.end(), enhancement_type.begin(), ::tolower); //lowercase
-if ( std::find(found.begin(), found.end(), enhancement_type) == found.end() ) {
-cout << "Enhancement type not valid";
-return false;
-}
-if (inf.getBonus() < 1 || inf.getBonus() > 5) {
-cout << "Enhancement bonus not valid";
-}
-}
-
-return true;
-}
-
-
-*/
