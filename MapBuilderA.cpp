@@ -105,23 +105,22 @@ int MapBuilderA::LoadMap(const char *filename)
 				}
 				for (int j = 0; j < m_cols; j++)
 				{
-					if (0)
+					CELL_TYPE x = line[j];
+					if (x != CHAR_EMPTY && x != CHAR_WALL && x != CHAR_CHEST && x != CHAR_ENEMY)	// validating the cell
 					{
-						cout << "Invalid Map: Character (" << line[j] << ") at line #" << lineNumber << endl;
-						FreeMem();
-						return 4;
-					}
-					else
-					{
-						m_scene[lineNumber - 2][j] = line[j];
-						CELL_TYPE x = line[j];
 						if (x == CHAR_PLAYER || x == CHAR_ENTRY || x == CHAR_EXIT)
 						{
 							cout << "Invalid map: player, entrance and exit should not be specified again in the map" << endl;
 							FreeMem();
 							return 4;
 						}
+						else
+							cout << "Invalid Map: Character (" << x << ") at line #" << lineNumber << endl;
+						FreeMem();
+						return 4;
 					}
+					else
+						m_scene[lineNumber - 2][j] = x;
 				}
 			}
 		}
