@@ -1,6 +1,6 @@
 #include "Campaign.h"
 #include "MapBuilderA.h"
-#include "director.h"
+#include "MapDirector.h"
 #include <stdio.h>
 #include <stdlib.h>
 

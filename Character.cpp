@@ -116,6 +116,9 @@ int Character::attackBonus()
 
 }
 
+int Character::getLevel(){
+	return level;
+}
 void Character::levelUp(){
 	level++;
 }
@@ -290,7 +293,7 @@ void Character::playerInfo()
 {
 	cout << "-------------------------------\n";
 	cout << "Class Type: " << characterType << endl;
-	cout << "Level" << getLevel()<<endl;
+	cout << "Level" << level << endl;
 	cout << "Total HP: " << currentHitPoints << endl;
 	cout << "Total armor: " << armorModifier() << endl;
 	cout << "Strenght: " << abilityScores[0] << endl;
@@ -304,43 +307,43 @@ void Character::playerInfo()
 	cout << "-------------------------------\n";
 }
 
-bool Character::equipItem(Item item)
+bool Character::equipItem(Item* item)
 {
-	string type = item.getType();
+	string type = item->getType();
 
-	if (type == "Helmet")
+	if (type == "helmet")
 	{
-		equipment[Helmet] = item;
+		equipment[Helmet] = *item;
 	}
-	else if (type == "Armor")
+	else if (type == "armor")
 	{
-		equipment[Armor] = item;
+		equipment[Armor] = *item;
 	}
-	else if (type == "Weapon")
+	else if (type == "weapon")
 	{
-		equipment[Weapon] = item;
+		equipment[Weapon] = *item;
 	}
-	else if (type == "Shield")
+	else if (type == "shield")
 	{
-		equipment[Shield] = item;
+		equipment[Shield] = *item;
 	}
-	else if (type == "Ring")
+	else if (type == "ring")
 	{
-		equipment[Ring] = item;
+		equipment[Ring] = *item;
 	}
-	else if (type == "Belt")
+	else if (type == "belt")
 	{
-		equipment[Belt] = item;
+		equipment[Belt] = *item;
 	}
-	else if (type == "Boots")
+	else if (type == "boots")
 	{
-		equipment[Boots] = item;
+		equipment[Boots] = *item;
 	}
 	else
 		return false;
 
 	//if(backpack.getSize() > 0)
-		backpack.removeItem(type);
+		//backpack.removeItem(type);
 						//takes it out of backpack
 	return true;
 

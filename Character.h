@@ -38,32 +38,35 @@ public:
 	int damageBonus();
 	void saveCharacter();
 	void loadCharacter();
-	virtual void playerInfo();
-	bool equipItem(Item);
+	void playerInfo();
+	bool equipItem(Item*);
 	bool unequipItem(string);
 	void printBackPackItems();
 	void addToBackpack(Item);
 	void printEquippedItems();
 	void levelUp();
 
-	virtual int armorClass();
+	//virtual int armorClass();
 	int getLevel();
-	int getHitPoints();
 
 	void setPositionX(int);
-	void setPositionY(int)
+	void setPositionY(int);
 	int getPositionX();
 	int getPositionY();
 
+
+	
+
+protected:
+	int currentHitPoints;
+	Item equipment[MAX_ITEMS_EQUIPPED];
+	const Item emptyItem; //itemholder for equipementSlots
+	int level;
 private:
 	string characterType;
 	int abilityScores[6];
-	int currentHitPoints;
-	Item equipment[MAX_ITEMS_EQUIPPED];
 	ItemContainer backpack;
 	enum equipmentSlots {Helmet, Armor, Weapon, Shield, Ring, Belt, Boots};
-	int level;
-	const Item emptyItem; //itemholder for equipementSlots
 	int positionX;
 	int positionY;
 };
@@ -75,7 +78,10 @@ public:
     Fighter();
     Fighter(int, int, int, int, int, int);
 
-    void setArmorClass(); //overrides parent function
-    void playerInfo();//overrides parent function
+    //void setArmorClass(); //overrides parent function
+    //void playerInfo();//overrides parent function
     int attackBonus();
+
+private:
+	int abilityScores[6];
 };

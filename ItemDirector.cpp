@@ -7,8 +7,8 @@ ItemDirector::ItemDirector()
 }
 
 void ItemDirector::makeItem(){
-	itemBuilder->createNewItem;
-	itemBuilder->buildType;
+	itemBuilder->createNewItem();
+	itemBuilder->buildType();
 }
 
 

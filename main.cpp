@@ -32,9 +32,9 @@ void main() {
   int character_choice = validate_choice(1, 2);
   switch (character_choice) {
   case 1:
-    //Character* character = new Fighter();
+    character = new Fighter();
   case 2:
-    Character* character = new Character();
+    character = new Character();
   }
 
   
@@ -46,21 +46,24 @@ void main() {
 
   // create items
   ItemDirector* id = new ItemDirector();
-  id->setItemBuilder(new ArmorBuilder());
+  id->setItemBuilder(new RandomBuilder());
   id->makeItem();
   Item* item = id->getItem();
   cout << "Here is a new Item: " << endl;
   item->printItem();
+  cout << endl;
 
   cout << "Would you like to edit this item? ('y'/'n'): " << endl;
-  int choice;
-  if ((choice = getchar()) == 'y') {
+  char choice;
+  cin >> choice;
+  if (choice == 'y') {
     item->editItem();
     //item->saveItem();
   }
 
   cout << "Would you like your character to be equiped with this item? ('y'/'n'): " << endl;
-  if ((choice = getchar()) == 'y') {
+  cin >> choice;
+  if (choice== 'y') {
     character->equipItem(item);
   }
   delete id;

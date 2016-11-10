@@ -8,8 +8,8 @@ public:
 	~ChestDirector();
 	void setChestBuilder(ChestBuilder* inputChestBuilder) { chestBuilder = inputChestBuilder; };
 	Chest* getChest() { return chestBuilder->getChest(); };
-	void makeChest() { chestBuilder->createNewChest;};
-	~ChestDirector();
+	void makeChest() { chestBuilder->createNewChest();};
+	
 
 	
 private:

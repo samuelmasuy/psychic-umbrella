@@ -5,7 +5,7 @@ class Chest
 {
 public:
 	Chest();
-	Chest(int, int, Item);
+	Chest(int, int, Item*);
 	~Chest();
 	void setPositionX(int);
 	void setPositionY(int);

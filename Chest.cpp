@@ -6,7 +6,7 @@ Chest::Chest(){
 	positionY = 0;
 }
 
-Chest::Chest(int inputPositionX, int inputPositionY, Item inputChestContent){
+Chest::Chest(int inputPositionX, int inputPositionY, Item* inputChestContent){
 	positionX = inputPositionX;
 	positionY = inputPositionY;
 	chestContent = inputChestContent;

@@ -10,31 +10,31 @@ void Game::play() {
 
   initializeCharacterPositionOnMap();
 
-  int characterPositionX = character->getPostionX();
-  int characterPositionY = character->getPostionY();
+  int characterPositionX = character->getPositionX();
+  int characterPositionY = character->getPositionY();
 
   int choice;
   string itemType;
-
+  int level = 1;
   while (true) {
-    characterPositionX = character->getPostionX();
-    characterPositionY = character->getPostionY();
+    characterPositionX = character->getPositionX();
+    characterPositionY = character->getPositionY();
     // check if character at the exit
     if (map->GetCell(characterPositionX, characterPositionY) != CHAR_EXIT) {
       map->Display();
 
       switch (choice = getchar()) {
       case KEY_RIGHT:
-        move(characterPositionX + 1, characterPositionY);
+        move(characterPositionX, characterPositionY, characterPositionX + 1, characterPositionY);
         break;
       case KEY_LEFT:
-        move(characterPositionX - 1, characterPositionY);
+        move(characterPositionX, characterPositionY, characterPositionX - 1, characterPositionY);
         break;
       case KEY_UP:
-        move(characterPositionX, characterPositionY + 1);
+        move(characterPositionX, characterPositionY, characterPositionX, characterPositionY + 1);
         break;
       case KEY_DOWN:
-        move(characterPositionX, characterPositionY - 1);
+        move(characterPositionX, characterPositionY, characterPositionX, characterPositionY - 1);
         break;
       case 'c':
         character->playerInfo();
@@ -43,11 +43,13 @@ void Game::play() {
         character->printBackPackItems();
         map->Display();
       case 'e':
-        int level = 1;
+		  cout << "Enter level: ";
+		  cin >> level;
         character->setLevel(level);
         map->Display();
       case 'u':
-
+		  cout << "Enter item type to unequip: ";
+		  cin >> itemType;
         // unequip from character
         character->unequipItem(itemType);
         map->Display();
@@ -69,8 +71,8 @@ void Game::play() {
 }
 
 void Game::stop() {
-  int characterPositionX = character->getPostionX();
-  int characterPositionY = character->getPostionY();
+  int characterPositionX = character->getPositionX();
+  int characterPositionY = character->getPositionY();
   if (map->GetCell(characterPositionX, characterPositionY) != CHAR_EXIT) {
     map->setCell(characterPositionX, characterPositionY, CHAR_EMPTY);
   }
@@ -82,8 +84,8 @@ void Game::initializeCharacterPositionOnMap() {
   for (int y = 0; y < map->GetRows(); y++) {
     for (int x = 0; x < map->GetCols(); x++) {
       if (map->GetCell(y, x) == CHAR_PLAYER) {
-        character->setPostionX(x);
-		character->setPostionY(y);
+        character->setPositionX(x);
+		character->setPositionY(y);
         return;
       }
     }
@@ -103,8 +105,8 @@ void Game::move(int old_x, int old_y, int new_x, int new_y) {
       // set previous cell to empty
       map->setCell(old_x, old_y, CHAR_EMPTY);
       // set character location to the new cell
-      character->setPostionX(new_x);
-      character->setPostionY(new_y);
+      character->setPositionX(new_x);
+      character->setPositionY(new_y);
       map->setCell(old_x, old_y, CHAR_PLAYER);
       map->Display();
       break;
@@ -112,8 +114,8 @@ void Game::move(int old_x, int old_y, int new_x, int new_y) {
       // set previous cell to empty
       map->setCell(old_x, old_y, CHAR_EMPTY);
       // set character location to the new cell
-      character->setPostionX(new_x);
-      character->setPostionY(new_y);
+      character->setPositionX(new_x);
+      character->setPositionY(new_y);
       map->Display();
       break;
     case CHAR_CHEST:
