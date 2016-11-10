@@ -6,12 +6,15 @@
 #include <string>
 #include <fstream>
 
-#include "MapMangager.h"
+#include "MapManager.h"
 #include "MapBuilder.h"
 #include "ChestBuilder.h"
-#include "CharacterBuilder.h"
+#include "Character.h"
 #include "GameBuilder.h"
 #include "Game.h"
+
+
+
 
 using namespace std;
 
@@ -21,17 +24,20 @@ string get_filename();
 bool has_ending(string const &, string const &);
 
 void main() {
-  cout << "Dungeons And Dragons Game" << endl;
+	Character* character = NULL;
+	
+	cout << "Dungeons And Dragons Game" << endl;
 
   cout << "Let's create a character, would you like to play with a fighter[1] or a regular character[2]: " << endl;
   int character_choice = validate_choice(1, 2);
-  switch (choice) {
+  switch (character_choice) {
   case 1:
-    Character* character = new Fighter();
+    //Character* character = new Fighter();
   case 2:
     Character* character = new Character();
   }
 
+  
   // Create a character
   // CharacterDirector* cd = new CharacterDirector();
   // cd->setCharacterBuilder(new Warrior());
@@ -40,22 +46,22 @@ void main() {
 
   // create items
   ItemDirector* id = new ItemDirector();
-  id->setItemBuilder(new ConcreteArmorBuilder());
+  id->setItemBuilder(new ArmorBuilder());
   id->makeItem();
   Item* item = id->getItem();
   cout << "Here is a new Item: " << endl;
-  cout << item->printItem();
+  item->printItem();
 
   cout << "Would you like to edit this item? ('y'/'n'): " << endl;
   int choice;
-  if ((choice = getch()) == 'y') {
+  if ((choice = getchar()) == 'y') {
     item->editItem();
-    item->saveItem();
+    //item->saveItem();
   }
 
   cout << "Would you like your character to be equiped with this item? ('y'/'n'): " << endl;
-  if ((choice = getch()) == 'y') {
-    player->equipItem(item);
+  if ((choice = getchar()) == 'y') {
+    character->equipItem(item);
   }
   delete id;
 
@@ -64,7 +70,7 @@ void main() {
   cout << endl;
   character->printEquippedItems();
   cout << endl;
-  character->printBackpackItems();
+  character->printBackPackItems();
   cout << endl;
 
   // ........... many more items
@@ -101,7 +107,7 @@ void main() {
 
   GameBuilder* gb = new GameBuilder();
   gb->constructGame();
-  gb->setCharacterAndMap(player, *map);
+  gb->setCharacterAndMap(character, &map);
   Game* game = gb->getGame();
   game->play();
 }

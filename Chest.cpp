@@ -28,11 +28,11 @@ int Chest::getPositionY(){
 	return positionY;
 }
 
-void Chest::setChestContent(Item inputItem){
+void Chest::setChestContent(Item* inputItem){
 	chestContent = inputItem;
 }
 
-Item Chest::getItem(){
+Item* Chest::getItem(){
 	return chestContent;
 }
 

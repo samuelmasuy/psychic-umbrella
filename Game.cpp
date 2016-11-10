@@ -4,6 +4,7 @@
  */
 #include "Game.h"
 
+
 void Game::play() {
   CharacterOBS* observerCharacter = new CharacterOBS(character);
 
@@ -13,15 +14,16 @@ void Game::play() {
   int characterPositionY = character->getPostionY();
 
   int choice;
+  string itemType;
 
   while (true) {
     characterPositionX = character->getPostionX();
     characterPositionY = character->getPostionY();
     // check if character at the exit
-    if (map->getCell(characterPositionX, characterPositionY) != CHAR_EXIT) {
+    if (map->GetCell(characterPositionX, characterPositionY) != CHAR_EXIT) {
       map->Display();
 
-      switch (choice = getch()) {
+      switch (choice = getchar()) {
       case KEY_RIGHT:
         move(characterPositionX + 1, characterPositionY);
         break;
@@ -38,20 +40,20 @@ void Game::play() {
         character->playerInfo();
       case 'i':
         character->printEquippedItems();
-        character->printBackpackItems();
+        character->printBackPackItems();
         map->Display();
       case 'e':
         int level = 1;
         character->setLevel(level);
         map->Display();
       case 'u':
-        string itemType;
+
         // unequip from character
         character->unequipItem(itemType);
         map->Display();
       case 'q':
         cout << "Do you want to quit the game? ('y'/'n'): " << endl;
-        if ((choice = getch()) == 'y') {
+        if ((choice = getchar()) == 'y') {
           stop();
           return;
         }
@@ -69,19 +71,19 @@ void Game::play() {
 void Game::stop() {
   int characterPositionX = character->getPostionX();
   int characterPositionY = character->getPostionY();
-  if (map->getCell(characterPositionX, characterPositionY) != CHAR_EXIT) {
+  if (map->GetCell(characterPositionX, characterPositionY) != CHAR_EXIT) {
     map->setCell(characterPositionX, characterPositionY, CHAR_EMPTY);
   }
   // might need to put back character original coordinate  + for map
-  map->save();
+  //map->save();
 }
 
 void Game::initializeCharacterPositionOnMap() {
-  for (int y = 0; y < map->getRows(); y++) {
-    for (int x = 0; x < map->getColumns(); x++) {
-      if (map->getCell(y, x) == CHAR_PLAYER) {
-        player->setPostionX(x);
-        player->setPostionY(y);
+  for (int y = 0; y < map->GetRows(); y++) {
+    for (int x = 0; x < map->GetCols(); x++) {
+      if (map->GetCell(y, x) == CHAR_PLAYER) {
+        character->setPostionX(x);
+		character->setPostionY(y);
         return;
       }
     }
@@ -89,12 +91,12 @@ void Game::initializeCharacterPositionOnMap() {
 }
 
 void Game::move(int old_x, int old_y, int new_x, int new_y) {
-  int mapRows = map->getRows();
-  int mapColumns = map->getColumns();
+  int mapRows = map->GetRows();
+  int mapColumns = map->GetCols();
   // Check for valid move
   if (!(new_x >= mapRows || new_x < 0 || new_y >= mapColumns || new_y < 0)) {
-    char new_cell_type = map->getCell(new_x, new_y)
-    switch (map->getCell(new_x, new_y)) {
+	  char new_cell_type = map->GetCell(new_x, new_y);
+    switch (map->GetCell(new_x, new_y)) {
     case CHAR_WALL:
       break;
     case CHAR_EMPTY:
@@ -128,11 +130,12 @@ void Game::openChest() {
   cg->makeChest();
   Chest* chest = cg->getChest();
   Item* item = chest->getItem();
-  item->print();
+  item->printItem();
   cout << "Would you like your character to be equiped with this item? ('y'/'n'): " << endl;
-  if ((choice = getch()) == 'y') {
+  int choice;
+  if ((choice = getchar()) == 'y') {
     character->equipItem(item);
-    map->setCell(chest->positionX, chest->postionY, CHAR_EMPTY);
+    //map->setCell(chest->positionX, chest->postionY, CHAR_EMPTY);
   }
   delete cg;
 }

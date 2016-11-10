@@ -297,37 +297,37 @@ void Character::playerInfo()
 	cout << "-------------------------------\n";
 }
 
-bool Character::equipItem(Item item)
+bool Character::equipItem(Item* item)
 {
-	string type = item.getType();
+	string type = item->getType();
 
 	if (type == "Helmet")
 	{
-		equipment[Helmet] = item;
+		equipment[Helmet] = *item;
 	}
 	else if (type == "Armor")
 	{
-		equipment[Armor] = item;
+		equipment[Armor] = *item;
 	}
 	else if (type == "Weapon")
 	{
-		equipment[Weapon] = item;
+		equipment[Weapon] = *item;
 	}
 	else if (type == "Shield")
 	{
-		equipment[Shield] = item;
+		equipment[Shield] = *item;
 	}
 	else if (type == "Ring")
 	{
-		equipment[Ring] = item;
+		equipment[Ring] = *item;
 	}
 	else if (type == "Belt")
 	{
-		equipment[Belt] = item;
+		equipment[Belt] = *item;
 	}
 	else if (type == "Boots")
 	{
-		equipment[Boots] = item;
+		equipment[Boots] = *item;
 	}
 	else
 		return false;

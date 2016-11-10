@@ -28,7 +28,7 @@ public:
 	void saveCharacter();
 	void loadCharacter();
 	void playerInfo();
-	bool equipItem(Item);
+	bool equipItem(Item*);
 	bool unequipItem(string);
 	void printBackPackItems();
 	void addToBackpack(Item);

@@ -4,6 +4,8 @@
 // it saves the campaign, u can load it and display the maps in it,
 // and the actual map itself..
 //
+#include "MapManager.h"
+
 void Flush()
 {
 
@@ -423,6 +425,6 @@ void manageMap()
 			} ;
 		}
 	} while (true);
-    return 0;
+  
 }
 

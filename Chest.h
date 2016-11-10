@@ -9,14 +9,14 @@ public:
 	~Chest();
 	void setPositionX(int);
 	void setPositionY(int);
-	void setChestContent(Item);
+	void setChestContent(Item*);
 	int getPositionX();
 	int getPositionY();
-	Item getItem();
+	Item* getItem();
 
 private:
 	int positionX;
 	int positionY;
-	Item chestContent;
+	Item* chestContent;
 };
 

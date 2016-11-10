@@ -5,7 +5,7 @@ class ItemDirector
 public:
 	ItemDirector();
 	void setItemBuilder(ItemBuilder* inputItemBuilder) { itemBuilder = inputItemBuilder; };
-	Item* getItem() { return itemBuilder->getItem; };
+	Item * getItem() { return itemBuilder->getItem; };
 	void makeItem();
 	~ItemDirector();
 

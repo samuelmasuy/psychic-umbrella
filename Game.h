@@ -9,11 +9,12 @@
 #include <fstream>
 #include <string>
 
-#include <Item.h>
-#include <Character.h>
-#include <Map.h>
-#include <CharacterBuilder.h>
-#include <ChestBuilder.h>
+#include "Item.h"
+#include "Character.h"
+#include "Map.h"
+#include "ChestBuilder.h"
+#include "CharacterOBS.h"
+#include "ChestDirector.h"
 
 using namespace std;
 
