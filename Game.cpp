@@ -118,7 +118,7 @@ void Game::stop() {
   character->playerInfo();
   cout << endl << "Press any key to quit the game." << endl;
   char quit;
-  cin >> quit
+  cin >> quit;
   // might need to put back character original coordinate  + for map
   // map->save();
 }
