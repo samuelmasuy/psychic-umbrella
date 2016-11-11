@@ -1,3 +1,27 @@
+//////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////
+/// Our Game & Design Info: This is our campaign class ///
+/// where we gather a collections of maps to make a    ///
+/// campaign of maps of different levels. Here we set  /// 
+/// the design to create (default), load, save, and    ///
+/// clear campaigns.                                   ///
+//////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////
+/// LIBRARIES USED:                                    ///
+/// iosteam: This is used for our basic input/output   ///
+/// services for our project such as cin and cout.     ///
+///fstream: This is another input/output stream used   ///
+/// for parameters such as char_type                   ///
+///vector: This is used for the arrays and all its     ///
+/// related member functions such as size, max, empty. ///
+/// stdlib: This is used for memory management.        ///
+/// string: Used for string types                      ///
+///                                                    ///
+//////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////
 #pragma once
 
 #include "Map.h"
