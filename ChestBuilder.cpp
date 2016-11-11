@@ -11,6 +11,7 @@ void ChestBuilder::buildItem(){
 	ItemBuilder* randomItemBuilder = new RandomBuilder();
 	randomItemBuilder->createNewItem();
 	randomItemBuilder->buildType();
+	randomItemBuilder->buildEnhancement();
 	chest->setChestContent(randomItemBuilder->getItem());
 }
 
