@@ -68,9 +68,9 @@ int ItemContainer::getItemIndex(string itemType){
   return -1;
 }
 
-void ItemContainer::removeItem(string itemType){
+void ItemContainer::removeItem(int index){
 
-	int index = getItemIndex(itemType);
+	//int index = getItemIndex(itemType);
 	items.erase(items.begin() + index);
 	size--;
 
@@ -83,9 +83,23 @@ void ItemContainer::printBackpack()
 		cout << "---BACKPACK ITEMS---\n";
 		for (int i = 0; i < items.size(); i++)
 		{
-			cout << items[i].getType() << " {" << items.at(i).getInfluences().at(0).getType() << " +" << items.at(i).getInfluences().at(0).getBonus() << "}" << endl;
+			cout << i <<". " << items[i].getType() << " {" << items.at(i).getInfluences().at(0).getType() << " +" << items.at(i).getInfluences().at(0).getBonus() << "}" << endl;
 		}
 	}
 	else
 		cout << "Backpack is empty\n";
+}
+
+string ItemContainer::getItemTypeAtIndex(int index)
+{
+	string type;
+	type = items[index].getType();
+	return type;
+}
+
+Item ItemContainer::getItemAtIndex(int index)
+{
+
+	return items[index];
+
 }

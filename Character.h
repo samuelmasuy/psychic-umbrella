@@ -31,7 +31,7 @@ public:
 	int damageBonus();
 	void playerInfo(); //displaying character info
 	bool equipItem(Item*);
-
+	bool equipFromBackpack(int);
 	bool unequipItem(string);
 	void printBackPackItems();
 	void addToBackpack(Item);
