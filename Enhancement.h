@@ -12,6 +12,8 @@ public:
 	Enhancement();
 	Enhancement(string type, int bonus);
 	string getType();
+	void setType(string inputType) { type = inputType; };
+	void setBonus(int inputBonus) { bonus = inputBonus; };
 	int getBonus();
 	void setEnhacement(string, int);
 	~Enhancement();
