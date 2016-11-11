@@ -24,6 +24,8 @@ int main(int argc, char const* argv[]) {
   cout << "Dungeons And Dragons Game" << endl;
 
   Character* character = NULL;
+  char choice;
+
   cout << "Let's create a character, would you like to play with a fighter[1] or a regular character[2]: " << endl;
   int character_choice = validate_choice(1, 2);
   switch (character_choice) {
@@ -31,6 +33,12 @@ int main(int argc, char const* argv[]) {
     character = new Fighter();
   case 2:
     character = new Character();
+  }
+
+  cout << endl << "Do you want to load your character from a file?";
+  cin >> choice;
+  if (choice== 'y') {
+    character->loadCharacter();
   }
 
   // create items
@@ -43,7 +51,6 @@ int main(int argc, char const* argv[]) {
   cout << endl;
 
   cout << "Would you like to edit this item? ('y'/'n'): ";
-  char choice;
   cin >> choice;
   if (choice == 'y') {
     item->editItem();

@@ -81,6 +81,11 @@ void Game::play() {
         character->unequipItem(itemType);
         map->print();
         break;
+      case 'x':
+        system("cls");
+        character->saveCharacter();
+        map->print();
+        break;
       case 'h':
         // clear_screen();
         system("cls");
@@ -230,5 +235,6 @@ void Game::printGameUsage() {
   cout << "Use i to display the items on the character." << endl;
   cout << "Use u to unequip an item from the character." << endl;
   cout << "Use e to change the level of the character." << endl;
+  cout << "Use x to save your character." << endl;
   cout << "Use h to display this help menu." << endl;
 }
