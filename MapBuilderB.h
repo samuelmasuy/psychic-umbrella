@@ -47,6 +47,24 @@ public:
 	/// save the level into file
 	///
 	int SaveLevel(const char *filename);
+	///
+	/// return true if the map is valid 
+	///
+	int ValidateMap();
+
+private:
+	///
+	/// determine if a path exits between (row0, col0) and (row1, col1)
+	///
+	bool PathExist(int row0, int col0, int row1, int col1);
+	///
+	/// backtracking to find a path between [row0,col0] and [row1,col1]
+	///
+	bool Backtracking(CELL_TYPE **v, int row0, int col0, int row1, int col1);
+
+	///
+	/// release memory of a 2D array pointer
+	///
+	void FreeMem(CELL_TYPE **x, int rows);
 
 };
-
