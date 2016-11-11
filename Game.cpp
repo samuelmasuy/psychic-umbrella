@@ -29,44 +29,44 @@ void Game::play() {
       switch (choice) {
       case 'd':
         //clear_screen();
-		  system("cls");
+        system("cls");
         move(characterPositionX, characterPositionY, characterPositionX + 1, characterPositionY);
         map->print();
         break;
       case 'a':
-       // clear_screen();
-		system("cls");
+        // clear_screen();
+        system("cls");
         move(characterPositionX, characterPositionY, characterPositionX - 1, characterPositionY);
         map->print();
         break;
       case 'w':
         //clear_screen();
-		system("cls");
+        system("cls");
         move(characterPositionX, characterPositionY, characterPositionX, characterPositionY - 1);
         map->print();
         break;
       case 's':
-       // clear_screen();
-		  system("cls");
+        // clear_screen();
+        system("cls");
         move(characterPositionX, characterPositionY, characterPositionX, characterPositionY + 1);
         map->print();
         break;
       case 'c':
-       // clear_screen();
-		  system("cls");
+        // clear_screen();
+        system("cls");
         character->playerInfo();
         map->print();
         break;
       case 'i':
         //clear_screen();
-		  system("cls");
+        system("cls");
         character->printEquippedItems();
         character->printBackPackItems();
         map->print();
         break;
       case 'e':
-       // clear_screen();
-		  system("cls");
+        // clear_screen();
+        system("cls");
         cout << "Enter level: ";
         cin >> level;
         character->setLevel(level);
@@ -74,7 +74,7 @@ void Game::play() {
         break;
       case 'u':
         //clear_screen();
-		  system("cls");
+        system("cls");
         cout << "Enter item type to unequip: ";
         cin >> itemType;
         // unequip from character
@@ -82,13 +82,13 @@ void Game::play() {
         map->print();
         break;
       case 'h':
-       // clear_screen();
-		  system("cls");
+        // clear_screen();
+        system("cls");
         printGameUsage();
-		break;
+        break;
       case 'q':
-       //clear_screen();
-		  system("cls");
+        //clear_screen();
+        system("cls");
         cout << "Do you want to quit the game? ('y'/'n'): ";
         cin >> choice;
         if (choice == 'y') {
@@ -125,18 +125,18 @@ void Game::stop() {
 }
 
 void Game::initializeCharacterPositionOnMap() {
-	int ip, jp;
-	ip = map->getEntranceRow();
-	jp = map->getEntranceColumn();
-	map->SetPlayerPos(ip, jp);	
+  int ip, jp;
+  ip = map->getEntranceRow();
+  jp = map->getEntranceColumn();
+  map->SetPlayerPos(ip, jp);
 
 
-	character->setPositionX(jp);
-	character->setPositionY(ip);
+  character->setPositionX(jp);
+  character->setPositionY(ip);
 
-	map->Display();
+  map->Display();
 
-	/*
+  /*
   int ip, jp;
   map->GetPlayerPos(ip, jp);
   character->setPositionX(jp);

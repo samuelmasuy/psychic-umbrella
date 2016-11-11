@@ -33,12 +33,6 @@ int main(int argc, char const* argv[]) {
     character = new Character();
   }
 
-  // Create a character
-  // CharacterDirector* cd = new CharacterDirector();
-  // cd->setCharacterBuilder(new Warrior());
-  // cd->createNewCharacter("Umbrella");
-  // Character* character = cd->getCharacter();
-
   // create items
   ItemDirector* id = new ItemDirector();
   id->setItemBuilder(new RandomBuilder());
@@ -53,7 +47,7 @@ int main(int argc, char const* argv[]) {
   cin >> choice;
   if (choice == 'y') {
     item->editItem();
-    //item->saveItem();
+    // item->saveItem();
   }
 
   cout << "Would you like your character to be equiped with this item? ('y'/'n'): ";
@@ -102,7 +96,7 @@ int main(int argc, char const* argv[]) {
     break;
   } while (true);
 
- // map.Display();
+// map.Display();
 
   GameBuilder* gb = new GameBuilder();
   gb->constructGame();
