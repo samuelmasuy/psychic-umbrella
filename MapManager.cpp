@@ -48,7 +48,7 @@ void manageMap()
 	do
 	{
 		cout << "Select an option:" << endl;
-		cout << "  [1] Create a new Campaign" << endl;
+		cout << "  [1] Reset Campaign" << endl;
 		cout << "  [2] Load Campaign" << endl;
 		cout << "  [3] Save Campaign" << endl;
 		cout << "  [4] Show information of current Campaign" << endl;
