@@ -44,3 +44,19 @@ exit denoted by `O`.
 	Entry   'I'
 	Exit    'O'
 	Chest   'c'
+
+### List of Map Files
+
+level1.txt
+
+level2.txt
+
+campaign1.txt
+
+campaign2.txt
+
+ErrorMap1.txt
+
+ErrorMap2.txt
+
+ErrorMap3.txt
