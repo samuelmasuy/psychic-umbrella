@@ -58,6 +58,11 @@ class Game {
    */
   Character* getCharacter();
 
+  /**
+   * @brief Print the game usage.
+   */
+  void printGameUsage();
+
  private:
   Map* map;
   Character* character;

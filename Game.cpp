@@ -13,6 +13,8 @@ void Game::play() {
   int characterPositionX = character->getPositionX();
   int characterPositionY = character->getPositionY();
 
+  printGameUsage();
+
   char choice;
   string itemType;
   int level = 1;
@@ -70,6 +72,9 @@ void Game::play() {
         character->unequipItem(itemType);
         map->print();
         break;
+      case 'h':
+        clear_screen();
+        printGameUsage();
       case 'q':
         clear_screen();
         cout << "Do you want to quit the game? ('y'/'n'): ";
@@ -175,4 +180,12 @@ Map* Game::getMap() {
 }
 Character* Game::getCharacter() {
   return character;
+}
+
+void Game::printGameUsage() {
+  cout << "Use w, a, s, d to move your character." << endl;
+  cout << "Use c to display the character statistics." << endl;
+  cout << "Use i to display the items on the character." << endl;
+  cout << "Use u to unequip an item from the character." << endl;
+  cout << "Use e to change the level of the character." << endl;
 }
