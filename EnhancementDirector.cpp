@@ -1,4 +1,3 @@
-#pragma
 #include "EnhancementDirector.h"
 
 EnhancementDirector::EnhancementDirector() {

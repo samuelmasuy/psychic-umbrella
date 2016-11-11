@@ -1,6 +1,8 @@
 #pragma once
 #include "Item.h"
-//#include "EnhancementDirector.h"
+#include "EnhancementDirector.h"
+#include "EnhancementBuilder.h"
+
 #include <stdio.h>
 #include <stdlib.h>     /* srand, rand */
 //#include <time.h>       /* time */
@@ -26,43 +28,43 @@ protected:
 
 class HelmetBuilder : public ItemBuilder{
 	void buildType() { item->setType("helmet"); };
-	void buildEnhancement() {};
+	void buildEnhancement();
 };
 
 class ArmorBuilder : public ItemBuilder {
 	void buildType() { item->setType("armor"); }
-	void buildEnhancement() {};
+	void buildEnhancement();
 };
 
 
-class SheildBuilder : public ItemBuilder{
+class ShieldBuilder : public ItemBuilder{
 	void buildType() { item->setType("shield"); }
-	void buildEnhancement() {};
+	void buildEnhancement();
 };
 
 class RingBuilder : public ItemBuilder{
 	void buildType() { item->setType("ring"); }
-	void buildEnhancement() {};
+	void buildEnhancement();
 };
 
 class BeltBuilder : public ItemBuilder{
 	void buildType() { item->setType("belt"); }
-	void buildEnhancement() {};
+	void buildEnhancement();
 };
 
 class BootBuilder : public ItemBuilder{
 	void buildType() { item->setType("boot"); }
-	void buildEnhancement() {};
+	void buildEnhancement();
 };
 
 class WeaponBuilder : public ItemBuilder{
 	void buildType() { item->setType("weapon"); }
-	void buildEnhancement() {};
+	void buildEnhancement();
 };
 
 class RandomBuilder : public ItemBuilder{
 	void buildType();
-	void buildEnhancement() {};
+	void buildEnhancement();
 };
 
 

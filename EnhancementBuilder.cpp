@@ -5,11 +5,13 @@
 
 EnhancementBuilder::EnhancementBuilder()
 {
+	enhancement = new Enhancement();
 }
 
 
 EnhancementBuilder::~EnhancementBuilder()
 {
+	delete enhancement;
 }
 
 void RandomEnhancementBuilderForHelmet::buildType() {

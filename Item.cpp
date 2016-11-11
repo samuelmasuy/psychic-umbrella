@@ -15,6 +15,7 @@ const string fileName = "items.ros";
 Item::Item()
 {
 	type = "";
+
 }
 
 Item::Item(string type_name, vector<Enhancement> influences)
@@ -134,7 +135,7 @@ void Item::editItem(){
 	cout << " Enter bonus for the enhacement: ";
 	cin >> bonus;
 		for (int i = 0; i < influence.size(); i++) {
-			influence[i].setEnhacement(enhacementType, bonus);
+			influence[i].setEnhancement(enhacementType, bonus);
 			validateItem();
 		}
 }

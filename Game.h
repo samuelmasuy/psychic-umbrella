@@ -82,7 +82,7 @@ class Game {
 /**
  * @brief Helper Function to clear the screen
  */
-void clear_screen() {
+/*void clear_screen() {
 #ifdef WINDOWS
   std::system("cls");
 #else
@@ -90,4 +90,5 @@ void clear_screen() {
   std::system("clear");
 #endif
 }
+*/
 

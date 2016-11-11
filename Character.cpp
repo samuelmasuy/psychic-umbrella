@@ -389,9 +389,9 @@ bool Character::equipItem(Item* item)
 
 //! Implementation of unequip item
 //! @return bool: states whether item has been unequipped or not
-bool Character::unequipItem(Item item)
+bool Character::unequipItem(string type)
 {
-	string type = item.getType();
+	
 
 	//remove item from correct slot
 	if (type == "Helmet")

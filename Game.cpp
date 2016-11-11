@@ -27,45 +27,53 @@ void Game::play() {
 
       switch (choice) {
       case 'd':
-        clear_screen();
+        //clear_screen();
+		  system("cls");
         move(characterPositionX, characterPositionY, characterPositionX + 1, characterPositionY);
         map->print();
         break;
       case 'a':
-        clear_screen();
+       // clear_screen();
+		system("cls");
         move(characterPositionX, characterPositionY, characterPositionX - 1, characterPositionY);
         map->print();
         break;
       case 'w':
-        clear_screen();
+        //clear_screen();
+		system("cls");
         move(characterPositionX, characterPositionY, characterPositionX, characterPositionY - 1);
         map->print();
         break;
       case 's':
-        clear_screen();
+       // clear_screen();
+		  system("cls");
         move(characterPositionX, characterPositionY, characterPositionX, characterPositionY + 1);
         map->print();
         break;
       case 'c':
-        clear_screen();
+       // clear_screen();
+		  system("cls");
         character->playerInfo();
         map->print();
         break;
       case 'i':
-        clear_screen();
+        //clear_screen();
+		  system("cls");
         character->printEquippedItems();
         character->printBackPackItems();
         map->print();
         break;
       case 'e':
-        clear_screen();
+       // clear_screen();
+		  system("cls");
         cout << "Enter level: ";
         cin >> level;
         character->setLevel(level);
         map->print();
         break;
       case 'u':
-        clear_screen();
+        //clear_screen();
+		  system("cls");
         cout << "Enter item type to unequip: ";
         cin >> itemType;
         // unequip from character
@@ -73,10 +81,13 @@ void Game::play() {
         map->print();
         break;
       case 'h':
-        clear_screen();
+       // clear_screen();
+		  system("cls");
         printGameUsage();
+		break;
       case 'q':
-        clear_screen();
+       //clear_screen();
+		  system("cls");
         cout << "Do you want to quit the game? ('y'/'n'): ";
         cin >> choice;
         if (choice == 'y') {
@@ -196,4 +207,5 @@ void Game::printGameUsage() {
   cout << "Use i to display the items on the character." << endl;
   cout << "Use u to unequip an item from the character." << endl;
   cout << "Use e to change the level of the character." << endl;
+  cout << "Use h to display this help menu." << endl;
 }

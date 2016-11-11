@@ -34,6 +34,16 @@ void Enhancement::setEnhancement(string type_name, int bonus_val)
 	bonus = bonus_val;
 }
 
+void Enhancement::setType(string inputType) 
+{ 
+	type = inputType;
+}
+
+void Enhancement::setBonus(int inputBonus)
+{
+	bonus = inputBonus;
+}
+
 Enhancement::~Enhancement()
 {
 }

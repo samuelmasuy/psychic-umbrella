@@ -15,8 +15,8 @@ void RandomBuilder::buildType(){
 	// Initialize Mersenne Twister pseudo-random number generator
 	mt19937 gen(rd());
 	// Generate pseudo-random numbers
-	// uniformly distributed in range (1, 7)
-	uniform_int_distribution<> rand(1, 7);
+	// uniformly distributed in range (0, 6)
+	uniform_int_distribution<> rand(0, 6);
 			int i = rand(gen);
 			switch (i) {
 				case 0:
@@ -35,7 +35,7 @@ void RandomBuilder::buildType(){
 					item->setType("belt");
 					break;
 				case 5:
-					item->setType("boot");
+					item->setType("boots");
 					break;
 				case 6:
 					item->setType("weapon");
@@ -48,49 +48,49 @@ void HelmetBuilder::buildEnhancement(){
   EnhancementBuilder* eb = new RandomEnhancementBuilderForHelmet();
   eb->buildType();
   eb->buildBonus();
-  item->setEnhancement(eb->getEnhancement());
+  item->setInfluences(*eb->getEnhancement());
 }
 
 void ArmorBuilder::buildEnhancement(){
   EnhancementBuilder* eb = new RandomEnhancementBuilderForArmor();
   eb->buildType();
   eb->buildBonus();
-  item->setEnhancement(eb->getEnhancement());
+  item->setInfluences(*eb->getEnhancement());
 }
 
 void ShieldBuilder::buildEnhancement(){
   EnhancementBuilder* eb = new RandomEnhancementBuilderForShield();
   eb->buildType();
   eb->buildBonus();
-  item->setEnhancement(eb->getEnhancement());
+  item->setInfluences(*eb->getEnhancement());
 }
 
 void RingBuilder::buildEnhancement(){
   EnhancementBuilder* eb = new RandomEnhancementBuilderForRing();
   eb->buildType();
   eb->buildBonus();
-  item->setEnhancement(eb->getEnhancement());
+  item->setInfluences(*eb->getEnhancement());
 }
 
 void BeltBuilder::buildEnhancement(){
   EnhancementBuilder* eb = new RandomEnhancementBuilderForBelt();
   eb->buildType();
   eb->buildBonus();
-  item->setEnhancement(eb->getEnhancement());
+  item->setInfluences(*eb->getEnhancement());
 }
 
 void BootBuilder::buildEnhancement(){
   EnhancementBuilder* eb = new RandomEnhancementBuilderForBoots();
   eb->buildType();
   eb->buildBonus();
-  item->setEnhancement(eb->getEnhancement());
+  item->setInfluences(*eb->getEnhancement());
 }
 
 void WeaponBuilder::buildEnhancement(){
   EnhancementBuilder* eb = new RandomEnhancementBuilderForWeapon();
   eb->buildType();
   eb->buildBonus();
-  item->setEnhancement(eb->getEnhancement());
+  item->setInfluences(*eb->getEnhancement());
 }
 
 void RandomBuilder::buildEnhancement() {
@@ -100,36 +100,36 @@ void RandomBuilder::buildEnhancement() {
     EnhancementBuilder* eb = new RandomEnhancementBuilderForHelmet();
     eb->buildType();
     eb->buildBonus();
-    item->setEnhancement(eb->getEnhancement());
+	item->setInfluences(*eb->getEnhancement());
   } else if (item_type.compare("armor") == 0) {
     EnhancementBuilder* eb = new RandomEnhancementBuilderForArmor();
     eb->buildType();
     eb->buildBonus();
-    item->setEnhancement(eb->getEnhancement());
+	item->setInfluences(*eb->getEnhancement());
   } else if (item_type.compare("shield") == 0) {
     EnhancementBuilder* eb = new RandomEnhancementBuilderForShield();
     eb->buildType();
     eb->buildBonus();
-    item->setEnhancement(eb->getEnhancement());
+	item->setInfluences(*eb->getEnhancement());
   } else if (item_type.compare("ring") == 0) {
     EnhancementBuilder* eb = new RandomEnhancementBuilderForRing();
     eb->buildType();
     eb->buildBonus();
-    item->setEnhancement(eb->getEnhancement());
+	item->setInfluences(*eb->getEnhancement());
   } else if (item_type.compare("belt") == 0) {
     EnhancementBuilder* eb = new RandomEnhancementBuilderForBelt();
     eb->buildType();
     eb->buildBonus();
-    item->setEnhancement(eb->getEnhancement());
+	item->setInfluences(*eb->getEnhancement());
   } else if (item_type.compare("boots") == 0) {
     EnhancementBuilder* eb = new RandomEnhancementBuilderForBoots();
     eb->buildType();
     eb->buildBonus();
-    item->setEnhancement(eb->getEnhancement());
+	item->setInfluences(*eb->getEnhancement());
   } else if (item_type.compare("weapon") == 0) {
     EnhancementBuilder* eb = new RandomEnhancementBuilderForWeapon();
     eb->buildType();
     eb->buildBonus();
-    item->setEnhancement(eb->getEnhancement());
+	item->setInfluences(*eb->getEnhancement());
   }
 }

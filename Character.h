@@ -32,7 +32,7 @@ public:
 	void playerInfo(); //displaying character info
 	bool equipItem(Item*);
 
-	bool unequipItem(Item);
+	bool unequipItem(string);
 	void printBackPackItems();
 	void addToBackpack(Item);
 	void printEquippedItems();
