@@ -54,7 +54,11 @@ int main(int argc, char const* argv[]) {
   cin >> choice;
   if (choice == 'y') {
     item->editItem();
-    // item->saveItem();
+    // cout << "Would you like to save this item? ('y'/'n'): ";
+    // cin >> choice;
+    // if (choice == 'y') {
+    //   item->saveItem();
+    // }
   }
 
   cout << "Would you like your character to be equiped with this item? ('y'/'n'): ";
