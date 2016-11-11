@@ -38,14 +38,16 @@ Character::Character()
 {
 	characterType = "fighter";
 
+	//generate stats for Character
 	for (int i = 0; i < TOT_STATS; i++)
 		abilityScores[i] = generateStats();
+	//initializing backpack to emptyItem
 	for (int i = 0; i < MAX_ITEMS_EQUIPPED; i++)
 		equipment[i] = emptyItem;
 
 	//and set hit points to 10
 	currentHitPoints = 10;
-	notify();
+	notify(); //notifies character observer
 }
 
 //! Implementation of the verification of a newly created Character
@@ -73,13 +75,16 @@ int Character::getHitPoints()
 	return currentHitPoints; 
 }
 
-
+//! Implementation of ability modifier method.
+//! @return int: value of modified ability score entered
 int Character::abilityModifier(int ability)
 {
 
 	return abilityScores[ability] / 2 - 5;
 }
 
+//! Implementation of hit points of character
+//! @param currentHitPoints: sets currentHitPoints according to ability modifier
 void Character::hpChange()
 {
 	if (abilityModifier(3) > 1)
@@ -89,7 +94,8 @@ void Character::hpChange()
 	notify();
 }
 
-
+//! Implementation of level of character
+//! @param level: when level is changed the following stats must also change according to D20 rules.
 void Character::setLevel(int lvl)
 {
 	level = lvl;
@@ -99,30 +105,41 @@ void Character::setLevel(int lvl)
 	notify();
 }
 
+//! Implementation of armor modifier
+//! @return the modifier for armor according to D20 game rules
 int Character::armorModifier()
 {
 	return 10 + abilityModifier(1);
 
 }
-
+//! Implementation of damage bonus which depends on strength ability
+//! @return strength ability
 int Character::damageBonus()
 {
 	return abilityModifier(0); 
 }
-
+//! Implementation of attack bonus according to D20 game rules
+//! @return attackBonus according d20 game
 int Character::attackBonus()
 {
 		return level + abilityModifier(0) + abilityModifier(1);
 
 }
 
+//! Implementation of get level
+//! @return level: level f the character
 int Character::getLevel(){
 	return level;
 }
+
+//! Implementation of level up
+//! @param level: increase level of character upon level change
 void Character::levelUp(){
 	level++;
 }
 
+//! Implementation of stats generator
+//! @return total: random number generated
 int Character::generateStats()
 {
 	int score = 0;
@@ -154,23 +171,16 @@ int Character::generateStats()
 	return total;
 }
 
+
+//! Implementation of save character
+//! @param saves character into txt file.
 void Character::saveCharacter()
 {
-
- /*	ofstream ofs("savedCharacter.ros", ios::binary);
-	ofs.write((char *)&character, sizeof(character));
-	ofs.close();
-*/
-	/*
-	ofstream outfile;
-	outfile.open(filename.c_str(), ios::out | ios::app | ios::binary);
-	outfile.write((char *)(&character), sizeof(character));
-	outfile.close();
-	*/
 	string type = "";
 	string saveFile;
 	cout << "Enter name of file being saved: ";
 	cin >> saveFile;
+
 
 
 	ofstream ofs(saveFile);
@@ -179,13 +189,14 @@ void Character::saveCharacter()
 	ofs << currentHitPoints << endl;
 	for (int i = 0; i < 6; i++)
 		ofs << abilityScores[i] << endl;
-
+	ofs << equippedSize << endl;
 	for (int i = 0; i < MAX_ITEMS_EQUIPPED; i++)
 	{
 		type = equipment[i].getType();
 		if (type != "")
 		{
 			ofs << equipment[i].getType() << endl;
+			ofs << equipment[i].getInfluences().size() << endl;
 			for (int j = 0; j < equipment[i].getInfluences().size(); j++)
 			{
 				ofs << equipment[i].getInfluences().at(0).getType() << endl;
@@ -195,10 +206,11 @@ void Character::saveCharacter()
 	}
 
 	if (backpack.getSize() != 0){
-		ofs << backpack.getSize();
+		ofs << backpack.getSize() << endl;
 		for (int i = 0; i < backpack.getSize(); i++)
 		{
 			ofs << backpack.getItems().at(i).getType() << endl;
+			ofs << backpack.getItems()[i].getInfluences().size() << endl;
 			for (int j = 0; j < backpack.getItems()[i].getInfluences().size(); j++)
 			{
 				ofs << backpack.getItems()[i].getInfluences().at(0).getType() << endl;
@@ -213,16 +225,11 @@ void Character::saveCharacter()
 
 
 }
+
+//! Implementation of load character
+//! @param loads character from txt file.
 void Character::loadCharacter()
 {
-
-	/*
-	ifstream infile;
-	infile.open(filename.c_str(), ios::binary);
-
-	while (infile.read((char *)&character, sizeof(character)))
-	infile.close();
-	*/
 
 	string loadFile;
 	string Validation;
@@ -230,12 +237,14 @@ void Character::loadCharacter()
 	bool chooseFileName = false;
 	int backpackSize;
 	int bonus;
+	int size;
+	int influenceSize;
 	cout << "Load File: ";
 	cin >> loadFile;
 
 	ifstream ifs(loadFile);
-	do{
-		while (!ifs.good()){
+	do {
+		while (!ifs.good()) {
 			cout << "File does not exist, try again: ";
 			cin >> loadFile;
 			ifs.open(loadFile);
@@ -243,7 +252,7 @@ void Character::loadCharacter()
 		ifs >> Validation;
 		if (Validation == "CharFile")//check if it is an item save file
 			chooseFileName = true;
-		else{
+		else {
 			ifs.close();
 			chooseFileName = false;
 			cout << "Incorrect File Loaded, select another File: " << endl;
@@ -255,43 +264,62 @@ void Character::loadCharacter()
 
 	ifs >> level;
 	ifs >> currentHitPoints;
-		for (int i = 0; i < 6; i++){
-			ifs >> abilityScores[i];
-		}
-		for (int i = 0; i < MAX_ITEMS_EQUIPPED; i++)			//save equipped items
+	for (int i = 0; i < 6; i++) {
+		ifs >> abilityScores[i];
+	}
+	ifs >> size;
+	if (size > 0)
+	{
+		Enhancement* myEnhacement;
+		for (int i = 0; i < size; i++)			//save equipped items
 		{
 			ifs >> type;
 			equipment[i].setType(type);
-			for (int j = 0; j < equipment[i].getInfluences().size(); j++)
+			ifs >> influenceSize;
+
+			for (int j = 0; j < influenceSize; j++)
 			{
 				ifs >> type;
 				ifs >> bonus;
-				equipment[i].getInfluences()[j].setEnhacement(type, bonus);
-
-
+				myEnhacement = new Enhancement(type, bonus);
+				equipment[i].setInfluences(*myEnhacement);
+				delete myEnhacement;
 			}
-		}
-		ifs >> backpackSize;
-		if (backpackSize != 0)
-		{
 
-			for (int i = 0; i < backpack.getSize(); i++)		//save inventory/backpack
+		}
+	}
+	ifs >> backpackSize;
+	if (backpackSize != 0)
+	{
+		Item* myItem;
+		Enhancement  *myEnhacements;
+
+
+		for (int i = 0; i < backpackSize; i++)		//save inventory/backpack
+		{
+			ifs >> type;
+			myItem = new Item();
+			myItem->setType(type);
+			ifs >> influenceSize;
+			for (int j = 0; j < influenceSize; j++)
 			{
 				ifs >> type;
-				backpack.getItems().at(i).setType(type);
-
-				for (int j = 0; j < backpack.getItems()[i].getInfluences().size(); j++)
-				{
-					ifs >> type;
-					ifs >> bonus;
-					backpack.getItems()[i].getInfluences()[j].setEnhacement(type, bonus);
-				}
-
+				ifs >> bonus;
+				myEnhacements = new Enhancement(type, bonus);
+				myItem->setInfluences(*myEnhacements);
+				backpack.addItem(*myItem);
+				delete myItem;
+				delete myEnhacements;
+				//backpack.getItems()[i].getInfluences()[j].setEnhacement(type, bonus);
 			}
+
 		}
-		ifs.close();
+	}
+	ifs.close();
 }
 
+//! Implementation of player info
+//! @param print character info on screen
 void Character::playerInfo()
 {
 	cout << "-------------------------------\n";
@@ -310,8 +338,13 @@ void Character::playerInfo()
 	cout << "-------------------------------\n";
 }
 
+
+//! Implementation of equip item
+//! @return bool: states whether item has been equipped or not
 bool Character::equipItem(Item* item)
 {
+	int backpackSize;
+
 	string type = item->getType();
 
 	if (type == "helmet")
@@ -345,16 +378,20 @@ bool Character::equipItem(Item* item)
 	else
 		return false;
 
-	//if(backpack.getSize() > 0)
-		//backpack.removeItem(type);
+	backpackSize = backpack.getSize;
+	if(backpackSize > 0)
+		backpack.removeItem(type);
 						//takes it out of backpack
+	equippedSize++;
 	return true;
 
 }
 
-bool Character::unequipItem(string item)
+//! Implementation of unequip item
+//! @return bool: states whether item has been unequipped or not
+bool Character::unequipItem(Item item)
 {
-	string type = item;
+	string type = item.getType();
 
 	//remove item from correct slot
 	if (type == "Helmet")
@@ -399,15 +436,21 @@ bool Character::unequipItem(string item)
 	return true;
 }
 
+//! Implementation of printBackPackItems
+//! @param prints backpack items on screen
 void Character::printBackPackItems()
 {
 	backpack.printBackpack();
 }
 
+//! Implementation of addToBackPack
+//! @param takes in an item and adds item to backpack
 void Character::addToBackpack(Item newItem){
 	backpack.addItem(newItem);
 }
 
+//! Implementation of printEquippedItems
+//! @param prints every item equipped onto screen
 void Character::printEquippedItems()
 {
 	string type;
@@ -421,23 +464,33 @@ void Character::printEquippedItems()
 	}
 }
 
+//! Implementation of mutator method of setPositionX
+//! @param sets position X of character
 void Character::setPositionX(int x){
 	positionX = x;
 }
 
+//! Implementation of mutator method of  setPositionY
+//! @param sets position Y of character
 void Character::setPositionY(int y){
 	positionY = y;
 }
 
+//! Implementation of accessor method getPositionX
+//! @return positionX: gets position X of character
 int Character::getPositionX(){
 	return positionX;
 }
 
+//! Implementation of accessor method getPositionY
+//! @return positionY: gets position Y of character
 int Character::getPositionY(){
 	return positionY;
 }
 
 
+//! Implementation of Fighter Class, inherited from Character
+//! Default constructor
 Fighter::Fighter() : Character(){
 
 		for (int i = 0; i < TOT_STATS; i++)
@@ -449,6 +502,10 @@ Fighter::Fighter() : Character(){
 		currentHitPoints = 10;
 		notify();
 }
+
+
+//! Implementation of Fighter Class, inherited from Character
+//! constructor
 Fighter::Fighter(int str, int dex, int con, int intel, int wis, int cha)
 {
 
@@ -463,6 +520,8 @@ Fighter::Fighter(int str, int dex, int con, int intel, int wis, int cha)
 	currentHitPoints = 10;
 }
 
+//! Implementation of attackBonus method for Fighter
+//! return attackBonus parameter for fighter character
 int Fighter::attackBonus(){
 	return (level * 2) + abilityModifier(0) + abilityModifier(1);
 }
