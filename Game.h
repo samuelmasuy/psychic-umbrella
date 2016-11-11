@@ -18,6 +18,10 @@
 
 using namespace std;
 
+/**
+ * @brief Game Engine, it runs the game and interacts with the items, the
+ * characters and the map.
+ */
 class Game {
  public:
   /**

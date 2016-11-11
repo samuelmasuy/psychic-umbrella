@@ -6,26 +6,28 @@
 #include "Item.h"
 using namespace std;
 
-class ItemContainer
-{
-public:
-	ItemContainer();
-	ItemContainer(vector<Item> items);
-	//~ItemContainer();
-	vector<Item> getItems();
-	void addItem(Item item);
-	Item getItem(string itemType);
-	bool validateItemsInContainer();
-	
-	//added
-	int getSize();
-	void removeItem(string itemType);
-	int getItemIndex(string);
-	void printBackpack();
+/**
+ * @brief Item container, for example a chest
+ */
+class ItemContainer {
+ public:
+  ItemContainer();
+  ItemContainer(vector<Item> items);
+  // ~ItemContainer();
+  vector<Item> getItems();
+  void addItem(Item item);
+  Item getItem(string itemType);
+  bool validateItemsInContainer();
 
-private:
-	vector<Item> items;
-	int size;
+  // added
+  int getSize();
+  void removeItem(string itemType);
+  int getItemIndex(string);
+  void printBackpack();
+
+ private:
+  vector<Item> items;
+  int size;
 };
 
 #endif

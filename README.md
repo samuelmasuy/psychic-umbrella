@@ -1,9 +1,20 @@
-# psychic-umbrella
-Advanced program design with C++: Final Project
+# Psychic Umbrella
+
+*COMP345: Advanced program design with C++*
+
+## Authors
+
+Cristian Ardelean 27498691
+Nadia Sheikh 25644151
+Ahamd Baiazid 27393016
+Samuel Masuy 26590624
 
 ## Usage
 
-How to Create a Campaign
+**WARNING** Please make sure to have all the text file in this directory, at the
+reach of the program. So that they can be used to interact with the map.
+
+### How to Create a Campaign
 (ALL MAPS AND CAMPAIGNS HAVE TO BE IN THE PROJECT DIRECTORY)
 
 1. The campaign menu starts with a fresh empty campaign, so in order to create one, you simply build Maps of different levels(Option number 9) and save them or load a map into the campaign(Option number 5). After you are done saving the maps, choose the option to Save the campaign, make sure to always save with .txt at the end as an extension. Once the campaign is saved it stores your collection of newly created maps in order from the lowest level to the highest.
@@ -12,6 +23,25 @@ How to Create a Campaign
 4. You can display or load a map/levels by inputing its name from the Display all levels or Display a map options.
 5. Once you are done and exit the campaign editor (Option 12) and its time to play, you can attempt to load ErrorMap1.ext, ErrorMa21.ext, ErrorMap3.ext to show all the invalid map types, this is our verification process. We will not be able to load a map without an entrance, exit or player.
 
-Cristian Ardelean 27498691
-Nadia Sheikh 25644151
-Ahamd Baiazid 27393016
+## Design
+
+* We extensively used the builder pattern for each part of this project.
+* The Game is separted into two part, first of all there is the Map Manager,
+  where you can edit maps, create them, create campaign, and save them. The
+  second part is the game itself, where the user can move its character along
+  the map, open chests, and reach the final destination.
+
+### Map Design
+
+The player usually starts at the entry of the map `E`, the goal is to reach the
+exit denoted by `O`.
+
+	Empty   ' '
+	Player  'P'
+	Enemy   'E'
+	Wall    '*'
+	Entry   'I'
+	Exit    'O'
+	Chest   'c'
+
+

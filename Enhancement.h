@@ -5,23 +5,33 @@
 #include <stdlib.h>     /* srand, rand */
 #include <time.h>       /* time */
 
-
 using namespace std;
 
-class Enhancement
-{
-public:
-	Enhancement();
-	Enhancement(string type, int bonus);
-	string getType();
-	void setType(string);
-	void setBonus(int);
-	int getBonus();
-	void setEnhancement(string, int);
-	~Enhancement();
-	
+/**
+ * @brief An enhancement is something that benificiate a character.
+ */
+class Enhancement {
+ public:
+  /**
+   * @brief Constructor
+   */
+  Enhancement();
 
-private:
-	string type;
-	int bonus;
+  /**
+   * @brief Constructor
+   *
+   * @param type enhancement type
+   * @param bonus bonus
+   */
+  Enhancement(string type, int bonus);
+  string getType();
+  void setType(string);
+  void setBonus(int);
+  int getBonus();
+  void setEnhancement(string, int);
+  ~Enhancement();
+
+ private:
+  string type;
+  int bonus;
 };

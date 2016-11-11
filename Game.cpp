@@ -5,6 +5,7 @@
 #include "Game.h"
 
 void Game::play() {
+  // set Character observer
   CharacterOBS* observerCharacter = new CharacterOBS(character);
 
   map->reinitializeMap();
@@ -156,6 +157,7 @@ void Game::move(int old_x, int old_y, int new_x, int new_y) {
       character->setPositionY(new_y);
       break;
     case CHAR_CHEST:
+      // if the chest was opened, we remove it from the map.
       if (openChest()) {
         // set previous cell to empty
         map->fillCell(old_y, old_x, CHAR_EMPTY);
@@ -170,6 +172,7 @@ void Game::move(int old_x, int old_y, int new_x, int new_y) {
 }
 
 bool Game::openChest() {
+  // generate a chest.
   ChestDirector* cg = new ChestDirector();
   cg->setChestBuilder(new ChestBuilder());
   cg->makeChest();
