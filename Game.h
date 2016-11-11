@@ -6,6 +6,7 @@
 
 #include <iostream>
 #include <fstream>
+#include <cstdlib>
 #include <string>
 
 #include "Item.h"
@@ -17,26 +18,71 @@
 
 using namespace std;
 
-#define KEY_UP 72
-#define KEY_DOWN 80
-#define KEY_LEFT 75
-#define KEY_RIGHT 77
-
 class Game {
  public:
+  /**
+   * @brief Start a new game.
+   */
   void play();
+
+  /**
+   * @brief Stop a new game.
+   */
   void stop();
 
+  /**
+   * @brief Set map for the game play.
+   *
+   * @param Map
+   */
   void setMap(Map*);
+
+  /**
+   * @brief Set the character for the game play.
+   *
+   * @param Character
+   */
   void setCharacter(Character*);
+
+  /**
+   * @brief Get map of the game.
+   *
+   * @return pointer to a Map.
+   */
   Map* getMap();
+
+  /**
+   * @brief Get character of the game.
+   *
+   * @return pointer to a character.
+   */
   Character* getCharacter();
+
  private:
   Map* map;
   Character* character;
   void initializeCharacterPositionOnMap();
   void move(int, int, int, int);
+  /**
+   * @brief Open a chest
+   */
   void openChest();
+  /**
+   * @brief Fight with a monster
+   */
   void fightMonster();
   ItemDirector* id;
 };
+
+/**
+ * @brief Helper Function to clear the screen
+ */
+void clear_screen() {
+#ifdef WINDOWS
+  std::system("cls");
+#else
+  // Assume POSIX
+  std::system("clear");
+#endif
+}
+

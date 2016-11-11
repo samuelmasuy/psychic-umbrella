@@ -1,3 +1,7 @@
+/**
+ * @file Chest.cpp
+ * @brief Implementation of the chest
+ */
 #include "Chest.h"
 
 

@@ -4,8 +4,6 @@
  */
 #include "Game.h"
 
-
-
 void Game::play() {
   CharacterOBS* observerCharacter = new CharacterOBS(character);
 
@@ -27,45 +25,45 @@ void Game::play() {
 
       switch (choice) {
       case 'd':
-        system("clear");
+        clear_screen();
         move(characterPositionX, characterPositionY, characterPositionX + 1, characterPositionY);
         map->print();
         break;
       case 'a':
-        system("clear");
+        clear_screen();
         move(characterPositionX, characterPositionY, characterPositionX - 1, characterPositionY);
         map->print();
         break;
       case 'w':
-        system("clear");
+        clear_screen();
         move(characterPositionX, characterPositionY, characterPositionX, characterPositionY - 1);
         map->print();
         break;
       case 's':
-        system("clear");
+        clear_screen();
         move(characterPositionX, characterPositionY, characterPositionX, characterPositionY + 1);
         map->print();
         break;
       case 'c':
-        system("clear");
+        clear_screen();
         character->playerInfo();
         map->print();
         break;
       case 'i':
-        system("clear");
+        clear_screen();
         character->printEquippedItems();
         character->printBackPackItems();
         map->print();
         break;
       case 'e':
-        system("clear");
+        clear_screen();
         cout << "Enter level: ";
         cin >> level;
         character->setLevel(level);
         map->print();
         break;
       case 'u':
-        system("clear");
+        clear_screen();
         cout << "Enter item type to unequip: ";
         cin >> itemType;
         // unequip from character
@@ -73,7 +71,7 @@ void Game::play() {
         map->print();
         break;
       case 'q':
-        system("clear");
+        clear_screen();
         cout << "Do you want to quit the game? ('y'/'n'): ";
         cin >> choice;
         if (choice == 'y') {
@@ -98,7 +96,7 @@ void Game::stop() {
     map->fillCell(characterPositionY, characterPositionX, CHAR_EMPTY);
   }
   // might need to put back character original coordinate  + for map
-  //map->save();
+  // map->save();
 }
 
 void Game::initializeCharacterPositionOnMap() {
@@ -114,8 +112,8 @@ void Game::move(int old_x, int old_y, int new_x, int new_y) {
   // Check for valid move
   if (!(new_x >= mapRows || new_x < 0 || new_y >= mapColumns || new_y < 0)) {
     char new_cell_type = map->retrieveCell(new_y, new_x);
-    cout << new_cell_type;
-    cout << "old_x " << old_x << "old_y " << old_y << "new_x " << new_x << "new_y " << new_y;
+    // cout << new_cell_type;
+    // cout << "old_x " << old_x << "old_y " << old_y << "new_x " << new_x << "new_y " << new_y;
     switch (new_cell_type) {
     case CHAR_WALL:
       cout << "hiting a WALL";
@@ -129,8 +127,6 @@ void Game::move(int old_x, int old_y, int new_x, int new_y) {
       map->fillCell(new_y, new_x, CHAR_PLAYER);
       break;
     case CHAR_EXIT:
-      // set previous cell to empty
-      map->fillCell(old_y, old_x, CHAR_EMPTY);
       // set character location to the new cell
       character->setPositionX(new_x);
       character->setPositionY(new_y);
