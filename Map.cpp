@@ -445,10 +445,13 @@ void Map::reinitializeMap() {
   GetEntrancePos(i0, j0);
   GetExitPos(i1, j1);
 
-  for (int r = 0; r < GetRows(); r++) {
+   for (int r = 0; r < GetRows(); r++) {
     for (int c = 0; c < GetCols(); c++) {
-      if (r == i0 && c == j0)
-        m_scene[r][c] = CHAR_PLAYER;
+		if (r == i0 && c == j0)
+		{
+			m_scene[r][c] = CHAR_PLAYER;
+			SetPlayerPos(r, c);
+		}
       else if (r == i1 && c == j1)
         m_scene[r][c] = CHAR_EXIT;
     }
@@ -472,4 +475,12 @@ void Map::print() {
     }
     cout << endl;
   }
+}
+int Map::getEntranceRow()
+{
+	return m_i0;
+}
+int Map::getEntranceColumn()
+{
+	return m_j0;
 }

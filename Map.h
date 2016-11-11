@@ -139,6 +139,9 @@ public:
 	///
 	void Display();
 
+	
+	int getEntranceRow();
+	int getEntranceColumn();
 private:
 	///
 	///the scene itselft (a 2D array)

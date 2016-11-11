@@ -102,7 +102,7 @@ int main(int argc, char const* argv[]) {
     break;
   } while (true);
 
-  map.Display();
+ // map.Display();
 
   GameBuilder* gb = new GameBuilder();
   gb->constructGame();
