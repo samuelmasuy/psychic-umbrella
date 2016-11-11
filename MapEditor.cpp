@@ -1,11 +1,13 @@
 #include "MapEditor.h"
+#include "MapBuilderB.h"
 
 MapEditor::MapEditor()
 {
 
 }
-
-// destructor
+///
+/// The destructor
+///
 MapEditor::~MapEditor()
 {
 
@@ -13,13 +15,14 @@ MapEditor::~MapEditor()
 
 void MapEditor::Flush()
 {
-	//cin.ignore(INT_MAX);
+	
 	cin.clear();
 	cin.ignore(numeric_limits<streamsize>::max(), '\n');
 }
 
-
-// edit the current map 
+///
+/// edit the current map 
+///
 void MapEditor::EditMap(Map *pMap, const string &filename)
 {
 	cout << "Current map is " << pMap->GetRows() << ", " << pMap->GetCols() << endl;
@@ -28,23 +31,35 @@ void MapEditor::EditMap(Map *pMap, const string &filename)
 		pMap->Display();
 		cout << "Select an option:" << endl;
 		cout << "  [1] Modify a cell" << endl;
-		cout << "  [2] Save  " << filename << endl;
-		cout << "  [3] Back to main menu (All changes not saved will be lost)" << endl;
+		cout << "  [2] Save map as " << filename << endl;
+		cout << "  [3] Back to main menu" << endl;
 		string opc;
 		cin >> opc;
 		Flush();
-		if (opc.compare("3") == 0)	// exit pressed!
+		if (opc.compare("3") == 0)	
+			///
+			/// exit pressed!
+			///
 			break;
-		else if (opc.compare("2") == 0)	// save map pressed
+		else if (opc.compare("2") == 0)	
+			///
+			/// save map pressed
+			///
 		{
-			MapBuilderB mb(*pMap);
-			if (mb.SaveLevel(filename.c_str()) == 0)
-				cout << "File " << filename << " has been updated" << endl;
-			else
-				cout << "File " << filename << " cannot be updated. Check if the file is opened in a text editor, and it is not read-only." << endl;
+			if (pMap->ValidateMap())
+			{
+				MapBuilderB mb(*pMap);
 
+				if (mb.SaveLevel(filename.c_str()) == 0)
+					cout << "File " << filename << " has been updated" << endl;
+				else
+					cout << "File " << filename << " cannot be updated. Check if the file is opened in a text editor, and it is not read-only." << endl;
+			}
 		}
-		else if (opc.compare("1") == 0)	// modify a cell
+		else if (opc.compare("1") == 0)	
+			///
+			/// modify a cell
+			///
 		{
 			int row = -1, col = -1;
 			do
@@ -63,7 +78,7 @@ void MapEditor::EditMap(Map *pMap, const string &filename)
 				}
 				else
 				{
-					// go back to zero based indexes
+					
 					row--; col--; break;
 				}
 			} while (true);
@@ -84,6 +99,7 @@ void MapEditor::EditMap(Map *pMap, const string &filename)
 				Flush();
 				if (opc.compare("1") == 0)
 				{
+					
 					pMap->setCell(row, col, CHAR_EMPTY);
 					break;
 				}
@@ -96,11 +112,49 @@ void MapEditor::EditMap(Map *pMap, const string &filename)
 				}
 				else if (opc.compare("3") == 0)
 				{
+					int i, j;
+					pMap->GetExitPos(i, j);
+					if (i == row && j == col)
+					{
+						cout << "Invalid position: an enemy cannot be located at the exit position" << endl;
+						continue;
+					}
+					pMap->GetEntrancePos(i, j);
+					if (i == row && j == col)
+					{
+						cout << "Invalid position: an enemy cannot be located at the entrance position" << endl;
+						continue;
+					}
+					pMap->GetPlayerPos(i, j);
+					if (i == row && j == col)
+					{
+						cout << "Invalid position: an enemy cannot be located at the player position" << endl;
+						continue;
+					}
 					pMap->setCell(row, col, CHAR_ENEMY);
 					break;
 				}
 				else if (opc.compare("4") == 0)
 				{
+					int i, j;
+					pMap->GetExitPos(i, j);
+					if (i == row && j == col)
+					{
+						cout << "Invalid position: a wall cannot be located at the exit position" << endl;
+						continue;
+					}
+					pMap->GetEntrancePos(i, j);
+					if (i == row && j == col)
+					{
+						cout << "Invalid position: a wall cannot be located at the entrance position" << endl;
+						continue;
+					}
+					pMap->GetPlayerPos(i, j);
+					if (i == row && j == col)
+					{
+						cout << "Invalid position: a wall cannot be located at the player position" << endl;
+						continue;
+					}
 					pMap->setCell(row, col, CHAR_WALL);
 					break;
 				}
