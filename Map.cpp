@@ -137,9 +137,9 @@ void Map::FreeMem(CELL_TYPE **x, int rows)
 {
 	if (x && rows>0)
 	{
-		for (int i = 0; i < rows; i++)
-			delete[] x[i];
-		delete[] x;
+		//for (int i = 0; i < rows; i++)
+			//delete[] x[i];
+		//delete[] x;
 	}
 }
 ///
