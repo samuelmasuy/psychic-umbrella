@@ -2,6 +2,8 @@
 
 #include <string>
 #include <vector>
+#include <stdlib.h>     /* srand, rand */
+#include <time.h>       /* time */
 
 
 using namespace std;
@@ -15,7 +17,7 @@ public:
 	void setType(string inputType) { type = inputType; };
 	void setBonus(int inputBonus) { bonus = inputBonus; };
 	int getBonus();
-	void setEnhacement(string, int);
+	void setEnhancement(string, int);
 	~Enhancement();
 	
 

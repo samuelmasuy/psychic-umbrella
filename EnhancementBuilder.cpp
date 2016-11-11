@@ -88,3 +88,8 @@ void RandomEnhancementBuilderForWeapon::buildType() {
 		break;
 	}
 }
+
+void EnhancementBuilder::buildBonus() {
+  srand(time(NULL));
+  enhancement->setBonus(rand() % 5 + 1);
+}

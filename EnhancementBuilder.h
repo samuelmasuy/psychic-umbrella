@@ -10,7 +10,7 @@ public:
 	Enhancement* getEnhancement() { return enhancement; };
 	void createNewEnhancment() { enhancement = new Enhancement(); };
 	virtual void buildType() = 0;
-	void buildBonus() { enhancement->setBonus(rand() % 7 + 1); };
+	void buildBonus();
 	~EnhancementBuilder();
 
 protected:
@@ -30,7 +30,7 @@ class ArmorEnhancementBuilder : public EnhancementBuilder {
 };
 
 class StrentghEnhancementBuilder : public EnhancementBuilder {
-	void buildType() { enhancement->setType("strengh"); };
+	void buildType() { enhancement->setType("strength"); };
 };
 
 class ConstitutionEnhancementBuilder : public EnhancementBuilder {

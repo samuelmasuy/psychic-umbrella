@@ -40,10 +40,10 @@ bool Item::validateItem()
 {
 
 	std::map<std::string, std::vector<string>> m;
-	
+
 	string helmet[] = { "intelligence","wisdom","armor" };
 	m["helmet"] = vector<string>(helmet, std::end(helmet));
-	
+
 	string armor[] = { "armor" };
 	m["helmet"] = vector<string>(armor, std::end(armor));
 
@@ -65,7 +65,7 @@ bool Item::validateItem()
 	std::string type_copy = type.c_str();
 	std::transform(type_copy.begin(), type_copy.end(), type_copy.begin(), ::tolower); //lowercase
 	std::map<string, std::vector<string> >::iterator it = m.find(type_copy);
-	
+
 	if (it == m.end()) 
 	{
 		cout << "type not found" << endl;
