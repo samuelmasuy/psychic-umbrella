@@ -7,6 +7,7 @@
 Cristian Ardelean 27498691
 Nadia Sheikh 25644151
 Ahamd Baiazid 27393016
+Asma Laaribi 29326197
 Samuel Masuy 26590624
 
 ## Usage
@@ -43,5 +44,3 @@ exit denoted by `O`.
 	Entry   'I'
 	Exit    'O'
 	Chest   'c'
-
-

@@ -1,12 +1,14 @@
 #include "MapDirector.h"
-
-// default constructor
+///
+/// default constructor
+///
 MapDirector::MapDirector()
 {
 	m_pBuilder = NULL;
 }
-
-// destructor
+///
+/// destructor
+///
 MapDirector::~MapDirector()
 {
 }
