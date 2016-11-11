@@ -15,7 +15,7 @@ MapEditor::~MapEditor()
 
 void MapEditor::Flush()
 {
-	
+
 	cin.clear();
 	cin.ignore(numeric_limits<streamsize>::max(), '\n');
 }
@@ -36,17 +36,17 @@ void MapEditor::EditMap(Map *pMap, const string &filename)
 		string opc;
 		cin >> opc;
 		Flush();
-		if (opc.compare("3") == 0)	
+		if (opc.compare("3") == 0)
 			///
 			/// exit pressed!
 			///
 			break;
-		else if (opc.compare("2") == 0)	
+		else if (opc.compare("2") == 0)
 			///
 			/// save map pressed
 			///
 		{
-			if (pMap->ValidateMap())
+			if (pMap->ValidateMap()==0)
 			{
 				MapBuilderB mb(*pMap);
 
@@ -56,7 +56,7 @@ void MapEditor::EditMap(Map *pMap, const string &filename)
 					cout << "File " << filename << " cannot be updated. Check if the file is opened in a text editor, and it is not read-only." << endl;
 			}
 		}
-		else if (opc.compare("1") == 0)	
+		else if (opc.compare("1") == 0)
 			///
 			/// modify a cell
 			///
@@ -78,7 +78,7 @@ void MapEditor::EditMap(Map *pMap, const string &filename)
 				}
 				else
 				{
-					
+
 					row--; col--; break;
 				}
 			} while (true);
@@ -99,7 +99,7 @@ void MapEditor::EditMap(Map *pMap, const string &filename)
 				Flush();
 				if (opc.compare("1") == 0)
 				{
-					
+
 					pMap->setCell(row, col, CHAR_EMPTY);
 					break;
 				}
