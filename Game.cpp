@@ -86,13 +86,22 @@ void Game::play() {
         character->saveCharacter();
         map->print();
         break;
+      case 'b':
+        system("cls");
+        cout << "Here are the items on the backpack" << endl;
+        character->printBackPackItems();
+        cout << "Enter item type to equip: ";
+        cin >> itemType;
+        character->equipItem(itemType);
+        map->print();
+        break;
       case 'h':
         // clear_screen();
         system("cls");
         printGameUsage();
         break;
       case 'q':
-        //clear_screen();
+        // clear_screen();
         system("cls");
         cout << "Do you want to quit the game? ('y'/'n'): ";
         cin >> choice;
@@ -236,5 +245,6 @@ void Game::printGameUsage() {
   cout << "Use u to unequip an item from the character." << endl;
   cout << "Use e to change the level of the character." << endl;
   cout << "Use x to save your character." << endl;
+  cout << "Use b to equip your character with an item in the backpack." << endl;
   cout << "Use h to display this help menu." << endl;
 }
