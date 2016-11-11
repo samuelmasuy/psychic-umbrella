@@ -5,7 +5,6 @@
 #include "Game.h"
 
 void Game::play() {
-  // set Character observer
   CharacterOBS* observerCharacter = new CharacterOBS(character);
 
   map->reinitializeMap();
@@ -107,28 +106,41 @@ void Game::play() {
 }
 
 void Game::stop() {
-  int characterPositionX = character->getPositionX();
-  int characterPositionY = character->getPositionY();
-  if (map->retrieveCell(characterPositionX, characterPositionY) != CHAR_EXIT) {
-    map->fillCell(characterPositionY, characterPositionX, CHAR_EMPTY);
-  }
-  system("CLS");
-  character->levelUp();
-  cout << "Congratulations you finish the level!!" << endl;
-  cout << "Here is your character info: " << endl;
-  character->playerInfo();
-  cout << endl << "Press any key to quit the game." << endl;
-  char quit;
-  cin >> quit;
-  // might need to put back character original coordinate  + for map
-  // map->save();
+	int characterPositionX = character->getPositionX();
+	int characterPositionY = character->getPositionY();
+	if (map->retrieveCell(characterPositionX, characterPositionY) != CHAR_EXIT) {
+		map->fillCell(characterPositionY, characterPositionX, CHAR_EMPTY);
+	}
+	system("CLS");
+	character->levelUp();
+	cout << "Congratulations you finish the level!!" << endl;
+	cout << "Here is your character info: " << endl;
+	character->playerInfo();
+	cout << endl << "Press any key to quit the game." << endl;
+	char quit;
+	cin >> quit;
+		// might need to put back character original coordinate  + for map
+		// map->save();
 }
 
 void Game::initializeCharacterPositionOnMap() {
+	int ip, jp;
+	ip = map->getEntranceRow();
+	jp = map->getEntranceColumn();
+	map->SetPlayerPos(ip, jp);	
+
+
+	character->setPositionX(jp);
+	character->setPositionY(ip);
+
+	map->Display();
+
+	/*
   int ip, jp;
   map->GetPlayerPos(ip, jp);
   character->setPositionX(jp);
   character->setPositionY(ip);
+  */
 }
 
 void Game::move(int old_x, int old_y, int new_x, int new_y) {
@@ -157,7 +169,6 @@ void Game::move(int old_x, int old_y, int new_x, int new_y) {
       character->setPositionY(new_y);
       break;
     case CHAR_CHEST:
-      // if the chest was opened, we remove it from the map.
       if (openChest()) {
         // set previous cell to empty
         map->fillCell(old_y, old_x, CHAR_EMPTY);
@@ -172,7 +183,6 @@ void Game::move(int old_x, int old_y, int new_x, int new_y) {
 }
 
 bool Game::openChest() {
-  // generate a chest.
   ChestDirector* cg = new ChestDirector();
   cg->setChestBuilder(new ChestBuilder());
   cg->makeChest();
