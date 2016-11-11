@@ -112,8 +112,8 @@ void Game::move(int old_x, int old_y, int new_x, int new_y) {
   // Check for valid move
   if (!(new_x >= mapRows || new_x < 0 || new_y >= mapColumns || new_y < 0)) {
     char new_cell_type = map->retrieveCell(new_y, new_x);
-    cout << new_cell_type;
-    cout << "old_x " << old_x << "old_y " << old_y << "new_x " << new_x << "new_y " << new_y;
+    // cout << new_cell_type;
+    // cout << "old_x " << old_x << "old_y " << old_y << "new_x " << new_x << "new_y " << new_y;
     switch (new_cell_type) {
     case CHAR_WALL:
       cout << "hiting a WALL";
@@ -127,8 +127,6 @@ void Game::move(int old_x, int old_y, int new_x, int new_y) {
       map->fillCell(new_y, new_x, CHAR_PLAYER);
       break;
     case CHAR_EXIT:
-      // set previous cell to empty
-      map->fillCell(old_y, old_x, CHAR_EMPTY);
       // set character location to the new cell
       character->setPositionX(new_x);
       character->setPositionY(new_y);
