@@ -6,6 +6,7 @@ ItemBuilder::ItemBuilder(){
 
 
 ItemBuilder::~ItemBuilder(){
+
 }
 
 void RandomBuilder::buildType(){
@@ -37,3 +38,6 @@ void RandomBuilder::buildType(){
 
 		}
 
+void HelmetBuilder::buildEnhancement(){
+	
+}

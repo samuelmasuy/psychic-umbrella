@@ -17,34 +17,62 @@ protected:
 	Enhancement* enhancement;
 };
 
-class intelligenceEnhancementBuilder : public EnhancementBuilder{
+class IntelligenceEnhancementBuilder : public EnhancementBuilder{
 	void buildType() { enhancement->setType("intelligence"); };
 };
 
-class wisdomEnhancementBuilder : public EnhancementBuilder {
+class WisdomEnhancementBuilder : public EnhancementBuilder {
 	void buildType() { enhancement->setType("wisdom"); };
 };
 
-class armorEnhancementBuilder : public EnhancementBuilder {
+class ArmorEnhancementBuilder : public EnhancementBuilder {
 	void buildType() { enhancement->setType("armor"); };
 };
 
-class strentghEnhancementBuilder : public EnhancementBuilder {
+class StrentghEnhancementBuilder : public EnhancementBuilder {
 	void buildType() { enhancement->setType("strengh"); };
 };
 
-class constitutionEnhancementBuilder : public EnhancementBuilder {
+class ConstitutionEnhancementBuilder : public EnhancementBuilder {
 	void buildType() { enhancement->setType("constitution"); };
 };
 
-class charismaEnhancementBuilder : public EnhancementBuilder {
+class CharismaEnhancementBuilder : public EnhancementBuilder {
 	void buildType() { enhancement->setType("charisma"); };
 };
 
-class dexterityEnhancementBuilder : public EnhancementBuilder {
+class DexterityEnhancementBuilder : public EnhancementBuilder {
 	void buildType() { enhancement->setType("dexterity"); };
 };
 
-class damageEnhancementBuilder : public EnhancementBuilder {
+class DamageEnhancementBuilder : public EnhancementBuilder {
 	void buildType() { enhancement->setType("damage"); };
+};
+
+class RandomEnhancementBuilderForShield : public EnhancementBuilder {
+	void buildType() { enhancement->setType("armor"); };
+};
+
+class RandomEnhancementBuilderForArmor : public EnhancementBuilder {
+	void buildType() { enhancement->setType("armor"); };
+};
+
+class RandomEnhancementBuilderForHelmet : public EnhancementBuilder {
+	void buildType();
+};
+
+class RandomEnhancementBuilderForRing : public EnhancementBuilder {
+	void buildType();
+};
+
+class RandomEnhancementBuilderForBelt : public EnhancementBuilder {
+	void buildType();
+};
+
+class RandomEnhancementBuilderForBoots : public EnhancementBuilder {
+	void buildType();
+};
+
+class RandomEnhancementBuilderForWeapon : public EnhancementBuilder {
+	void buildType();
 };
