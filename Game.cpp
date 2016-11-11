@@ -100,6 +100,14 @@ void Game::stop() {
   if (map->retrieveCell(characterPositionX, characterPositionY) != CHAR_EXIT) {
     map->fillCell(characterPositionY, characterPositionX, CHAR_EMPTY);
   }
+  system("CLS");
+  character->levelUp();
+  cout << "Congratulations you finish the level!!" << endl;
+  cout << "Here is your character info: " << endl;
+  character->playerInfo();
+  cout << endl << "Press any key to quit the game." << endl;
+  char quit;
+  cin >> quit
   // might need to put back character original coordinate  + for map
   // map->save();
 }
