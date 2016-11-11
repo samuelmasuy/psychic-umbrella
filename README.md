@@ -34,7 +34,7 @@ reach of the program. So that they can be used to interact with the map.
 
 ### Map Design
 
-The player usually starts at the entry of the map `E`, the goal is to reach the
+The player usually starts at the entry of the map `I`, the goal is to reach the
 exit denoted by `O`.
 
 	Empty   ' '
