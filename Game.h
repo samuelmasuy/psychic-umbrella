@@ -68,10 +68,13 @@ class Game {
   Character* character;
   void initializeCharacterPositionOnMap();
   void move(int, int, int, int);
+
   /**
    * @brief Open a chest
+   *
+   * @return true if chest was opened
    */
-  void openChest();
+  bool openChest();
   /**
    * @brief Fight with a monster
    */

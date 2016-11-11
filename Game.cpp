@@ -156,13 +156,20 @@ void Game::move(int old_x, int old_y, int new_x, int new_y) {
       character->setPositionY(new_y);
       break;
     case CHAR_CHEST:
-      openChest();
+      if (openChest()) {
+        // set previous cell to empty
+        map->fillCell(old_y, old_x, CHAR_EMPTY);
+        // set character location to the new cell
+        character->setPositionX(new_x);
+        character->setPositionY(new_y);
+        map->fillCell(new_y, new_x, CHAR_PLAYER);
+      }
       break;
     }
   }
 }
 
-void Game::openChest() {
+bool Game::openChest() {
   ChestDirector* cg = new ChestDirector();
   cg->setChestBuilder(new ChestBuilder());
   cg->makeChest();
@@ -177,6 +184,7 @@ void Game::openChest() {
     // map->setCell(chest->positionX, chest->postionY, CHAR_EMPTY);
   }
   delete cg;
+  return choice == 'y';
 }
 
 // void Game::fightMonster() {
