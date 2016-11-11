@@ -1,16 +1,18 @@
 #include "Map.h"
 
 
-
-// default constructor
+///
+///default constructor
+///
 Map::Map()
 {
 	m_rows = m_cols = 0;
 	m_scene = NULL;
 	m_i0 = m_j0 = m_i1 = m_j1 = m_iPlayer = m_jPlayer = -1;
 }
-
-// constructor with size
+///
+/// constructor with size
+///
 Map::Map(int rows, int cols)
 {
 	m_scene = NULL;
@@ -18,8 +20,9 @@ Map::Map(int rows, int cols)
 	m_i0 = m_j0 = m_i1 = m_j1 = m_iPlayer = m_jPlayer = -1;
 	Create(rows, cols);
 }
-
-// copy constructor 
+///
+/// copy constructor 
+///
 Map::Map(const Map &x)
 {
 	m_i0 = x.m_i0;
@@ -51,14 +54,16 @@ Map & Map::operator = (const Map &x)
 	return *this;
 }
 
-
-// destructor
+///
+/// destructor
+///
 Map::~Map()
 {
 	FreeMem();
 }
-
-// creates a map
+///
+///creates a map
+///
 bool Map::Create(int rows, int cols)
 {
 	if (rows > 0 && cols > 0)	// proceed  only if the scene is valid
@@ -90,8 +95,9 @@ bool Map::Create(int rows, int cols)
 	}
 }
 
-
-// determine if a path exits between (row0, col0) and (row1, col1)
+///
+/// determine if a path exits between (row0, col0) and (row1, col1)
+///
 bool Map::PathExist(int row0, int col0, int row1, int col1)
 {
 	CELL_TYPE **visited = AllocMem(m_rows, m_cols);
@@ -101,8 +107,9 @@ bool Map::PathExist(int row0, int col0, int row1, int col1)
 	FreeMem(visited, m_rows);
 	return ret;
 }
-
-// backtracking to find a path between [row0,col0] and [row1,col1]
+///
+/// backtracking to find a path between [row0,col0] and [row1,col1]
+///
 bool Map::Backtracking(CELL_TYPE **v, int row0, int col0, int row1, int col1)
 {
 	if (!ValidPos(row0, col0))
@@ -123,8 +130,9 @@ bool Map::Backtracking(CELL_TYPE **v, int row0, int col0, int row1, int col1)
 	v[row0][col0] = false;
 	return ret;
 }
-
-// release memory of a 2D array pointer
+///
+///release memory of a 2D array pointer
+///
 void Map::FreeMem(CELL_TYPE **x, int rows)
 {
 	if (x && rows>0)
@@ -134,16 +142,18 @@ void Map::FreeMem(CELL_TYPE **x, int rows)
 		delete[] x;
 	}
 }
-
-// release memory
+///
+/// release memory
+///
 void Map::FreeMem()
 {
 	FreeMem(m_scene, m_rows);
 	m_scene = NULL;
 	m_rows = m_cols = 0;
 }
-
-// alloc memory for a 2D array
+///
+/// alloc memory for a 2D array
+///
 CELL_TYPE **Map::AllocMem(int rows, int cols)
 {
 	CELL_TYPE **aux;
@@ -173,8 +183,9 @@ bool Map::ValidCell(CELL_TYPE x)
 		x == CHAR_RING ||
 		x == CHAR_HELMET;*/
 }
-
-// store a cell into the map. 
+///
+/// store a cell into the map. 
+///
 void Map::setCell(int i, int j, CELL_TYPE value)
 {
 	if (ValidPos(i, j) && ValidCell(value) && value != CHAR_EXIT && value != CHAR_ENTRY && value != CHAR_PLAYER)
@@ -224,8 +235,9 @@ void Map::RemoveCell(int i, int j)
 	else
 		cout << "Cannot remove a cell on invalid position" << endl;
 }
-
-// retrieve a cell value
+///
+/// retrieve a cell value
+///
 CELL_TYPE Map::GetCell(int i, int j)
 {
 	if (ValidPos(i, j))
@@ -242,15 +254,17 @@ CELL_TYPE Map::GetCell(int i, int j)
 	else
 		return CHAR_WALL;
 }
-
-// return true if the cell position is a valid position into the scene
+///
+/// return true if the cell position is a valid position into the scene
+///
 bool Map::ValidPos(int i, int j)
 {
 	return i >= 0 && i < m_rows && j >= 0 && j < m_cols;
 }
-
-// setting the entrance of the map. Return true if the position is valid
-// return false if the position is not valid, or contains a wall
+///
+/// setting the entrance of the map. Return true if the position is valid
+/// return false if the position is not valid, or contains a wall
+///
 bool Map::SetEntrance(int i, int j)
 {
 	if (!ValidPos(i, j))
@@ -263,9 +277,10 @@ bool Map::SetEntrance(int i, int j)
 	m_j0 = j;
 	return true;
 }
-
-// setting the exit of the map. Return true if the position is valid
-// return false if the position is not valid, or contains a wall
+///
+///setting the exit of the map. Return true if the position is valid
+///return false if the position is not valid, or contains a wall
+///
 bool Map::SetExit(int i, int j)
 {
 	if (!ValidPos(i, j))
@@ -336,8 +351,9 @@ int Map::ValidateMap()
 	}
 	return 0;
 }
-
-// find an item on the map, and remove it all occurencies
+///
+/// find an item on the map, and remove it all occurencies
+///
 void Map::FindAndRemove(CELL_TYPE x)
 {
 	for (int i = 0; i < m_rows; i++)
@@ -345,8 +361,9 @@ void Map::FindAndRemove(CELL_TYPE x)
 			if (m_scene[i][j] == x)
 				m_scene[i][j] = CHAR_EMPTY;
 }
-
-// Retrieve the position of the first ocurrency of a item. Return true if the item was found
+///
+/// Retrieve the position of the first ocurrency of a item. Return true if the item was found
+///
 bool Map::FindItem(CELL_TYPE x, int &row, int &col)
 {
 	for (int i = 0; i < m_rows; i++)
