@@ -125,12 +125,24 @@ void Game::stop() {
 }
 
 void Game::initializeCharacterPositionOnMap() {
+	int ip, jp;
+	ip = map->getEntranceRow();
+	jp = map->getEntranceColumn();
+	map->SetPlayerPos(ip, jp);	
+
+
+	character->setPositionX(jp);
+	character->setPositionY(ip);
+
+	map->Display();
+
+	/*
   int ip, jp;
   map->GetPlayerPos(ip, jp);
   character->setPositionX(jp);
   character->setPositionY(ip);
+  */
 }
-
 void Game::move(int old_x, int old_y, int new_x, int new_y) {
   int mapRows = map->GetRows();
   int mapColumns = map->GetCols();
