@@ -1,9 +1,10 @@
 #pragma once
 #include "Item.h"
-#include "EnhancementDirector.h"
+//#include "EnhancementDirector.h"
 #include <stdio.h>
 #include <stdlib.h>     /* srand, rand */
-#include <time.h>       /* time */
+//#include <time.h>       /* time */
+#include <random>
 
 
 using namespace std;

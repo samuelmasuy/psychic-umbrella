@@ -10,8 +10,14 @@ ItemBuilder::~ItemBuilder(){
 }
 
 void RandomBuilder::buildType(){
-      srand(time(NULL));
-			int i = rand() % 7;
+	// Random seed
+	random_device rd;
+	// Initialize Mersenne Twister pseudo-random number generator
+	mt19937 gen(rd());
+	// Generate pseudo-random numbers
+	// uniformly distributed in range (1, 7)
+	uniform_int_distribution<> rand(1, 7);
+			int i = rand(gen);
 			switch (i) {
 				case 0:
 					item->setType("helmet");

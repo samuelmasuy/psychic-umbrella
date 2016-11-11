@@ -378,7 +378,7 @@ bool Character::equipItem(Item* item)
 	else
 		return false;
 
-	backpackSize = backpack.getSize;
+	backpackSize = backpack.getSize();
 	if(backpackSize > 0)
 		backpack.removeItem(type);
 						//takes it out of backpack

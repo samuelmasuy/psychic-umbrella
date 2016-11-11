@@ -430,7 +430,7 @@ void Map::reinitializeMap() {
 
   for (int r = 0; r < GetRows(); r++) {
     for (int c = 0; c < GetCols(); c++) {
-      if (r == ip && c == jp)
+      if (r == i0 && c == j0)
         m_scene[r][c] = CHAR_PLAYER;
       else if (r == i1 && c == j1)
         m_scene[r][c] = CHAR_EXIT;
