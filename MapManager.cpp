@@ -1,9 +1,9 @@
-//
-// This runs everything, it starts a fresh campaign, so to use it start
-// by creating a map, it automatically saves, then you click save campaign,
-// it saves the campaign, u can load it and display the maps in it,
-// and the actual map itself..
-//
+///
+/// This runs everything, it starts a fresh campaign, so to use it start
+/// by creating a map, it automatically saves, then you click save campaign,
+/// it saves the campaign, u can load it and display the maps in it,
+/// and the actual map itself..
+///
 #include "MapManager.h"
 
 void Flush()
