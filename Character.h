@@ -2,12 +2,6 @@
 //! @brief Header file for the Character class  
 //!
 #pragma once
-#include <map>
-#include <sstream>
-#include <cmath>
-#include <string>
-#include <vector>
-
 #include<string>
 #include "Subject.h"
 #include "ItemContainer.h"
@@ -15,53 +9,54 @@
 
 const int MAX_ITEMS_EQUIPPED = 7;
 using namespace std;
-using std::map;
-using std::vector;
-using std::string;
-using std::stringstream;
+
 
 //! Class that implements a character 
 class Character : public Subject
 {
 public:
+
+	//constructors
 	Character();
 	Character(int, int, int, int, int, int);
+
+	//logical game functions
 	bool validateNewCharacter();
 	void hit(int);
 	int generateStats();
-	int getHitPoints();
 	void hpChange();
 	int abilityModifier(int);
-	void setLevel(int);
 	int armorModifier();
-	virtual int attackBonus();
+	virtual int attackBonus();//class to be inherited
 	int damageBonus();
-	void saveCharacter();
-	void loadCharacter();
-	void playerInfo();
+	void playerInfo(); //displaying character info
 	bool equipItem(Item*);
-	bool unequipItem(string);
+
+	bool unequipItem(Item);
 	void printBackPackItems();
 	void addToBackpack(Item);
 	void printEquippedItems();
 	void levelUp();
 
-	//virtual int armorClass();
-	int getLevel();
-
+	//saving and loading character
+	void saveCharacter();
+	void loadCharacter();
+	void setLevel(int);
 	void setPositionX(int);
 	void setPositionY(int);
+
+	//game accessor methods
+	int getHitPoints();
+	int getLevel();
 	int getPositionX();
 	int getPositionY();
-
-
 	
-
 protected:
 	int currentHitPoints;
 	Item equipment[MAX_ITEMS_EQUIPPED];
 	const Item emptyItem; //itemholder for equipementSlots
 	int level;
+
 private:
 	string characterType;
 	int abilityScores[6];
@@ -69,17 +64,19 @@ private:
 	enum equipmentSlots {Helmet, Armor, Weapon, Shield, Ring, Belt, Boots};
 	int positionX;
 	int positionY;
+	int equippedSize;
 };
 
+//Fighter class inherited from Character class
 class Fighter: public Character{
 public:
     const static int FIGHTER_HP=10;
 
+    //Fighter constructors
     Fighter();
     Fighter(int, int, int, int, int, int);
 
-    //void setArmorClass(); //overrides parent function
-    //void playerInfo();//overrides parent function
+    //fighter attack bonus
     int attackBonus();
 
 private:
