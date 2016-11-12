@@ -27,6 +27,7 @@ Character::Character(int str, int dex, int con, int intel, int wis, int cha)
 	abilityScores[5] = cha;
 
 	//and set hit points to 10
+	equippedSize = 0;
 	currentHitPoints = 10;
 	positionX = 0;
 	positionY = 0;
@@ -47,6 +48,7 @@ Character::Character()
 
 	//and set hit points to 10
 	currentHitPoints = 10;
+	equippedSize = 0;
 	notify(); //notifies character observer
 }
 
@@ -267,11 +269,11 @@ void Character::loadCharacter()
 	for (int i = 0; i < 6; i++) {
 		ifs >> abilityScores[i];
 	}
-	ifs >> size;
-	if (size > 0)
+	ifs >> equippedSize;
+	if (equippedSize > 0)
 	{
 		Enhancement* myEnhacement;
-		for (int i = 0; i < size; i++)			//save equipped items
+		for (int i = 0; i < equippedSize; i++)			//save equipped items
 		{
 			ifs >> type;
 			equipment[i].setType(type);
@@ -475,7 +477,7 @@ bool Character::unequipItem(string type)
 	}
 	else
 		return false;
-
+	equippedSize--;
 	return true;
 }
 
