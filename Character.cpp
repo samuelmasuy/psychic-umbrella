@@ -326,7 +326,7 @@ void Character::playerInfo()
 {
 	cout << "-------------------------------\n";
 	cout << "Class Type: " << characterType << endl;
-	cout << "Level" << level << endl;
+	cout << "Level: " << level << endl;
 	cout << "Total HP: " << currentHitPoints << endl;
 	cout << "Total armor: " << armorModifier() << endl;
 	cout << "Strenght: " << abilityScores[0] << endl;
