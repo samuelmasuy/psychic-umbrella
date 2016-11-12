@@ -151,7 +151,7 @@ int MapBuilderB::LoadMap(const char *filename, int levelNumber)
 		return 1;
 	}
 
-	for (int k = 0; k < levelNumber * 3; k++)
+	for (int k = 0; k < levelNumber * 2; k++)
 	{
 		int i = rand() % m_rows;
 		int j = rand() & m_cols;
@@ -159,9 +159,8 @@ int MapBuilderB::LoadMap(const char *filename, int levelNumber)
 		{
 			// adding a wall or enemy
 			if (rand() & 1)
-				m_scene[i][j] = CHAR_WALL;
-			else
-				m_scene[i][j] = CHAR_ENEMY;
+				m_scene[i][j] = CHAR_CHEST;
+			
 		}
 	}
 	return 0;
