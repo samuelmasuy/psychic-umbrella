@@ -17,8 +17,8 @@ public:
 	bool validateItem();
 	void setType(string);
 	void setInfluences(Enhancement);
-	void saveItem(Item*);
-	void loadItem(Item*);
+	void saveItem();
+	void loadItem();
   void editItem();
   void printItem();
 	//~Item();

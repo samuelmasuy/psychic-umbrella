@@ -18,6 +18,7 @@ void Game::play() {
 
   char choice;
   string itemType;
+  int itemIndexInBackpack;
   int level = 1;
   while (true) {
     characterPositionX = character->getPositionX();
@@ -90,9 +91,9 @@ void Game::play() {
         system("cls");
         cout << "Here are the items on the backpack" << endl;
         character->printBackPackItems();
-        cout << "Enter item type to equip: ";
-        cin >> itemType;
-        character->equipItem(itemType);
+		cout << "Enter item # to equip: ";
+        cin >> itemIndexInBackpack;
+		character->equipFromBackpack(itemIndexInBackpack);
         map->print();
         break;
       case 'h':

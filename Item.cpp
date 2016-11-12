@@ -98,20 +98,71 @@ void Item::setInfluences(Enhancement newEnhancement){
 	influence.insert(influence.begin(), newEnhancement);
 }
  
-void Item::saveItem(Item* item)
-{
-	
-	ofstream ofs(fileName, ios::binary);
+//save an item to file
+void Item::saveItem() {
+	string fileName;
+	int numberOfInfluences = influence.size();
+	cout << "File Name: ";
+	cin >> fileName;
 
-	ofs.write((char*)&item, sizeof(item));
+	ofstream output(fileName);
+
+	output << "ItemFile" << endl;	//type of save
+	output << type << endl;			//item type 
+
+	output << numberOfInfluences << endl;
+	for (int i = 0; i < numberOfInfluences; i++)
+	{
+		output << influence.at(i).getType() << endl;
+		output << influence.at(i).getBonus() << endl;
+	}
+	output.close();
 }
 
-void Item::loadItem(Item* item)
+//load item from file
+void Item::loadItem()
 {
-	
+	string fileName;
+	string enhanceType;
+	string Validation;
+	Enhancement *tempEnhance;
+	int numberOfInfluences;
+	int bonus;
+	bool badFile = false;
+	cout << "Load File: ";
+	cin >> fileName;
 
-	ifstream ifs(fileName, ios::binary);
-	ifs.read((char *)&item, sizeof(item));
+	ifstream input(fileName);
+	do {
+		while (!input.good()) {
+			cout << "File does not exist, try again: ";
+			cin >> fileName;
+			input.open(fileName);
+		}
+		input >> Validation;
+		if (Validation == "ItemFile")//check if file is for item
+			badFile = true;
+		else {
+			input.close();
+			badFile = false;
+			cout << "Incorrect File Loaded, select another File: " << endl;
+			cin >> fileName;
+			input.open(fileName);
+		}
+	} while (badFile == false);
+
+	input >> type;						//type of item
+	input >> numberOfInfluences;		//how many influences (dexterity +3, strenght +4, etc)
+
+	for (int i = 0; i < numberOfInfluences; i++)
+	{
+		input >> enhanceType;					//type enhacement dexterity, wisdomt etc
+		input >> bonus;					//bonus +3,+4 etc
+		tempEnhance = new Enhancement(enhanceType, bonus);
+		influence.insert(influence.begin(), *tempEnhance);
+		delete tempEnhance;
+	}
+	input.close();
 }
 
 void Item::printItem(){
