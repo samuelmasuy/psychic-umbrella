@@ -31,7 +31,7 @@ public:
 	int damageBonus();
 	void playerInfo(); //displaying character info
 	bool equipItem(Item*);
-	bool equipFromBackpack(int);
+
 	bool unequipItem(string);
 	void printBackPackItems();
 	void addToBackpack(Item);
@@ -41,6 +41,9 @@ public:
 	//saving and loading character
 	void saveCharacter();
 	void loadCharacter();
+
+	//mutator methods
+	void damageUpdate(int);
 	void setLevel(int);
 	void setPositionX(int);
 	void setPositionY(int);
@@ -56,6 +59,7 @@ protected:
 	Item equipment[MAX_ITEMS_EQUIPPED];
 	const Item emptyItem; //itemholder for equipementSlots
 	int level;
+	static int strBonus, dexBonus, conBonus, intelBonus, wisBonus, chaBonus;
 
 private:
 	string characterType;

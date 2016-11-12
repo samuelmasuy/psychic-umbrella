@@ -31,6 +31,13 @@ Character::Character(int str, int dex, int con, int intel, int wis, int cha)
 	positionX = 0;
 	positionY = 0;
 	level = 0;
+	equippedSize=0;
+	strBonus=0;
+	dexBonus=0;
+	conBonus=0;
+	intelBonus=0;
+	wisBonus=0;
+	chaBonus=0;
 
 }
 
@@ -327,13 +334,13 @@ void Character::playerInfo()
 	cout << "Level" << level << endl;
 	cout << "Total HP: " << currentHitPoints << endl;
 	cout << "Total armor: " << armorModifier() << endl;
-	cout << "Strenght: " << abilityScores[0] << endl;
+	cout << "Strength: " << abilityScores[0] << endl;
 	cout << "Dexterity: " << abilityScores[1] << endl;
-	cout << "Constituion: " << abilityScores[2] << endl;
-	cout << "Intelect: " << abilityScores[3] << endl;
-	cout << "Wizdom: " << abilityScores[4] << endl;
+	cout << "Constitution: " << abilityScores[2] << endl;
+	cout << "Intellect: " << abilityScores[3] << endl;
+	cout << "Wisdom: " << abilityScores[4] << endl;
 	cout << "Charisma: " << abilityScores[5] << endl;
-	cout << "Damange bonus: " << damageBonus() << endl;
+	cout << "Damage bonus: " << damageBonus() << endl;
 	cout << "Attack bonus: " << attackBonus() << endl;
 	cout << "-------------------------------\n";
 }
@@ -378,54 +385,38 @@ bool Character::equipItem(Item* item)
 	else
 		return false;
 
+/*	switch (item->getInfluences()){
+	case "strength":
+		abilityScores(0) += item->getEnhancementBonus();
+		strBonus = item->getEnhancementBonus(); //this is here because unequipe does not take an item as an argument, only a type.. so we do it manually
+		break;
 
-						
+	case "dexterity";
+		abilityScores(1) += item->getEnhancementBonus();
+		dexBonus = item->getEnhancementBonus();
+		break;
+	case "constitution":
+		abilityScores(2) += item->getEnhancementBonus();
+		conBonus = item->getEnhancementBonus();
+		break;
+	case "intelligence":
+		abilityScores(3) += item->getEnhancementBonus();
+		intelBonus = item->getEnhancementBonus();
+		break;
+	case "wisdom":
+		abilityScores(4) += item->getEnhancementBonus();
+		wisBonus = item->getEnhancementBonus();
+		break;
+	case "charisma":
+		abilityScores(5) += item->getEnhancementBonus();
+		chaBonus = item->getEnhancementBonus();
+		break;
+	}*/
+	backpackSize = backpack.getSize();
+	if(backpackSize > 0)
+		backpack.removeItem(type);
+						//takes it out of backpack
 	equippedSize++;
-	return true;
-
-}
-bool Character::equipFromBackpack(int backpackIndex)
-{
-	string type;
-
-	type = backpack.getItemTypeAtIndex(backpackIndex);
-	if (type == "helmet")
-	{
-		equipment[Helmet] = backpack.getItemAtIndex(backpackIndex);
-	}
-	else if (type == "armor")
-	{
-		equipment[Armor] = backpack.getItemAtIndex(backpackIndex);
-	}
-	else if (type == "weapon")
-	{
-		equipment[Weapon] = backpack.getItemAtIndex(backpackIndex);
-	}
-	else if (type == "shield")
-	{
-		equipment[Shield] = backpack.getItemAtIndex(backpackIndex);
-	}
-	else if (type == "ring")
-	{
-		equipment[Ring] = backpack.getItemAtIndex(backpackIndex);
-	}
-	else if (type == "belt")
-	{
-		equipment[Belt] = backpack.getItemAtIndex(backpackIndex);
-	}
-	else if (type == "boots")
-	{
-		equipment[Boots] = backpack.getItemAtIndex(backpackIndex);
-	}
-	else
-		return false;
-	equippedSize++;
-
-
-	//takes it out of backpack
-	backpack.removeItem(backpackIndex);
-
-
 	return true;
 
 }
@@ -437,46 +428,66 @@ bool Character::unequipItem(string type)
 	
 
 	//remove item from correct slot
-	if (type == "helmet")
+	if (type == "Helmet")
 	{
 		backpack.addItem(equipment[Helmet]);
 		equipment[Helmet] = emptyItem;
 	}
-	else if (type == "armor")
+	else if (type == "Armor")
 	{
 		backpack.addItem(equipment[Armor]);
 		equipment[Armor] = emptyItem;
 
 	}
-	else if (type == "weapon")
+	else if (type == "Weapon")
 	{
 		backpack.addItem(equipment[Weapon]);
 		equipment[Weapon] = emptyItem;
 	}
-	else if (type == "shield")
+	else if (type == "Shield")
 	{
 		backpack.addItem(equipment[Shield]);
 		equipment[Shield] = emptyItem;
 	}
-	else if (type == "ring")
+	else if (type == "Ring")
 	{
 		backpack.addItem(equipment[Ring]);
 		equipment[Ring] = emptyItem;
 	}
-	else if (type == "belt")
+	else if (type == "Belt")
 	{
 		backpack.addItem(equipment[Belt]);
 		equipment[Belt] = emptyItem;
 	}
-	else if (type == "boots")
+	else if (type == "Boots")
 	{
 		backpack.addItem(equipment[Boots]);
 		equipment[Boots] = emptyItem;
 	}
 	else
 		return false;
-
+/*	switch (type){
+		case "strength":
+			abilityScores(0) -= strBonus;
+			break;
+		case "dexterity";
+			abilityScores(1) -= dexBonus;
+			break;
+		case "constitution":
+			abilityScores(2) -= conBonus
+			break;
+		case "intelligence":
+			abilityScores(3) -= intelBonus;
+			break;
+		case "wisdom":
+			abilityScores(4) -= wisBonus;
+			break;
+		case "charisma":
+			abilityScores(5) -= chaBonus;
+			break;
+	}*/
 	return true;
+
 }
 
 //! Implementation of printBackPackItems
