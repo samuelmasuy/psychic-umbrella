@@ -7,6 +7,8 @@
 void Game::play() {
   // set Character observer
   CharacterOBS* observerCharacter = new CharacterOBS(character);
+  // set Map observer
+  // ......
 
   map->reinitializeMap();
   initializeCharacterPositionOnMap();
@@ -29,44 +31,37 @@ void Game::play() {
 
       switch (choice) {
       case 'd':
-        //clear_screen();
         system("cls");
         move(characterPositionX, characterPositionY, characterPositionX + 1, characterPositionY);
         map->print();
         break;
       case 'a':
-        // clear_screen();
         system("cls");
         move(characterPositionX, characterPositionY, characterPositionX - 1, characterPositionY);
         map->print();
         break;
       case 'w':
-        //clear_screen();
         system("cls");
         move(characterPositionX, characterPositionY, characterPositionX, characterPositionY - 1);
         map->print();
         break;
       case 's':
-        // clear_screen();
         system("cls");
         move(characterPositionX, characterPositionY, characterPositionX, characterPositionY + 1);
         map->print();
         break;
       case 'c':
-        // clear_screen();
         system("cls");
         character->playerInfo();
         map->print();
         break;
       case 'i':
-        //clear_screen();
         system("cls");
         character->printEquippedItems();
         character->printBackPackItems();
         map->print();
         break;
       case 'e':
-        // clear_screen();
         system("cls");
         cout << "Enter level: ";
         cin >> level;
@@ -74,7 +69,6 @@ void Game::play() {
         map->print();
         break;
       case 'u':
-        //clear_screen();
         system("cls");
         cout << "Enter item type to unequip: ";
         cin >> itemType;
@@ -91,18 +85,16 @@ void Game::play() {
         system("cls");
         cout << "Here are the items on the backpack" << endl;
         character->printBackPackItems();
-		cout << "Enter item # to equip: ";
+        cout << "Enter item # to equip: ";
         cin >> itemIndexInBackpack;
-		character->equipFromBackpack(itemIndexInBackpack);
+        character->equipFromBackpack(itemIndexInBackpack);
         map->print();
         break;
       case 'h':
-        // clear_screen();
         system("cls");
         printGameUsage();
         break;
       case 'q':
-        // clear_screen();
         system("cls");
         cout << "Do you want to quit the game? ('y'/'n'): ";
         cin >> choice;
@@ -137,6 +129,7 @@ void Game::stop() {
   cin >> quit;
   // might need to put back character original coordinate  + for map
   // map->save();
+  // character->save();
 }
 
 void Game::initializeCharacterPositionOnMap() {
