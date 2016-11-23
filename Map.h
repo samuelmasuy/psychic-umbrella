@@ -30,6 +30,7 @@ using namespace std;
 
 class Map : public Subject
 {
+	friend class Observer;
 public:
 	///
 	/// default constructor

@@ -2,6 +2,7 @@
 #include "Map.h"
 #include "Observer.h"
 #include "Subject.h"
+#include "Logger.h"
 
 /**
 * @brief Observer pattern for map
