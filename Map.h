@@ -4,6 +4,7 @@
 #include <string>
 #include <vector>
 #include <stdlib.h>
+#include "Subject.h"
 
 #define CELL_TYPE char
 using namespace std;
@@ -11,11 +12,13 @@ using namespace std;
 
 #define CHAR_EMPTY   ' '
 #define CHAR_PLAYER  'P'
-#define CHAR_ENEMY   'E'
+#define CHAR_MONSTER 'M'
 #define CHAR_WALL    '*'
 #define CHAR_ENTRY	 'I'
 #define CHAR_EXIT	 'O'
 #define CHAR_CHEST   'c'
+#define CHAR_FRIENDLY 'F'
+#define CHAR_DOOR    'D'
 /* would be added in future releases
 #define CHAR_ARMOR   'a'
 #define CHAR_SHIELD  's'
@@ -25,7 +28,7 @@ using namespace std;
 #define CHAR_HELMET  'h'
 */
 
-class Map
+class Map : public Subject
 {
 public:
 	///
@@ -71,23 +74,25 @@ public:
 	///
 	/// basic getters
 	///
-	inline int  GetRows() { return m_rows;  }
-	inline int  GetCols() { return m_cols;  }
-	inline void GetPlayerPos(int &r, int &c) { r = m_iPlayer; c = m_jPlayer;  }
+	inline int  GetRows() { return m_rows; }
+	inline int  GetCols() { return m_cols; }
+	inline void GetPlayerPos(int &r, int &c) { r = m_iPlayer; c = m_jPlayer; }
 	inline void GetEntrancePos(int &r, int &c) { r = m_i0; c = m_j0; }
 	inline void GetExitPos(int &r, int &c) { r = m_i1; c = m_j1; }
 	///
 	///store a cell into the map. 
 	///
 	void setCell(int i, int j, CELL_TYPE value);
-  
-  void fillCell(int i, int j, CELL_TYPE value);
-  
-  CELL_TYPE retrieveCell(int i, int j);
 
-  void print();
-  
-  void reinitializeMap();
+	void fillCell(int i, int j, CELL_TYPE value);
+	
+	void mapInfo();
+
+	CELL_TYPE retrieveCell(int i, int j);
+
+	void print();
+
+	void reinitializeMap();
 	///
 	/// retrieve a cell value, by ref
 	///
@@ -139,7 +144,7 @@ public:
 	///
 	void Display();
 
-	
+
 	int getEntranceRow();
 	int getEntranceColumn();
 private:
