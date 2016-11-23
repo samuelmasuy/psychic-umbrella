@@ -9,6 +9,7 @@ Map::Map()
 	m_rows = m_cols = 0;
 	m_scene = NULL;
 	m_i0 = m_j0 = m_i1 = m_j1 = m_iPlayer = m_jPlayer = -1;
+	notify(); //notifies map observer
 }
 ///
 /// constructor with size
@@ -19,6 +20,7 @@ Map::Map(int rows, int cols)
 	m_rows = m_cols = 0;
 	m_i0 = m_j0 = m_i1 = m_j1 = m_iPlayer = m_jPlayer = -1;
 	Create(rows, cols);
+	notify(); //notifies map observer
 }
 ///
 /// copy constructor 
@@ -35,7 +37,8 @@ Map::Map(const Map &x)
 	m_cols = x.m_cols;
 	m_scene = AllocMem(x.m_rows, x.m_cols);
 	for (int i = 0; i < m_rows; i++)
-		memcpy(m_scene[i], x.m_scene[i], m_cols * sizeof (CELL_TYPE));
+		memcpy(m_scene[i], x.m_scene[i], m_cols * sizeof(CELL_TYPE));
+	notify(); //notifies map observer
 }
 
 Map & Map::operator = (const Map &x)
@@ -51,6 +54,7 @@ Map & Map::operator = (const Map &x)
 	m_scene = AllocMem(x.m_rows, x.m_cols);
 	for (int i = 0; i < m_rows; i++)
 		memcpy(m_scene[i], x.m_scene[i], m_cols * sizeof(CELL_TYPE));
+	notify(); //notifies map observer
 	return *this;
 }
 
@@ -86,6 +90,7 @@ bool Map::Create(int rows, int cols)
 			}
 		}
 		m_i0 = m_j0 = m_i1 = m_j1 = m_iPlayer = m_jPlayer = -1;
+		notify(); //notifies map observer
 		return true;
 	}
 	else
@@ -122,7 +127,7 @@ bool Map::Backtracking(CELL_TYPE **v, int row0, int col0, int row1, int col1)
 	if (row0 == row1 && col0 == col1)
 		return true;
 	v[row0][col0] = true;
-	bool ret = 
+	bool ret =
 		Backtracking(v, row0 + 1, col0, row1, col1) ||
 		Backtracking(v, row0 - 1, col0, row1, col1) ||
 		Backtracking(v, row0, col0 + 1, row1, col1) ||
@@ -138,7 +143,7 @@ void Map::FreeMem(CELL_TYPE **x, int rows)
 	if (x && rows>0)
 	{
 		//for (int i = 0; i < rows; i++)
-			//delete[] x[i];
+		//delete[] x[i];
 		//delete[] x;
 	}
 }
@@ -171,17 +176,20 @@ bool Map::ValidCell(CELL_TYPE x)
 	return
 		x == CHAR_EMPTY ||
 		x == CHAR_PLAYER ||
-		x == CHAR_ENEMY ||
+		x == CHAR_MONSTER ||
 		x == CHAR_WALL ||
 		x == CHAR_ENTRY ||
 		x == CHAR_EXIT ||
-		x == CHAR_CHEST;/* ||
-		x == CHAR_ARMOR ||
-		x == CHAR_SHIELD ||
-		x == CHAR_WEAPON ||
-		x == CHAR_BOOTS ||
-		x == CHAR_RING ||
-		x == CHAR_HELMET;*/
+		x == CHAR_FRIENDLY ||
+		x == CHAR_DOOR ||
+		x == CHAR_CHEST;/* 
+						||
+						x == CHAR_ARMOR ||
+						x == CHAR_SHIELD ||
+						x == CHAR_WEAPON ||
+						x == CHAR_BOOTS ||
+						x == CHAR_RING ||
+						x == CHAR_HELMET;*/
 }
 ///
 /// store a cell into the map. 
@@ -191,31 +199,36 @@ void Map::setCell(int i, int j, CELL_TYPE value)
 	if (ValidPos(i, j) && ValidCell(value) && value != CHAR_EXIT && value != CHAR_ENTRY && value != CHAR_PLAYER)
 	{
 		m_scene[i][j] = value;
+		notify(); //notifies map observer
 	}
 	else
 		cout << "Invalid position or cell type" << endl;
 }
 
 /**
- * @brief fill a cell into the map.
- *
- * @param i column
- * @param j row
- * @param value type to be set
- */
+* @brief fill a cell into the map.
+*
+* @param i column
+* @param j row
+* @param value type to be set
+*/
 void Map::fillCell(int i, int j, CELL_TYPE value) {
-    m_scene[i][j] = value;
+	m_scene[i][j] = value;
+	notify(); //notifies map observer
+}
+void Map::mapInfo()
+{
 }
 /**
- * @brief Retrieve a cell from the map
- *
- * @param i column
- * @param j row
- *
- * @return  a cell type
- */
+* @brief Retrieve a cell from the map
+*
+* @param i column
+* @param j row
+*
+* @return  a cell type
+*/
 CELL_TYPE Map::retrieveCell(int i, int j) {
-  return m_scene[i][j];
+	return m_scene[i][j];
 }
 
 CELL_TYPE &Map::GetCellByRef(int i, int j)
@@ -231,7 +244,10 @@ CELL_TYPE &Map::GetCellByRef(int i, int j)
 void Map::RemoveCell(int i, int j)
 {
 	if (ValidPos(i, j))
+	{
 		m_scene[i][j] = CHAR_EMPTY;
+		notify(); //notifies map observer
+	}
 	else
 		cout << "Cannot remove a cell on invalid position" << endl;
 }
@@ -248,7 +264,7 @@ CELL_TYPE Map::GetCell(int i, int j)
 			return CHAR_EXIT;
 		else if (m_iPlayer == i && m_jPlayer == j)
 			return CHAR_PLAYER;
-		else 
+		else
 			return m_scene[i][j];
 	}
 	else
@@ -275,6 +291,7 @@ bool Map::SetEntrance(int i, int j)
 		return false;
 	m_i0 = i;
 	m_j0 = j;
+	notify(); //notifies map observer
 	return true;
 }
 ///
@@ -291,6 +308,7 @@ bool Map::SetExit(int i, int j)
 		return false;
 	m_i1 = i;
 	m_j1 = j;
+	notify(); //notifies map observer
 	return true;
 }
 
@@ -300,8 +318,10 @@ bool Map::SetPlayerPos(int i, int j)
 		return false;
 	if (m_scene[i][j] == CHAR_WALL)
 		return false;
+	//m_scene[i][j] = CHAR_PLAYER;  
 	m_iPlayer = i;
 	m_jPlayer = j;
+	notify(); //notifies map observer
 	return true;
 }
 
@@ -336,10 +356,10 @@ int Map::ValidateMap()
 		{
 			switch (m_scene[i][j])
 			{
-				case CHAR_ENTRY: 
-				case CHAR_EXIT: 
-				case CHAR_PLAYER:
-					cout << "Entry, exit or player should not be specified in the map; only in the header" << endl;
+			case CHAR_ENTRY:
+			case CHAR_EXIT:
+			case CHAR_PLAYER:
+				cout << "Entry, exit or player should not be specified in the map; only in the header" << endl;
 				return 2;
 			}
 		}
@@ -356,10 +376,16 @@ int Map::ValidateMap()
 ///
 void Map::FindAndRemove(CELL_TYPE x)
 {
+	bool updated = false;
 	for (int i = 0; i < m_rows; i++)
 		for (int j = 0; j < m_cols; j++)
 			if (m_scene[i][j] == x)
+			{
 				m_scene[i][j] = CHAR_EMPTY;
+				updated = true;
+			}
+	if (updated)
+		notify(); //notifies map observer
 }
 ///
 /// Retrieve the position of the first ocurrency of a item. Return true if the item was found
@@ -382,14 +408,16 @@ string Map::CellToString(CELL_TYPE x)
 {
 	switch (x)
 	{
-		case CHAR_EMPTY: return "Empty"; break;
-		case CHAR_PLAYER: return "Player"; break;
-		case CHAR_ENEMY: return "Enemy"; break;
-		case CHAR_WALL: return "Wall"; break;
-		case CHAR_ENTRY: return "Entrance"; break;
-		case CHAR_EXIT: return "Exit"; break;
-		case CHAR_CHEST: return "Chest"; break;
-			/*
+	case CHAR_EMPTY: return "Empty"; break;
+	case CHAR_PLAYER: return "Player"; break;
+	case CHAR_MONSTER: return "Monster"; break;
+	case CHAR_WALL: return "Wall"; break;
+	case CHAR_ENTRY: return "Entrance"; break;
+	case CHAR_EXIT: return "Exit"; break;
+	case CHAR_CHEST: return "Chest"; break;
+	case CHAR_FRIENDLY: return "NPC"; break;
+	case CHAR_DOOR: return "Door"; break;
+		/*
 		case CHAR_ARMOR: return  "Armor"; break;
 		case CHAR_SHIELD: return "Shield"; break;
 		case CHAR_WEAPON: return "Weapon"; break;
@@ -407,7 +435,8 @@ void Map::SetMap(int rows, int cols, CELL_TYPE **data)
 	m_cols = cols;
 	m_scene = AllocMem(rows, cols);
 	for (int i = 0; i<rows; i++)
-		memcpy(m_scene[i], data[i], sizeof(CELL_TYPE) * rows);
+		memcpy(m_scene[i], data[i], sizeof(CELL_TYPE) * cols);
+	notify(); //notifies map observer
 }
 
 void Map::Display()
@@ -438,43 +467,44 @@ void Map::Display()
 }
 
 /**
- * @brief Reinitialize to a view neeeded for the main game.
- */
+* @brief Reinitialize to a view neeeded for the main game.
+*/
 void Map::reinitializeMap() {
-  int i0, j0, i1, j1;
-  GetEntrancePos(i0, j0);
-  GetExitPos(i1, j1);
+	int i0, j0, i1, j1;
+	GetEntrancePos(i0, j0);
+	GetExitPos(i1, j1);
 
-   for (int r = 0; r < GetRows(); r++) {
-    for (int c = 0; c < GetCols(); c++) {
-		if (r == i0 && c == j0)
-		{
-			m_scene[r][c] = CHAR_PLAYER;
-			SetPlayerPos(r, c);
+	for (int r = 0; r < GetRows(); r++) {
+		for (int c = 0; c < GetCols(); c++) {
+			if (r == i0 && c == j0)
+			{
+				m_scene[r][c] = CHAR_PLAYER;
+				SetPlayerPos(r, c);
+			}
+			else if (r == i1 && c == j1)
+				m_scene[r][c] = CHAR_EXIT;
 		}
-      else if (r == i1 && c == j1)
-        m_scene[r][c] = CHAR_EXIT;
-    }
-  }
+	}
+	notify(); //notifies map observer
 }
 
 /**
- * @brief Print the map, we always remember the entry postion.
- */
+* @brief Print the map, we always remember the entry postion.
+*/
 void Map::print() {
-  int i0, j0;
+	int i0, j0;
 
-  GetEntrancePos(i0, j0);
+	GetEntrancePos(i0, j0);
 
-  m_scene[i0][j0] = CHAR_ENTRY;
+	m_scene[i0][j0] = CHAR_ENTRY;
 
-  cout << endl;
-  for (int i = 0; i < m_rows; i++) {
-    for (int j = 0; j < m_cols; j++) {
-      cout << m_scene[i][j];
-    }
-    cout << endl;
-  }
+	cout << endl;
+	for (int i = 0; i < m_rows; i++) {
+		for (int j = 0; j < m_cols; j++) {
+			cout << m_scene[i][j];
+		}
+		cout << endl;
+	}
 }
 int Map::getEntranceRow()
 {

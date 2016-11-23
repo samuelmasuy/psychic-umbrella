@@ -46,7 +46,7 @@ void MapEditor::EditMap(Map *pMap, const string &filename)
 			/// save map pressed
 			///
 		{
-			if (pMap->ValidateMap()==0)
+			if (pMap->ValidateMap() == 0)
 			{
 				MapBuilderB mb(*pMap);
 
@@ -86,14 +86,16 @@ void MapEditor::EditMap(Map *pMap, const string &filename)
 			do
 			{
 				cout << endl << "Select the item type to put on the cell [" << row + 1 << "," << col + 1 << "]" << endl;
-				cout << "  [1] Empty    (" << CHAR_EMPTY << ")" << endl;
-				cout << "  [2] Player   (" << CHAR_PLAYER << ")" << endl;
-				cout << "  [3] Enemy    (" << CHAR_ENEMY << ")" << endl;
-				cout << "  [4] Wall     (" << CHAR_WALL << ")" << endl;
-				cout << "  [5] Entrance (" << CHAR_ENTRY << ")" << endl;
-				cout << "  [6] Exit     (" << CHAR_EXIT << ")" << endl;
-				cout << "  [7] Chest    (" << CHAR_CHEST << ")" << endl;
-				cout << "  [8] Back to main menu" << endl;
+				cout << "  [1] Empty	(" << CHAR_EMPTY << ")" << endl;
+				cout << "  [2] Player	(" << CHAR_PLAYER << ")" << endl;
+				cout << "  [3] Monster	(" << CHAR_MONSTER << ")" << endl;
+				cout << "  [4] Wall		(" << CHAR_WALL << ")" << endl;
+				cout << "  [5] Entrance	(" << CHAR_ENTRY << ")" << endl;
+				cout << "  [6] Exit		(" << CHAR_EXIT << ")" << endl;
+				cout << "  [7] Chest	(" << CHAR_CHEST << ")" << endl;
+				cout << "  [8] Friendly (" << CHAR_FRIENDLY << ")" << endl;
+				cout << "  [9] Door  	(" << CHAR_DOOR << ")" << endl;
+				cout << "  [0] Back to main menu" << endl;
 				cout << "-->";
 				cin >> opc;
 				Flush();
@@ -131,7 +133,7 @@ void MapEditor::EditMap(Map *pMap, const string &filename)
 						cout << "Invalid position: an enemy cannot be located at the player position" << endl;
 						continue;
 					}
-					pMap->setCell(row, col, CHAR_ENEMY);
+					pMap->setCell(row, col, CHAR_MONSTER);
 					break;
 				}
 				else if (opc.compare("4") == 0)
@@ -178,6 +180,16 @@ void MapEditor::EditMap(Map *pMap, const string &filename)
 					break;
 				}
 				else if (opc.compare("8") == 0)
+				{
+					pMap->setCell(row, col, CHAR_FRIENDLY);
+					break;
+				}
+				else if (opc.compare("9") == 0)
+				{
+					pMap->setCell(row, col, CHAR_DOOR);
+					break;
+				}
+				else if (opc.compare("0") == 0)
 					break;
 				else
 					cout << "Invalid option: " << opc << endl;
