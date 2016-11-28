@@ -12,6 +12,11 @@
 #include "Character.h"
 #include "GameBuilder.h"
 #include "Game.h"
+#include "CharacterBuilder.h"
+#include "NimbleBuilder.h"
+#include "Fighter.h"
+#include "TankBuilder.h"
+#include "BullyBuilder.h"
 
 using namespace std;
 
@@ -24,15 +29,34 @@ int main(int argc, char const* argv[]) {
 	cout << "Dungeons And Dragons Game" << endl;
 
 	Character* character = NULL;
+
+	Fighter* fighter = new Fighter();
+	CharacterBuilder* nimbleBuilder = new NimbleBuilder;
+	CharacterBuilder* tankBuilder = new TankBuilder;
+	CharacterBuilder* bullyBuilder = new BullyBuilder;
+
+
+	/**/
 	char choice;
 
 	cout << "Let's create a character, would you like to play with a fighter[1] or a regular character[2]: " << endl;
 	int character_choice = validate_choice(1, 2);
 	switch (character_choice) {
 	case 1:
-		character = new Fighter();
+		fighter->setCharacterBuilder(nimbleBuilder);
+		fighter->constructCharacter();
+		character = fighter->getCharacter();
+		break;
 	case 2:
-		character = new Character();
+		fighter->setCharacterBuilder(tankBuilder);
+		fighter->constructCharacter();
+		character = fighter->getCharacter();
+		break;
+	case 3:
+		fighter->setCharacterBuilder(bullyBuilder);
+		fighter->constructCharacter();
+		character = fighter->getCharacter();
+		break;
 	}
 
 	cout << endl << "Do you want to load your character from a file?";
