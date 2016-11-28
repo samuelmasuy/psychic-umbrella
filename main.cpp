@@ -31,33 +31,35 @@ int main(int argc, char const* argv[]) {
 	Character* character = NULL;
 
 	Fighter* fighter = new Fighter();
-	CharacterBuilder* nimbleBuilder = new NimbleBuilder;
-	CharacterBuilder* tankBuilder = new TankBuilder;
-	CharacterBuilder* bullyBuilder = new BullyBuilder;
-
-
 	/**/
 	char choice;
 
-	cout << "Let's create a character, would you like to play with a fighter[1] or a regular character[2]: " << endl;
-	int character_choice = validate_choice(1, 2);
+	cout << "Let's create a character, would you like to play with a nimble[1], a tank[2], or a bully[3]: " << endl;
+	int character_choice = validate_choice(1, 3);
 	switch (character_choice) {
 	case 1:
+    CharacterBuilder* nimbleBuilder = new NimbleBuilder;
 		fighter->setCharacterBuilder(nimbleBuilder);
 		fighter->constructCharacter();
 		character = fighter->getCharacter();
+    delete nimbleBuilder;
 		break;
 	case 2:
+    CharacterBuilder* tankBuilder = new TankBuilder;
 		fighter->setCharacterBuilder(tankBuilder);
 		fighter->constructCharacter();
 		character = fighter->getCharacter();
+    delete tankBuilder;
 		break;
 	case 3:
+    CharacterBuilder* bullyBuilder = new BullyBuilder;
 		fighter->setCharacterBuilder(bullyBuilder);
 		fighter->constructCharacter();
 		character = fighter->getCharacter();
+    delete bullyBuilder;
 		break;
 	}
+  delete fighter;
 
 	cout << endl << "Do you want to load your character from a file?";
 	cin >> choice;
