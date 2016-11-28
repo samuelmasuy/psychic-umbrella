@@ -14,7 +14,7 @@
 #include "Game.h"
 #include "CharacterBuilder.h"
 #include "NimbleBuilder.h"
-#include "Fighter.h"
+#include "CharacterDirector.h"
 #include "TankBuilder.h"
 #include "BullyBuilder.h"
 
@@ -30,7 +30,7 @@ int main(int argc, char const* argv[]) {
 
 	Character* character = NULL;
 
-	Fighter* fighter = new Fighter();
+	CharacterDirector* cd = new CharacterDirector();
 	/**/
 	char choice;
 
@@ -39,27 +39,27 @@ int main(int argc, char const* argv[]) {
 	switch (character_choice) {
 	case 1:
     CharacterBuilder* nimbleBuilder = new NimbleBuilder;
-		fighter->setCharacterBuilder(nimbleBuilder);
-		fighter->constructCharacter();
-		character = fighter->getCharacter();
+		cd->setCharacterBuilder(nimbleBuilder);
+		cd->constructCharacter();
+		character = cd->getCharacter();
     delete nimbleBuilder;
 		break;
 	case 2:
     CharacterBuilder* tankBuilder = new TankBuilder;
-		fighter->setCharacterBuilder(tankBuilder);
-		fighter->constructCharacter();
-		character = fighter->getCharacter();
+		cd->setCharacterBuilder(tankBuilder);
+		cd->constructCharacter();
+		character = cd->getCharacter();
     delete tankBuilder;
 		break;
 	case 3:
     CharacterBuilder* bullyBuilder = new BullyBuilder;
-		fighter->setCharacterBuilder(bullyBuilder);
-		fighter->constructCharacter();
-		character = fighter->getCharacter();
+		cd->setCharacterBuilder(bullyBuilder);
+		cd->constructCharacter();
+		character = cd->getCharacter();
     delete bullyBuilder;
 		break;
 	}
-  delete fighter;
+  delete cd;
 
 	cout << endl << "Do you want to load your character from a file?";
 	cin >> choice;

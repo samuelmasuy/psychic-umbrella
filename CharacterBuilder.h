@@ -8,7 +8,7 @@ public:
 	Character* getCharacter(){return myCharacter;}
 	void createNewCharacter(){ myCharacter = new Character;}
 	virtual void buildAbilityMods() = 0;
-    virtual void buildType() = 0;
+  virtual void buildType() = 0;
 
 protected:
 	Character* myCharacter;

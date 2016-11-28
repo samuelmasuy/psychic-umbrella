@@ -1,10 +1,10 @@
 //! @file
-//! @brief Implementation file for the Character class
+//! @brief Implementation file for the Fighter class
 //!
 
-#include "Character.h"
+#include "Fighter.h"
 #include "Observer.h"
-#include <stdlib.h> 
+#include <stdlib.h>
 #include <random>
 #include <fstream>
 #include <iostream>
@@ -17,9 +17,9 @@ const int  TOT_STATS = 6;
 const string filename = "characterSaved.dat";
 
 //! Constructor: passes values to each ability score and set hit points to 10
-Character::Character(int str, int dex, int con, int intel, int wis, int cha)
+Fighter::Fighter(int str, int dex, int con, int intel, int wis, int cha)
 {
-	abilityScores[0] = str; 
+	abilityScores[0] = str;
 	abilityScores[1] = dex;
 	abilityScores[2] = con;
 	abilityScores[3] = intel;
@@ -41,11 +41,11 @@ Character::Character(int str, int dex, int con, int intel, int wis, int cha)
 }
 
 
-Character::Character()
+Fighter::Fighter()
 {
 	characterType = "fighter";
 
-	//generate stats for Character
+	//generate stats for Fighter
 	for (int i = 0; i < TOT_STATS; i++)
 		abilityScores[i] = generateStats();
 	//initializing backpack to emptyItem
@@ -55,13 +55,13 @@ Character::Character()
 	//and set hit points to 10
 	currentHitPoints = 10;
 	equippedSize = 0;
-	
-	notify(); //notifies character observer
+
+	notify(); //notifies Fighter observer
 }
 
-//! Implementation of the verification of a newly created Character
-//! @return bool value, true of the character is valid (stats should be in the 3-18 range for a new character), false if invalid. 
-bool Character::validateNewCharacter()
+//! Implementation of the verification of a newly created Fighter
+//! @return bool value, true of the Fighter is valid (stats should be in the 3-18 range for a new Fighter), false if invalid.
+bool Fighter::validateNewCharacter()
 {
 	for (int i = 0; i <= 5; i++)
 	if (abilityScores[i]<3 || abilityScores[i]>18)
@@ -69,23 +69,23 @@ bool Character::validateNewCharacter()
 	return true;
 }
 
-void Character::setCharacterType(string type){
+void Fighter::setCharacterType(string type){
 
 	characterType = type;
 }
 
-string Character::getCharacterType() {
+string Fighter::getCharacterType() {
 	return characterType;
 }
 
-int* Character::getAbilityScores() {
+int* Fighter::getAbilityScores() {
 
 	return abilityScores;
 }
 
 //! Implementation of fill cell, set any cell to anything it might eventually contain
-//! @param damage: damage sustained by the character
-void Character::hit(int damage)
+//! @param damage: damage sustained by the Fighter
+void Fighter::hit(int damage)
 {
 	currentHitPoints = currentHitPoints - damage;
 	notify();
@@ -93,22 +93,22 @@ void Character::hit(int damage)
 
 //! Implementation of a getter method for currentHitPoints
 //! @return int: value of currentHitPoints
-int Character::getHitPoints()
+int Fighter::getHitPoints()
 {
-	return currentHitPoints; 
+	return currentHitPoints;
 }
 
 //! Implementation of ability modifier method.
 //! @return int: value of modified ability score entered
-int Character::abilityModifier(int ability)
+int Fighter::abilityModifier(int ability)
 {
 
 	return abilityScores[ability] / 2 - 5;
 }
 
-//! Implementation of hit points of character
+//! Implementation of hit points of Fighter
 //! @param currentHitPoints: sets currentHitPoints according to ability modifier
-void Character::hpChange()
+void Fighter::hpChange()
 {
 	if (abilityModifier(2) > 1)
 		currentHitPoints = 10 + (level - 1) * (10 / 2 + 1) + (abilityModifier(2) * 20);
@@ -117,9 +117,9 @@ void Character::hpChange()
 	notify();
 }
 
-//! Implementation of level of character
+//! Implementation of level of Fighter
 //! @param level: when level is changed the following stats must also change according to D20 rules.
-void Character::setLevel(int lvl)
+void Fighter::setLevel(int lvl)
 {
 	level = lvl;
 	hpChange();
@@ -131,20 +131,20 @@ void Character::setLevel(int lvl)
 
 //! Implementation of armor modifier
 //! @return the modifier for armor according to D20 game rules
-int Character::armorModifier()
+int Fighter::armorModifier()
 {
 	return 10 + abilityModifier(1);
 
 }
 //! Implementation of damage bonus which depends on strength ability
 //! @return strength ability
-int Character::getDamageBonus()
+int Fighter::getDamageBonus()
 {
-	return abilityModifier(0); 
+	return abilityModifier(0);
 }
 //! Implementation of attack bonus according to D20 game rules
 //! @return attackBonus according d20 game
-void Character::setAttackBonus()
+void Fighter::setAttackBonus()
 {
 
 	int bonusPerRound = level;
@@ -154,7 +154,7 @@ void Character::setAttackBonus()
 		attacksPerRound++;
 		bonusAttack = new int(attacksPerRound);
 	}
-	
+
 
 	for (int i = 0; i < attacksPerRound; i++)
 	{
@@ -163,30 +163,30 @@ void Character::setAttackBonus()
 			bonusAttack[i] = bonusPerRound;
 			bonusPerRound -= 5;
 		}
-		
+
 	}
 }
 
-int* Character::getAttackBonus()
+int* Fighter::getAttackBonus()
 {
 	return bonusAttack;
 }
 
-int Character::getAttacksPerRound() 
+int Fighter::getAttacksPerRound()
 {
 	return ceil(level / 5.0);
 }
 
 
 //! Implementation of get level
-//! @return level: level f the character
-int Character::getLevel(){
+//! @return level: level f the Fighter
+int Fighter::getLevel(){
 	return level;
 }
 
 //! Implementation of level up
-//! @param level: increase level of character upon level change
-void Character::levelUp(){
+//! @param level: increase level of Fighter upon level change
+void Fighter::levelUp(){
 	level++;
 	hpChange();
 	setAttackBonus();
@@ -197,7 +197,7 @@ void Character::levelUp(){
 
 //! Implementation of stats generator
 //! @return total: random number generated
-int Character::generateStats()
+int Fighter::generateStats()
 {
 	int score = 0;
 	int diceTurns[4] = {};
@@ -229,9 +229,9 @@ int Character::generateStats()
 }
 
 
-//! Implementation of save character
-//! @param saves character into txt file.
-void Character::saveCharacter()
+//! Implementation of save Fighter
+//! @param saves Fighter into txt file.
+void Fighter::saveCharacter()
 {
 	string type = "";
 	string saveFile;
@@ -283,9 +283,9 @@ void Character::saveCharacter()
 
 }
 
-//! Implementation of load character
-//! @param loads character from txt file.
-void Character::loadCharacter()
+//! Implementation of load Fighter
+//! @param loads Fighter from txt file.
+void Fighter::loadCharacter()
 {
 
 	string loadFile;
@@ -376,8 +376,8 @@ void Character::loadCharacter()
 }
 
 //! Implementation of player info
-//! @param print character info on screen
-void Character::playerInfo()
+//! @param print Fighter info on screen
+void Fighter::playerInfo()
 {
 	cout << "-------------------------------\n";
 	cout << "Class Type: " << characterType << endl;
@@ -402,7 +402,7 @@ void Character::playerInfo()
 	}
 	else
 		cout << *(bonusAttack + 0) << " ";
-	
+
 
 	cout << "Attacks per/round: " << getAttacksPerRound() << endl;
 	cout << "-------------------------------\n";
@@ -411,7 +411,7 @@ void Character::playerInfo()
 
 //! Implementation of equip item
 //! @return bool: states whether item has been equipped or not
-bool Character::equipItem(Item* item)
+bool Fighter::equipItem(Item* item)
 {
 	int backpackSize;
 
@@ -449,12 +449,12 @@ bool Character::equipItem(Item* item)
 		return false;
 
 
-						
+
 	equippedSize++;
 	return true;
 
 }
-bool Character::equipFromBackpack(int backpackIndex)
+bool Fighter::equipFromBackpack(int backpackIndex)
 {
 	string type;
 
@@ -502,10 +502,8 @@ bool Character::equipFromBackpack(int backpackIndex)
 
 //! Implementation of unequip item
 //! @return bool: states whether item has been unequipped or not
-bool Character::unequipItem(string type)
+bool Fighter::unequipItem(string type)
 {
-	
-
 	//remove item from correct slot
 	if (type == "helmet")
 	{
@@ -551,20 +549,20 @@ bool Character::unequipItem(string type)
 
 //! Implementation of printBackPackItems
 //! @param prints backpack items on screen
-void Character::printBackPackItems()
+void Fighter::printBackPackItems()
 {
 	backpack.printBackpack();
 }
 
 //! Implementation of addToBackPack
 //! @param takes in an item and adds item to backpack
-void Character::addToBackpack(Item newItem){
+void Fighter::addToBackpack(Item newItem){
 	backpack.addItem(newItem);
 }
 
 //! Implementation of printEquippedItems
 //! @param prints every item equipped onto screen
-void Character::printEquippedItems()
+void Fighter::printEquippedItems()
 {
 	string type;
 	cout << "---EQUIPPED ITEMS---\n";
@@ -578,25 +576,25 @@ void Character::printEquippedItems()
 }
 
 //! Implementation of mutator method of setPositionX
-//! @param sets position X of character
-void Character::setPositionX(int x){
+//! @param sets position X of Fighter
+void Fighter::setPositionX(int x){
 	positionX = x;
 }
 
 //! Implementation of mutator method of  setPositionY
-//! @param sets position Y of character
-void Character::setPositionY(int y){
+//! @param sets position Y of Fighter
+void Fighter::setPositionY(int y){
 	positionY = y;
 }
 
 //! Implementation of accessor method getPositionX
-//! @return positionX: gets position X of character
-int Character::getPositionX(){
+//! @return positionX: gets position X of Fighter
+int Fighter::getPositionX(){
 	return positionX;
 }
 
 //! Implementation of accessor method getPositionY
-//! @return positionY: gets position Y of character
-int Character::getPositionY(){
+//! @return positionY: gets position Y of Fighter
+int Fighter::getPositionY(){
 	return positionY;
 }

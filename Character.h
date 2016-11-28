@@ -12,71 +12,46 @@ using namespace std;
 
 
 //! Class that implements a character 
-class Character : public Subject
+class Character
 {
 public:
-
-	//constructors
-	Character();
-	Character(int, int, int, int, int, int);
-
 	//logical game functions
-	void setCharacterType(string type);
-	bool validateNewCharacter();
-	void hit(int);
-	int generateStats();
-	void hpChange();
-	int abilityModifier(int);
-	int armorModifier();
+	virtual void setCharacterType(string type) = 0;
+	virtual bool validateNewCharacter() = 0;
+	virtual void hit(int) = 0;
+	virtual int generateStats() = 0;
+	virtual void hpChange() = 0;
+	virtual int abilityModifier(int) = 0;
+	virtual int armorModifier() = 0;
 	//virtual int attackBonus();//class to be inherited
-	void setAttackBonus();
-	void playerInfo(); //displaying character info
-	bool equipItem(Item*);
-	bool equipFromBackpack(int);
-	bool unequipItem(string);
-	void printBackPackItems();
-	void addToBackpack(Item);
-	void printEquippedItems();
-	void levelUp();
+	virtual void setAttackBonus() = 0;
+	virtual void playerInfo() = 0; //displaying character info
+	virtual bool equipItem(Item*) = 0;
+	virtual bool equipFromBackpack(int) = 0;
+	virtual bool unequipItem(string) = 0;
+	virtual void printBackPackItems() = 0;
+	virtual void addToBackpack(Item) = 0;
+	virtual void printEquippedItems() = 0;
+	virtual void levelUp() = 0;
 
 	//saving and loading character
-	void saveCharacter();
-	void loadCharacter();
-	void setLevel(int);
-	void setPositionX(int);
-	void setPositionY(int);
+	virtual void saveCharacter() = 0;
+	virtual void loadCharacter() = 0;
+	virtual void setLevel(int) = 0;
+	virtual void setPositionX(int) = 0;
+	virtual void setPositionY(int) = 0;
 
 	//game accessor methods
-	int getHitPoints();
-	int getLevel();
-	int getPositionX();
-	int getPositionY();
+	virtual int getHitPoints() = 0;
+	virtual int getLevel() = 0;
+	virtual int getPositionX() = 0;
+	virtual int getPositionY() = 0;
 
 	//character accessor methods
-	int getAttacksPerRound();
-	string getCharacterType();
-	int* getAbilityScores();
-	int* getAttackBonus();
-	int getDamageBonus();
-	
-protected:
-	int currentHitPoints;
-	Item equipment[MAX_ITEMS_EQUIPPED];
-	const Item emptyItem; //itemholder for equipementSlots
-	int level;
-	int abilityScores[6];
-	//int atkBonus;
-	int attacksPerRound;
-	int experience, gold;
-	int* bonusAttack = new int (1);
-
-private:
-	string characterType;
-	ItemContainer backpack;
-	enum equipmentSlots {Helmet, Armor, Weapon, Shield, Ring, Belt, Boots};
-	int positionX;
-	int positionY;
-	int equippedSize;
-
-
+	virtual int getAttacksPerRound() = 0;
+	virtual string getCharacterType() = 0;
+	virtual int* getAbilityScores() = 0;
+	virtual int* getAttackBonus() = 0;
+	virtual int getDamageBonus() = 0;
 };
+
