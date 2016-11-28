@@ -21,14 +21,15 @@ public:
 	Character(int, int, int, int, int, int);
 
 	//logical game functions
+	void setCharacterType(string type);
 	bool validateNewCharacter();
 	void hit(int);
 	int generateStats();
 	void hpChange();
 	int abilityModifier(int);
 	int armorModifier();
-	virtual int attackBonus();//class to be inherited
-	int damageBonus();
+	//virtual int attackBonus();//class to be inherited
+	void setAttackBonus();
 	void playerInfo(); //displaying character info
 	bool equipItem(Item*);
 	bool equipFromBackpack(int);
@@ -50,35 +51,32 @@ public:
 	int getLevel();
 	int getPositionX();
 	int getPositionY();
+
+	//character accessor methods
+	int getAttacksPerRound();
+	string getCharacterType();
+	int* getAbilityScores();
+	int* getAttackBonus();
+	int getDamageBonus();
 	
 protected:
 	int currentHitPoints;
 	Item equipment[MAX_ITEMS_EQUIPPED];
 	const Item emptyItem; //itemholder for equipementSlots
 	int level;
+	int abilityScores[6];
+	//int atkBonus;
+	int attacksPerRound;
+	int experience, gold;
+	int* bonusAttack = new int (1);
 
 private:
 	string characterType;
-	int abilityScores[6];
 	ItemContainer backpack;
 	enum equipmentSlots {Helmet, Armor, Weapon, Shield, Ring, Belt, Boots};
 	int positionX;
 	int positionY;
 	int equippedSize;
-};
 
-//Fighter class inherited from Character class
-class Fighter: public Character{
-public:
-    const static int FIGHTER_HP=10;
 
-    //Fighter constructors
-    Fighter();
-    Fighter(int, int, int, int, int, int);
-
-    //fighter attack bonus
-    int attackBonus();
-
-private:
-	int abilityScores[6];
 };

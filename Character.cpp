@@ -31,9 +31,15 @@ Character::Character(int str, int dex, int con, int intel, int wis, int cha)
 	currentHitPoints = 10;
 	positionX = 0;
 	positionY = 0;
-	level = 0;
+	level = 1;
+	//atkBonus = 0;
+	attacksPerRound = 1;
+	gold = 0;
+	experience = 0;
+	bonusAttack[0] = 0;
 
 }
+
 
 Character::Character()
 {
@@ -49,6 +55,7 @@ Character::Character()
 	//and set hit points to 10
 	currentHitPoints = 10;
 	equippedSize = 0;
+	
 	notify(); //notifies character observer
 }
 
@@ -60,6 +67,20 @@ bool Character::validateNewCharacter()
 	if (abilityScores[i]<3 || abilityScores[i]>18)
 		return false;
 	return true;
+}
+
+void Character::setCharacterType(string type){
+
+	characterType = type;
+}
+
+string Character::getCharacterType() {
+	return characterType;
+}
+
+int* Character::getAbilityScores() {
+
+	return abilityScores;
 }
 
 //! Implementation of fill cell, set any cell to anything it might eventually contain
@@ -89,8 +110,8 @@ int Character::abilityModifier(int ability)
 //! @param currentHitPoints: sets currentHitPoints according to ability modifier
 void Character::hpChange()
 {
-	if (abilityModifier(3) > 1)
-		currentHitPoints = 10 + (level - 1) * (10 / 2 + 1) + (abilityModifier(3) * 20);
+	if (abilityModifier(2) > 1)
+		currentHitPoints = 10 + (level - 1) * (10 / 2 + 1) + (abilityModifier(2) * 20);
 	else
 		currentHitPoints = 10 + (level - 1) * (10 / 2 + 1);
 	notify();
@@ -102,8 +123,9 @@ void Character::setLevel(int lvl)
 {
 	level = lvl;
 	hpChange();
-	attackBonus();
-	damageBonus();
+	setAttackBonus();
+	getDamageBonus();
+
 	notify();
 }
 
@@ -116,17 +138,45 @@ int Character::armorModifier()
 }
 //! Implementation of damage bonus which depends on strength ability
 //! @return strength ability
-int Character::damageBonus()
+int Character::getDamageBonus()
 {
 	return abilityModifier(0); 
 }
 //! Implementation of attack bonus according to D20 game rules
 //! @return attackBonus according d20 game
-int Character::attackBonus()
+void Character::setAttackBonus()
 {
-		return level + abilityModifier(0) + abilityModifier(1);
 
+	int bonusPerRound = level;
+	if (level % 5 == 1)
+	{
+
+		attacksPerRound++;
+		bonusAttack = new int(attacksPerRound);
+	}
+	
+
+	for (int i = 0; i < attacksPerRound; i++)
+	{
+		if (bonusPerRound > 0)
+		{
+			bonusAttack[i] = bonusPerRound;
+			bonusPerRound -= 5;
+		}
+		
+	}
 }
+
+int* Character::getAttackBonus()
+{
+	return bonusAttack;
+}
+
+int Character::getAttacksPerRound() 
+{
+	return ceil(level / 5.0);
+}
+
 
 //! Implementation of get level
 //! @return level: level f the character
@@ -138,6 +188,11 @@ int Character::getLevel(){
 //! @param level: increase level of character upon level change
 void Character::levelUp(){
 	level++;
+	hpChange();
+	setAttackBonus();
+	getDamageBonus();
+	getAttacksPerRound();
+	notify();
 }
 
 //! Implementation of stats generator
@@ -335,8 +390,21 @@ void Character::playerInfo()
 	cout << "Intelect: " << abilityScores[3] << endl;
 	cout << "Wizdom: " << abilityScores[4] << endl;
 	cout << "Charisma: " << abilityScores[5] << endl;
-	cout << "Damange bonus: " << damageBonus() << endl;
-	cout << "Attack bonus: " << attackBonus() << endl;
+	cout << "Damange bonus: " << getDamageBonus() << endl;
+	cout << "Attack bonus: ";
+	if (attacksPerRound > 1)
+	{
+			for (int i = 0; i < attacksPerRound; i++)
+		{
+				cout << *(bonusAttack + i) << " ; ";
+		}
+			cout  << endl;
+	}
+	else
+		cout << *(bonusAttack + 0) << " ";
+	
+
+	cout << "Attacks per/round: " << getAttacksPerRound() << endl;
 	cout << "-------------------------------\n";
 }
 
@@ -531,42 +599,4 @@ int Character::getPositionX(){
 //! @return positionY: gets position Y of character
 int Character::getPositionY(){
 	return positionY;
-}
-
-
-//! Implementation of Fighter Class, inherited from Character
-//! Default constructor
-Fighter::Fighter() : Character(){
-
-		for (int i = 0; i < TOT_STATS; i++)
-			abilityScores[i] = generateStats();
-		for (int i = 0; i < MAX_ITEMS_EQUIPPED; i++)
-			equipment[i] = emptyItem;
-
-		//and set hit points to 10
-		currentHitPoints = 10;
-		notify();
-}
-
-
-//! Implementation of Fighter Class, inherited from Character
-//! constructor
-Fighter::Fighter(int str, int dex, int con, int intel, int wis, int cha)
-{
-
-	abilityScores[0] = str;
-	abilityScores[1] = dex;
-	abilityScores[2] = con;
-	abilityScores[3] = intel;
-	abilityScores[4] = wis;
-	abilityScores[5] = cha;
-
-	//and set hit points to 10
-	currentHitPoints = 10;
-}
-
-//! Implementation of attackBonus method for Fighter
-//! return attackBonus parameter for fighter character
-int Fighter::attackBonus(){
-	return (level * 2) + abilityModifier(0) + abilityModifier(1);
 }
