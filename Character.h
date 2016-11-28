@@ -7,12 +7,11 @@
 #include "ItemContainer.h"
 
 
-const int MAX_ITEMS_EQUIPPED = 7;
 using namespace std;
 
 
 //! Class that implements a character 
-class Character
+class Character: public Subject
 {
 public:
 	//logical game functions

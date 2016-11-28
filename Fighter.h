@@ -5,6 +5,7 @@
 #include<string>
 #include "Subject.h"
 #include "ItemContainer.h"
+#include "Character.h"
 
 
 const int MAX_ITEMS_EQUIPPED = 7;
@@ -12,7 +13,7 @@ using namespace std;
 
 
 //! Class that implements a character 
-class Fighter : public Subject, Character
+class Fighter : public Character
 {
 public:
 
@@ -62,7 +63,7 @@ protected:
 	int currentHitPoints;
 	Item equipment[MAX_ITEMS_EQUIPPED];
 	const Item emptyItem; //itemholder for equipementSlots
-	int level;
+	int level = 1;
 	int abilityScores[6];
 	//int atkBonus;
 	int attacksPerRound;

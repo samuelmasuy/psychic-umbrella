@@ -29,6 +29,10 @@ int main(int argc, char const* argv[]) {
 	cout << "Dungeons And Dragons Game" << endl;
 
 	Character* character = NULL;
+	CharacterBuilder* nimbleBuilder = NULL;
+	CharacterBuilder* tankBuilder = NULL;
+	CharacterBuilder* bullyBuilder = NULL;
+
 
 	CharacterDirector* cd = new CharacterDirector();
 	/**/
@@ -37,27 +41,31 @@ int main(int argc, char const* argv[]) {
 	cout << "Let's create a character, would you like to play with a nimble[1], a tank[2], or a bully[3]: " << endl;
 	int character_choice = validate_choice(1, 3);
 	switch (character_choice) {
-	case 1:
-    CharacterBuilder* nimbleBuilder = new NimbleBuilder;
-		cd->setCharacterBuilder(nimbleBuilder);
-		cd->constructCharacter();
-		character = cd->getCharacter();
-    delete nimbleBuilder;
-		break;
-	case 2:
-    CharacterBuilder* tankBuilder = new TankBuilder;
-		cd->setCharacterBuilder(tankBuilder);
-		cd->constructCharacter();
-		character = cd->getCharacter();
-    delete tankBuilder;
-		break;
-	case 3:
-    CharacterBuilder* bullyBuilder = new BullyBuilder;
-		cd->setCharacterBuilder(bullyBuilder);
-		cd->constructCharacter();
-		character = cd->getCharacter();
-    delete bullyBuilder;
-		break;
+		case 1:
+		{
+			nimbleBuilder = new NimbleBuilder;
+			cd->setCharacterBuilder(nimbleBuilder);
+			cd->constructCharacter();
+			character = cd->getCharacter();
+			delete nimbleBuilder;
+		}break;
+
+		case 2:
+		{
+			tankBuilder = new TankBuilder;
+			cd->setCharacterBuilder(tankBuilder);
+			cd->constructCharacter();
+			character = cd->getCharacter();
+			delete tankBuilder;
+		}break;
+		case 3:
+		{
+			bullyBuilder = new BullyBuilder;
+			cd->setCharacterBuilder(bullyBuilder);
+			cd->constructCharacter();
+			character = cd->getCharacter();
+			delete bullyBuilder;
+		}break;
 	}
   delete cd;
 
