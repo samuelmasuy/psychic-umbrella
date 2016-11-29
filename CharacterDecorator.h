@@ -23,9 +23,6 @@ class CharacterDecorator : public Character {
    */
   CharacterDecorator(Character *decoratedCharacter) {
     this->decoratedCharacter = decoratedCharacter;
-    if (this->decoratedCharacter->getEquippedItems() == nullptr) {
-      equipedItems = map<string,*Character>();
-    }
   }
   virtual ~CharacterDecorator() {
   }
@@ -155,7 +152,7 @@ class CharacterDecorator : public Character {
   }
   void setStrenght(int str)
   {
-	  decoratedCharacter->setStrenght(str);
+	  decoratedCharacter->setStrength(str);
   }
   void setDexterity(int dex)
   {
@@ -178,33 +175,32 @@ class CharacterDecorator : public Character {
 	  decoratedCharacter->setCharisma(cha);
   }
 
-  int getStrenght()
+  int getStrength()
   {
-	  decoratedCharacter->getStrenght();
+	  return decoratedCharacter->getStrength();
   }
   int getDexterity()
   {
-	  decoratedCharacter->getDexterity();
+	  return decoratedCharacter->getDexterity();
   }
   int getConstitution()
   {
-	  decoratedCharacter->getConstitution();
+	  return decoratedCharacter->getConstitution();
   }
   int getIntelligence()
   {
-	  decoratedCharacter->getIntelligence();
+	  return decoratedCharacter->getIntelligence();
   }
   int getWisdom()
   {
-	  decoratedCharacter->getWisdom();
+	  return  decoratedCharacter->getWisdom();
   }
   int getCharisma()
   {
-	  decoratedCharacter->getCharisma();
+	  return decoratedCharacter->getCharisma();
   }
 
  protected:
   Character *decoratedCharacter;
   map<string, Character*> equipedItems;
-  // string type;
 };

@@ -8,27 +8,31 @@
 
 using namespace std;
 
-ItemDecorator::ItemDecorator(Character *decoratedCharacter, Item* item) : CharacterDecorator(decoratedCharacter) {
-    type = item->getInfluences().at(0).getType();
+ItemDecorator::ItemDecorator(CharacterDecorator * decoratedCharacter, Item * item) : CharacterDecorator(decoratedCharacter)
+{
+	string type = item->getInfluences().at(0).getType();
 
-    if (type.compare("intelligence" == 0)) {
-      intelligence = item->getInfluences().at(0).getBonus();
-    } else if (type.compare("wisdom" == 0)) {
-      wisdom = item->getInfluences().at(0).getBonus();
-    } else if (type.compare("armor" == 0)) {
-      armor = item->getInfluences().at(0).getBonus();
-    } else if (type.compare("strength" == 0)) {
-      strength = item->getInfluences().at(0).getBonus();
-    } else if (type.compare("constitution" == 0)) {
-      constitution = item->getInfluences().at(0).getBonus();
-    } else if (type.compare("wisdom" == 0)) {
-      wisdom = item->getInfluences().at(0).getBonus();
-    } else if (type.compare("charisma" == 0)) {
-      charisma = item->getInfluences().at(0).getBonus();
-    }
-    map<string, *Character> equip = decoratedCharacter->getEquippedItems();
-    equip[type] = decoratedCharacter;
-    character->setEquippedItems(equip);
+	if (type == "intelligence") {
+		intelligence = item->getInfluences().at(0).getBonus();
+	}
+	else if (type == "wisdom") {
+		wisdom = item->getInfluences().at(0).getBonus();
+	}
+	else if (type == "strength") {
+		strength = item->getInfluences().at(0).getBonus();
+	}
+	else if (type == "constitution") {
+		constitution = item->getInfluences().at(0).getBonus();
+	}
+	else if (type == "dexterity") {
+		dexterity = item->getInfluences().at(0).getBonus();
+	}
+	else if (type == "charisma") {
+		charisma = item->getInfluences().at(0).getBonus();
+	}
+	map<string, Character*> equip = decoratedCharacter->getEquippedItems();
+	equip[type] = decoratedCharacter;
+	decoratedCharacter->setEquippedItems(equip);
 }
 
 int ItemDecorator::getIntelligence() {
@@ -37,20 +41,17 @@ int ItemDecorator::getIntelligence() {
 int ItemDecorator::getWisdom() {
   return CharacterDecorator::getWisdom() + wisdom;
 }
-int ItemDecorator::getArmor() {
-  return CharacterDecorator::getArmor() + armor;
-}
 int ItemDecorator::getStrength() {
   return CharacterDecorator::getStrength() + strength;
 }
 int ItemDecorator::getConstitution() {
   return CharacterDecorator::getConstitution() + constitution;
 }
-int ItemDecorator::getWisdom() {
-  return CharacterDecorator::getWisdom() + wisdom;
-}
 int ItemDecorator::getCharisma() {
   return CharacterDecorator::getCharisma() + charisma;
+}
+int ItemDecorator::getDexterity() {
+	return CharacterDecorator::getDexterity() + dexterity;
 }
 
 // nimble = new Helmet(nimble)

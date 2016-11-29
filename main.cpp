@@ -17,6 +17,7 @@
 #include "CharacterDirector.h"
 #include "TankBuilder.h"
 #include "BullyBuilder.h"
+#include "ItemDecorator.h"
 
 using namespace std;
 
@@ -99,7 +100,7 @@ int main(int argc, char const* argv[]) {
 	cout << "Would you like your character to be equiped with this item? ('y'/'n'): ";
 	cin >> choice;
 	if (choice == 'y') {
-		character->equipItem(item);
+		character = new ItemDecorator(character, item);
 	}
 	delete id;
 

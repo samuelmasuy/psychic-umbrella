@@ -11,9 +11,9 @@ using namespace std;
 
 void CharacterDecorator::unequip(string removeType) {
   if (decoratedCharacter->getEquippedItems()[removeType] != nullptr) {
-      map<string, Character*> str = character->getEquippedItems();
+      map<string, Character*> str = decoratedCharacter->getEquippedItems();
       str.erase(removeType);
-      character->setEquippedItems(str);
+      decoratedCharacter->setEquippedItems(str);
   }
 }
 

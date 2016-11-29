@@ -41,7 +41,7 @@ Fighter::Fighter(int str, int dex, int con, int intel, int wis, int cha)
 }
 
 
-void Fighter::setStrenght(int str)
+void Fighter::setStrength(int str)
 {
 	abilityScores[0] = str;
 }
@@ -66,7 +66,7 @@ void Fighter::setCharisma(int cha)
 	abilityScores[5] = cha;
 }
 
-int Fighter::getStrenght()
+int Fighter::getStrength()
 {
 	return abilityScores[0];
 }
@@ -659,5 +659,6 @@ void Fighter::setEquippedItems(map<string, Character*> m) {
   throw "Cannot set equiped items";
 }
 map<string, Character*> Fighter::getEquippedItems() {
-  return map<string,*Character>();
+  map<string, Character*> empty;
+  return empty;
 }

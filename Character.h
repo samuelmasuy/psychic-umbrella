@@ -38,7 +38,7 @@ public:
 	virtual void setLevel(int) = 0;
 	virtual void setPositionX(int) = 0;
 	virtual void setPositionY(int) = 0;
-	virtual void setStrenght(int) = 0;
+	virtual void setStrength(int) = 0;
 	virtual void setDexterity(int) = 0;
 	virtual void setConstitution(int) = 0;
 	virtual void setIntelligence(int) = 0;
@@ -46,7 +46,7 @@ public:
 	virtual void setCharisma(int) = 0;
 
 	//game accessor methods
-	virtual int getStrenght() = 0;
+	virtual int getStrength() = 0;
 	virtual int getDexterity() = 0;
 	virtual int getConstitution() = 0;
 	virtual int getIntelligence() = 0;

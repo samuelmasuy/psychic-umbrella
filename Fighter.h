@@ -47,7 +47,7 @@ public:
 	void setLevel(int);
 	void setPositionX(int);
 	void setPositionY(int);
-	void setStrenght(int);
+	void setStrength(int);
 	void setDexterity(int);
 	void setConstitution(int);
 	void setIntelligence(int);
@@ -61,7 +61,7 @@ public:
 	int getPositionY();
 
 	//character accessor methods
-	int getStrenght();
+	int getStrength();
 	int getDexterity();
 	int getConstitution();
 	int getIntelligence();
