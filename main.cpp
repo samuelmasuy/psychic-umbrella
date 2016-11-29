@@ -69,6 +69,7 @@ int main(int argc, char const* argv[]) {
 	}
   delete cd;
 
+ 
 	cout << endl << "Do you want to load your character from a file?";
 	cin >> choice;
 	if (choice == 'y') {

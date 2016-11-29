@@ -171,7 +171,6 @@ void Item::printItem(){
 	for (int i = 0; i < influence.size(); i++){
 		cout << " {" << influence[i].getType() << " +" << influence[i].getBonus() << "}";
 	}
-
 }
 
 void Item::editItem(){

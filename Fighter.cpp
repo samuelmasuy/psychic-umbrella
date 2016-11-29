@@ -41,6 +41,56 @@ Fighter::Fighter(int str, int dex, int con, int intel, int wis, int cha)
 }
 
 
+void Fighter::setStrenght(int str)
+{
+	abilityScores[0] = str;
+}
+void Fighter::setDexterity(int dex)
+{
+	abilityScores[1] = dex;
+}
+void Fighter::setConstitution(int con)
+{
+	abilityScores[2] = con;
+}
+void Fighter::setIntelligence(int intel)
+{
+	abilityScores[3] = intel;
+}
+void Fighter::setWisdom(int wis)
+{
+	abilityScores[4] = wis;
+}
+void Fighter::setCharisma(int cha)
+{
+	abilityScores[5] = cha;
+}
+
+int Fighter::getStrenght()
+{
+	return abilityScores[0];
+}
+int Fighter::getDexterity()
+{
+	return abilityScores[1];
+}
+int Fighter::getConstitution()
+{
+	return abilityScores[2];
+}
+int Fighter::getIntelligence()
+{
+	return abilityScores[3];
+}
+int Fighter::getWisdom()
+{
+	return abilityScores[4];
+}
+int Fighter::getCharisma()
+{
+	return abilityScores[5];
+}
+
 Fighter::Fighter()
 {
 	characterType = "fighter";
@@ -419,7 +469,9 @@ bool Fighter::equipItem(Item* item)
 
 	if (type == "helmet")
 	{
+		//this = new CharacterDecorator(this, item)
 		equipment[Helmet] = *item;
+
 	}
 	else if (type == "armor")
 	{

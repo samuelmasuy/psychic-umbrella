@@ -46,6 +46,12 @@ public:
 	void setLevel(int);
 	void setPositionX(int);
 	void setPositionY(int);
+	void setStrenght(int);
+	void setDexterity(int);
+	void setConstitution(int);
+	void setIntelligence(int);
+	void setWisdom(int);
+	void setCharisma(int);
 
 	//game accessor methods
 	int getHitPoints();
@@ -54,6 +60,12 @@ public:
 	int getPositionY();
 
 	//character accessor methods
+	int getStrenght();
+	int getDexterity();
+	int getConstitution();
+	int getIntelligence();
+	int getWisdom();
+	int getCharisma();
 	int getAttacksPerRound();
 	string getCharacterType();
 	int* getAbilityScores();

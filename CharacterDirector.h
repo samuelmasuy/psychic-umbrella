@@ -1,11 +1,4 @@
 #pragma once
-/*
- * CharacterDirector.h
- *
- *  Created on: Nov 21, 2016
- *      Author: ahmad
- */
-
 #include "CharacterBuilder.h"
 #include <iostream>
 
