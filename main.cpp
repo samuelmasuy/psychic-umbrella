@@ -30,13 +30,14 @@ int main(int argc, char const* argv[]) {
 	cout << "Dungeons And Dragons Game" << endl;
 
 	Character* character = NULL;
+	//Character* monster = NULL;
 	CharacterBuilder* nimbleBuilder = NULL;
 	CharacterBuilder* tankBuilder = NULL;
 	CharacterBuilder* bullyBuilder = NULL;
 
 
 	CharacterDirector* cd = new CharacterDirector();
-	/**/
+
 	char choice;
 
 	cout << "Let's create a character, would you like to play with a nimble[1], a tank[2], or a bully[3]: " << endl;
@@ -190,6 +191,7 @@ string get_filename() {
 		}
 		cout << "Invalid filename." << endl;
 	}
+
 }
 
 bool has_ending(string const &str, string const &ending) {

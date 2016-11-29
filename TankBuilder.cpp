@@ -15,6 +15,7 @@ TankBuilder::~TankBuilder()
 void TankBuilder::buildAbilityMods()
 {
 	int* newAbilityScores;
+	int tankHP;
 	newAbilityScores = myCharacter->getAbilityScores();
 
 	int oldAbilityScores[6]={};
@@ -44,6 +45,7 @@ void TankBuilder::buildAbilityMods()
 	newAbilityScores[3] = oldAbilityScores[3];
 	newAbilityScores[4] = oldAbilityScores[5];
 	newAbilityScores[5] = oldAbilityScores[4];
+	myCharacter->hpChange();
 
 }
 void TankBuilder::buildType()

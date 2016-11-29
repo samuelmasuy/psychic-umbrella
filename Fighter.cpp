@@ -26,13 +26,13 @@ Fighter::Fighter(int str, int dex, int con, int intel, int wis, int cha)
 	abilityScores[4] = wis;
 	abilityScores[5] = cha;
 
+
 	//and set hit points to 10
 	equippedSize = 0;
-	currentHitPoints = 10;
+	currentHitPoints = 10 + abilityModifier(2);
 	positionX = 0;
 	positionY = 0;
 	level = 1;
-	//atkBonus = 0;
 	attacksPerRound = 1;
 	gold = 0;
 	experience = 0;
@@ -103,7 +103,9 @@ Fighter::Fighter()
 		equipment[i] = emptyItem;
 
 	//and set hit points to 10
-	currentHitPoints = 10;
+	currentHitPoints = 10 + abilityModifier(2);
+	level = 1;
+	attacksPerRound = 1;
 	equippedSize = 0;
 
 	notify(); //notifies Fighter observer
@@ -274,6 +276,8 @@ int Fighter::generateStats()
 		total += diceTurns[i];
 	}
 	total -= lowest;
+
+	level = 1;
 
 	return total;
 }
