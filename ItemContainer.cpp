@@ -76,6 +76,19 @@ void ItemContainer::removeItem(int index){
 
 }
 
+void ItemContainer::removeItem(string itemType){
+
+	for (int i = 0; i < items.size(); i++)
+	{
+		if (items[i].getType() == itemType) {
+      items.erase(items.begin() + i);
+      size--;
+      break;
+    }
+	}
+  throw "Item type not found";
+}
+
 void ItemContainer::printBackpack()
 {
 	if (items.size() > 0)

@@ -2,13 +2,12 @@
 //! @brief Header file for the Character class  
 //!
 #pragma once
-#include<string>
+#include <string>
+#include <map>
 #include "Subject.h"
 #include "ItemContainer.h"
 
-
 using namespace std;
-
 
 //! Class that implements a character 
 class Character: public Subject
@@ -64,5 +63,10 @@ public:
 	virtual int* getAbilityScores() = 0;
 	virtual int* getAttackBonus() = 0;
 	virtual int getDamageBonus() = 0;
+
+  //character decorator
+  virtual void unequip(string) = 0;
+  virtual void setEquippedItems(map<string, Character*>) = 0;
+  virtual map<string, Character*> getEquippedItems() = 0;
 };
 

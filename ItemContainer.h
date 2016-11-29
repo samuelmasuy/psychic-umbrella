@@ -23,6 +23,7 @@ public:
 	//added
 	int getSize();
 	void removeItem(int);
+	void removeItem(string);
 	int getItemIndex(string);
 	void printBackpack();
 

@@ -23,6 +23,9 @@ class CharacterDecorator : public Character {
    */
   CharacterDecorator(Character *decoratedCharacter) {
     this->decoratedCharacter = decoratedCharacter;
+    if (this->decoratedCharacter->getEquippedItems() == nullptr) {
+      equipedItems = map<string,*Character>();
+    }
   }
   virtual ~CharacterDecorator() {
   }
@@ -36,7 +39,6 @@ class CharacterDecorator : public Character {
   void unequip(string);
   void setEquippedItems(map<string, Character*>);
   map<string, Character*> getEquippedItems();
-  int getBonus(string);
   // Character* remove(string);
   // bool isTypeExist(string);
 
@@ -200,9 +202,6 @@ class CharacterDecorator : public Character {
   {
 	  decoratedCharacter->getCharisma();
   }
-
-
-
 
  protected:
   Character *decoratedCharacter;

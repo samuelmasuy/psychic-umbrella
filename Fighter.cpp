@@ -650,3 +650,14 @@ int Fighter::getPositionX(){
 int Fighter::getPositionY(){
 	return positionY;
 }
+
+// decorator
+void Fighter::unequip(string t) {
+  throw "Item not found";
+}
+void Fighter::setEquippedItems(map<string, Character*> m) {
+  throw "Cannot set equiped items";
+}
+map<string, Character*> Fighter::getEquippedItems() {
+  return map<string,*Character>();
+}

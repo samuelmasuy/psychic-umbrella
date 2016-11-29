@@ -2,7 +2,8 @@
 //! @brief Header file for the Character class  
 //!
 #pragma once
-#include<string>
+#include <string>
+#include <map>
 #include "Subject.h"
 #include "ItemContainer.h"
 #include "Character.h"
@@ -71,6 +72,11 @@ public:
 	int* getAbilityScores();
 	int* getAttackBonus();
 	int getDamageBonus();
+
+  //decorator
+  void unequip(string);
+  void setEquippedItems(map<string, Character*>);
+  map<string, Character*> getEquippedItems();
 protected:
 	int currentHitPoints;
 	Item equipment[MAX_ITEMS_EQUIPPED];
