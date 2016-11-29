@@ -79,11 +79,24 @@ class CharacterDecorator : public Character {
 	  decoratedCharacter->playerInfo();
   }
 
-  //virtual bool equipFromBackpack(int) = 0;
- // virtual bool unequipItem(string) = 0;
-  //virtual void printBackPackItems() = 0;
-  //virtual void addToBackpack(Item) = 0;
-  //virtual void printEquippedItems() = 0;
+  bool equipFromBackpack(int i) {
+	  return decoratedCharacter->equipFromBackpack(i);
+  }
+  bool unequipItem(string s) {
+	  return decoratedCharacter->unequipItem(s);
+  }
+  bool equipItem(Item* i) {
+	  return decoratedCharacter->equipItem(i);
+  }
+  void printBackPackItems() {
+	  decoratedCharacter->printBackPackItems();
+  }
+  void addToBackpack(Item i) {
+	  decoratedCharacter->addToBackpack(i);
+  }
+  void printEquippedItems() {
+	  decoratedCharacter->printEquippedItems();
+  }
   void levelUp()
   {
 	  decoratedCharacter->levelUp();
@@ -150,7 +163,7 @@ class CharacterDecorator : public Character {
   {
 	  return decoratedCharacter->getDamageBonus();
   }
-  void setStrenght(int str)
+  void setStrength(int str)
   {
 	  decoratedCharacter->setStrength(str);
   }

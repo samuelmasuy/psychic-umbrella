@@ -15,7 +15,7 @@
 
 class ItemDecorator: public CharacterDecorator {
   public:
-    ItemDecorator(CharacterDecorator *decoratedCharacter, Item *item);
+    ItemDecorator(Character *decoratedCharacter, Item *item);
     int getIntelligence();
     int getWisdom();
     int getStrength();

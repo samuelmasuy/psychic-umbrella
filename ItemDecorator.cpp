@@ -8,7 +8,7 @@
 
 using namespace std;
 
-ItemDecorator::ItemDecorator(CharacterDecorator * decoratedCharacter, Item * item) : CharacterDecorator(decoratedCharacter)
+ItemDecorator::ItemDecorator(Character * decoratedCharacter, Item * item) : CharacterDecorator(decoratedCharacter)
 {
 	string type = item->getInfluences().at(0).getType();
 
