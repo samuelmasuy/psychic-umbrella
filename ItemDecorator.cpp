@@ -32,7 +32,7 @@ ItemDecorator::ItemDecorator(Character * decoratedCharacter, Item * item) : Char
 	}
 	map<string, Character*> equip = decoratedCharacter->getEquippedItems();
 	equip[type] = decoratedCharacter;
-	decoratedCharacter->setEquippedItems(equip);
+	setEquippedItems(equip);
 }
 
 int ItemDecorator::getIntelligence() {
