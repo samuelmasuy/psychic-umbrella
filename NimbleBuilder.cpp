@@ -41,7 +41,7 @@ void NimbleBuilder::buildAbilityMods()
 	newAbilityScores[3] = oldAbilityScores[3];
 	newAbilityScores[4] = oldAbilityScores[5];
 	newAbilityScores[5] = oldAbilityScores[4];
-
+	myCharacter->hpChange();
 
 }
 void NimbleBuilder::buildType()
