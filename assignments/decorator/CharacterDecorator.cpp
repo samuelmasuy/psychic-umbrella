@@ -19,6 +19,28 @@ Character* CharacterDecorator::remove(string removeType) {
   return decoratedCharacter->remove(removeType);
 }
 
+
+class CharacterDecorator : public Character {
+   public:
+        CharacterDecorator(Character*);
+        ~CharacterDecorator();
+        void remove(string);
+        map<string, Character*> getEquippedItems();
+        void setEquippedItems(map<string, Character*>);
+        string getEnchantment();
+    protected:
+        Character* character;
+};
+void CharacterDecorator::remove(string type)
+{
+        if (character->getEquippedItems()[type] != nullptr)
+        {
+                map<string, Character*> str = character->getEquippedItems();
+                str.erase(type);
+                character->setEquippedItems(str);
+        }
+}
+
 bool CharacterDecorator::isTypeExist(string compareType) {
   if(compareType.compare(type) == 0) {
     return true;
