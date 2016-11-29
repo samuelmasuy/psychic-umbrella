@@ -101,7 +101,10 @@ int main(int argc, char const* argv[]) {
 	cout << "Would you like your character to be equiped with this item? ('y'/'n'): ";
 	cin >> choice;
 	if (choice == 'y') {
+		character->playerInfo();
 		character = new ItemDecorator(character, item);
+		character->printEquippedItems();
+		character->playerInfo();
 	}
 	delete id;
 

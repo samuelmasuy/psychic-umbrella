@@ -6,6 +6,7 @@
  */
 #pragma once
 
+#include <iostream>
 #include <string>
 #include "Character.h"
 #include "map"
@@ -36,6 +37,7 @@ class CharacterDecorator : public Character {
   void unequip(string);
   void setEquippedItems(map<string, Character*>);
   map<string, Character*> getEquippedItems();
+  void printEquippedItems();
   // Character* remove(string);
   // bool isTypeExist(string);
 
@@ -94,9 +96,7 @@ class CharacterDecorator : public Character {
   void addToBackpack(Item i) {
 	  decoratedCharacter->addToBackpack(i);
   }
-  void printEquippedItems() {
-	  decoratedCharacter->printEquippedItems();
-  }
+
   void levelUp()
   {
 	  decoratedCharacter->levelUp();

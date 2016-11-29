@@ -25,6 +25,12 @@ map<string, Character*> CharacterDecorator::getEquippedItems() {
   return equipedItems;
 }
 
+void CharacterDecorator::printEquippedItems() {
+	for (map<string, Character*>::iterator it = equipedItems.begin(); it != equipedItems.end(); ++it) {
+		cout << it->first << "\n";
+	}
+}
+
 //TODO: make sure to put those methods in abstract character
 //TODO: implement getBonus(string) in CharacterDecorator.h
 
