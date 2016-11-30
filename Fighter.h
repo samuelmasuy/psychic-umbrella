@@ -61,12 +61,12 @@ public:
 	int getPositionY();
 
 	//character accessor methods
-	int getStrength();
-	int getDexterity();
-	int getConstitution();
-	int getIntelligence();
-	int getWisdom();
-	int getCharisma();
+	virtual int getStrength();
+	virtual int getDexterity();
+	virtual int getConstitution();
+	virtual int getIntelligence();
+	virtual int getWisdom();
+	virtual int getCharisma();
 	int getAttacksPerRound();
 	string getCharacterType();
 	int* getAbilityScores();

@@ -37,6 +37,7 @@ class ItemDecorator: public CharacterDecorator {
   int getConstitution();
   int getCharisma();
   int getDexterity();
+  void playerInfo();
  private:
   int intelligence;
   int wisdom;

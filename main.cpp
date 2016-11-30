@@ -17,6 +17,7 @@
 #include "CharacterDirector.h"
 #include "TankBuilder.h"
 #include "BullyBuilder.h"
+#include "CharacterDecorator.h"
 #include "ItemDecorator.h"
 
 using namespace std;
@@ -83,7 +84,7 @@ int main(int argc, char const* argv[]) {
 	id->setItemBuilder(new RingBuilder());
 	id->makeItem();
 	Item* item = id->getItem();
-	id->setItemBuilder(new RingBuilder());
+	id->setItemBuilder(new BeltBuilder());
 	id->makeItem();
 	Item* item2 = id->getItem();
 	cout << "Here is a new Item: " << endl;
@@ -105,10 +106,10 @@ int main(int argc, char const* argv[]) {
 	cout << "Would you like your character to be equiped with this item? ('y'/'n'): ";
 	cin >> choice;
 	if (choice == 'y') {
-		character->playerInfo();
-		character = new ItemDecorator(new ItemDecorator(character, item),item2);
+		character = new ItemDecorator(character, item);
+		character = new ItemDecorator(character, item2);
+		cout << endl << "Equiped Items::" << endl;
 		character->printEquippedItems();
-		//character->playerInfo();
 	}
 	delete id;
 
