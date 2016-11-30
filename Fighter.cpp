@@ -438,12 +438,12 @@ void Fighter::playerInfo()
 	cout << "Level: " << level << endl;
 	cout << "Total HP: " << currentHitPoints << endl;
 	cout << "Total armor: " << armorModifier() << endl;
-	cout << "Strenght: " << abilityScores[0] << endl;
-	cout << "Dexterity: " << abilityScores[1] << endl;
-	cout << "Constituion: " << abilityScores[2] << endl;
-	cout << "Intelect: " << abilityScores[3] << endl;
-	cout << "Wizdom: " << abilityScores[4] << endl;
-	cout << "Charisma: " << abilityScores[5] << endl;
+	cout << "Strenght: " << getStrength() << endl;
+	cout << "Dexterity: " << getDexterity() << endl;
+	cout << "Constituion: " << getConstitution() << endl;
+	cout << "Intelect: " << getIntelligence() << endl;
+	cout << "Wizdom: " << getWisdom() << endl;
+	cout << "Charisma: " << getCharisma() << endl;
 	cout << "Damange bonus: " << getDamageBonus() << endl;
 	cout << "Attack bonus: ";
 	if (attacksPerRound > 1)

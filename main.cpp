@@ -80,11 +80,15 @@ int main(int argc, char const* argv[]) {
 
 	// create items
 	ItemDirector* id = new ItemDirector();
-	id->setItemBuilder(new RandomBuilder());
+	id->setItemBuilder(new RingBuilder());
 	id->makeItem();
 	Item* item = id->getItem();
+	id->setItemBuilder(new RingBuilder());
+	id->makeItem();
+	Item* item2 = id->getItem();
 	cout << "Here is a new Item: " << endl;
 	item->printItem();
+	item2->printItem();
 	cout << endl;
 
 	cout << "Would you like to edit this item? ('y'/'n'): ";
@@ -102,9 +106,9 @@ int main(int argc, char const* argv[]) {
 	cin >> choice;
 	if (choice == 'y') {
 		character->playerInfo();
-		character = new ItemDecorator(character, item);
+		character = new ItemDecorator(new ItemDecorator(character, item),item2);
 		character->printEquippedItems();
-		character->playerInfo();
+		//character->playerInfo();
 	}
 	delete id;
 

@@ -65,7 +65,6 @@ class CharacterDecorator : public Character {
   void playerInfo() {
     decoratedCharacter->playerInfo();
   }
-
   bool equipFromBackpack(int i) {
     return decoratedCharacter->equipFromBackpack(i);
   }
