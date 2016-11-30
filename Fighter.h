@@ -53,6 +53,7 @@ public:
 	void setWisdom(int);
 	void setCharisma(int);
 	void setArmor();
+	void setHitPoints(int);
 
 	//game accessor methods
 	int getHitPoints();

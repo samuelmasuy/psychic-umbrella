@@ -151,6 +151,11 @@ int Fighter::getHitPoints()
 	return currentHitPoints;
 }
 
+void Fighter::setHitPoints(int hp)
+{
+	currentHitPoints = hp;
+}
+
 //! Implementation of ability modifier method.
 //! @return int: value of modified ability score entered
 int Fighter::abilityModifier(int ability)

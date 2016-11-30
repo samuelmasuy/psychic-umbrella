@@ -179,6 +179,11 @@ class CharacterDecorator : public Character {
   void combat(Character* m){
 	  decoratedCharacter->combat(m);
   }
+
+  void setHitPoints(int hp)
+  {
+	  decoratedCharacter->setHitPoints(hp);
+  }
  protected:
   Character *decoratedCharacter;
   map<string, Character*> equipedItems;

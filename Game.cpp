@@ -83,6 +83,11 @@ void Game::play() {
 				saveCharacter();
 				_map->print();
 				break;
+			case 'l':
+				system("cls");
+				loadCharacter();
+				_map->print();
+				break;
 			case 'b':
 				system("cls");
 				cout << "Here are the items on the backpack" << endl;
@@ -120,15 +125,11 @@ void Game::saveCharacter(){
 	string saveFile;
 	map<string, Character*> equipedItems;
 	equipedItems = character->getEquippedItems();
-	//cout << character->getEquippedItems()
 
-	for (map<string, Character*>::iterator it = equipedItems.begin(); it != equipedItems.end(); ++it) {
-		cout << it->first  <<"\n";
-		it->second->printEquippedItems();
-	}
+	
 	cout << "Enter name of file being saved: ";
 	cin >> saveFile;
-
+	
 
 
 	ofstream ofs(saveFile);
@@ -144,9 +145,13 @@ void Game::saveCharacter(){
 	ofs << character->getCharisma() << endl;
 	//	for (int i = 0; i < 6; i++)
 	//		ofs << abilityScores[i] << endl;
-	ofs << character->armorModifier() << endl;
-	ofs << character->getDamageBonus() << endl;
+	//ofs << character->armorModifier() << endl;
+	//ofs << character->getDamageBonus() << endl;
 
+	ofs << equipedItems.size() << endl;
+	for (map<string, Character*>::iterator it = equipedItems.begin(); it != equipedItems.end(); ++it) {
+		ofs << it->first << "\n";
+	}
 	/*
 	ofs << equippedSize << endl;
 	for (int i = 0; i < MAX_ITEMS_EQUIPPED; i++)
@@ -188,6 +193,116 @@ void Game::saveCharacter(){
 
 void Game::loadCharacter()
 {
+	string loadFile;
+	string Validation;
+	string type;
+	string characterType;
+	string items;
+	int currentHitPoints;
+	int level;
+	int str;
+	int dex;
+	int con;
+	int intel;
+	int wis;
+	int cha;
+	bool chooseFileName = false;
+	int backpackSize;
+	int bonus;
+	int size;
+	int influenceSize;
+	int equippedSize;
+	map<string, Character*> equipedItems;
+
+
+	cout << "Load File: ";
+	cin >> loadFile;
+
+	ifstream ifs(loadFile);
+	do {
+		while (!ifs.good()) {
+			cout << "File does not exist, try again: ";
+			cin >> loadFile;
+			ifs.open(loadFile);
+		}
+		ifs >> Validation;
+		if (Validation == "CharFile")//check if it is an item save file
+			chooseFileName = true;
+		else {
+			ifs.close();
+			chooseFileName = false;
+			cout << "Incorrect File Loaded, select another File: " << endl;
+			cin >> loadFile;
+			ifs.open(loadFile);
+		}
+	} while (chooseFileName == false);
+
+	ifs >> characterType;
+	character->setCharacterType(characterType);
+	ifs >> level;
+//	for (int i = 0; i < level; i++)
+//	{
+	character->setLevel(level);
+//	}
+	ifs >> currentHitPoints;
+	character->setHitPoints(currentHitPoints);
+	
+	ifs >> str;
+	character->setStrength(str);
+	ifs >> dex;
+	character->setDexterity(dex);
+	ifs >> con;
+	character->setConstitution(con);
+	ifs >> intel;
+	character->setIntelligence(intel);
+	ifs >> wis;
+	character->setWisdom(wis);
+	ifs >> cha;
+	character->setCharisma(cha);
+	//ifs >> damange;
+	//character->set
+	//ifs >> armor;
+	//ifs >> 
+	ifs >> equippedSize;
+	if (equippedSize > 0)
+	{
+		for (int i = 0; i < equippedSize; i++)			//save equipped items
+		{
+			//ifs >> items;
+			//equipedItems.insert(items);
+		}
+
+	}
+	
+	/*ifs >> backpackSize;
+	if (backpackSize != 0)
+	{
+		Item* myItem;
+		Enhancement  *myEnhacements;
+
+
+		for (int i = 0; i < backpackSize; i++)		//save inventory/backpack
+		{
+			ifs >> type;
+			myItem = new Item();
+			myItem->setType(type);
+			ifs >> influenceSize;
+			for (int j = 0; j < influenceSize; j++)
+			{
+				ifs >> type;
+				ifs >> bonus;
+				myEnhacements = new Enhancement(type, bonus);
+				myItem->setInfluences(*myEnhacements);
+				backpack.addItem(*myItem);
+				delete myItem;
+				delete myEnhacements;
+				//backpack.getItems()[i].getInfluences()[j].setEnhacement(type, bonus);
+			}
+
+		}
+	}
+*/
+	ifs.close();
 
 }
 
@@ -343,6 +458,7 @@ void Game::printGameUsage() {
 	cout << "Use u to unequip an item from the character." << endl;
 	cout << "Use e to change the level of the character." << endl;
 	cout << "Use x to save your character." << endl;
+	cout << "Use l to load a character from file" << endl;
 	cout << "Use b to equip your character with an item in the backpack." << endl;
 	cout << "Use h to display this help menu." << endl;
 }
