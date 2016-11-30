@@ -13,20 +13,35 @@
 #include "ItemException.h"
 #include "Item.h"
 
+/**
+ * @brief Make the Character wear an Item, it is a subclass of
+ * CharacterDecorator.
+ */
 class ItemDecorator: public CharacterDecorator {
-  public:
-    ItemDecorator(Character *decoratedCharacter, Item *item);
-    int getIntelligence();
-    int getWisdom();
-    int getStrength();
-    int getConstitution();
-    int getCharisma();
-	int getDexterity();
-private:
-	int intelligence;
-	int wisdom;
-	int strength;
-	int constitution;
-	int charisma;
-	int dexterity;
+ public:
+  /**
+   * @brief  When creating a decorated Character, pass a Character to be decorated
+   * as a parameter and an item. Note that this can be an already-decorated Character.
+   *
+   * @param decoratedCharacter the (decorated) Character.
+   * @param item the item that the Character should wear.
+   */
+  ItemDecorator(Character *decoratedCharacter, Item *item);
+  /**
+  * Overriding methods defined in the abstract superclass.
+  * Enables to provide different behavior for decorated Character methods.
+  */
+  int getIntelligence();
+  int getWisdom();
+  int getStrength();
+  int getConstitution();
+  int getCharisma();
+  int getDexterity();
+ private:
+  int intelligence;
+  int wisdom;
+  int strength;
+  int constitution;
+  int charisma;
+  int dexterity;
 };

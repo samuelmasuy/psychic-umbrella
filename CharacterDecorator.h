@@ -31,186 +31,143 @@ class CharacterDecorator : public Character {
   * Provides the wrapper with the Character interface and delegates
   * its methods to the wrapped Character object.
   */
-  // int getStrength() {
-  //   return decoratedCharacter->getStrength();
-  // }
   void unequip(string);
   void setEquippedItems(map<string, Character*>);
   map<string, Character*> getEquippedItems();
   void printEquippedItems();
-  // Character* remove(string);
-  // bool isTypeExist(string);
-
 
   //logical game functions
-   void setCharacterType(string type)
-  {
-	   decoratedCharacter->setCharacterType(type);
+  void setCharacterType(string type) {
+    decoratedCharacter->setCharacterType(type);
   }
-   bool validateNewCharacter()
-   {
-	  return decoratedCharacter->validateNewCharacter();
-   }
-   void hit(int dmg)
-   {
-	   decoratedCharacter->hit(dmg);
-   }
-   int generateStats()
-   {
-	   return decoratedCharacter->generateStats();
-   }
-   void hpChange()
-   {
-	   decoratedCharacter->hpChange();
-   }
-   int abilityModifier(int ability)
-   {
-	   return decoratedCharacter->abilityModifier(ability);
+  bool validateNewCharacter() {
+    return decoratedCharacter->validateNewCharacter();
   }
-  int armorModifier()
-   {
-	  return decoratedCharacter->armorModifier();
+  void hit(int dmg) {
+    decoratedCharacter->hit(dmg);
+  }
+  int generateStats() {
+    return decoratedCharacter->generateStats();
+  }
+  void hpChange() {
+    decoratedCharacter->hpChange();
+  }
+  int abilityModifier(int ability) {
+    return decoratedCharacter->abilityModifier(ability);
+  }
+  int armorModifier() {
+    return decoratedCharacter->armorModifier();
   }
   //virtual int attackBonus();//class to be inherited
-  void setAttackBonus()
-  {
-	  decoratedCharacter->setAttackBonus();
+  void setAttackBonus() {
+    decoratedCharacter->setAttackBonus();
   }
-  void playerInfo()
-  {
-	  decoratedCharacter->playerInfo();
+  void playerInfo() {
+    decoratedCharacter->playerInfo();
   }
 
   bool equipFromBackpack(int i) {
-	  return decoratedCharacter->equipFromBackpack(i);
+    return decoratedCharacter->equipFromBackpack(i);
   }
   bool unequipItem(string s) {
-	  return decoratedCharacter->unequipItem(s);
+    return decoratedCharacter->unequipItem(s);
   }
   bool equipItem(Item* i) {
-	  return decoratedCharacter->equipItem(i);
+    return decoratedCharacter->equipItem(i);
   }
   void printBackPackItems() {
-	  decoratedCharacter->printBackPackItems();
+    decoratedCharacter->printBackPackItems();
   }
   void addToBackpack(Item i) {
-	  decoratedCharacter->addToBackpack(i);
+    decoratedCharacter->addToBackpack(i);
   }
 
-  void levelUp()
-  {
-	  decoratedCharacter->levelUp();
+  void levelUp() {
+    decoratedCharacter->levelUp();
   }
 
   //saving and loading character
-  void saveCharacter()
-  {
-	  decoratedCharacter->saveCharacter();
+  void saveCharacter() {
+    decoratedCharacter->saveCharacter();
   }
-  void loadCharacter()
-  {
-	  decoratedCharacter->loadCharacter();
+  void loadCharacter() {
+    decoratedCharacter->loadCharacter();
   }
-  void setLevel(int lvl)
-  {
-	  decoratedCharacter->setLevel(lvl);
+  void setLevel(int lvl) {
+    decoratedCharacter->setLevel(lvl);
   }
-  void setPositionX(int x)
-  {
-	  decoratedCharacter->setPositionX(x);
+  void setPositionX(int x) {
+    decoratedCharacter->setPositionX(x);
   }
-  void setPositionY(int y)
-  {
-	  decoratedCharacter->setPositionY(y);
+  void setPositionY(int y) {
+    decoratedCharacter->setPositionY(y);
   }
 
   //game accessor methods
-  int getHitPoints()
-  {
-	 return decoratedCharacter->getHitPoints();
+  int getHitPoints() {
+    return decoratedCharacter->getHitPoints();
   }
-  int getLevel()
-  {
-	 return decoratedCharacter->getLevel();
+  int getLevel() {
+    return decoratedCharacter->getLevel();
   }
-  int getPositionX()
-  {
-	  return decoratedCharacter->getPositionX();
+  int getPositionX() {
+    return decoratedCharacter->getPositionX();
   }
-  int getPositionY()
-  {
-	  return decoratedCharacter->getPositionY();
+  int getPositionY() {
+    return decoratedCharacter->getPositionY();
   }
 
   //character accessor methods
-  int getAttacksPerRound()
-  {
-	  return decoratedCharacter->getAttacksPerRound();
+  int getAttacksPerRound() {
+    return decoratedCharacter->getAttacksPerRound();
   }
-  string getCharacterType()
-  {
-	  return decoratedCharacter->getCharacterType();
+  string getCharacterType() {
+    return decoratedCharacter->getCharacterType();
   }
-  int* getAbilityScores()
-  {
-	  return decoratedCharacter->getAbilityScores();
+  int* getAbilityScores() {
+    return decoratedCharacter->getAbilityScores();
   }
-  int* getAttackBonus()
-  {
-	  return decoratedCharacter->getAttackBonus();
+  int* getAttackBonus() {
+    return decoratedCharacter->getAttackBonus();
   }
-  int getDamageBonus()
-  {
-	  return decoratedCharacter->getDamageBonus();
+  int getDamageBonus() {
+    return decoratedCharacter->getDamageBonus();
   }
-  void setStrength(int str)
-  {
-	  decoratedCharacter->setStrength(str);
+  void setStrength(int str) {
+    decoratedCharacter->setStrength(str);
   }
-  void setDexterity(int dex)
-  {
-	  decoratedCharacter->setDexterity(dex);
+  void setDexterity(int dex) {
+    decoratedCharacter->setDexterity(dex);
   }
-  void setConstitution(int con)
-  {
-	  decoratedCharacter->setConstitution(con);
+  void setConstitution(int con) {
+    decoratedCharacter->setConstitution(con);
   }
-  void setIntelligence(int intel)
-  {
-	  decoratedCharacter->setIntelligence(intel);
+  void setIntelligence(int intel) {
+    decoratedCharacter->setIntelligence(intel);
   }
-  void setWisdom(int wis)
-  {
-	  decoratedCharacter->setWisdom(wis);
+  void setWisdom(int wis) {
+    decoratedCharacter->setWisdom(wis);
   }
-  void setCharisma(int cha)
-  {
-	  decoratedCharacter->setCharisma(cha);
+  void setCharisma(int cha) {
+    decoratedCharacter->setCharisma(cha);
   }
-
-  int getStrength()
-  {
-	  return decoratedCharacter->getStrength();
+  int getStrength() {
+    return decoratedCharacter->getStrength();
   }
-  int getDexterity()
-  {
-	  return decoratedCharacter->getDexterity();
+  int getDexterity() {
+    return decoratedCharacter->getDexterity();
   }
-  int getConstitution()
-  {
-	  return decoratedCharacter->getConstitution();
+  int getConstitution() {
+    return decoratedCharacter->getConstitution();
   }
-  int getIntelligence()
-  {
-	  return decoratedCharacter->getIntelligence();
+  int getIntelligence() {
+    return decoratedCharacter->getIntelligence();
   }
-  int getWisdom()
-  {
-	  return  decoratedCharacter->getWisdom();
+  int getWisdom() {
+    return  decoratedCharacter->getWisdom();
   }
-  int getCharisma()
-  {
-	  return decoratedCharacter->getCharisma();
+  int getCharisma() {
+    return decoratedCharacter->getCharisma();
   }
 
  protected:

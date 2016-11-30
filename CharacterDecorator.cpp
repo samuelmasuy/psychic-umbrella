@@ -31,9 +31,6 @@ void CharacterDecorator::printEquippedItems() {
 	}
 }
 
-//TODO: make sure to put those methods in abstract character
-//TODO: implement getBonus(string) in CharacterDecorator.h
-
 // Character* CharacterDecorator::remove(string removeType) {
 //   if(removeType.compare(type) == 0) {
 //     Character* childRef = decoratedCharacter;
