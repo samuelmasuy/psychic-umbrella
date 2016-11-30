@@ -16,6 +16,7 @@
 #include "MapObserver.h"
 #include "ChestDirector.h"
 #include "DoorDirector.h"
+#include "CharacterDecorator.h"
 
 using namespace std;
 
@@ -68,8 +69,10 @@ public:
 	*/
 	void printGameUsage();
 
+	void saveCharacter();
+	void loadCharacter();
 private:
-	Map* map;
+	Map* _map;
 	Character* character;
 	void initializeCharacterPositionOnMap();
 	void move(int, int, int, int);

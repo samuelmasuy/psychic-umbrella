@@ -2,6 +2,7 @@
 * @file Game.cpp
 * @brief Implementation of the Game walkthought.
 */
+#include <map>
 #include "Game.h"
 
 
@@ -9,9 +10,9 @@ void Game::play() {
 	// set Character observer
 	CharacterOBS* observerCharacter = new CharacterOBS(character);
 	// set Map observer
-	MapOBS* observerMap = new MapOBS(map);
+	MapOBS* observerMap = new MapOBS(_map);
 
-	map->reinitializeMap();
+	_map->reinitializeMap();
 	initializeCharacterPositionOnMap();
 
 	int characterPositionX = character->getPositionX();
@@ -27,47 +28,47 @@ void Game::play() {
 		characterPositionX = character->getPositionX();
 		characterPositionY = character->getPositionY();
 		// check if character at the exit
-		if (map->retrieveCell(characterPositionY, characterPositionX) != CHAR_EXIT) {
+		if (_map->retrieveCell(characterPositionY, characterPositionX) != CHAR_EXIT) {
 			cin >> choice;
 
 			switch (choice) {
 			case 'd':
 				system("cls");
 				move(characterPositionX, characterPositionY, characterPositionX + 1, characterPositionY);
-				map->print();
+				_map->print();
 				break;
 			case 'a':
 				system("cls");
 				move(characterPositionX, characterPositionY, characterPositionX - 1, characterPositionY);
-				map->print();
+				_map->print();
 				break;
 			case 'w':
 				system("cls");
 				move(characterPositionX, characterPositionY, characterPositionX, characterPositionY - 1);
-				map->print();
+				_map->print();
 				break;
 			case 's':
 				system("cls");
 				move(characterPositionX, characterPositionY, characterPositionX, characterPositionY + 1);
-				map->print();
+				_map->print();
 				break;
 			case 'c':
 				system("cls");
 				character->playerInfo();
-				map->print();
+				_map->print();
 				break;
 			case 'i':
 				system("cls");
 				character->printEquippedItems();
 				character->printBackPackItems();
-				map->print();
+				_map->print();
 				break;
 			case 'e':
 				system("cls");
 				cout << "Enter level: ";
 				cin >> level;
 				character->setLevel(level);
-				map->print();
+				_map->print();
 				break;
 			case 'u':
 				system("cls");
@@ -75,12 +76,12 @@ void Game::play() {
 				cin >> itemType;
 				// unequip from character
 				character->unequipItem(itemType);
-				map->print();
+				_map->print();
 				break;
 			case 'x':
 				system("cls");
-				character->saveCharacter();
-				map->print();
+				saveCharacter();
+				_map->print();
 				break;
 			case 'b':
 				system("cls");
@@ -89,7 +90,7 @@ void Game::play() {
 				cout << "Enter item # to equip: ";
 				cin >> itemIndexInBackpack;
 				character->equipFromBackpack(itemIndexInBackpack);
-				map->print();
+				_map->print();
 				break;
 			case 'h':
 				system("cls");
@@ -114,12 +115,87 @@ void Game::play() {
 		}
 	}
 }
+void Game::saveCharacter(){
+	string type = "";
+	string saveFile;
+	map<string, Character*> equipedItems;
+	equipedItems = character->getEquippedItems();
+	//cout << character->getEquippedItems()
+
+	for (map<string, Character*>::iterator it = equipedItems.begin(); it != equipedItems.end(); ++it) {
+		cout << it->first  <<"\n";
+		it->second->printEquippedItems();
+	}
+	cout << "Enter name of file being saved: ";
+	cin >> saveFile;
+
+
+
+	ofstream ofs(saveFile);
+	ofs << "CharFile" << endl;	//define type of save file
+	ofs << character->getCharacterType() << endl;
+	ofs << character->getLevel() << endl;
+	ofs << character->getHitPoints() << endl;
+	ofs << character->getStrength() << endl;
+	ofs << character->getDexterity() << endl;
+	ofs << character->getConstitution() << endl;
+	ofs << character->getIntelligence() << endl;
+	ofs << character->getWisdom() << endl;
+	ofs << character->getCharisma() << endl;
+	//	for (int i = 0; i < 6; i++)
+	//		ofs << abilityScores[i] << endl;
+	ofs << character->armorModifier() << endl;
+	ofs << character->getDamageBonus() << endl;
+
+	/*
+	ofs << equippedSize << endl;
+	for (int i = 0; i < MAX_ITEMS_EQUIPPED; i++)
+	{
+		type = equipment[i].getType();
+		if (type != "")
+		{
+			ofs << equipment[i].getType() << endl;
+			ofs << equipment[i].getInfluences().size() << endl;
+			for (int j = 0; j < equipment[i].getInfluences().size(); j++)
+			{
+				ofs << equipment[i].getInfluences().at(0).getType() << endl;
+				ofs << equipment[i].getInfluences().at(0).getBonus() << endl;
+			}
+		}
+	}
+
+	if (backpack.getSize() != 0){
+		ofs << backpack.getSize() << endl;
+		for (int i = 0; i < backpack.getSize(); i++)
+		{
+			ofs << backpack.getItems().at(i).getType() << endl;
+			ofs << backpack.getItems()[i].getInfluences().size() << endl;
+			for (int j = 0; j < backpack.getItems()[i].getInfluences().size(); j++)
+			{
+				ofs << backpack.getItems()[i].getInfluences().at(0).getType() << endl;
+				ofs << backpack.getItems()[i].getInfluences().at(0).getBonus() << endl;
+			}
+		}
+	}
+	else
+		ofs << 0;
+*/
+	ofs.close();
+
+
+	
+}
+
+void Game::loadCharacter()
+{
+
+}
 
 void Game::stop() {
 	int characterPositionX = character->getPositionX();
 	int characterPositionY = character->getPositionY();
-	if (map->retrieveCell(characterPositionX, characterPositionY) != CHAR_EXIT) {
-		map->fillCell(characterPositionY, characterPositionX, CHAR_EMPTY);
+	if (_map->retrieveCell(characterPositionX, characterPositionY) != CHAR_EXIT) {
+		_map->fillCell(characterPositionY, characterPositionX, CHAR_EMPTY);
 	}
 	system("CLS");
 	character->levelUp();
@@ -130,35 +206,35 @@ void Game::stop() {
 	char quit;
 	cin >> quit;
 	// might need to put back character original coordinate  + for map
-	// map->save();
+	// _map->save();
 	// character->save();
 }
 
 void Game::initializeCharacterPositionOnMap() {
 	int ip, jp;
-	ip = map->getEntranceRow();
-	jp = map->getEntranceColumn();
-	map->SetPlayerPos(ip, jp);
+	ip = _map->getEntranceRow();
+	jp = _map->getEntranceColumn();
+	_map->SetPlayerPos(ip, jp);
 
 
 	character->setPositionX(jp);
 	character->setPositionY(ip);
 
-	map->Display();
+	_map->Display();
 
 	/*
 	int ip, jp;
-	map->GetPlayerPos(ip, jp);
+	_map->GetPlayerPos(ip, jp);
 	character->setPositionX(jp);
 	character->setPositionY(ip);
 	*/
 }
 void Game::move(int old_x, int old_y, int new_x, int new_y) {
-	int mapRows = map->GetRows();
-	int mapColumns = map->GetCols();
+	int mapRows = _map->GetRows();
+	int mapColumns = _map->GetCols();
 	// Check for valid move
 	if (!(new_y >= mapRows || new_y < 0 || new_x >= mapColumns || new_x < 0)) {
-		char new_cell_type = map->retrieveCell(new_y, new_x);
+		char new_cell_type = _map->retrieveCell(new_y, new_x);
 		// cout << new_cell_type;
 		// cout << "old_x " << old_x << "old_y " << old_y << "new_x " << new_x << "new_y " << new_y;
 		switch (new_cell_type) {
@@ -167,11 +243,11 @@ void Game::move(int old_x, int old_y, int new_x, int new_y) {
 			break;
 		case CHAR_EMPTY:
 			// set previous cell to empty
-			map->fillCell(old_y, old_x, CHAR_EMPTY);
+			_map->fillCell(old_y, old_x, CHAR_EMPTY);
 			// set character location to the new cell
 			character->setPositionX(new_x);
 			character->setPositionY(new_y);
-			map->fillCell(new_y, new_x, CHAR_PLAYER);
+			_map->fillCell(new_y, new_x, CHAR_PLAYER);
 			break;
 		case CHAR_EXIT:
 			// set character location to the new cell
@@ -182,11 +258,11 @@ void Game::move(int old_x, int old_y, int new_x, int new_y) {
 			if (openDoor())
 			{
 				// set previous cell to empty
-				map->fillCell(old_y, old_x, CHAR_EMPTY);
+				_map->fillCell(old_y, old_x, CHAR_EMPTY);
 				// set character location to the new cell
 				character->setPositionX(new_x);
 				character->setPositionY(new_y);
-				map->fillCell(new_y, new_x, CHAR_PLAYER);
+				_map->fillCell(new_y, new_x, CHAR_PLAYER);
 
 			}
 			break;
@@ -194,11 +270,11 @@ void Game::move(int old_x, int old_y, int new_x, int new_y) {
 			// if the chest was opened, we remove it from the map.
 			if (openChest()) {
 				// set previous cell to empty
-				map->fillCell(old_y, old_x, CHAR_EMPTY);
+				_map->fillCell(old_y, old_x, CHAR_EMPTY);
 				// set character location to the new cell
 				character->setPositionX(new_x);
 				character->setPositionY(new_y);
-				map->fillCell(new_y, new_x, CHAR_PLAYER);
+				_map->fillCell(new_y, new_x, CHAR_PLAYER);
 			}
 			break;
 		}
@@ -218,7 +294,7 @@ bool Game::openChest() {
 	cin >> choice;
 	if (choice == 'y') {
 		character->equipItem(item);
-		// map->setCell(chest->positionX, chest->postionY, CHAR_EMPTY);
+		// _map->setCell(chest->positionX, chest->postionY, CHAR_EMPTY);
 	}
 	delete cg;
 	return choice == 'y';
@@ -248,13 +324,13 @@ bool Game::openDoor() {
 // }
 
 void Game::setMap(Map* n_map) {
-	map = n_map;
+	_map = n_map;
 }
 void Game::setCharacter(Character* n_character) {
 	character = n_character;
 }
 Map* Game::getMap() {
-	return map;
+	return _map;
 }
 Character* Game::getCharacter() {
 	return character;

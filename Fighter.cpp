@@ -33,6 +33,7 @@ Fighter::Fighter(int str, int dex, int con, int intel, int wis, int cha)
 	positionX = 0;
 	positionY = 0;
 	level = 1;
+	armor = 0;
 	attacksPerRound = 1;
 	gold = 0;
 	experience = 0;
@@ -181,11 +182,17 @@ void Fighter::setLevel(int lvl)
 	notify();
 }
 
+void Fighter::setArmor()
+{
+	armor = 10 + abilityModifier(1);
+}
+
 //! Implementation of armor modifier
 //! @return the modifier for armor according to D20 game rules
 int Fighter::armorModifier()
 {
-	return 10 + abilityModifier(1);
+	//return 10 + abilityModifier(1);
+	return armor;
 
 }
 //! Implementation of damage bonus which depends on strength ability
@@ -285,7 +292,7 @@ int Fighter::generateStats()
 
 //! Implementation of save Fighter
 //! @param saves Fighter into txt file.
-void Fighter::saveCharacter()
+/*void Fighter::saveCharacter()
 {
 	string type = "";
 	string saveFile;
@@ -296,10 +303,19 @@ void Fighter::saveCharacter()
 
 	ofstream ofs(saveFile);
 	ofs << "CharFile" << endl;	//define type of save file
+	ofs << getCharacterType() << endl;
 	ofs << level << endl;
 	ofs << currentHitPoints << endl;
-	for (int i = 0; i < 6; i++)
-		ofs << abilityScores[i] << endl;
+	ofs << getStrength() << endl;
+	ofs << getDexterity() << endl;
+	ofs << getConstitution() << endl;
+	ofs << getIntelligence() << endl;
+	ofs << getWisdom() << endl;
+	ofs << getCharisma() << endl;
+//	for (int i = 0; i < 6; i++)
+//		ofs << abilityScores[i] << endl;
+	ofs << armorModifier() << endl;
+	//ofs << getDamageBonus() << endl;
 	ofs << equippedSize << endl;
 	for (int i = 0; i < MAX_ITEMS_EQUIPPED; i++)
 	{
@@ -335,11 +351,11 @@ void Fighter::saveCharacter()
 
 
 
-}
+}*/
 
 //! Implementation of load Fighter
 //! @param loads Fighter from txt file.
-void Fighter::loadCharacter()
+/*void Fighter::loadCharacter()
 {
 
 	string loadFile;
@@ -372,12 +388,14 @@ void Fighter::loadCharacter()
 		}
 	} while (chooseFileName == false);
 
-
+	ifs >> characterType;
 	ifs >> level;
 	ifs >> currentHitPoints;
 	for (int i = 0; i < 6; i++) {
 		ifs >> abilityScores[i];
 	}
+	ifs >> armor;
+	//ifs >> 
 	ifs >> equippedSize;
 	if (equippedSize > 0)
 	{
@@ -427,7 +445,7 @@ void Fighter::loadCharacter()
 		}
 	}
 	ifs.close();
-}
+}*/
 
 //! Implementation of player info
 //! @param print Fighter info on screen
@@ -665,4 +683,47 @@ void Fighter::setEquippedItems(map<string, Character*> m) {
 map<string, Character*> Fighter::getEquippedItems() {
   map<string, Character*> empty;
   return empty;
+}
+
+void Fighter::combat(Character* monster)
+{
+	int totalDmg;
+/*
+	for (int i = 0; i < attacksPerRound; i++)
+	{
+		//roll dice for dmg
+		int roll = diceRoll(20);
+
+		switch (attacksPerRound)
+		{
+			case 1:
+			{
+					totalDmg = bonusAttack[0] + getDamageBonus() + roll;
+					cout << "First blow: " << totalDmg << "dmg" << endl;
+					monster->MonsterHp -= total;
+			}break;
+			
+			case 2:
+			{
+					  totalDmg = bonusAttack[1] + getDamageBonus() + roll;
+					  cout << "Second blow: " << totalDmg << "dmg" << endl;
+					  monster->MonsterHp -= total;
+			}break;
+			case 3:
+			{
+					  totalDmg = bonusAttack[2] + getDamageBonus() + roll;
+					  cout << "Third blow: " << totalDmg << "dmg" << endl;
+					  monster->MonsterHp -= total;
+			}break;
+			case 4:
+			{	
+					  totalDmg = bonusAttack[3] + getDamageBonus() + roll;
+					  cout << "Forth blow: " << totalDmg << "dmg" << endl;
+					  monster->MonsterHp -= total;
+			}break;
+
+		}
+	}
+*/
+
 }

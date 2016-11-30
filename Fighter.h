@@ -29,7 +29,6 @@ public:
 	int generateStats();
 	void hpChange();
 	int abilityModifier(int);
-	int armorModifier();
 	//virtual int attackBonus();//class to be inherited
 	void setAttackBonus();
 	void playerInfo(); //displaying character info
@@ -53,6 +52,7 @@ public:
 	void setIntelligence(int);
 	void setWisdom(int);
 	void setCharisma(int);
+	void setArmor();
 
 	//game accessor methods
 	int getHitPoints();
@@ -67,6 +67,7 @@ public:
 	virtual int getIntelligence();
 	virtual int getWisdom();
 	virtual int getCharisma();
+	int armorModifier();
 	int getAttacksPerRound();
 	string getCharacterType();
 	int* getAbilityScores();
@@ -77,6 +78,11 @@ public:
   void unequip(string);
   void setEquippedItems(map<string, Character*>);
   map<string, Character*> getEquippedItems();
+
+
+  //combat
+  void combat(Character*);
+
 protected:
 	int currentHitPoints;
 	Item equipment[MAX_ITEMS_EQUIPPED];
@@ -87,6 +93,7 @@ protected:
 	int attacksPerRound;
 	int experience, gold;
 	int* bonusAttack = new int (1);
+	int armor;
 
 private:
 	string characterType;

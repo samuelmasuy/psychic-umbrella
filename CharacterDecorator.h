@@ -58,6 +58,10 @@ class CharacterDecorator : public Character {
   int armorModifier() {
     return decoratedCharacter->armorModifier();
   }
+
+  void setArmor(){
+	  return decoratedCharacter->setArmor();
+  }
   //virtual int attackBonus();//class to be inherited
   void setAttackBonus() {
     decoratedCharacter->setAttackBonus();
@@ -86,12 +90,15 @@ class CharacterDecorator : public Character {
   }
 
   //saving and loading character
+/*
   void saveCharacter() {
     decoratedCharacter->saveCharacter();
   }
   void loadCharacter() {
     decoratedCharacter->loadCharacter();
   }
+*/
+
   void setLevel(int lvl) {
     decoratedCharacter->setLevel(lvl);
   }
@@ -169,6 +176,9 @@ class CharacterDecorator : public Character {
     return decoratedCharacter->getCharisma();
   }
 
+  void combat(Character* m){
+	  decoratedCharacter->combat(m);
+  }
  protected:
   Character *decoratedCharacter;
   map<string, Character*> equipedItems;

@@ -46,6 +46,7 @@ void TankBuilder::buildAbilityMods()
 	newAbilityScores[4] = oldAbilityScores[5];
 	newAbilityScores[5] = oldAbilityScores[4];
 	myCharacter->hpChange();
+	myCharacter->setArmor();
 
 }
 void TankBuilder::buildType()

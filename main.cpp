@@ -38,46 +38,52 @@ int main(int argc, char const* argv[]) {
 
 
 	CharacterDirector* cd = new CharacterDirector();
-
-	char choice;
-
+	
+	
+	/*
+	cout << endl << "Do you want to load your character from a file?";
+	cin >> choice;
+	if (choice == 'y') {
+		loadCharacter();
+		 
+	}
+	else
+	{
+*/
+	
 	cout << "Let's create a character, would you like to play with a nimble[1], a tank[2], or a bully[3]: " << endl;
-	int character_choice = validate_choice(1, 3);
-	switch (character_choice) {
+
+		int character_choice = validate_choice(1, 3);
+		switch (character_choice) {
 		case 1:
 		{
-			nimbleBuilder = new NimbleBuilder;
-			cd->setCharacterBuilder(nimbleBuilder);
-			cd->constructCharacter();
-			character = cd->getCharacter();
-			delete nimbleBuilder;
+				  nimbleBuilder = new NimbleBuilder;
+				  cd->setCharacterBuilder(nimbleBuilder);
+				  cd->constructCharacter();
+				  character = cd->getCharacter();
+				  delete nimbleBuilder;
 		}break;
 
 		case 2:
 		{
-			tankBuilder = new TankBuilder;
-			cd->setCharacterBuilder(tankBuilder);
-			cd->constructCharacter();
-			character = cd->getCharacter();
-			delete tankBuilder;
+				  tankBuilder = new TankBuilder;
+				  cd->setCharacterBuilder(tankBuilder);
+				  cd->constructCharacter();
+				  character = cd->getCharacter();
+				  delete tankBuilder;
 		}break;
 		case 3:
 		{
-			bullyBuilder = new BullyBuilder;
-			cd->setCharacterBuilder(bullyBuilder);
-			cd->constructCharacter();
-			character = cd->getCharacter();
-			delete bullyBuilder;
+				  bullyBuilder = new BullyBuilder;
+				  cd->setCharacterBuilder(bullyBuilder);
+				  cd->constructCharacter();
+				  character = cd->getCharacter();
+				  delete bullyBuilder;
 		}break;
-	}
-  delete cd;
+		}
+		delete cd;
 
- 
-	cout << endl << "Do you want to load your character from a file?";
-	cin >> choice;
-	if (choice == 'y') {
-		character->loadCharacter();
-	}
+		char choice;
 
 	// create items
 	ItemDirector* id = new ItemDirector();
@@ -176,6 +182,7 @@ int main(int argc, char const* argv[]) {
 
 int validate_choice(int min, int max) {
 	while (true) {
+		//cin.ignore();
 		cout << "Enter your choice: ";
 		string s;
 		getline(cin, s);
@@ -210,7 +217,6 @@ bool has_ending(string const &str, string const &ending) {
 		return false;
 	}
 }
-
 
 
 
