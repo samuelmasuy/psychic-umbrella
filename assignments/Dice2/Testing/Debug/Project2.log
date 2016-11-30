@@ -1,7 +1,0 @@
-﻿  cppunittest.cpp
-LINK : warning LNK4075: ignoring '/INCREMENTAL' due to '/FORCE' specification
-cppunittest.obj : warning LNK4075: ignoring '/EDITANDCONTINUE' due to '/OPT:LBR' specification
-cppunit.lib(Message.obj) : warning LNK4006: "public: __thiscall CppUnit::Message::~Message(void)" (??1Message@CppUnit@@QAE@XZ) already defined in cppunittest.obj; second definition ignored
-C:\Users\Asma Laaribi\Documents\Visual Studio 2015\Projects\Project1\Debug\cppunittest.exe : warning LNK4088: image being generated due to /FORCE option; image may not run
-  Project2.vcxproj -> C:\Users\Asma Laaribi\Documents\Visual Studio 2015\Projects\Project1\Debug\cppunittest.exe
-  Project2.vcxproj -> C:\Users\Asma Laaribi\Documents\Visual Studio 2015\Projects\Project1\Debug\cppunittest.pdb (Partial PDB)
