@@ -24,7 +24,7 @@ class CharacterDecorator : public Character {
    */
   CharacterDecorator(Character *decoratedCharacter, Item* item) {
     this->decoratedCharacter = decoratedCharacter;
-    this->item = item;
+	this->item = item;
 
   }
   virtual ~CharacterDecorator() {
@@ -58,8 +58,8 @@ class CharacterDecorator : public Character {
     return decoratedCharacter->armorModifier();
   }
 
-  void setArmor() {
-    return decoratedCharacter->setArmor();
+  void setArmor(){
+	  return decoratedCharacter->setArmor();
   }
   //virtual int attackBonus();//class to be inherited
   void setAttackBonus() {
@@ -76,7 +76,7 @@ class CharacterDecorator : public Character {
   }
 
   void printBackPackItems() {
-    return decoratedCharacter->printBackPackItems();
+	return decoratedCharacter->printBackPackItems();
   }
 
   void addToBackpack(Item i) {
@@ -88,14 +88,14 @@ class CharacterDecorator : public Character {
   }
 
   //saving and loading character
-  /*
-    void saveCharacter() {
-      decoratedCharacter->saveCharacter();
-    }
-    void loadCharacter() {
-      decoratedCharacter->loadCharacter();
-    }
-  */
+/*
+  void saveCharacter() {
+    decoratedCharacter->saveCharacter();
+  }
+  void loadCharacter() {
+    decoratedCharacter->loadCharacter();
+  }
+*/
   void printEquippedItems();
 
   void setLevel(int lvl) {
@@ -134,7 +134,7 @@ class CharacterDecorator : public Character {
   }
 
   int getAbilityScore(int ability) {
-    return decoratedCharacter->getAbilityScore(ability);
+	  return decoratedCharacter->getAbilityScore(ability);
   }
 
   int* getAttackBonus() {
@@ -180,22 +180,25 @@ class CharacterDecorator : public Character {
     return decoratedCharacter->getCharisma();
   }
 
-  void combat(Character* m) {
-    decoratedCharacter->combat(m);
+  void combat(Character* m){
+	  decoratedCharacter->combat(m);
   }
 
-  void setHitPoints(int hp) {
-    decoratedCharacter->setHitPoints(hp);
+  void setHitPoints(int hp)
+  {
+	  decoratedCharacter->setHitPoints(hp);
   }
 
-  ItemContainer getBackPack() {
-    return decoratedCharacter->getBackPack();
+  ItemContainer getBackPack()
+  {
+	  return decoratedCharacter->getBackPack();
   }
 
-  void setAbilityScores(int i, int abl) {
-    decoratedCharacter->setAbilityScores(i, abl);
+  void setAbilityScores(int i, int abl)
+  {
+	  decoratedCharacter->setAbilityScores(i, abl);
   }
  protected:
-  Character* decoratedCharacter;
-  Item* item;
+	 Character* decoratedCharacter;
+	 Item* item;
 };

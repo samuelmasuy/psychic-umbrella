@@ -28,198 +28,200 @@ string get_filename();
 bool has_ending(string const &, string const &);
 
 int main(int argc, char const* argv[]) {
-  cout << "Dungeons And Dragons Game" << endl;
+	cout << "Dungeons And Dragons Game" << endl;
 
-  Character* character = NULL;
-  //Character* monster = NULL;
-  CharacterBuilder* nimbleBuilder = NULL;
-  CharacterBuilder* tankBuilder = NULL;
-  CharacterBuilder* bullyBuilder = NULL;
-
-
-  CharacterDirector* cd = new CharacterDirector();
+	Character* character = NULL;
+	//Character* monster = NULL;
+	CharacterBuilder* nimbleBuilder = NULL;
+	CharacterBuilder* tankBuilder = NULL;
+	CharacterBuilder* bullyBuilder = NULL;
 
 
-  /*
-  cout << endl << "Do you want to load your character from a file?";
-  cin >> choice;
-  if (choice == 'y') {
-  	loadCharacter();
+	CharacterDirector* cd = new CharacterDirector();
+	
+	
+	/*
+	cout << endl << "Do you want to load your character from a file?";
+	cin >> choice;
+	if (choice == 'y') {
+		loadCharacter();
+		 
+	}
+	else
+	{
+*/
+	
+	cout << "Let's create a character, would you like to play with a nimble[1], a tank[2], or a bully[3]: " << endl;
 
-  }
-  else
-  {
-  */
+		int character_choice = validate_choice(1, 3);
+		switch (character_choice) {
+		case 1:
+		{
+				  nimbleBuilder = new NimbleBuilder;
+				  cd->setCharacterBuilder(nimbleBuilder);
+				  cd->constructCharacter();
+				  character = cd->getCharacter();
+				  delete nimbleBuilder;
+		}break;
 
-  cout << "Let's create a character, would you like to play with a nimble[1], a tank[2], or a bully[3]: " << endl;
+		case 2:
+		{
+				  tankBuilder = new TankBuilder;
+				  cd->setCharacterBuilder(tankBuilder);
+				  cd->constructCharacter();
+				  character = cd->getCharacter();
+				  delete tankBuilder;
+		}break;
+		case 3:
+		{
+				  bullyBuilder = new BullyBuilder;
+				  cd->setCharacterBuilder(bullyBuilder);
+				  cd->constructCharacter();
+				  character = cd->getCharacter();
+				  delete bullyBuilder;
+		}break;
+		}
+		delete cd;
 
-  int character_choice = validate_choice(1, 3);
-  switch (character_choice) {
-  case 1: {
-    nimbleBuilder = new NimbleBuilder;
-    cd->setCharacterBuilder(nimbleBuilder);
-    cd->constructCharacter();
-    character = cd->getCharacter();
-    delete nimbleBuilder;
-  }
-  break;
+		char choice;
 
-  case 2: {
-    tankBuilder = new TankBuilder;
-    cd->setCharacterBuilder(tankBuilder);
-    cd->constructCharacter();
-    character = cd->getCharacter();
-    delete tankBuilder;
-  }
-  break;
-  case 3: {
-    bullyBuilder = new BullyBuilder;
-    cd->setCharacterBuilder(bullyBuilder);
-    cd->constructCharacter();
-    character = cd->getCharacter();
-    delete bullyBuilder;
-  }
-  break;
-  }
-  delete cd;
+	// create items
+	ItemDirector* id = new ItemDirector();
+	id->setItemBuilder(new RingBuilder());
+	id->makeItem();
+	Item* item = id->getItem();
+	id->setItemBuilder(new BeltBuilder());
+	id->makeItem();
+	Item* item2 = id->getItem();
+	cout << "Here is a new Item: " << endl;
+	item->printItem();
+	item2->printItem();
+	cout << endl;
 
-  char choice;
+	cout << "Would you like to edit this item? ('y'/'n'): ";
+	cin >> choice;
+	if (choice == 'y') {
+		item->editItem();
+		cout << "Would you like to save this item? ('y'/'n'): ";
+		cin >> choice;
+		if (choice == 'y') {
+			item->saveItem();
+		}
+	}
 
-  // create items
-  ItemDirector* id = new ItemDirector();
-  id->setItemBuilder(new RingBuilder());
-  id->makeItem();
-  Item* item = id->getItem();
-  id->setItemBuilder(new BeltBuilder());
-  id->makeItem();
-  Item* item2 = id->getItem();
-  cout << "Here is a new Item: " << endl;
-  item->printItem();
-  item2->printItem();
-  cout << endl;
+	cout << "Would you like your character to be equiped with this item? ('y'/'n'): ";
+	cin >> choice;
+	if (choice == 'y') {
+		character->playerInfo();
+		character = new ItemDecorator(character, item);
+		character = new ItemDecorator(character, item2);
+		cout << endl << "Equiped Items::" << endl;
+		character->printEquippedItems();
+	}
+	delete id;
 
-  cout << "Would you like to edit this item? ('y'/'n'): ";
-  cin >> choice;
-  if (choice == 'y') {
-    item->editItem();
-    cout << "Would you like to save this item? ('y'/'n'): ";
-    cin >> choice;
-    if (choice == 'y') {
-      item->saveItem();
-    }
-  }
+	cout << "Here are the stats of your character" << endl;
+	character->playerInfo();
 
-  cout << "Would you like your character to be equiped with this item? ('y'/'n'): ";
-  cin >> choice;
-  if (choice == 'y') {
-    character->playerInfo();
-    character = new ItemDecorator(character, item);
-    character = new ItemDecorator(character, item2);
-    cout << endl << "Equiped Items::" << endl;
-    character->printEquippedItems();
-  }
-  delete id;
+	Item* r = character->unEquip("ring");
+	r->printItem();
+	cout << endl;
+	character->playerInfo();
+	cout << endl;
+	character->printEquippedItems();
+	cout << endl;
+	character->printBackPackItems();
+	cout << endl;
 
-  cout << "Here are the stats of your character" << endl;
-  character->playerInfo();
+	// ........... many more items
+	cout << "Let's take care of the map." << endl;
 
-  cout << "Unequiping the ring." << endl;
-  Item* r = character->unEquip("ring");
-  r->printItem();
-  cout << endl;
-  character->playerInfo();
-  cout << endl;
-  cout << endl << "Equiped Items::" << endl;
-  character->printEquippedItems();
-  cout << endl;
-  character->printBackPackItems();
-  cout << endl;
+	// map management
+	manageMap();
 
-  // ........... many more items
-  cout << "Let's take care of the map." << endl;
+	cout << endl;
 
-  // map management
-  manageMap();
+	cout << "TIME TO PLAY" << endl;
+	string campaignFilename = "";
+	Campaign theCampaign;
+	do
+	{
 
-  cout << endl;
+		cout << "Please enter the Campaign you would like to play!: ";
+		cin >> campaignFilename;
+		if (theCampaign.Load(campaignFilename.c_str()) == 0)
+		{
+			break;
+		}
+	} while (1);
 
-  cout << "TIME TO PLAY" << endl;
-  string campaignFilename = "";
-  Campaign theCampaign;
-  do {
+	vector<int> levels;
+	theCampaign.GetLevels(levels);
+	for (unsigned int i = 0; i < levels.size(); i++)
+	{
+		Map map;
+		MapDirector d;
 
-    cout << "Please enter the Campaign you would like to play!: ";
-    cin >> campaignFilename;
-    if (theCampaign.Load(campaignFilename.c_str()) == 0) {
-      break;
-    }
-  } while (1);
-
-  vector<int> levels;
-  theCampaign.GetLevels(levels);
-  for (unsigned int i = 0; i < levels.size(); i++) {
-    Map map;
-    MapDirector d;
-
-    // load map from file
-    MapBuilderB mb;
-    if (mb.LoadMap(theCampaign.GetFileName(levels[i]).c_str(), levels[i]))
-      continue;
-    // set this builder to director
-    d.SetBuilder(&mb);
-    // get the map from director
-    d.GetMap(map);
+		// load map from file
+		MapBuilderB mb;
+		if (mb.LoadMap(theCampaign.GetFileName(levels[i]).c_str(), levels[i]))
+			continue;
+		// set this builder to director
+		d.SetBuilder(&mb);
+		// get the map from director
+		d.GetMap(map);
 
 
-    GameBuilder* gb = new GameBuilder();
-    gb->constructGame();
-    gb->setCharacterAndMap(character, &map);
-    Game* game = gb->getGame();
-    game->play();
-    delete game;
-    delete gb;
-  }
-  cout << "Game over!!! Press any key and then enter to exit! -->";
-  string aux;
-  cin >> aux;
-  return 0;
+		GameBuilder* gb = new GameBuilder();
+		gb->constructGame();
+		gb->setCharacterAndMap(character, &map);
+		Game* game = gb->getGame();
+		game->play();
+		delete game;
+		delete gb;
+	}
+	cout << "Game over!!! Press any key and then enter to exit! -->";
+	string aux;
+	cin >> aux;
+	return 0;
 }
 
 int validate_choice(int min, int max) {
-  while (true) {
-    //cin.ignore();
-    cout << "Enter your choice: ";
-    string s;
-    getline(cin, s);
-    char *endp = 0;
-    int ret = strtol(s.c_str(), &endp, 10);
-    if (endp != s.c_str() && !*endp && ret >= min && ret <= max) {
-      return ret;
-    }
-    cout << "Invalid choice." << endl;
-  }
+	while (true) {
+		//cin.ignore();
+		cout << "Enter your choice: ";
+		string s;
+		getline(cin, s);
+		char *endp = 0;
+		int ret = strtol(s.c_str(), &endp, 10);
+		if (endp != s.c_str() && !*endp && ret >= min && ret <= max) {
+			return ret;
+		}
+		cout << "Invalid choice." << endl;
+	}
 }
 
 string get_filename() {
-  while (true) {
-    cout << "Enter a map filename: " << endl;
-    string s;
-    getline(cin, s);
-    ifstream file(s);
-    if (file) {
-      return s;
-    }
-    cout << "Invalid filename." << endl;
-  }
+	while (true) {
+		cout << "Enter a map filename: " << endl;
+		string s;
+		getline(cin, s);
+		ifstream file(s);
+		if (file) {
+			return s;
+		}
+		cout << "Invalid filename." << endl;
+	}
 
 }
 
 bool has_ending(string const &str, string const &ending) {
-  if (str.length() >= ending.length()) {
-    return (0 == str.compare(str.length() - ending.length(), ending.length(), ending));
-  } else {
-    return false;
-  }
+	if (str.length() >= ending.length()) {
+		return (0 == str.compare(str.length() - ending.length(), ending.length(), ending));
+	}
+	else {
+		return false;
+	}
 }
 
 
