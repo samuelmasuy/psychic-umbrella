@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 /**
 * @file Game.cpp
 * @brief Implementation of the Game walkthought.
@@ -175,71 +176,6 @@ void Game::play() {
 		}
 	}
 }
-void Game::saveCharacter(){
-	string type = "";
-	string saveFile;
-	map<string, Character*> equipedItems;
-	//equipedItems = character->getEquippedItems();
-
-	
-	cout << "Enter name of file being saved: ";
-	cin >> saveFile;
-	
-
-
-	ofstream ofs(saveFile);
-	ofs << "CharFile" << endl;	//define type of save file
-	ofs << character->getCharacterType() << endl;
-	ofs << character->getLevel() << endl;
-	ofs << character->getHitPoints() << endl;
-		for (int i = 0; i < 6; i++)
-			ofs <<  character->getAbilityScore(i) << endl;
-	//ofs << character->armorModifier() << endl;
-	//ofs << character->getDamageBonus() << endl;
-
-	ofs << equipedItems.size() << endl;
-	for (map<string, Character*>::iterator it = equipedItems.begin(); it != equipedItems.end(); ++it) {
-		ofs << it->first <<"\n";
-	}
-/*	
-	for (int i = 0; i < equipedItems.size(); i++)
-	{
-		
-		type = equipment[i].getType();
-		if (type != "")
-		{
-			ofs << equipment[i].getType() << endl;
-			ofs << equipment[i].getInfluences().size() << endl;
-			for (int j = 0; j < equipment[i].getInfluences().size(); j++)
-			{
-				ofs << equipment[i].getInfluences().at(0).getType() << endl;
-				ofs << equipment[i].getInfluences().at(0).getBonus() << endl;
-			}
-		}
-		
-	}
-*/	
-	//if (character->getBackPack().getSize() != 0){
-	//	ofs << character->getBackPack().getSize() << endl;
-	//	for (int i = 0; i < character->getBackPack().getSize(); i++)
-	//	{
-	//		ofs << character->getBackPack().getItems().at(0).getType() << endl;
-	//		ofs << character->getBackPack().getItems()[i].getInfluences().size() << endl;
-	//		for (int j = 0; j < character->getBackPack().getItems()[i].getInfluences().size(); j++)
-	//		{
-	//			ofs << character->getBackPack().getItems()[i].getInfluences().at(0).getType() << endl;
-	//			ofs << character->getBackPack().getItems()[i].getInfluences().at(0).getBonus() << endl;
-	//		}
-	//	}
-	//}
-	//else
-	//	ofs << 0;
-
-	ofs.close();
-
-
-	
-}
 
 void Game::loadCharacter()
 {
@@ -247,7 +183,6 @@ void Game::loadCharacter()
 	string Validation;
 	string type;
 	string characterType;
-	string items;
 	int currentHitPoints;
 	int level;
 	int ability;
@@ -257,7 +192,8 @@ void Game::loadCharacter()
 	int size;
 	int influenceSize;
 	int equippedSize;
-	map<string, Character*> equipedItems;
+
+
 
 
 	cout << "Load File: ";
@@ -284,31 +220,45 @@ void Game::loadCharacter()
 
 	ifs >> characterType;
 	character->setCharacterType(characterType);
+
 	ifs >> level;
-	//for (int i = 1; i < level; i++)
-//	{
-		character->setLevel(level);
-//	}
+	character->setLevel(level);
+	
 	ifs >> currentHitPoints;
 	character->setHitPoints(currentHitPoints);
-	
+
 	for (int i = 0; i < 6; i++)
 	{
 		ifs >> ability;
 		character->setAbilityScores(i, ability);
 	}
-		
+
 	ifs >> equippedSize;
 	if (equippedSize > 0)
 	{
 		for (int i = 0; i < equippedSize; i++)			//save equipped items
 		{
-			//ifs >> items;
-			//equipedItems.insert(items);
+			Item* itemFromFile;
+			Enhancement* itemEnhacement;
+
+			ifs >> type;
+			itemFromFile->setType(type);
+			ifs >> bonus;
+
+			ifs >> influenceSize;
+			for (int j = 0; j < influenceSize; j++)
+			{
+				ifs >> type;
+				ifs >> bonus;
+			}
+			itemEnhacement = new Enhancement(type, bonus);
+			itemFromFile->setInfluences(*itemEnhacement);
 		}
 
 	}
-	
+
+
+
 	ifs >> backpackSize;
 	if (backpackSize != 0)
 	{
@@ -555,7 +505,6 @@ vector<Item*> Game::getCharacterEquipedItems() {
 	}
 	delete i;
 	return equipedItems;
-}
 
 vector<Chest*> Game::createChestsFromMap() {
 	// map get  all chests position _map

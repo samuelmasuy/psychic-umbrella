@@ -578,3 +578,56 @@ bool Fighter::isEquiped(string s) {
 	return false;
 }
 
+//! Implementation of printEquippedItems
+//! @param prints every item equipped onto screen
+void Fighter::printEquippedItems()
+{
+	cout << endl;
+}
+
+
+void Fighter::combat(Character* monster)
+{
+	int totalDmg;
+/*
+	for (int i = 0; i < attacksPerRound; i++)
+	{
+		//roll dice for dmg
+		int roll = diceRoll(20);
+
+		switch (attacksPerRound)
+		{
+			case 1:
+			{
+					playertotalDmg = bonusAttack[0] + getDamageBonus() + roll;
+					monsterTotDmg = monster->get
+					cout << "First blow: " << totalDmg << "dmg" << endl;
+					 monster->hit(totalDmg);
+			}break;
+			
+			case 2:
+			{
+					  totalDmg = bonusAttack[1] + getDamageBonus() + roll;
+					  cout << "Second blow: " << totalDmg << "dmg" << endl;
+					   monster->hit(totalDmg);
+			}break;
+			case 3:
+			{
+					  totalDmg = bonusAttack[2] + getDamageBonus() + roll;
+					  cout << "Third blow: " << totalDmg << "dmg" << endl;
+					  monster->hit(totalDmg);
+			}break;
+			case 4:
+			{	
+					  totalDmg = bonusAttack[3] + getDamageBonus() + roll;
+					  cout << "Forth blow: " << totalDmg << "dmg" << endl;
+					  monster->hit(totalDmg);
+			}break;
+
+		}
+	}
+*/
+
+}
+=======
+>>>>>>> c635bc621a57a254c18b766b348702ca1905a06f
