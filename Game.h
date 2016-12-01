@@ -89,6 +89,7 @@ private:
 	void initializeCharacterPositionOnMap();
 	vector<Item*> getCharacterEquipedItems();
 	vector<Chest*> createChestsFromMap();
+	vector<Character*> createMonstersFromMap();
 	void move(int, int, int, int);
 
 	/**
