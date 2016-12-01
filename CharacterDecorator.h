@@ -22,10 +22,8 @@ class CharacterDecorator : public Character {
    *
    * @param decoratedCharacter a Character.
    */
-  CharacterDecorator(Character *decoratedCharacter, Item* item) {
+  CharacterDecorator(Character *decoratedCharacter) {
     this->decoratedCharacter = decoratedCharacter;
-	this->item = item;
-
   }
   virtual ~CharacterDecorator() {
   }
@@ -33,7 +31,10 @@ class CharacterDecorator : public Character {
   * Provides the wrapper with the Character interface and delegates
   * its methods to the wrapped Character object.
   */
-  void playerInfo();
+  void unequip(string);
+  void setEquippedItems(map<string, Character*>);
+  map<string, Character*> getEquippedItems();
+  void printEquippedItems();
 
   //logical game functions
   void setCharacterType(string type) {
@@ -65,6 +66,9 @@ class CharacterDecorator : public Character {
   void setAttackBonus() {
     decoratedCharacter->setAttackBonus();
   }
+  void playerInfo() {
+    decoratedCharacter->playerInfo();
+  }
   bool equipFromBackpack(int i) {
     return decoratedCharacter->equipFromBackpack(i);
   }
@@ -74,11 +78,9 @@ class CharacterDecorator : public Character {
   bool equipItem(Item* i) {
     return decoratedCharacter->equipItem(i);
   }
-
   void printBackPackItems() {
-	return decoratedCharacter->printBackPackItems();
+    decoratedCharacter->printBackPackItems();
   }
-
   void addToBackpack(Item i) {
     decoratedCharacter->addToBackpack(i);
   }
@@ -96,7 +98,6 @@ class CharacterDecorator : public Character {
     decoratedCharacter->loadCharacter();
   }
 */
-  void printEquippedItems();
 
   void setLevel(int lvl) {
     decoratedCharacter->setLevel(lvl);
@@ -199,6 +200,6 @@ class CharacterDecorator : public Character {
 	  decoratedCharacter->setAbilityScores(i, abl);
   }
  protected:
-	 Character* decoratedCharacter;
-	 Item* item;
+  Character *decoratedCharacter;
+  map<string, Character*> equipedItems;
 };

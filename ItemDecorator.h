@@ -7,7 +7,6 @@
  */
 #pragma once
 
-#include <iostream>
 #include <string>
 #include "Character.h"
 #include "CharacterDecorator.h"
@@ -38,16 +37,12 @@ class ItemDecorator: public CharacterDecorator {
   int getConstitution();
   int getCharisma();
   int getDexterity();
-  Item* unEquip(string s);
-  bool isEquiped(string s);
+  void playerInfo();
  private:
-	 Item *i;
-	 bool isEmpty;
-	 bool isWearing;
-	 int intelligence;
-	 int wisdom;
-	 int strength;
-	 int constitution;
-	 int charisma;
-	 int dexterity;
+  int intelligence;
+  int wisdom;
+  int strength;
+  int constitution;
+  int charisma;
+  int dexterity;
 };

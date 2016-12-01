@@ -124,7 +124,7 @@ void Game::saveCharacter(){
 	string type = "";
 	string saveFile;
 	map<string, Character*> equipedItems;
-	//equipedItems = character->getEquippedItems();
+	equipedItems = character->getEquippedItems();
 
 	
 	cout << "Enter name of file being saved: ";
