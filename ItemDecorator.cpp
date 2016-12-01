@@ -8,9 +8,13 @@
 
 using namespace std;
 
-ItemDecorator::ItemDecorator(Character * decoratedCharacter, Item * item) : CharacterDecorator(decoratedCharacter)
+ItemDecorator::ItemDecorator(Character * decoratedCharacter, Item * item) : CharacterDecorator(decoratedCharacter, item)
 {
-	string item_type = item->getType();
+	this->decoratedCharacter = decoratedCharacter;
+	this->item = item;
+	isEmpty = false;
+	isWearing = true;
+
 	string type = item->getInfluences().at(0).getType();
 
 	if (type == "intelligence") {
@@ -31,59 +35,57 @@ ItemDecorator::ItemDecorator(Character * decoratedCharacter, Item * item) : Char
 	else if (type == "charisma") {
 		charisma = item->getInfluences().at(0).getBonus();
 	}
-	map<string, Character*> equip = decoratedCharacter->getEquippedItems();
-	equip[item_type] = decoratedCharacter;
-	setEquippedItems(equip);
 }
 
 int ItemDecorator::getIntelligence() {
-  return CharacterDecorator::getIntelligence() + intelligence;
+	return decoratedCharacter->getIntelligence() + (isEmpty ? 0 : intelligence);
 }
+
 int ItemDecorator::getWisdom() {
-  return CharacterDecorator::getWisdom() + wisdom;
+	return decoratedCharacter->getIntelligence() + (isEmpty ? 0 : wisdom);
 }
+
 int ItemDecorator::getStrength() {
-  return CharacterDecorator::getStrength() + strength;
+	return decoratedCharacter->getIntelligence() + (isEmpty ? 0 : strength);
 }
+
 int ItemDecorator::getConstitution() {
-  return CharacterDecorator::getConstitution() + constitution;
+	return decoratedCharacter->getConstitution() + (isEmpty ? 0 : constitution);
 }
-int ItemDecorator::getCharisma() {
-  return CharacterDecorator::getCharisma() + charisma;
-}
-int ItemDecorator::getDexterity() {
-	return CharacterDecorator::getDexterity() + dexterity;
-}
-void ItemDecorator::playerInfo()
+
+int ItemDecorator::getCharisma()
 {
-	cout << "-------------------------------\n";
-	cout << "Class Type: " << CharacterDecorator::getCharacterType() << endl;
-	cout << "Level: " << CharacterDecorator::getLevel() << endl;
-	cout << "Total HP: " << CharacterDecorator::getHitPoints() << endl;
-	cout << "Total armor: " << CharacterDecorator::armorModifier() << endl;
-	cout << "Strenght: " << getStrength() << endl;
-	cout << "Dexterity: " << getDexterity() << endl;
-	cout << "Constituion: " << getConstitution() << endl;
-	cout << "Intelect: " << getIntelligence() << endl;
-	cout << "Wizdom: " << getWisdom() << endl;
-	cout << "Charisma: " << getCharisma() << endl;
-	cout << "Damange bonus: " << CharacterDecorator::getDamageBonus() << endl;
-	cout << "Attack bonus: ";
-	if (CharacterDecorator::getAttacksPerRound() > 1)
-	{
-		for (int i = 0; i < CharacterDecorator::getAttacksPerRound(); i++)
-		{
-			cout << *(CharacterDecorator::getAttackBonus() + i) << " ; ";
-		}
-		cout << endl;
-	}
-	else
-		cout << *(CharacterDecorator::getAttackBonus() + 0) << " ";
-
-
-	cout << "Attacks per/round: " << CharacterDecorator::getAttacksPerRound() << endl;
-	cout << "-------------------------------\n";
+	return decoratedCharacter->getCharisma() + (isEmpty ? 0 : charisma);
 }
+int ItemDecorator::getDexterity()
+{
+	return decoratedCharacter->getDexterity() + (isEmpty ? 0 : dexterity);
+}
+
+Item * ItemDecorator::unEquip(string s) {
+	string item_type = item->getType();
+	if (!isEmpty) {
+		if (s == item_type) {
+			isEmpty = true;
+			isWearing = false;
+			return item;
+		}
+	}
+	return decoratedCharacter->unEquip(s);
+}
+
+bool ItemDecorator::isEquiped(string s) {
+	string item_type = item->getType();
+	if (isWearing) {
+		if (s == item_type) {
+			isWearing = true;
+			return isWearing;
+		}
+	}
+	return decoratedCharacter->isEquiped(s);
+}
+
+
 
 // nimble = new Helmet(nimble)
 // Helmet::Helmet(Character *decoratedCharacter) : CharacterDecorator(decoratedCharacter) {

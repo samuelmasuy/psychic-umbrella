@@ -8,7 +8,6 @@
 #include <random>
 #include <fstream>
 #include <iostream>
-#include "ItemContainer.h"
 
 
 using namespace std;
@@ -639,21 +638,6 @@ void Fighter::addToBackpack(Item newItem){
 	backpack.addItem(newItem);
 }
 
-//! Implementation of printEquippedItems
-//! @param prints every item equipped onto screen
-void Fighter::printEquippedItems()
-{
-	string type;
-	cout << "---EQUIPPED ITEMS---\n";
-	for (int i= 0; i < MAX_ITEMS_EQUIPPED; i++)
-	{
-		type = equipment[i].getType();
-		if ( type != "")
-			cout << equipment[i].getType() << " {" << equipment[i].getInfluences().at(0).getType() << " +" << equipment[i].getInfluences().at(0).getBonus() << "}" << endl;
-
-	}
-}
-
 //! Implementation of mutator method of setPositionX
 //! @param sets position X of Fighter
 void Fighter::setPositionX(int x){
@@ -678,17 +662,21 @@ int Fighter::getPositionY(){
 	return positionY;
 }
 
-// decorator
-void Fighter::unequip(string t) {
-  throw "Item not found";
+Item* Fighter::unEquip(string s) {
+	return NULL;
 }
-void Fighter::setEquippedItems(map<string, Character*> m) {
-  throw "Cannot set equiped items";
+
+bool Fighter::isEquiped(string s) {
+	return false;
 }
-map<string, Character*> Fighter::getEquippedItems() {
-  map<string, Character*> empty;
-  return empty;
+
+//! Implementation of printEquippedItems
+//! @param prints every item equipped onto screen
+void Fighter::printEquippedItems()
+{
+	cout << endl;
 }
+
 
 void Fighter::combat(Character* monster)
 {

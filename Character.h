@@ -70,8 +70,11 @@ public:
 	virtual int getDamageBonus() = 0;
 
   //character decorator
-  virtual void unequip(string) = 0;
-  virtual void setEquippedItems(map<string, Character*>) = 0;
-  virtual map<string, Character*> getEquippedItems() = 0;
+  //virtual void unequip(string) = 0;
+//  virtual void setEquippedItems(map<string, Character*>) = 0;
+ // virtual map<string, Character*> getEquippedItems() = 0;
+	virtual bool isEquiped(string) = 0;
+	virtual Item* unEquip(string) = 0;
+
 };
 
