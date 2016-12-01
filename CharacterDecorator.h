@@ -192,16 +192,6 @@ class CharacterDecorator : public Character {
   void setAbilityScores(int i, int abl) {
     decoratedCharacter->setAbilityScores(i, abl);
   }
-
-  ItemContainer getBackPack()
-  {
-	  return decoratedCharacter->getBackPack();
-  }
-
-  void setAbilityScores(int i, int abl)
-  {
-	  decoratedCharacter->setAbilityScores(i, abl);
-  }
  protected:
   Character* decoratedCharacter;
   Item* item;
