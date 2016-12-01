@@ -107,6 +107,8 @@ void Game::play() {
 
 	int characterPositionX = character->getPositionX();
 	int characterPositionY = character->getPositionY();
+	enemiesDefeated = false;
+	enemiesDefeated = (_map->countMonsters() == 0);
 
 	printGameUsage();
 
@@ -126,32 +128,38 @@ void Game::play() {
 				system("cls");
 				move(characterPositionX, characterPositionY, characterPositionX + 1, characterPositionY);
 				_map->print();
+				game->printGameUsage();
 				break;
 			case 'a':
 				system("cls");
 				move(characterPositionX, characterPositionY, characterPositionX - 1, characterPositionY);
 				_map->print();
+				game->printGameUsage();
 				break;
 			case 'w':
 				system("cls");
 				move(characterPositionX, characterPositionY, characterPositionX, characterPositionY - 1);
 				_map->print();
+				game->printGameUsage();
 				break;
 			case 's':
 				system("cls");
 				move(characterPositionX, characterPositionY, characterPositionX, characterPositionY + 1);
 				_map->print();
+				game->printGameUsage();
 				break;
 			case 'c':
 				system("cls");
 				character->playerInfo();
 				_map->print();
+				game->printGameUsage();
 				break;
 			case 'i':
 				system("cls");
 				character->printEquippedItems();
 				character->printBackPackItems();
 				_map->print();
+				game->printGameUsage();
 				break;
 			case 'e':
 				system("cls");
@@ -159,6 +167,7 @@ void Game::play() {
 				cin >> level;
 				character->setLevel(level);
 				_map->print();
+				game->printGameUsage();
 				break;
 			case 'u':
 				system("cls");
@@ -167,16 +176,19 @@ void Game::play() {
 				// unequip from character
 				character->unequipItem(itemType);
 				_map->print();
+				game->printGameUsage();
 				break;
 			case 'x':
 				system("cls");
 				saveCharacter();
 				_map->print();
+				game->printGameUsage();
 				break;
 			case 'l':
 				system("cls");
 				loadCharacter();
 				_map->print();
+				game->printGameUsage();
 				break;
 			case 'b':
 				system("cls");
@@ -186,10 +198,41 @@ void Game::play() {
 				cin >> itemIndexInBackpack;
 				character->equipFromBackpack(itemIndexInBackpack);
 				_map->print();
+				game->printGameUsage();
 				break;
 			case 'h':
 				system("cls");
 				printGameUsage();
+				break;
+			case '1':
+				system("cls");
+				Characterlog();
+				_map->print();
+				game->printGameUsage();
+				break;
+			case '2':
+				system("cls");
+				Gamelog();
+				_map->print();
+				game->printGameUsage();
+				break;
+			case '3':
+				system("cls");
+				AttackLog();
+				_map->print();
+				game->printGameUsage();
+				break;
+			case '4':
+				system("cls");
+				DiceLog();
+				_map->print();
+				game->printGameUsage();
+				break;
+			case '5':
+				system("cls");
+				AllLogs();
+				_map->print();
+				game->printGameUsage();
 				break;
 			case 'q':
 				system("cls");
@@ -384,6 +427,7 @@ void Game::stop() {
 	system("CLS");
 	character->levelUp();
 	cout << "Congratulations you finish the level!!" << endl;
+	if (Logger::isOn()) Logger::fout() << "Level finished" << endl;
 	cout << "Here is your character info: " << endl;
 	character->playerInfo();
 	cout << endl << "Press any key to continue the game." << endl;
@@ -395,23 +439,22 @@ void Game::stop() {
 }
 
 
+
 void Game::initializeCharacterPositionOnMap() {
 	int ip, jp;
 	ip = _map->getEntranceRow();
 	jp = _map->getEntranceColumn();
 	_map->SetPlayerPos(ip, jp);
 
-
 	character->setPositionX(jp);
 	character->setPositionY(ip);
 
 	_map->Display();
 
+	
 	/*
-	int ip, jp;
-	_map->GetPlayerPos(ip, jp);
-	character->setPositionX(jp);
-	character->setPositionY(ip);
+	int iELF, jELF;
+    _map->GetEnemyPos(CHAR_ELF, iELF, jELF);
 	*/
 }
 void Game::move(int old_x, int old_y, int new_x, int new_y) {
@@ -419,9 +462,9 @@ void Game::move(int old_x, int old_y, int new_x, int new_y) {
 	int mapColumns = _map->GetCols();
 	// Check for valid move
 	if (!(new_y >= mapRows || new_y < 0 || new_x >= mapColumns || new_x < 0)) {
+		if (Logger::isOn())Logger::fout() << "Position: " << character->getCharacterType() << " has moved: " << character->getPositionY() + 1 << "," << character->getPositionX() + 1 << endl;
 		char new_cell_type = _map->retrieveCell(new_y, new_x);
-		// cout << new_cell_type;
-		// cout << "old_x " << old_x << "old_y " << old_y << "new_x " << new_x << "new_y " << new_y;
+		
 		switch (new_cell_type) {
 		case CHAR_WALL:
 			cout << "hiting a WALL";
@@ -435,9 +478,16 @@ void Game::move(int old_x, int old_y, int new_x, int new_y) {
 			_map->fillCell(new_y, new_x, CHAR_PLAYER);
 			break;
 		case CHAR_EXIT:
-			// set character location to the new cell
-			character->setPositionX(new_x);
-			character->setPositionY(new_y);
+			if (enemiesDefeated)
+			{
+				// set character location to the new cell
+				character->setPositionX(new_x);
+				character->setPositionY(new_y);
+			}
+			else
+			{
+				cout << "Cannot exit the map until all Monsters have been defeated" << endl;
+			}
 
 			break;
 		case CHAR_DOOR:
