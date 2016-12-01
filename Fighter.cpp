@@ -67,6 +67,10 @@ void Fighter::setCharisma(int cha)
 	abilityScores[5] = cha;
 }
 
+void Fighter::setStrategy(Strategy* inputStrategy) {
+	characterStrategy = inputStrategy;
+}
+
 int Fighter::getStrength()
 {
 	return abilityScores[0];
@@ -90,6 +94,10 @@ int Fighter::getWisdom()
 int Fighter::getCharisma()
 {
 	return abilityScores[5];
+}
+
+Strategy* Fighter::getStrategy(){
+	return characterStrategy;
 }
 
 Fighter::Fighter()
@@ -690,45 +698,4 @@ map<string, Character*> Fighter::getEquippedItems() {
   return empty;
 }
 
-void Fighter::combat(Character* monster)
-{
-	int totalDmg;
-/*
-	for (int i = 0; i < attacksPerRound; i++)
-	{
-		//roll dice for dmg
-		int roll = diceRoll(20);
 
-		switch (attacksPerRound)
-		{
-			case 1:
-			{
-					totalDmg = bonusAttack[0] + getDamageBonus() + roll;
-					cout << "First blow: " << totalDmg << "dmg" << endl;
-					monster->MonsterHp -= total;
-			}break;
-			
-			case 2:
-			{
-					  totalDmg = bonusAttack[1] + getDamageBonus() + roll;
-					  cout << "Second blow: " << totalDmg << "dmg" << endl;
-					  monster->MonsterHp -= total;
-			}break;
-			case 3:
-			{
-					  totalDmg = bonusAttack[2] + getDamageBonus() + roll;
-					  cout << "Third blow: " << totalDmg << "dmg" << endl;
-					  monster->MonsterHp -= total;
-			}break;
-			case 4:
-			{	
-					  totalDmg = bonusAttack[3] + getDamageBonus() + roll;
-					  cout << "Forth blow: " << totalDmg << "dmg" << endl;
-					  monster->MonsterHp -= total;
-			}break;
-
-		}
-	}
-*/
-
-}

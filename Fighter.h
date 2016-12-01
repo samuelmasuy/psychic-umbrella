@@ -7,7 +7,7 @@
 #include "Subject.h"
 #include "ItemContainer.h"
 #include "Character.h"
-
+#include "Strategy.h"
 
 const int MAX_ITEMS_EQUIPPED = 7;
 using namespace std;
@@ -54,6 +54,7 @@ public:
 	void setCharisma(int);
 	void setArmor();
 	void setHitPoints(int);
+	void setStrategy(Strategy*);
 
 	//game accessor methods
 	int getHitPoints();
@@ -68,6 +69,7 @@ public:
 	virtual int getIntelligence();
 	virtual int getWisdom();
 	virtual int getCharisma();
+	Strategy* getStrategy();
 	int armorModifier();
 	int getAttacksPerRound();
 	string getCharacterType();
@@ -95,6 +97,7 @@ protected:
 	int experience, gold;
 	int* bonusAttack = new int (1);
 	int armor;
+	Strategy* characterStrategy;
 
 private:
 	string characterType;
