@@ -534,7 +534,7 @@ vector<Character*> Game::createMonstersFromMap() {
 	MonsterBuilder* mb = nullptr;
 	Character* monster = nullptr;
 
-	for (int i = 0; i < 6; i++) {
+	for (int i = 1; i <= 6; i++) {
 		int x = 0;
 		int y = 0;
 		bool found = _map->FindItem('0' + i, x, y);
