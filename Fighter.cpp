@@ -72,6 +72,12 @@ void Fighter::setCharisma(int cha)
 	abilityScores[5] = cha;
 }
 
+void Fighter::setStrategy(Strategy* inputStrategy) {
+	characterStrategy = inputStrategy;
+}
+int Fighter::getHitPoints() {
+	return currentHitPoints;
+}
 int Fighter::getStrength()
 {
 	return abilityScores[0];
@@ -95,6 +101,10 @@ int Fighter::getWisdom()
 int Fighter::getCharisma()
 {
 	return abilityScores[5];
+}
+
+Strategy* Fighter::getStrategy(){
+	return characterStrategy;
 }
 
 Fighter::Fighter()
@@ -143,13 +153,6 @@ void Fighter::hit(int damage)
 {
 	currentHitPoints = currentHitPoints - damage;
 	notify();
-}
-
-//! Implementation of a getter method for currentHitPoints
-//! @return int: value of currentHitPoints
-int Fighter::getHitPoints()
-{
-	return currentHitPoints;
 }
 
 void Fighter::setHitPoints(int hp)
@@ -626,3 +629,5 @@ void Fighter::combat(Character* monster)
 */
 
 }
+=======
+>>>>>>> c635bc621a57a254c18b766b348702ca1905a06f

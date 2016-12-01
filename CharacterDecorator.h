@@ -76,6 +76,14 @@ class CharacterDecorator : public Character {
     decoratedCharacter->levelUp();
   }
 
+  void setStrategy(Strategy* inputStrategy){
+	  decoratedCharacter->setStrategy(inputStrategy);
+  }
+
+  Strategy* getStrategy(){
+	  return decoratedCharacter->getStrategy();
+  }
+
   //saving and loading character
 /*
   void saveCharacter() {
