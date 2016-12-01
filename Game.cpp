@@ -14,6 +14,13 @@ void Game::play() {
 
 	vector<Character*> monsters;
 
+	cout << "equiped items in game";
+	vector<Item*> equiped = getCharacterEquipedItems();
+	for (int i = 0; i <= equiped.size(); i++)
+	{
+		equiped[i]->printItem();
+	}
+
 	Character* monster = NULL;
 
 	MonsterBuilder* monsterBuilder = NULL;
@@ -586,4 +593,43 @@ void Game::printGameUsage() {
 	cout << "Use 3 to toggle on/off the Attack Log." << endl;
 	cout << "Use 4 to toggle on/off the Dice log." << endl;
 	cout << "Use 5 to toggle on/off All the logs" << endl;
+}
+
+
+vector<Item*> Game::getCharacterEquipedItems() {
+	Item* i = nullptr;
+	vector<Item*> equipedItems;
+	if (character->isEquiped("ring")) {
+		i = character->retrieveItem("ring");
+		equipedItems.push_back(i);
+	}
+	if (character->isEquiped("belt")) {
+		i = character->retrieveItem("belt");
+		equipedItems.push_back(i);
+	}
+	if (character->isEquiped("boots")) {
+		i = character->retrieveItem("boots");
+		equipedItems.push_back(i);
+	}
+	if (character->isEquiped("helmet")) {
+		i = character->retrieveItem("helmet");
+		equipedItems.push_back(i);
+	}
+	if (character->isEquiped("shield")) {
+		i = character->retrieveItem("shield");
+		equipedItems.push_back(i);
+	}
+	if (character->isEquiped("boots")) {
+		i = character->retrieveItem("boots");
+		equipedItems.push_back(i);
+	}
+	if (character->isEquiped("weapon")) {
+		i = character->retrieveItem("weapon");
+		equipedItems.push_back(i);
+	}
+	if (character->isEquiped("armor")) {
+		i = character->retrieveItem("armor");
+		equipedItems.push_back(i);
+	}
+	return equipedItems;
 }

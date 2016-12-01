@@ -86,6 +86,8 @@ class CharacterDecorator : public Character {
   }
 */
   void printEquippedItems();
+  
+  Item* retrieveItem(string);
 
   void setLevel(int lvl) {
     decoratedCharacter->setLevel(lvl);

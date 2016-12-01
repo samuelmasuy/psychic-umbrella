@@ -78,6 +78,7 @@ public:
 	Item* unEquip(string);
 	bool isEquiped(string);
 	void printEquippedItems();
+	Item* retrieveItem(string s);
   //combat
   void combat(Character*);
 

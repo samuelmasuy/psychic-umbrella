@@ -65,6 +65,13 @@ void CharacterDecorator::printEquippedItems() {
 	decoratedCharacter->printEquippedItems();
 }
 
+Item* CharacterDecorator::retrieveItem(string s) {
+	if (isEquiped(item->getType())) {
+		return item;
+	}
+	return decoratedCharacter->retrieveItem(s);
+}
+
 // Character* CharacterDecorator::remove(string removeType) {
 //   if(removeType.compare(type) == 0) {
 //     Character* childRef = decoratedCharacter;

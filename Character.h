@@ -75,6 +75,7 @@ public:
 //  virtual void setEquippedItems(map<string, Character*>) = 0;
  // virtual map<string, Character*> getEquippedItems() = 0;
 	virtual bool isEquiped(string) = 0;
+	virtual Item* retrieveItem(string) = 0;
 	virtual Item* unEquip(string) = 0;
 };
 

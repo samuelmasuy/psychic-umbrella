@@ -564,7 +564,11 @@ int Fighter::getPositionY(){
 }
 
 Item* Fighter::unEquip(string s) {
-	return NULL;
+	return nullptr;
+}
+
+Item* Fighter::retrieveItem(string s) {
+	return nullptr;
 }
 
 bool Fighter::isEquiped(string s) {

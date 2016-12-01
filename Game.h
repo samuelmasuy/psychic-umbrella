@@ -87,6 +87,7 @@ private:
 	Game* game;
 	bool enemiesDefeated;
 	void initializeCharacterPositionOnMap();
+	vector<Item*> getCharacterEquipedItems();
 	void move(int, int, int, int);
 
 	/**

@@ -120,9 +120,9 @@ int main(int argc, char const* argv[]) {
   cout << "Here are the stats of your character" << endl;
   character->playerInfo();
 
-  cout << "Unequiping the ring::" << endl;
-  Item* r = character->unEquip("ring");  
-  r->printItem();
+  //cout << "Unequiping the ring::" << endl;
+  //Item* r = character->unEquip("ring");  
+  //r->printItem();
   cout << endl;
   character->playerInfo();
   cout << endl;
