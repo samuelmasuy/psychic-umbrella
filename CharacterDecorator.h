@@ -131,8 +131,9 @@ class CharacterDecorator : public Character {
   int* getAbilityScores() {
     return decoratedCharacter->getAbilityScores();
   }
+
   int getAbilityScore(int ability) {
-    return decoratedCharacter->getAbilityScore(ability);
+	  return decoratedCharacter->getAbilityScore(ability);
   }
   int* getAttackBonus() {
     return decoratedCharacter->getAttackBonus();
@@ -190,6 +191,16 @@ class CharacterDecorator : public Character {
 
   void setAbilityScores(int i, int abl) {
     decoratedCharacter->setAbilityScores(i, abl);
+  }
+
+  ItemContainer getBackPack()
+  {
+	  return decoratedCharacter->getBackPack();
+  }
+
+  void setAbilityScores(int i, int abl)
+  {
+	  decoratedCharacter->setAbilityScores(i, abl);
   }
  protected:
   Character* decoratedCharacter;

@@ -137,14 +137,8 @@ void Game::saveCharacter(){
 	ofs << character->getCharacterType() << endl;
 	ofs << character->getLevel() << endl;
 	ofs << character->getHitPoints() << endl;
-	ofs << character->getStrength() << endl;
-	ofs << character->getDexterity() << endl;
-	ofs << character->getConstitution() << endl;
-	ofs << character->getIntelligence() << endl;
-	ofs << character->getWisdom() << endl;
-	ofs << character->getCharisma() << endl;
-	//	for (int i = 0; i < 6; i++)
-	//		ofs << abilityScores[i] << endl;
+		for (int i = 0; i < 6; i++)
+			ofs <<  character->getAbilityScore(i) << endl;
 	//ofs << character->armorModifier() << endl;
 	//ofs << character->getDamageBonus() << endl;
 
@@ -152,10 +146,10 @@ void Game::saveCharacter(){
 	for (map<string, Character*>::iterator it = equipedItems.begin(); it != equipedItems.end(); ++it) {
 		ofs << it->first << "\n";
 	}
-	/*
-	ofs << equippedSize << endl;
-	for (int i = 0; i < MAX_ITEMS_EQUIPPED; i++)
+/*	
+	for (int i = 0; i < equipedItems.size(); i++)
 	{
+		
 		type = equipment[i].getType();
 		if (type != "")
 		{
@@ -167,24 +161,25 @@ void Game::saveCharacter(){
 				ofs << equipment[i].getInfluences().at(0).getBonus() << endl;
 			}
 		}
+		
 	}
-
-	if (backpack.getSize() != 0){
-		ofs << backpack.getSize() << endl;
-		for (int i = 0; i < backpack.getSize(); i++)
+*/	
+	if (character->getBackPack().getSize() != 0){
+		ofs << character->getBackPack().getSize() << endl;
+		for (int i = 0; i < character->getBackPack().getSize(); i++)
 		{
-			ofs << backpack.getItems().at(i).getType() << endl;
-			ofs << backpack.getItems()[i].getInfluences().size() << endl;
-			for (int j = 0; j < backpack.getItems()[i].getInfluences().size(); j++)
+			ofs << character->getBackPack().getItems().at(0).getType() << endl;
+			ofs << character->getBackPack().getItems()[i].getInfluences().size() << endl;
+			for (int j = 0; j < character->getBackPack().getItems()[i].getInfluences().size(); j++)
 			{
-				ofs << backpack.getItems()[i].getInfluences().at(0).getType() << endl;
-				ofs << backpack.getItems()[i].getInfluences().at(0).getBonus() << endl;
+				ofs << character->getBackPack().getItems()[i].getInfluences().at(0).getType() << endl;
+				ofs << character->getBackPack().getItems()[i].getInfluences().at(0).getBonus() << endl;
 			}
 		}
 	}
 	else
 		ofs << 0;
-*/
+
 	ofs.close();
 
 
@@ -200,12 +195,7 @@ void Game::loadCharacter()
 	string items;
 	int currentHitPoints;
 	int level;
-	int str;
-	int dex;
-	int con;
-	int intel;
-	int wis;
-	int cha;
+	int ability;
 	bool chooseFileName = false;
 	int backpackSize;
 	int bonus;
@@ -240,29 +230,19 @@ void Game::loadCharacter()
 	ifs >> characterType;
 	character->setCharacterType(characterType);
 	ifs >> level;
-//	for (int i = 0; i < level; i++)
+	//for (int i = 1; i < level; i++)
 //	{
-	character->setLevel(level);
+		character->setLevel(level);
 //	}
 	ifs >> currentHitPoints;
 	character->setHitPoints(currentHitPoints);
 	
-	ifs >> str;
-	character->setStrength(str);
-	ifs >> dex;
-	character->setDexterity(dex);
-	ifs >> con;
-	character->setConstitution(con);
-	ifs >> intel;
-	character->setIntelligence(intel);
-	ifs >> wis;
-	character->setWisdom(wis);
-	ifs >> cha;
-	character->setCharisma(cha);
-	//ifs >> damange;
-	//character->set
-	//ifs >> armor;
-	//ifs >> 
+	for (int i = 0; i < 6; i++)
+	{
+		ifs >> ability;
+		character->setAbilityScores(i, ability);
+	}
+		
 	ifs >> equippedSize;
 	if (equippedSize > 0)
 	{
@@ -274,7 +254,7 @@ void Game::loadCharacter()
 
 	}
 	
-	/*ifs >> backpackSize;
+	ifs >> backpackSize;
 	if (backpackSize != 0)
 	{
 		Item* myItem;
@@ -293,15 +273,14 @@ void Game::loadCharacter()
 				ifs >> bonus;
 				myEnhacements = new Enhancement(type, bonus);
 				myItem->setInfluences(*myEnhacements);
-				backpack.addItem(*myItem);
+				character->addToBackpack(*myItem);
 				delete myItem;
 				delete myEnhacements;
-				//backpack.getItems()[i].getInfluences()[j].setEnhacement(type, bonus);
 			}
 
 		}
 	}
-*/
+
 	ifs.close();
 
 }
