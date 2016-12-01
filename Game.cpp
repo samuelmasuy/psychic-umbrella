@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 /**
 * @file Game.cpp
 * @brief Implementation of the Game walkthought.
@@ -505,6 +504,7 @@ vector<Item*> Game::getCharacterEquipedItems() {
 	}
 	delete i;
 	return equipedItems;
+}
 
 vector<Chest*> Game::createChestsFromMap() {
 	// map get  all chests position _map
