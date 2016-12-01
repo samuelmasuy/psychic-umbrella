@@ -37,6 +37,21 @@ using namespace std;
 typedef struct Coord2D
 {
 	int x, y;
+
+	Coord2D()
+	{
+		x = y = 0;
+	}
+	Coord2D(int a, int b)
+	{
+		x = a; y = b;
+	}
+
+	Coord2D(const Coord2D &e)
+	{
+		x = e.x;
+		y = e.y;
+	}
 } Coord2D;
 
 class Map : public Subject
@@ -83,6 +98,10 @@ public:
 	/// retrieve the matrix pointer
 	///
 	CELL_TYPE **GetMatrix() { return m_scene; };
+	///
+	/// Returns all occurances of CELL_TYPE as vector of its cords
+	///
+	void FindAll(CELL_TYPE value, vector<Coord2D> &v);
 	///
 	/// basic getters
 	///
