@@ -4,25 +4,22 @@
 #include <iostream>
 #include <fstream>
 #include "Observer.h"
-#include "AttLogger.h"
-#include "DiceLogger.h"
-#include "ChLogger.h"
-#include "Subject.h"
+
 
 using namespace std;
 ///
-///Here is the method to prompt to the user whether they would like to turn the GameLog on or off
+///Here is the method to prompt to the user whether they would like to turn the DiceLog on or off
 ///
-void Gamelog();
+void DiceLog();
 ///
-///Here is the method to prompt to the user whether they would like to turn All the logs on or off
+/// Here is the Dice Logger class, this logs the Dice play, such as number of dice, kind of dice, and additions
 ///
-void AllLogs();
 /**
-* @brief  Here is the method to prompt to the user whether they would like to turn All the logs on or off
+* @brief  Here is the Dice Logger class, this logs the Dice play, such as number of dice, kind of dice, and additions
 */
-class Logger : public Subject
+class DiceLogger
 {
+
 public:
 	///
 	///Here we set a log file to outputted
@@ -49,9 +46,7 @@ public:
 	///
 	static void append(const string &s);
 private:
-
 	static bool g_logOn;
 	static string g_logFileName;
 	static ofstream my_fstream;
 };
-

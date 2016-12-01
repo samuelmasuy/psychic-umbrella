@@ -10,9 +10,15 @@
 using namespace std;
 
 
+
 #define CHAR_EMPTY   ' '
 #define CHAR_PLAYER  'P'
-#define CHAR_MONSTER 'M'
+#define CHAR_ELF     '1' 
+#define CHAR_GOBLIN  '2'
+#define CHAR_LIZARD  '3'
+#define CHAR_SKELETON '4'
+#define CHAR_VINE    '5'
+#define CHAR_MEDUSA  '6'
 #define CHAR_WALL    '*'
 #define CHAR_ENTRY	 'I'
 #define CHAR_EXIT	 'O'
@@ -27,6 +33,11 @@ using namespace std;
 #define CHAR_RING    'r'
 #define CHAR_HELMET  'h'
 */
+
+typedef struct Coord2D
+{
+	int x, y;
+} Coord2D;
 
 class Map : public Subject
 {
@@ -120,6 +131,10 @@ public:
 	/// setting the player position on the map. Return true if the position is valid
 	/// return false if the position is not valid, or contains a wall
 	bool SetPlayerPos(int i, int j);
+
+	bool SetEnemyPos(char enemyType, int i, int j);
+	bool KillEnemy(char enemyType);
+	bool GetEnemyPos(char enemyType, int &i, int &j);
 	///
 	/// return true if the cell x is valid
 	///
@@ -148,6 +163,9 @@ public:
 
 	int getEntranceRow();
 	int getEntranceColumn();
+
+	int countMonsters();
+
 private:
 	///
 	///the scene itselft (a 2D array)
@@ -185,6 +203,8 @@ private:
 	/// player position
 	///
 	int m_iPlayer, m_jPlayer;
+
+	Coord2D m_enemiesPosition[6];
 
 };
 

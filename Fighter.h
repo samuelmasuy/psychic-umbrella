@@ -8,7 +8,7 @@
 #include "ItemContainer.h"
 #include "Character.h"
 #include "Strategy.h"
-
+#include "Logger.h"
 const int MAX_ITEMS_EQUIPPED = 7;
 using namespace std;
 
@@ -32,14 +32,9 @@ public:
 	//virtual int attackBonus();//class to be inherited
 	void setAttackBonus();
 	void playerInfo(); //displaying character info
-	bool equipItem(Item*);
-	bool equipFromBackpack(int);
-	bool unequipItem(string);
 	void printBackPackItems();
-	void addToBackpack(Item);
-	void printEquippedItems();
+	void addToBackpack(Item*);
 	void levelUp();
-
 	//saving and loading character
 	void saveCharacter();
 	void loadCharacter();
@@ -55,6 +50,7 @@ public:
 	void setArmor();
 	void setHitPoints(int);
 	void setStrategy(Strategy*);
+	void setAbilityScores(int, int);
 
 	//game accessor methods
 	int getHitPoints();
@@ -74,22 +70,21 @@ public:
 	int getAttacksPerRound();
 	string getCharacterType();
 	int* getAbilityScores();
+	int getAbilityScore(int);
 	int* getAttackBonus();
 	int getDamageBonus();
+	ItemContainer getBackPack();
 
   //decorator
-  void unequip(string);
-  void setEquippedItems(map<string, Character*>);
-  map<string, Character*> getEquippedItems();
-
-
+	Item* unEquip(string);
+	bool isEquiped(string);
+	void printEquippedItems();
+	Item* retrieveItem(string s);
   //combat
   void combat(Character*);
 
 protected:
 	int currentHitPoints;
-	Item equipment[MAX_ITEMS_EQUIPPED];
-	const Item emptyItem; //itemholder for equipementSlots
 	int level = 1;
 	int abilityScores[6];
 	//int atkBonus;
@@ -102,8 +97,6 @@ protected:
 private:
 	string characterType;
 	ItemContainer backpack;
-	enum equipmentSlots {Helmet, Armor, Weapon, Shield, Ring, Belt, Boots};
 	int positionX;
 	int positionY;
-	int equippedSize;
 };

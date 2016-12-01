@@ -1,11 +1,12 @@
-#include "Logger.h"
-
-bool Logger::g_logOn = true;
-string Logger::g_logFileName = "log.txt";
-ofstream Logger::my_fstream;
+#include "ChLogger.h"
 
 
-bool Logger::setLogFile(const string &filename)
+bool ChLogger::g_logOn = true;
+string ChLogger::g_logFileName = "log.txt";
+ofstream ChLogger::my_fstream;
+
+
+bool ChLogger::setLogFile(const string &filename)
 {
 	g_logFileName = filename;
 	if (my_fstream.is_open())
@@ -21,24 +22,24 @@ bool Logger::setLogFile(const string &filename)
 	return true;
 }
 
-void Logger::logOn()
+void ChLogger::logOn()
 {
 	g_logOn = true;
 }
 
 
-void Logger::logOff()
+void ChLogger::logOff()
 {
 	g_logOn = false;
 }
 
-bool Logger::isOn()
+bool ChLogger::isOn()
 {
 	return g_logOn;
 }
 
 
-ofstream &Logger::fout()
+ofstream &ChLogger::fout()
 {
 	if (my_fstream.is_open())
 		return my_fstream;
@@ -54,7 +55,7 @@ ofstream &Logger::fout()
 	return my_fstream;
 }
 
-void Logger::append(const string &s)
+void ChLogger::append(const string &s)
 {
 	if (g_logOn)
 	{
@@ -73,16 +74,14 @@ void Logger::append(const string &s)
 		my_fstream << s;
 	}
 }
-
-
-void Gamelog()
+void Characterlog()
 {
 	bool enable = false;
 	while (true)
 	{
 		string opc;
 		getline(cin, opc);
-		cout << "Toggle Game log on/off (o/f)? -->";
+		cout << "Toggle Character log on/off (o/f)? -->";
 		if (opc[0] == 'o' || opc[0] == 'O')
 		{
 			enable = true;
@@ -92,54 +91,16 @@ void Gamelog()
 		{
 			enable = false;
 			break;
+
 		}
 		else
 		{
 			continue;
 		}
 	}
+
 	if (enable)
-		Logger::logOn();
+		ChLogger::logOn();
 	else
-		Logger::logOff();
-}
-
-void AllLogs()
-{
-	 bool enable = false;
-	 while (true)
-	{
-		string opc;
-		getline(cin, opc);
-		cout << "Toggle All logs on/off (o/f)? -->" << endl;
-		if (opc[0] == 'o' || opc[0] == 'O')
-		{
-			enable = true;		
-			break;
-		}
-		if (opc[0] == 'f' || opc[0] == 'F')
-		{
-			enable = false;
-			break;
-		}
-		else
-		{
-			continue;
-		}
-		if (enable) 
-		{
-			Logger::logOn();
-			AttLogger::logOn();
-			DiceLogger::logOn();
-			ChLogger::logOn();
-		}
-		else
-		{
-			Logger::logOff();
-			AttLogger::logOff();
-			DiceLogger::logOff();
-			ChLogger::logOff();
-		}
-	}
-
+		ChLogger::logOff();
 }

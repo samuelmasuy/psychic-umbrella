@@ -17,7 +17,7 @@ class ItemBuilder
 public:
 	ItemBuilder();
 	Item * getItem() { return item; }
-	void createNewItem() { item = new Item(); }
+	void createNewItem() { item = new Item(); buildType(); }
 	virtual void buildType() = 0;
 	virtual void buildEnhancement() = 0;
 	~ItemBuilder();

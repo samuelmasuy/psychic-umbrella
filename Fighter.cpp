@@ -8,7 +8,6 @@
 #include <random>
 #include <fstream>
 #include <iostream>
-#include "ItemContainer.h"
 
 
 using namespace std;
@@ -28,7 +27,6 @@ Fighter::Fighter(int str, int dex, int con, int intel, int wis, int cha)
 
 
 	//and set hit points to 10
-	equippedSize = 0;
 	currentHitPoints = 10 + abilityModifier(2);
 	positionX = 0;
 	positionY = 0;
@@ -39,6 +37,13 @@ Fighter::Fighter(int str, int dex, int con, int intel, int wis, int cha)
 	experience = 0;
 	bonusAttack[0] = 0;
 
+}
+int Fighter::getAbilityScore(int index){
+	return abilityScores[index];
+}
+
+void Fighter::setAbilityScores(int i, int ability){
+	abilityScores[i] = ability;
 }
 
 
@@ -70,7 +75,9 @@ void Fighter::setCharisma(int cha)
 void Fighter::setStrategy(Strategy* inputStrategy) {
 	characterStrategy = inputStrategy;
 }
-
+int Fighter::getHitPoints() {
+	return currentHitPoints;
+}
 int Fighter::getStrength()
 {
 	return abilityScores[0];
@@ -107,15 +114,11 @@ Fighter::Fighter()
 	//generate stats for Fighter
 	for (int i = 0; i < TOT_STATS; i++)
 		abilityScores[i] = generateStats();
-	//initializing backpack to emptyItem
-	for (int i = 0; i < MAX_ITEMS_EQUIPPED; i++)
-		equipment[i] = emptyItem;
 
 	//and set hit points to 10
 	currentHitPoints = 10 + abilityModifier(2);
 	level = 1;
 	attacksPerRound = 1;
-	equippedSize = 0;
 
 	notify(); //notifies Fighter observer
 }
@@ -152,13 +155,6 @@ void Fighter::hit(int damage)
 	notify();
 }
 
-//! Implementation of a getter method for currentHitPoints
-//! @return int: value of currentHitPoints
-int Fighter::getHitPoints()
-{
-	return currentHitPoints;
-}
-
 void Fighter::setHitPoints(int hp)
 {
 	currentHitPoints = hp;
@@ -189,9 +185,25 @@ void Fighter::setLevel(int lvl)
 {
 	level = lvl;
 	hpChange();
+	if (level < 5)
+	{
+		attacksPerRound = 1;
+	}
+	else if (level > 5 && level < 11)
+	{
+		attacksPerRound = 2;
+	}
+	else if (level > 10 && level < 16)
+	{
+		attacksPerRound = 3;
+	}
+	else if (level > 15 && level < 21)
+	{
+		attacksPerRound = 4;
+	}
+	
 	setAttackBonus();
 	getDamageBonus();
-
 	notify();
 }
 
@@ -491,147 +503,26 @@ void Fighter::playerInfo()
 
 	cout << "Attacks per/round: " << getAttacksPerRound() << endl;
 	cout << "-------------------------------\n";
-}
+	if (ChLogger::isOn())
+	{
+		ChLogger::fout() << "-------------------------------\n";
+		ChLogger::fout() << "Class Type: " << getCharacterType() << endl;
+		ChLogger::fout() << "Level: " << getLevel() << endl;
+		ChLogger::fout() << "Total HP: " << currentHitPoints << endl;
+		ChLogger::fout() << "Ability scores: ";
+		ChLogger::fout() << " Strength: " << getStrength();
+		ChLogger::fout() << " , Dexterity: " << getDexterity();
+		ChLogger::fout() << " , Constitution: " << getConstitution();
+		ChLogger::fout() << " , Intellect: " << getIntelligence();
+		ChLogger::fout() << " , Wisdom: " << getWisdom();
+		ChLogger::fout() << " , Charisma: " << getCharisma();
+		ChLogger::fout() << endl;
+		ChLogger::fout() << "Damage bonus: " << getDamageBonus() << endl;
+		ChLogger::fout() << "Attacks per Round: " << getAttacksPerRound() << endl;
 
 
-//! Implementation of equip item
-//! @return bool: states whether item has been equipped or not
-bool Fighter::equipItem(Item* item)
-{
-	int backpackSize;
-
-	string type = item->getType();
-
-	if (type == "helmet")
-	{
-		//this = new CharacterDecorator(this, item)
-		equipment[Helmet] = *item;
-
+		ChLogger::fout() << "-------------------------------\n";
 	}
-	else if (type == "armor")
-	{
-		equipment[Armor] = *item;
-	}
-	else if (type == "weapon")
-	{
-		equipment[Weapon] = *item;
-	}
-	else if (type == "shield")
-	{
-		equipment[Shield] = *item;
-	}
-	else if (type == "ring")
-	{
-		equipment[Ring] = *item;
-	}
-	else if (type == "belt")
-	{
-		equipment[Belt] = *item;
-	}
-	else if (type == "boots")
-	{
-		equipment[Boots] = *item;
-	}
-	else
-		return false;
-
-
-
-	equippedSize++;
-	return true;
-
-}
-bool Fighter::equipFromBackpack(int backpackIndex)
-{
-	string type;
-
-	type = backpack.getItemTypeAtIndex(backpackIndex);
-	if (type == "helmet")
-	{
-		equipment[Helmet] = backpack.getItemAtIndex(backpackIndex);
-	}
-	else if (type == "armor")
-	{
-		equipment[Armor] = backpack.getItemAtIndex(backpackIndex);
-	}
-	else if (type == "weapon")
-	{
-		equipment[Weapon] = backpack.getItemAtIndex(backpackIndex);
-	}
-	else if (type == "shield")
-	{
-		equipment[Shield] = backpack.getItemAtIndex(backpackIndex);
-	}
-	else if (type == "ring")
-	{
-		equipment[Ring] = backpack.getItemAtIndex(backpackIndex);
-	}
-	else if (type == "belt")
-	{
-		equipment[Belt] = backpack.getItemAtIndex(backpackIndex);
-	}
-	else if (type == "boots")
-	{
-		equipment[Boots] = backpack.getItemAtIndex(backpackIndex);
-	}
-	else
-		return false;
-	equippedSize++;
-
-
-	//takes it out of backpack
-	backpack.removeItem(backpackIndex);
-
-
-	return true;
-
-}
-
-//! Implementation of unequip item
-//! @return bool: states whether item has been unequipped or not
-bool Fighter::unequipItem(string type)
-{
-	//remove item from correct slot
-	if (type == "helmet")
-	{
-		backpack.addItem(equipment[Helmet]);
-		equipment[Helmet] = emptyItem;
-	}
-	else if (type == "armor")
-	{
-		backpack.addItem(equipment[Armor]);
-		equipment[Armor] = emptyItem;
-
-	}
-	else if (type == "weapon")
-	{
-		backpack.addItem(equipment[Weapon]);
-		equipment[Weapon] = emptyItem;
-	}
-	else if (type == "shield")
-	{
-		backpack.addItem(equipment[Shield]);
-		equipment[Shield] = emptyItem;
-	}
-	else if (type == "ring")
-	{
-		backpack.addItem(equipment[Ring]);
-		equipment[Ring] = emptyItem;
-	}
-	else if (type == "belt")
-	{
-		backpack.addItem(equipment[Belt]);
-		equipment[Belt] = emptyItem;
-	}
-	else if (type == "boots")
-	{
-		backpack.addItem(equipment[Boots]);
-		equipment[Boots] = emptyItem;
-	}
-	else
-		return false;
-	equippedSize--;
-	return true;
 }
 
 //! Implementation of printBackPackItems
@@ -641,25 +532,14 @@ void Fighter::printBackPackItems()
 	backpack.printBackpack();
 }
 
-//! Implementation of addToBackPack
-//! @param takes in an item and adds item to backpack
-void Fighter::addToBackpack(Item newItem){
-	backpack.addItem(newItem);
+ItemContainer Fighter::getBackPack(){
+	return backpack;
 }
 
-//! Implementation of printEquippedItems
-//! @param prints every item equipped onto screen
-void Fighter::printEquippedItems()
-{
-	string type;
-	cout << "---EQUIPPED ITEMS---\n";
-	for (int i= 0; i < MAX_ITEMS_EQUIPPED; i++)
-	{
-		type = equipment[i].getType();
-		if ( type != "")
-			cout << equipment[i].getType() << " {" << equipment[i].getInfluences().at(0).getType() << " +" << equipment[i].getInfluences().at(0).getBonus() << "}" << endl;
-
-	}
+//! Implementation of addToBackPack
+//! @param takes in an item and adds item to backpack
+void Fighter::addToBackpack(Item* newItem){
+	backpack.addItem(newItem);
 }
 
 //! Implementation of mutator method of setPositionX
@@ -686,16 +566,15 @@ int Fighter::getPositionY(){
 	return positionY;
 }
 
-// decorator
-void Fighter::unequip(string t) {
-  throw "Item not found";
-}
-void Fighter::setEquippedItems(map<string, Character*> m) {
-  throw "Cannot set equiped items";
-}
-map<string, Character*> Fighter::getEquippedItems() {
-  map<string, Character*> empty;
-  return empty;
+Item* Fighter::unEquip(string s) {
+	return nullptr;
 }
 
+Item* Fighter::retrieveItem(string s) {
+	return nullptr;
+}
+
+bool Fighter::isEquiped(string s) {
+	return false;
+}
 

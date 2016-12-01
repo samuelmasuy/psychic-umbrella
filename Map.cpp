@@ -9,6 +9,9 @@ Map::Map()
 	m_rows = m_cols = 0;
 	m_scene = NULL;
 	m_i0 = m_j0 = m_i1 = m_j1 = m_iPlayer = m_jPlayer = -1;
+	for (int i = 0; i < 6; i++)
+		m_enemiesPosition[i].x = m_enemiesPosition[i].y = -1;
+
 	notify(); //notifies map observer
 }
 ///
@@ -38,6 +41,7 @@ Map::Map(const Map &x)
 	m_scene = AllocMem(x.m_rows, x.m_cols);
 	for (int i = 0; i < m_rows; i++)
 		memcpy(m_scene[i], x.m_scene[i], m_cols * sizeof(CELL_TYPE));
+	memcpy(m_enemiesPosition, x.m_enemiesPosition, sizeof(Coord2D) * 6);
 	notify(); //notifies map observer
 }
 
@@ -54,6 +58,7 @@ Map & Map::operator = (const Map &x)
 	m_scene = AllocMem(x.m_rows, x.m_cols);
 	for (int i = 0; i < m_rows; i++)
 		memcpy(m_scene[i], x.m_scene[i], m_cols * sizeof(CELL_TYPE));
+	memcpy(m_enemiesPosition, x.m_enemiesPosition, sizeof(Coord2D) * 6);
 	notify(); //notifies map observer
 	return *this;
 }
@@ -90,6 +95,8 @@ bool Map::Create(int rows, int cols)
 			}
 		}
 		m_i0 = m_j0 = m_i1 = m_j1 = m_iPlayer = m_jPlayer = -1;
+		for (int i = 0; i < 6; i++)
+			m_enemiesPosition[i].x = m_enemiesPosition[i].y = -1;
 		notify(); //notifies map observer
 		return true;
 	}
@@ -176,7 +183,12 @@ bool Map::ValidCell(CELL_TYPE x)
 	return
 		x == CHAR_EMPTY ||
 		x == CHAR_PLAYER ||
-		x == CHAR_MONSTER ||
+		x == CHAR_ELF ||
+		x == CHAR_GOBLIN ||
+		x == CHAR_LIZARD||
+		x == CHAR_MEDUSA||
+		x == CHAR_SKELETON ||
+		x == CHAR_VINE||
 		x == CHAR_WALL ||
 		x == CHAR_ENTRY ||
 		x == CHAR_EXIT ||
@@ -410,7 +422,12 @@ string Map::CellToString(CELL_TYPE x)
 	{
 	case CHAR_EMPTY: return "Empty"; break;
 	case CHAR_PLAYER: return "Player"; break;
-	case CHAR_MONSTER: return "Monster"; break;
+	case CHAR_ELF: return "Elf"; break;
+	case CHAR_VINE: return "Vine"; break;
+	case CHAR_LIZARD: return "Lizard"; break;
+	case CHAR_SKELETON: return "Skeleton"; break;
+	case CHAR_MEDUSA: return "Medusa"; break;
+	case CHAR_GOBLIN: return "Goblin"; break;
 	case CHAR_WALL: return "Wall"; break;
 	case CHAR_ENTRY: return "Entrance"; break;
 	case CHAR_EXIT: return "Exit"; break;
@@ -434,8 +451,18 @@ void Map::SetMap(int rows, int cols, CELL_TYPE **data)
 	m_rows = rows;
 	m_cols = cols;
 	m_scene = AllocMem(rows, cols);
-	for (int i = 0; i<rows; i++)
+	for (int i = 0; i < rows; i++)
+	{
 		memcpy(m_scene[i], data[i], sizeof(CELL_TYPE) * cols);
+		for (int j = 0; j < cols; j++)
+		{
+			if (m_scene[i][j] >= CHAR_ELF && m_scene[i][j] <= CHAR_MEDUSA)
+			{
+				m_enemiesPosition[m_scene[i][j] - '1'].x = j;
+				m_enemiesPosition[m_scene[i][j] - '1'].y = i;
+			}
+		}
+	}
 	notify(); //notifies map observer
 }
 
@@ -513,4 +540,45 @@ int Map::getEntranceRow()
 int Map::getEntranceColumn()
 {
 	return m_j0;
+}
+
+int Map::countMonsters()
+{
+	int count = 0;
+	for (int i = 0; i < m_rows; i++)
+		for (int j = 0; j < m_cols; j++)
+			if (m_scene[i][j] >= CHAR_ELF && m_scene[i][j] <= CHAR_MEDUSA)	// here, we count the number of enemies...
+				count++;
+	return count;
+
+}
+
+bool Map::SetEnemyPos(char enemyType, int i, int j)
+{
+	if (!ValidPos(i, j))
+		return false;
+	if (m_enemiesPosition[enemyType - '1'].x != -1)	// because, that enemy was in another pos...
+		m_scene[i][j] = CHAR_WALL;
+	m_scene[i][j] = enemyType;
+	m_enemiesPosition[enemyType - '1'].x = j;
+	m_enemiesPosition[enemyType - '1'].y = i;
+	return true;
+}
+
+bool Map::GetEnemyPos(char enemyType, int &i, int &j)
+{
+	if (m_enemiesPosition[enemyType - '1'].x == -1)
+		return false;
+	i = m_enemiesPosition[enemyType - '1'].y;
+	j = m_enemiesPosition[enemyType - '1'].x;
+}
+
+bool Map::KillEnemy(char enemyType)
+{ 
+	if (m_enemiesPosition[enemyType - '1'].x != -1)
+		m_scene[m_enemiesPosition[enemyType - '1'].y][m_enemiesPosition[enemyType - '1'].x] = CHAR_WALL;
+	else
+		return false;
+	m_enemiesPosition[enemyType - '1'].x = m_enemiesPosition[enemyType - '1'].y = -1;
+	return true;
 }

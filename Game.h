@@ -8,6 +8,7 @@
 #include <fstream>
 #include <cstdlib>
 #include <string>
+#include <map>
 #include "Item.h"
 #include "Character.h"
 #include "Map.h"
@@ -17,6 +18,15 @@
 #include "ChestDirector.h"
 #include "DoorDirector.h"
 #include "CharacterDecorator.h"
+#include "MonsterDirector.h"
+#include "ElfBuilder.h"
+#include "GoblinBuilder.h"
+#include "LizardBuilder.h"
+#include "MedusaBuilder.h"
+#include "SkeletonBuilder.h"
+#include "VineBuilder.h"
+#include "ItemDecorator.h"
+
 
 using namespace std;
 
@@ -74,7 +84,10 @@ public:
 private:
 	Map* _map;
 	Character* character;
+	Game* game;
+	bool enemiesDefeated;
 	void initializeCharacterPositionOnMap();
+	vector<Item*> getCharacterEquipedItems();
 	void move(int, int, int, int);
 
 	/**

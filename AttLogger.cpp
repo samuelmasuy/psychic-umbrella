@@ -1,11 +1,12 @@
-#include "Logger.h"
-
-bool Logger::g_logOn = true;
-string Logger::g_logFileName = "log.txt";
-ofstream Logger::my_fstream;
+#include "AttLogger.h"
 
 
-bool Logger::setLogFile(const string &filename)
+bool AttLogger::g_logOn = true;
+string AttLogger::g_logFileName = "log.txt";
+ofstream AttLogger::my_fstream;
+
+
+bool AttLogger::setLogFile(const string &filename)
 {
 	g_logFileName = filename;
 	if (my_fstream.is_open())
@@ -21,24 +22,24 @@ bool Logger::setLogFile(const string &filename)
 	return true;
 }
 
-void Logger::logOn()
+void AttLogger::logOn()
 {
 	g_logOn = true;
 }
 
 
-void Logger::logOff()
+void AttLogger::logOff()
 {
 	g_logOn = false;
 }
 
-bool Logger::isOn()
+bool AttLogger::isOn()
 {
 	return g_logOn;
 }
 
 
-ofstream &Logger::fout()
+ofstream &AttLogger::fout()
 {
 	if (my_fstream.is_open())
 		return my_fstream;
@@ -54,7 +55,7 @@ ofstream &Logger::fout()
 	return my_fstream;
 }
 
-void Logger::append(const string &s)
+void AttLogger::append(const string &s)
 {
 	if (g_logOn)
 	{
@@ -74,15 +75,14 @@ void Logger::append(const string &s)
 	}
 }
 
-
-void Gamelog()
+void AttackLog()
 {
 	bool enable = false;
 	while (true)
 	{
 		string opc;
 		getline(cin, opc);
-		cout << "Toggle Game log on/off (o/f)? -->";
+		cout << "Toggle Attack log on/off (o/f)? -->";
 		if (opc[0] == 'o' || opc[0] == 'O')
 		{
 			enable = true;
@@ -99,47 +99,8 @@ void Gamelog()
 		}
 	}
 	if (enable)
-		Logger::logOn();
+		AttLogger::logOn();
 	else
-		Logger::logOff();
+		AttLogger::logOff();
 }
 
-void AllLogs()
-{
-	 bool enable = false;
-	 while (true)
-	{
-		string opc;
-		getline(cin, opc);
-		cout << "Toggle All logs on/off (o/f)? -->" << endl;
-		if (opc[0] == 'o' || opc[0] == 'O')
-		{
-			enable = true;		
-			break;
-		}
-		if (opc[0] == 'f' || opc[0] == 'F')
-		{
-			enable = false;
-			break;
-		}
-		else
-		{
-			continue;
-		}
-		if (enable) 
-		{
-			Logger::logOn();
-			AttLogger::logOn();
-			DiceLogger::logOn();
-			ChLogger::logOn();
-		}
-		else
-		{
-			Logger::logOff();
-			AttLogger::logOff();
-			DiceLogger::logOff();
-			ChLogger::logOff();
-		}
-	}
-
-}

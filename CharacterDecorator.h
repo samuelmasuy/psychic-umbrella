@@ -22,8 +22,9 @@ class CharacterDecorator : public Character {
    *
    * @param decoratedCharacter a Character.
    */
-  CharacterDecorator(Character *decoratedCharacter) {
+  CharacterDecorator(Character *decoratedCharacter, Item* item) {
     this->decoratedCharacter = decoratedCharacter;
+    this->item = item;
   }
   virtual ~CharacterDecorator() {
   }
@@ -31,10 +32,7 @@ class CharacterDecorator : public Character {
   * Provides the wrapper with the Character interface and delegates
   * its methods to the wrapped Character object.
   */
-  void unequip(string);
-  void setEquippedItems(map<string, Character*>);
-  map<string, Character*> getEquippedItems();
-  void printEquippedItems();
+  void playerInfo();
 
   //logical game functions
   void setCharacterType(string type) {
@@ -59,29 +57,18 @@ class CharacterDecorator : public Character {
     return decoratedCharacter->armorModifier();
   }
 
-  void setArmor(){
-	  return decoratedCharacter->setArmor();
+  void setArmor() {
+    return decoratedCharacter->setArmor();
   }
   //virtual int attackBonus();//class to be inherited
   void setAttackBonus() {
     decoratedCharacter->setAttackBonus();
   }
-  void playerInfo() {
-    decoratedCharacter->playerInfo();
-  }
-  bool equipFromBackpack(int i) {
-    return decoratedCharacter->equipFromBackpack(i);
-  }
-  bool unequipItem(string s) {
-    return decoratedCharacter->unequipItem(s);
-  }
-  bool equipItem(Item* i) {
-    return decoratedCharacter->equipItem(i);
-  }
   void printBackPackItems() {
-    decoratedCharacter->printBackPackItems();
+	return decoratedCharacter->printBackPackItems();
   }
-  void addToBackpack(Item i) {
+
+  void addToBackpack(Item* i) {
     decoratedCharacter->addToBackpack(i);
   }
 
@@ -106,6 +93,9 @@ class CharacterDecorator : public Character {
     decoratedCharacter->loadCharacter();
   }
 */
+  void printEquippedItems();
+  
+  Item* retrieveItem(string);
 
   void setLevel(int lvl) {
     decoratedCharacter->setLevel(lvl);
@@ -140,6 +130,10 @@ class CharacterDecorator : public Character {
   }
   int* getAbilityScores() {
     return decoratedCharacter->getAbilityScores();
+  }
+
+  int getAbilityScore(int ability) {
+	  return decoratedCharacter->getAbilityScore(ability);
   }
   int* getAttackBonus() {
     return decoratedCharacter->getAttackBonus();
@@ -184,15 +178,21 @@ class CharacterDecorator : public Character {
     return decoratedCharacter->getCharisma();
   }
 
-  void combat(Character* m){
-	  decoratedCharacter->combat(m);
+  void combat(Character* m) {
+    decoratedCharacter->combat(m);
   }
 
-  void setHitPoints(int hp)
-  {
-	  decoratedCharacter->setHitPoints(hp);
+  void setHitPoints(int hp) {
+    decoratedCharacter->setHitPoints(hp);
+  }
+  ItemContainer getBackPack() {
+    return decoratedCharacter->getBackPack();
+  }
+
+  void setAbilityScores(int i, int abl) {
+    decoratedCharacter->setAbilityScores(i, abl);
   }
  protected:
-  Character *decoratedCharacter;
-  map<string, Character*> equipedItems;
+  Character* decoratedCharacter;
+  Item* item;
 };

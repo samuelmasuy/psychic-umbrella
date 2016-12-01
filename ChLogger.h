@@ -1,28 +1,24 @@
 #pragma once
-
 #include <string>
 #include <iostream>
 #include <fstream>
 #include "Observer.h"
-#include "AttLogger.h"
-#include "DiceLogger.h"
-#include "ChLogger.h"
-#include "Subject.h"
+
 
 using namespace std;
 ///
-///Here is the method to prompt to the user whether they would like to turn the GameLog on or off
+///Here is the method to prompt to the user whether they would like to turn the CharacterLog on or off
 ///
-void Gamelog();
+void Characterlog();
 ///
-///Here is the method to prompt to the user whether they would like to turn All the logs on or off
+/// Here is the Character Logger class, this logs the Character Stats in game play throughout every move made, such as Player type, health, items held and attack power. 
 ///
-void AllLogs();
 /**
-* @brief  Here is the method to prompt to the user whether they would like to turn All the logs on or off
+* @brief Here is the Character Logger class, this logs the Character Stats in game play throughout every move made, such as Player type, health, items held and attack power. 
 */
-class Logger : public Subject
+class ChLogger
 {
+
 public:
 	///
 	///Here we set a log file to outputted
@@ -49,9 +45,7 @@ public:
 	///
 	static void append(const string &s);
 private:
-
 	static bool g_logOn;
 	static string g_logFileName;
 	static ofstream my_fstream;
 };
-

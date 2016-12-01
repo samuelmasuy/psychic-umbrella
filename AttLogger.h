@@ -1,28 +1,23 @@
 #pragma once
-
 #include <string>
 #include <iostream>
 #include <fstream>
 #include "Observer.h"
-#include "AttLogger.h"
-#include "DiceLogger.h"
-#include "ChLogger.h"
-#include "Subject.h"
 
 using namespace std;
 ///
-///Here is the method to prompt to the user whether they would like to turn the GameLog on or off
+///Here is the method to prompt to the user whether they would like to turn the AttackLog on or off
 ///
-void Gamelog();
+void AttackLog();
 ///
-///Here is the method to prompt to the user whether they would like to turn All the logs on or off
+/// Here is the Attack Logger class, this logs the Attack play, such as Monster found, and attack hit points.
 ///
-void AllLogs();
 /**
-* @brief  Here is the method to prompt to the user whether they would like to turn All the logs on or off
+* @brief Here is the Attack Logger class, this logs the Attack play, such as Monster found, and attack hit points.
 */
-class Logger : public Subject
+class AttLogger
 {
+
 public:
 	///
 	///Here we set a log file to outputted
@@ -49,9 +44,7 @@ public:
 	///
 	static void append(const string &s);
 private:
-
 	static bool g_logOn;
 	static string g_logFileName;
 	static ofstream my_fstream;
 };
-

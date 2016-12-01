@@ -6,12 +6,12 @@
 #include <map>
 #include "Subject.h"
 #include "ItemContainer.h"
-#inlcude "Strategy.h"
+#include "Strategy.h"
 
 using namespace std;
 
 //! Class that implements a character 
-class Character: public Subject
+class Character : public Subject
 {
 public:
 	//logical game functions
@@ -25,14 +25,12 @@ public:
 	//virtual int attackBonus();//class to be inherited
 	virtual void setAttackBonus() = 0;
 	virtual void playerInfo() = 0; //displaying character info
-	virtual bool equipItem(Item*) = 0;
-	virtual bool equipFromBackpack(int) = 0;
-	virtual bool unequipItem(string) = 0;
-	virtual void printBackPackItems() = 0;
-	virtual void addToBackpack(Item) = 0;
+	virtual void addToBackpack(Item*) = 0;
 	virtual void printEquippedItems() = 0;
 	virtual void levelUp() = 0;
 	virtual void combat(Character*) = 0;
+
+	virtual void printBackPackItems() = 0;
 
 	//saving and loading character
 	//virtual void saveCharacter() = 0;
@@ -51,6 +49,7 @@ public:
 	virtual void setArmor() = 0;
 	virtual void setHitPoints(int) = 0;
 	virtual void setStrategy(Strategy*) = 0;
+	virtual void setAbilityScores(int, int) = 0;
 
 	//game accessor methods
 	virtual int getStrength() = 0;
@@ -69,12 +68,17 @@ public:
 	virtual int getAttacksPerRound() = 0;
 	virtual string getCharacterType() = 0;
 	virtual int* getAbilityScores() = 0;
+	virtual int getAbilityScore(int) = 0;
 	virtual int* getAttackBonus() = 0;
 	virtual int getDamageBonus() = 0;
+	virtual ItemContainer getBackPack() = 0;
 
   //character decorator
-  virtual void unequip(string) = 0;
-  virtual void setEquippedItems(map<string, Character*>) = 0;
-  virtual map<string, Character*> getEquippedItems() = 0;
+  //virtual void unequip(string) = 0;
+//  virtual void setEquippedItems(map<string, Character*>) = 0;
+ // virtual map<string, Character*> getEquippedItems() = 0;
+	virtual bool isEquiped(string) = 0;
+	virtual Item* retrieveItem(string) = 0;
+	virtual Item* unEquip(string) = 0;
 };
 
