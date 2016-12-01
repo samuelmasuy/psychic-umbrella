@@ -15,15 +15,17 @@ Monster::Monster() {
 	positionX = 0;
 	positionY = 0;
 	monsterType = "monster";
+	damage = 0;
 	level = 1;
 }
 
-Monster::Monster(int hp, int posX, int posY, int lvl){
+Monster::Monster(int hp, int posX, int posY, int lvl, int dam){
 	currentHitPoints = hp;
 	positionX = posX;
 	positionY = posY;
 	monsterType = "monster";
 	level = lvl;
+	damage = dam;
 }
 
 Monster::~Monster() {
@@ -62,6 +64,24 @@ void Monster::setPositionX(int x){
 void Monster::setPositionY(int y){
 	positionY = y;
 }
+
+int Monster::getMonsterDamage(){
+
+	if(level <= 5)
+		return 7;
+	else if (level <= 10)
+		return 14;
+	else if (level <= 15)
+		return 21;
+	else if (level <= 20)
+		return 28;
+	else
+		return 35;
+}
+void Monster::setMonsterDamage(){
+
+	 damage = getMonsterDamage();
+ }
 
 } /* namespace std */
 
