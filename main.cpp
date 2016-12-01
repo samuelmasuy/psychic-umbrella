@@ -83,6 +83,9 @@ int main(int argc, char const* argv[]) {
 		}
 		delete cd;
 
+		for (int i = 0; i < 16; i++)
+			character->levelUp();
+
 		char choice;
 
 	// create items
