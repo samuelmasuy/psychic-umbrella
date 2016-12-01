@@ -14,6 +14,8 @@ void Game::play() {
 
 	vector<Character*> monsters;
 
+	vector<Chest*> chests = createChestsFromMap();
+
 	cout << "equiped items in game";
 	vector<Item*> equiped = getCharacterEquipedItems();
 	for (int i = 0; i <= equiped.size(); i++)
@@ -631,5 +633,27 @@ vector<Item*> Game::getCharacterEquipedItems() {
 		i = character->retrieveItem("armor");
 		equipedItems.push_back(i);
 	}
+	delete i;
 	return equipedItems;
+}
+
+vector<Chest*> Game::createChestsFromMap() {
+	// map get  all chests position
+	int chest_size = 5; //sizeof
+	vector<Chest*> chests;
+
+	ChestDirector* cg = new ChestDirector();
+	Chest* mapChest = nullptr;
+
+	for (int i = 0; i < chest_size; i++) {
+		cg->setChestBuilder(new ChestBuilder());
+		cg->makeChest();
+		Chest* mapChest = cg->getChest();
+		mapChest->setPositionX(i);
+		mapChest->setPositionY(i);
+		chests.push_back(mapChest);
+	}
+	delete mapChest;
+	delete cg;
+	return chests;
 }

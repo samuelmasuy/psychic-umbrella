@@ -88,6 +88,7 @@ private:
 	bool enemiesDefeated;
 	void initializeCharacterPositionOnMap();
 	vector<Item*> getCharacterEquipedItems();
+	vector<Chest*> createChestsFromMap();
 	void move(int, int, int, int);
 
 	/**
