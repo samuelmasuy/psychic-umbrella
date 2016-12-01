@@ -37,9 +37,7 @@ public:
 	bool unequipItem(string);
 	void printBackPackItems();
 	void addToBackpack(Item);
-	void printEquippedItems();
 	void levelUp();
-
 	//saving and loading character
 	void saveCharacter();
 	void loadCharacter();
@@ -76,11 +74,9 @@ public:
 	int getDamageBonus();
 
   //decorator
-  void unequip(string);
-  void setEquippedItems(map<string, Character*>);
-  map<string, Character*> getEquippedItems();
-
-
+	Item* unEquip(string);
+	bool isEquiped(string);
+	void printEquippedItems();
   //combat
   void combat(Character*);
 

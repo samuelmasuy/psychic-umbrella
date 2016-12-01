@@ -112,31 +112,29 @@ int main(int argc, char const* argv[]) {
 		}
 	}
 
-  cout << "Would you like your character to be equiped with this item? ('y'/'n'): ";
-  cin >> choice;
-  if (choice == 'y') {
-    character->playerInfo();
-    character = new ItemDecorator(character, item);
-    character = new ItemDecorator(character, item2);
-    cout << endl << "Equiped Items::" << endl;
-    character->printEquippedItems();
-  }
-  delete id;
+	cout << "Would you like your character to be equiped with this item? ('y'/'n'): ";
+	cin >> choice;
+	if (choice == 'y') {
+		character->playerInfo();
+		character = new ItemDecorator(character, item);
+		character = new ItemDecorator(character, item2);
+		cout << endl << "Equiped Items::" << endl;
+		character->printEquippedItems();
+	}
+	delete id;
 
-  cout << "Here are the stats of your character" << endl;
-  character->playerInfo();
+	cout << "Here are the stats of your character" << endl;
+	character->playerInfo();
 
-  cout << "Unequiping the ring." << endl;
-  Item* r = character->unEquip("ring");
-  r->printItem();
-  cout << endl;
-  character->playerInfo();
-  cout << endl;
-  cout << endl << "Equiped Items::" << endl;
-  character->printEquippedItems();
-  cout << endl;
-  character->printBackPackItems();
-  cout << endl;
+	Item* r = character->unEquip("ring");
+	r->printItem();
+	cout << endl;
+	character->playerInfo();
+	cout << endl;
+	character->printEquippedItems();
+	cout << endl;
+	character->printBackPackItems();
+	cout << endl;
 
 	// ........... many more items
 	cout << "Let's take care of the map." << endl;
