@@ -27,6 +27,9 @@
 
 #include "Map.h"
 #include "MapBuilderB.h"
+#include "ItemBuilder.h"
+#include "Item.h"
+#include "Chest.h"
 
 class MapEditor
 {
@@ -45,6 +48,8 @@ public:
 	void EditMap(Map *pMap, const string &filename);
 
 private:
+	Item* item;
+	Chest* chest;
 	///
 	/// flush the keyboard buffer
 	///

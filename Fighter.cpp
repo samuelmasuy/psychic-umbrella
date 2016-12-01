@@ -505,6 +505,26 @@ void Fighter::playerInfo()
 
 	cout << "Attacks per/round: " << getAttacksPerRound() << endl;
 	cout << "-------------------------------\n";
+	if (ChLogger::isOn())
+	{
+		ChLogger::fout() << "-------------------------------\n";
+		ChLogger::fout() << "Class Type: " << getCharacterType() << endl;
+		ChLogger::fout() << "Level: " << getLevel() << endl;
+		ChLogger::fout() << "Total HP: " << currentHitPoints << endl;
+		ChLogger::fout() << "Ability scores: ";
+		ChLogger::fout() << " Strength: " << getStrength();
+		ChLogger::fout() << " , Dexterity: " << getDexterity();
+		ChLogger::fout() << " , Constitution: " << getConstitution();
+		ChLogger::fout() << " , Intellect: " << getIntelligence();
+		ChLogger::fout() << " , Wisdom: " << getWisdom();
+		ChLogger::fout() << " , Charisma: " << getCharisma();
+		ChLogger::fout() << endl;
+		ChLogger::fout() << "Damage bonus: " << getDamageBonus() << endl;
+		ChLogger::fout() << "Attacks per Round: " << getAttacksPerRound() << endl;
+
+
+		ChLogger::fout() << "-------------------------------\n";
+	}
 }
 
 

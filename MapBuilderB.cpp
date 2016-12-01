@@ -4,6 +4,10 @@
 ///
 MapBuilderB::MapBuilderB() : MapBuilder()
 {
+	for (int i = 0; i < 6; i++)
+	{
+		m_enemiesPositions[i].x = m_enemiesPositions[i].y = -1;
+	}
 }
 ///
 /// We set the building specifications of the map
@@ -18,7 +22,15 @@ MapBuilderB::MapBuilderB(Map &m)
 	m_scene = AllocMem(m_rows, m_cols);
 	CELL_TYPE **p = m.GetMatrix();
 	for (int r = 0; r < m_rows; r++)
+	{
 		memcpy(m_scene[r], p[r], m_cols * sizeof(CELL_TYPE));
+		for (int c=0; c< m_cols; c++)
+			if (m_scene[r][c] >= CHAR_ELF && m_scene[r][c] <= CHAR_MEDUSA)
+			{
+				m_enemiesPositions[r].x = c;
+				m_enemiesPositions[r].y = r;
+			}
+	}
 }
 
 
@@ -138,6 +150,17 @@ int MapBuilderB::LoadMap(const char *filename, int levelNumber)
 							//FreeMem();
 							return 4;
 						}
+						if (x >= CHAR_ELF && x <= CHAR_MEDUSA)
+						{
+							if (m_enemiesPositions[x - '1'].x != -1)
+							{
+								cout << "Error, cannot have more than 1 monster of same type in the map" << endl;
+								return 5;
+							}
+							m_enemiesPositions[x - '1'].x = j;
+							m_enemiesPositions[x - '1'].y = lineNumber - 2;
+						}
+						//  i just need to be able to get the position of the enemy
 					}
 				}
 			}
@@ -195,11 +218,13 @@ int MapBuilderB::ValidateMap()
 		{
 			switch (m_scene[i][j])
 			{
-			case CHAR_ENTRY:
-			case CHAR_EXIT:
-			case CHAR_PLAYER:
-				cout << "Entry, exit or player should not be specified in the map; only in the header" << endl;
-				return 2;
+				case CHAR_ENTRY:
+				case CHAR_EXIT:
+				case CHAR_PLAYER:
+					cout << "Entry, exit or player should not be specified in the map; only in the header" << endl;
+					return 2;
+					break;
+
 			}
 		}
 	}

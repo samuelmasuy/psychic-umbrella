@@ -394,6 +394,7 @@ void Game::stop() {
 	// character->save();
 }
 
+
 void Game::initializeCharacterPositionOnMap() {
 	int ip, jp;
 	ip = _map->getEntranceRow();
@@ -437,10 +438,13 @@ void Game::move(int old_x, int old_y, int new_x, int new_y) {
 			// set character location to the new cell
 			character->setPositionX(new_x);
 			character->setPositionY(new_y);
+
 			break;
 		case CHAR_DOOR:
+			if (Logger::isOn()) Logger::fout() << "Player encountered a Door" << endl;
 			if (openDoor())
 			{
+				if (Logger::isOn()) Logger::fout() << "Player has opened a door" << endl;
 				// set previous cell to empty
 				_map->fillCell(old_y, old_x, CHAR_EMPTY);
 				// set character location to the new cell
@@ -452,6 +456,7 @@ void Game::move(int old_x, int old_y, int new_x, int new_y) {
 			break;
 		case CHAR_CHEST:
 			// if the chest was opened, we remove it from the map.
+			if (Logger::isOn()) Logger::fout() << "Player moved on a chest" << endl;
 			if (openChest()) {
 				// set previous cell to empty
 				_map->fillCell(old_y, old_x, CHAR_EMPTY);
@@ -467,6 +472,7 @@ void Game::move(int old_x, int old_y, int new_x, int new_y) {
 
 bool Game::openChest() {
 	// generate a chest.
+	if (Logger::isOn()) Logger::fout() << "Player opened Chest" << endl;
 	ChestDirector* cg = new ChestDirector();
 	cg->setChestBuilder(new ChestBuilder());
 	cg->makeChest();
@@ -478,6 +484,7 @@ bool Game::openChest() {
 	cin >> choice;
 	if (choice == 'y') {
 		character->equipItem(item);
+		if (Logger::isOn()) Logger::fout() << "Item Equipped is:" << item->getType() << endl;
 		// _map->setCell(chest->positionX, chest->postionY, CHAR_EMPTY);
 	}
 	delete cg;
@@ -530,4 +537,9 @@ void Game::printGameUsage() {
 	cout << "Use l to load a character from file" << endl;
 	cout << "Use b to equip your character with an item in the backpack." << endl;
 	cout << "Use h to display this help menu." << endl;
+	cout << "Use 1 to toggle on/off the Character Log" << endl;
+	cout << "Use 2 to toggle on/off the Game Log." << endl;
+	cout << "Use 3 to toggle on/off the Attack Log." << endl;
+	cout << "Use 4 to toggle on/off the Dice log." << endl;
+	cout << "Use 5 to toggle on/off All the logs" << endl;
 }

@@ -19,6 +19,7 @@
 #include "BullyBuilder.h"
 #include "CharacterDecorator.h"
 #include "ItemDecorator.h"
+#include "Logger.h"
 
 using namespace std;
 
@@ -28,8 +29,7 @@ string get_filename();
 bool has_ending(string const &, string const &);
 
 int main(int argc, char const* argv[]) {
-  cout << "Dungeons And Dragons Game" << endl;
-
+  cout << "Dungeons And Dragons Game" <<  endl;
   Character* character = NULL;
   //Character* monster = NULL;
   CharacterBuilder* nimbleBuilder = NULL;
@@ -123,8 +123,8 @@ int main(int argc, char const* argv[]) {
   cout << "Here are the stats of your character" << endl;
   character->playerInfo();
 
-  Item* r = character->unEquip("ring");
-  r->printItem();
+  //Item* r = character->unEquip("ring");  
+  //r->printItem();
   cout << endl;
   character->playerInfo();
   cout << endl;
@@ -142,6 +142,8 @@ int main(int argc, char const* argv[]) {
   cout << endl;
 
   cout << "TIME TO PLAY" << endl;
+
+  if (Logger::isOn()) Logger::fout() << "Game is going to be started" << endl;
   string campaignFilename = "";
   Campaign theCampaign;
   do {
@@ -163,10 +165,12 @@ int main(int argc, char const* argv[]) {
     MapBuilderB mb;
     if (mb.LoadMap(theCampaign.GetFileName(levels[i]).c_str(), levels[i]))
       continue;
+	if (Logger::isOn()) Logger::fout() << "Level #" << levels[i] << "(" << theCampaign.GetFileName(levels[i]).c_str() << ") has been loaded" << endl;
+
     // set this builder to director
     d.SetBuilder(&mb);
     // get the map from director
-    d.GetMap(map);
+    d.GetMap(map); 
 
 
     GameBuilder* gb = new GameBuilder();
@@ -176,6 +180,15 @@ int main(int argc, char const* argv[]) {
     game->play();
     delete game;
     delete gb;
+	cout << "Map Completed! Press (y) to continue to the next phase or (n) to exit!-->";
+	cin >> choice;
+	if (choice == 'y') {
+		continue;
+	}
+	if (choice == 'n') {
+		return 0;
+	}
+
   }
   cout << "Game over!!! Press any key and then enter to exit! -->";
   string aux;

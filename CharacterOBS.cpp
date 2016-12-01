@@ -1,4 +1,5 @@
 #include "CharacterOBS.h"
+#include "Logger.h"
 #include <iostream>
 using namespace std;
 
@@ -20,6 +21,7 @@ CharacterOBS::CharacterOBS(Character* theCharacter)
 void CharacterOBS::update()
 {
 	printPlayerInfo();
+
 	
 }
 

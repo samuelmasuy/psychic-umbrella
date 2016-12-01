@@ -66,5 +66,6 @@ private:
 	/// release memory of a 2D array pointer
 	///
 	void FreeMem(CELL_TYPE **x, int rows);
-
+	
+	Coord2D m_enemiesPositions[6];
 };

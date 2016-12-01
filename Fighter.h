@@ -7,6 +7,7 @@
 #include "Subject.h"
 #include "ItemContainer.h"
 #include "Character.h"
+#include "Logger.h"
 
 
 const int MAX_ITEMS_EQUIPPED = 7;

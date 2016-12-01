@@ -74,6 +74,8 @@ public:
 private:
 	Map* _map;
 	Character* character;
+	Game* game;
+	bool enemiesDefeated;
 	void initializeCharacterPositionOnMap();
 	void move(int, int, int, int);
 
