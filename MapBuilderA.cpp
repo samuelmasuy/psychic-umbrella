@@ -106,7 +106,7 @@ int MapBuilderA::LoadMap(const char *filename)
 				for (int j = 0; j < m_cols; j++)
 				{
 					CELL_TYPE x = line[j];
-					if (x != CHAR_EMPTY && x != CHAR_WALL && x != CHAR_CHEST && x != CHAR_ELF  && x != CHAR_GOBLIN && x != CHAR_DOOR)	// validating the cell
+					if (x != CHAR_EMPTY && x != CHAR_WALL && x != CHAR_CHEST && x != CHAR_ELF  && x != CHAR_VINE && x != CHAR_SKELETON && x != CHAR_MEDUSA && x != CHAR_LIZARD && x != CHAR_GOBLIN && x != CHAR_DOOR)	// validating the cell
 					{
 						if (x == CHAR_PLAYER || x == CHAR_ENTRY || x == CHAR_EXIT)
 						{

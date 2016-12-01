@@ -452,9 +452,10 @@ void Game::initializeCharacterPositionOnMap() {
 	_map->Display();
 
 	
-	/*
+	/* Example of how to get elf's x and y position
 	int iELF, jELF;
     _map->GetEnemyPos(CHAR_ELF, iELF, jELF);
+	now, iELF and jELF hold the elf's x and y position (if there is no elf on the map x and y will be equal to -1)
 	*/
 }
 void Game::move(int old_x, int old_y, int new_x, int new_y) {
