@@ -4,6 +4,13 @@
 */
 #include <map>
 #include "Game.h"
+#include "MonsterDirector.h"
+#include "ElfBuilder.h"
+#include "GoblinBuilder.h"
+#include "LizardBuilder.h"
+#include "MedusaBuilder.h"
+#include "SkeletonBuilder.h"
+#include "VineBuilder.h"
 
 
 void Game::play() {
@@ -11,6 +18,89 @@ void Game::play() {
 	CharacterOBS* observerCharacter = new CharacterOBS(character);
 	// set Map observer
 	MapOBS* observerMap = new MapOBS(_map);
+
+	MonsterDirector* md = new MonsterDirector();
+
+	vector<Character*> monsters;
+
+	Character* monster = NULL;
+
+	MonsterBuilder* monsterBuilder = NULL;
+
+	for (int i = 0; i < 6; i++) {
+		int x = 0;
+		int y = 0;
+		bool found = _map->FindItem('1', x, y);
+		if (found) {
+			switch (i)
+			{
+			case 1:
+				monsterBuilder = new ElfBuilder();
+				md->setMonsterBuilder(monsterBuilder);
+				md->constructMonster();
+				monster = md->getMonster();
+				monster->setPositionX(x);
+				monster->setPositionY(y);
+				monsters.push_back(monster);
+				delete monsterBuilder;
+				break;
+			case 2:
+				monsterBuilder = new GoblinBuilder();
+				md->setMonsterBuilder(monsterBuilder);
+				md->constructMonster();
+				monster = md->getMonster();
+				monster->setPositionX(x);
+				monster->setPositionY(y);
+				monsters.push_back(monster);
+				delete monsterBuilder;
+				break;
+			case 3:
+				monsterBuilder = new LizardBuilder();
+				md->setMonsterBuilder(monsterBuilder);
+				md->constructMonster();
+				monster = md->getMonster();
+				monster->setPositionX(x);
+				monster->setPositionY(y);
+				monsters.push_back(monster);
+				delete monsterBuilder;
+				break;
+			case 4:
+				monsterBuilder = new MedusaBuilder();
+				md->setMonsterBuilder(monsterBuilder);
+				md->constructMonster();
+				monster = md->getMonster();
+				monster->setPositionX(x);
+				monster->setPositionY(y);
+				monsters.push_back(monster);
+				delete monsterBuilder;
+				break;
+			case 5:
+				monsterBuilder = new SkeletonBuilder();
+				md->setMonsterBuilder(monsterBuilder);
+				md->constructMonster();
+				monster = md->getMonster();
+				monster->setPositionX(x);
+				monster->setPositionY(y);
+				monsters.push_back(monster);
+				delete monsterBuilder;
+				break;
+			case 6:
+				monsterBuilder = new VineBuilder();
+				md->setMonsterBuilder(monsterBuilder);
+				md->constructMonster();
+				monster = md->getMonster();
+				monster->setPositionX(x);
+				monster->setPositionY(y);
+				monsters.push_back(monster);
+				delete monsterBuilder;
+				break;
+			}
+
+
+		}
+	}
+		
+	delete md;
 
 	_map->reinitializeMap();
 	initializeCharacterPositionOnMap();
@@ -144,7 +234,7 @@ void Game::saveCharacter(){
 
 	ofs << equipedItems.size() << endl;
 	for (map<string, Character*>::iterator it = equipedItems.begin(); it != equipedItems.end(); ++it) {
-		ofs << it->first << "\n";
+		ofs << it->first <<"\n";
 	}
 /*	
 	for (int i = 0; i < equipedItems.size(); i++)
