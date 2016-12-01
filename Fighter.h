@@ -54,6 +54,7 @@ public:
 	void setCharisma(int);
 	void setArmor();
 	void setHitPoints(int);
+	void setAbilityScores(int, int);
 
 	//game accessor methods
 	int getHitPoints();
@@ -72,8 +73,10 @@ public:
 	int getAttacksPerRound();
 	string getCharacterType();
 	int* getAbilityScores();
+	int getAbilityScore(int);
 	int* getAttackBonus();
 	int getDamageBonus();
+	ItemContainer getBackPack();
 
   //decorator
   void unequip(string);

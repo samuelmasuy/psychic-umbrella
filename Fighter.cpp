@@ -40,6 +40,13 @@ Fighter::Fighter(int str, int dex, int con, int intel, int wis, int cha)
 	bonusAttack[0] = 0;
 
 }
+int Fighter::getAbilityScore(int index){
+	return abilityScores[index];
+}
+
+void Fighter::setAbilityScores(int i, int ability){
+	abilityScores[i] = ability;
+}
 
 
 void Fighter::setStrength(int str)
@@ -181,9 +188,25 @@ void Fighter::setLevel(int lvl)
 {
 	level = lvl;
 	hpChange();
+	if (level < 5)
+	{
+		attacksPerRound = 1;
+	}
+	else if (level > 5 && level < 11)
+	{
+		attacksPerRound = 2;
+	}
+	else if (level > 10 && level < 16)
+	{
+		attacksPerRound = 3;
+	}
+	else if (level > 15 && level < 21)
+	{
+		attacksPerRound = 4;
+	}
+	
 	setAttackBonus();
 	getDamageBonus();
-
 	notify();
 }
 
@@ -631,6 +654,10 @@ bool Fighter::unequipItem(string type)
 void Fighter::printBackPackItems()
 {
 	backpack.printBackpack();
+}
+
+ItemContainer Fighter::getBackPack(){
+	return backpack;
 }
 
 //! Implementation of addToBackPack
