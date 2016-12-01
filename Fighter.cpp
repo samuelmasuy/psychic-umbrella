@@ -596,28 +596,29 @@ void Fighter::combat(Character* monster)
 		{
 			case 1:
 			{
-					totalDmg = bonusAttack[0] + getDamageBonus() + roll;
+					playertotalDmg = bonusAttack[0] + getDamageBonus() + roll;
+					monsterTotDmg = monster->get
 					cout << "First blow: " << totalDmg << "dmg" << endl;
-					monster->MonsterHp -= total;
+					 monster->hit(totalDmg);
 			}break;
 			
 			case 2:
 			{
 					  totalDmg = bonusAttack[1] + getDamageBonus() + roll;
 					  cout << "Second blow: " << totalDmg << "dmg" << endl;
-					  monster->MonsterHp -= total;
+					   monster->hit(totalDmg);
 			}break;
 			case 3:
 			{
 					  totalDmg = bonusAttack[2] + getDamageBonus() + roll;
 					  cout << "Third blow: " << totalDmg << "dmg" << endl;
-					  monster->MonsterHp -= total;
+					  monster->hit(totalDmg);
 			}break;
 			case 4:
 			{	
 					  totalDmg = bonusAttack[3] + getDamageBonus() + roll;
 					  cout << "Forth blow: " << totalDmg << "dmg" << endl;
-					  monster->MonsterHp -= total;
+					  monster->hit(totalDmg);
 			}break;
 
 		}
