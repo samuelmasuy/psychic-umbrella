@@ -68,6 +68,7 @@ Item * ItemDecorator::unEquip(string s) {
 		if (s == item_type) {
 			isEmpty = true;
 			isWearing = false;
+			decoratedCharacter->addToBackpack(item);
 			return item;
 		}
 	}

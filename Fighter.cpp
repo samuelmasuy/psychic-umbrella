@@ -27,7 +27,6 @@ Fighter::Fighter(int str, int dex, int con, int intel, int wis, int cha)
 
 
 	//and set hit points to 10
-	equippedSize = 0;
 	currentHitPoints = 10 + abilityModifier(2);
 	positionX = 0;
 	positionY = 0;
@@ -105,15 +104,11 @@ Fighter::Fighter()
 	//generate stats for Fighter
 	for (int i = 0; i < TOT_STATS; i++)
 		abilityScores[i] = generateStats();
-	//initializing backpack to emptyItem
-	for (int i = 0; i < MAX_ITEMS_EQUIPPED; i++)
-		equipment[i] = emptyItem;
 
 	//and set hit points to 10
 	currentHitPoints = 10 + abilityModifier(2);
 	level = 1;
 	attacksPerRound = 1;
-	equippedSize = 0;
 
 	notify(); //notifies Fighter observer
 }
@@ -527,147 +522,6 @@ void Fighter::playerInfo()
 	}
 }
 
-
-//! Implementation of equip item
-//! @return bool: states whether item has been equipped or not
-bool Fighter::equipItem(Item* item)
-{
-	int backpackSize;
-
-	string type = item->getType();
-
-	if (type == "helmet")
-	{
-		//this = new CharacterDecorator(this, item)
-		equipment[Helmet] = *item;
-
-	}
-	else if (type == "armor")
-	{
-		equipment[Armor] = *item;
-	}
-	else if (type == "weapon")
-	{
-		equipment[Weapon] = *item;
-	}
-	else if (type == "shield")
-	{
-		equipment[Shield] = *item;
-	}
-	else if (type == "ring")
-	{
-		equipment[Ring] = *item;
-	}
-	else if (type == "belt")
-	{
-		equipment[Belt] = *item;
-	}
-	else if (type == "boots")
-	{
-		equipment[Boots] = *item;
-	}
-	else
-		return false;
-
-
-
-	equippedSize++;
-	return true;
-
-}
-bool Fighter::equipFromBackpack(int backpackIndex)
-{
-	string type;
-
-	type = backpack.getItemTypeAtIndex(backpackIndex);
-	if (type == "helmet")
-	{
-		equipment[Helmet] = backpack.getItemAtIndex(backpackIndex);
-	}
-	else if (type == "armor")
-	{
-		equipment[Armor] = backpack.getItemAtIndex(backpackIndex);
-	}
-	else if (type == "weapon")
-	{
-		equipment[Weapon] = backpack.getItemAtIndex(backpackIndex);
-	}
-	else if (type == "shield")
-	{
-		equipment[Shield] = backpack.getItemAtIndex(backpackIndex);
-	}
-	else if (type == "ring")
-	{
-		equipment[Ring] = backpack.getItemAtIndex(backpackIndex);
-	}
-	else if (type == "belt")
-	{
-		equipment[Belt] = backpack.getItemAtIndex(backpackIndex);
-	}
-	else if (type == "boots")
-	{
-		equipment[Boots] = backpack.getItemAtIndex(backpackIndex);
-	}
-	else
-		return false;
-	equippedSize++;
-
-
-	//takes it out of backpack
-	backpack.removeItem(backpackIndex);
-
-
-	return true;
-
-}
-
-//! Implementation of unequip item
-//! @return bool: states whether item has been unequipped or not
-bool Fighter::unequipItem(string type)
-{
-	//remove item from correct slot
-	if (type == "helmet")
-	{
-		backpack.addItem(equipment[Helmet]);
-		equipment[Helmet] = emptyItem;
-	}
-	else if (type == "armor")
-	{
-		backpack.addItem(equipment[Armor]);
-		equipment[Armor] = emptyItem;
-
-	}
-	else if (type == "weapon")
-	{
-		backpack.addItem(equipment[Weapon]);
-		equipment[Weapon] = emptyItem;
-	}
-	else if (type == "shield")
-	{
-		backpack.addItem(equipment[Shield]);
-		equipment[Shield] = emptyItem;
-	}
-	else if (type == "ring")
-	{
-		backpack.addItem(equipment[Ring]);
-		equipment[Ring] = emptyItem;
-	}
-	else if (type == "belt")
-	{
-		backpack.addItem(equipment[Belt]);
-		equipment[Belt] = emptyItem;
-	}
-	else if (type == "boots")
-	{
-		backpack.addItem(equipment[Boots]);
-		equipment[Boots] = emptyItem;
-	}
-	else
-		return false;
-	equippedSize--;
-	return true;
-}
-
 //! Implementation of printBackPackItems
 //! @param prints backpack items on screen
 void Fighter::printBackPackItems()
@@ -681,7 +535,7 @@ ItemContainer Fighter::getBackPack(){
 
 //! Implementation of addToBackPack
 //! @param takes in an item and adds item to backpack
-void Fighter::addToBackpack(Item newItem){
+void Fighter::addToBackpack(Item* newItem){
 	backpack.addItem(newItem);
 }
 

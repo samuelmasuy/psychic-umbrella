@@ -166,8 +166,7 @@ void Item::loadItem()
 }
 
 void Item::printItem(){
-	cout << endl << "Found an item!";
-	cout << endl << type << endl;
+	cout << endl << "Item Type: " << type << endl;
 	for (int i = 0; i < influence.size(); i++){
 		cout << " {" << influence[i].getType() << " +" << influence[i].getBonus() << "}";
 	}

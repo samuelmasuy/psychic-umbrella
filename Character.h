@@ -24,14 +24,12 @@ public:
 	//virtual int attackBonus();//class to be inherited
 	virtual void setAttackBonus() = 0;
 	virtual void playerInfo() = 0; //displaying character info
-	virtual bool equipItem(Item*) = 0;
-	virtual bool equipFromBackpack(int) = 0;
-	virtual bool unequipItem(string) = 0;
-	virtual void printBackPackItems() = 0;
-	virtual void addToBackpack(Item) = 0;
+	virtual void addToBackpack(Item*) = 0;
 	virtual void printEquippedItems() = 0;
 	virtual void levelUp() = 0;
 	virtual void combat(Character*) = 0;
+
+	virtual void printBackPackItems() = 0;
 
 	//saving and loading character
 	//virtual void saveCharacter() = 0;

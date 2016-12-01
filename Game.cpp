@@ -2,16 +2,7 @@
 * @file Game.cpp
 * @brief Implementation of the Game walkthought.
 */
-#include <map>
 #include "Game.h"
-#include "MonsterDirector.h"
-#include "ElfBuilder.h"
-#include "GoblinBuilder.h"
-#include "LizardBuilder.h"
-#include "MedusaBuilder.h"
-#include "SkeletonBuilder.h"
-#include "VineBuilder.h"
-
 
 void Game::play() {
 	// set Character observer
@@ -112,6 +103,7 @@ void Game::play() {
 
 	printGameUsage();
 
+	Item* backpackItem = nullptr;
 	char choice;
 	string itemType;
 	int itemIndexInBackpack;
@@ -174,7 +166,7 @@ void Game::play() {
 				cout << "Enter item type to unequip: ";
 				cin >> itemType;
 				// unequip from character
-				character->unequipItem(itemType);
+				character->unEquip(itemType);
 				_map->print();
 				game->printGameUsage();
 				break;
@@ -196,7 +188,8 @@ void Game::play() {
 				character->printBackPackItems();
 				cout << "Enter item # to equip: ";
 				cin >> itemIndexInBackpack;
-				character->equipFromBackpack(itemIndexInBackpack);
+				backpackItem = character->getBackPack().getItemAtIndex(itemIndexInBackpack);
+				character = new ItemDecorator(character, backpackItem);
 				_map->print();
 				game->printGameUsage();
 				break;
@@ -297,21 +290,21 @@ void Game::saveCharacter(){
 		
 	}
 */	
-	if (character->getBackPack().getSize() != 0){
-		ofs << character->getBackPack().getSize() << endl;
-		for (int i = 0; i < character->getBackPack().getSize(); i++)
-		{
-			ofs << character->getBackPack().getItems().at(0).getType() << endl;
-			ofs << character->getBackPack().getItems()[i].getInfluences().size() << endl;
-			for (int j = 0; j < character->getBackPack().getItems()[i].getInfluences().size(); j++)
-			{
-				ofs << character->getBackPack().getItems()[i].getInfluences().at(0).getType() << endl;
-				ofs << character->getBackPack().getItems()[i].getInfluences().at(0).getBonus() << endl;
-			}
-		}
-	}
-	else
-		ofs << 0;
+	//if (character->getBackPack().getSize() != 0){
+	//	ofs << character->getBackPack().getSize() << endl;
+	//	for (int i = 0; i < character->getBackPack().getSize(); i++)
+	//	{
+	//		ofs << character->getBackPack().getItems().at(0).getType() << endl;
+	//		ofs << character->getBackPack().getItems()[i].getInfluences().size() << endl;
+	//		for (int j = 0; j < character->getBackPack().getItems()[i].getInfluences().size(); j++)
+	//		{
+	//			ofs << character->getBackPack().getItems()[i].getInfluences().at(0).getType() << endl;
+	//			ofs << character->getBackPack().getItems()[i].getInfluences().at(0).getBonus() << endl;
+	//		}
+	//	}
+	//}
+	//else
+	//	ofs << 0;
 
 	ofs.close();
 
@@ -406,7 +399,7 @@ void Game::loadCharacter()
 				ifs >> bonus;
 				myEnhacements = new Enhancement(type, bonus);
 				myItem->setInfluences(*myEnhacements);
-				character->addToBackpack(*myItem);
+				character->addToBackpack(myItem);
 				delete myItem;
 				delete myEnhacements;
 			}
@@ -534,7 +527,7 @@ bool Game::openChest() {
 	char choice;
 	cin >> choice;
 	if (choice == 'y') {
-		character->equipItem(item);
+		character = new ItemDecorator(character, item);
 		if (Logger::isOn()) Logger::fout() << "Item Equipped is:" << item->getType() << endl;
 		// _map->setCell(chest->positionX, chest->postionY, CHAR_EMPTY);
 	}

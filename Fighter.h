@@ -33,11 +33,8 @@ public:
 	//virtual int attackBonus();//class to be inherited
 	void setAttackBonus();
 	void playerInfo(); //displaying character info
-	bool equipItem(Item*);
-	bool equipFromBackpack(int);
-	bool unequipItem(string);
 	void printBackPackItems();
-	void addToBackpack(Item);
+	void addToBackpack(Item*);
 	void levelUp();
 	//saving and loading character
 	void saveCharacter();
@@ -86,8 +83,6 @@ public:
 
 protected:
 	int currentHitPoints;
-	Item equipment[MAX_ITEMS_EQUIPPED];
-	const Item emptyItem; //itemholder for equipementSlots
 	int level = 1;
 	int abilityScores[6];
 	//int atkBonus;
@@ -99,8 +94,6 @@ protected:
 private:
 	string characterType;
 	ItemContainer backpack;
-	enum equipmentSlots {Helmet, Armor, Weapon, Shield, Ring, Belt, Boots};
 	int positionX;
 	int positionY;
-	int equippedSize;
 };

@@ -12,14 +12,14 @@ using namespace std;
 class ItemContainer {
 public:
 	ItemContainer();
-	ItemContainer(vector<Item> items);
+	ItemContainer(vector<Item*> items);
 	//~ItemContainer();
-	vector<Item> getItems();
-	void addItem(Item item);
-	Item getItem(string itemType);
+	vector<Item*> getItems();
+	void addItem(Item* item);
+	Item* getItem(string itemType);
 	string getItemTypeAtIndex(int);
 	bool validateItemsInContainer();
-	Item getItemAtIndex(int);
+	Item* getItemAtIndex(int);
 	//added
 	int getSize();
 	void removeItem(int);
@@ -28,7 +28,7 @@ public:
 	void printBackpack();
 
 private:
-	vector<Item> items;
+	vector<Item*> items;
 	int size;
 };
 

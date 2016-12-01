@@ -64,21 +64,11 @@ class CharacterDecorator : public Character {
   void setAttackBonus() {
     decoratedCharacter->setAttackBonus();
   }
-  bool equipFromBackpack(int i) {
-    return decoratedCharacter->equipFromBackpack(i);
-  }
-  bool unequipItem(string s) {
-    return decoratedCharacter->unequipItem(s);
-  }
-  bool equipItem(Item* i) {
-    return decoratedCharacter->equipItem(i);
-  }
-
   void printBackPackItems() {
 	return decoratedCharacter->printBackPackItems();
   }
 
-  void addToBackpack(Item i) {
+  void addToBackpack(Item* i) {
     decoratedCharacter->addToBackpack(i);
   }
 

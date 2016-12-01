@@ -30,12 +30,9 @@ bool has_ending(string const &, string const &);
 
 int main(int argc, char const* argv[]) {
   cout << "Dungeons And Dragons Game" <<  endl;
-  Character* character = NULL;
+  Character* character = nullptr;
   //Character* monster = NULL;
-  CharacterBuilder* nimbleBuilder = NULL;
-  CharacterBuilder* tankBuilder = NULL;
-  CharacterBuilder* bullyBuilder = NULL;
-
+  CharacterBuilder* cb = nullptr;
 
   CharacterDirector* cd = new CharacterDirector();
 
@@ -56,25 +53,25 @@ int main(int argc, char const* argv[]) {
   int character_choice = validate_choice(1, 3);
   switch (character_choice) {
   case 1:
-    nimbleBuilder = new NimbleBuilder();
-    cd->setCharacterBuilder(nimbleBuilder);
+    cb = new NimbleBuilder();
+    cd->setCharacterBuilder(cb);
     cd->constructCharacter();
     character = cd->getCharacter();
-    delete nimbleBuilder;
+    delete cb;
     break;
   case 2:
-    tankBuilder = new TankBuilder();
-    cd->setCharacterBuilder(tankBuilder);
+    cb = new TankBuilder();
+    cd->setCharacterBuilder(cb);
     cd->constructCharacter();
     character = cd->getCharacter();
-    delete tankBuilder;
+    delete cb;
     break;
   case 3:
-    bullyBuilder = new BullyBuilder();
-    cd->setCharacterBuilder(bullyBuilder);
+    cb = new BullyBuilder();
+    cd->setCharacterBuilder(cb);
     cd->constructCharacter();
     character = cd->getCharacter();
-    delete bullyBuilder;
+    delete cb;
     break;
   }
   delete cd;
@@ -123,11 +120,13 @@ int main(int argc, char const* argv[]) {
   cout << "Here are the stats of your character" << endl;
   character->playerInfo();
 
-  //Item* r = character->unEquip("ring");  
-  //r->printItem();
+  cout << "Unequiping the ring::" << endl;
+  Item* r = character->unEquip("ring");  
+  r->printItem();
   cout << endl;
   character->playerInfo();
   cout << endl;
+  cout << endl << "Equiped Items::" << endl;
   character->printEquippedItems();
   cout << endl;
   character->printBackPackItems();
