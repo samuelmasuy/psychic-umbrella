@@ -507,8 +507,11 @@ vector<Item*> Game::getCharacterEquipedItems() {
 }
 
 vector<Chest*> Game::createChestsFromMap() {
+	vector<Coord2D> chestCoords;
+
+	_map->FindAll(CHAR_CHEST, chestCoords);
 	// map get  all chests position _map
-	int chest_size = 5; //sizeof
+	int chest_size = chestCoords.size(); // number of chests
 	vector<Chest*> chests;
 
 	ChestDirector* cg = new ChestDirector();
@@ -518,8 +521,8 @@ vector<Chest*> Game::createChestsFromMap() {
 		cg->setChestBuilder(new ChestBuilder());
 		cg->makeChest();
 		Chest* mapChest = cg->getChest();
-		mapChest->setPositionX(i);
-		mapChest->setPositionY(i);
+		mapChest->setPositionX(chestCoords[i].x);
+		mapChest->setPositionY(chestCoords[i].y);
 		chests.push_back(mapChest);
 	}
 	delete mapChest;
@@ -534,7 +537,7 @@ vector<Character*> Game::createMonstersFromMap() {
 	MonsterBuilder* mb = nullptr;
 	Character* monster = nullptr;
 
-	for (int i = 0; i < 6; i++) {
+	for (int i = 1; i <= 6; i++) {
 		int x = 0;
 		int y = 0;
 		bool found = _map->FindItem('0' + i, x, y);

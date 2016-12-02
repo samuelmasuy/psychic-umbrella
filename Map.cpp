@@ -415,6 +415,14 @@ bool Map::FindItem(CELL_TYPE x, int &row, int &col)
 	return false;
 }
 
+void Map::FindAll(CELL_TYPE value, vector<Coord2D> &res)
+{
+	res.clear();
+	for (int i = 0; i < m_rows; i++)
+		for (int j = 0; j < m_cols; j++)
+			if (m_scene[i][j] == value)	
+				res.push_back(Coord2D(j, i)); 
+}
 
 string Map::CellToString(CELL_TYPE x)
 {
