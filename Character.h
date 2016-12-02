@@ -6,7 +6,6 @@
 #include <map>
 #include "Subject.h"
 #include "ItemContainer.h"
-//#include "Strategy.h"
 
 using namespace std;
 
@@ -48,7 +47,7 @@ public:
 	virtual void setCharisma(int) = 0;
 	virtual void setArmor() = 0;
 	virtual void setHitPoints(int) = 0;
-	//virtual void setStrategy(Strategy*) = 0;
+	//virtual void setStrategy(StrategyN*) = 0;
 	virtual void setAbilityScores(int, int) = 0;
 
 	//game accessor methods
@@ -62,7 +61,7 @@ public:
 	virtual int getLevel() = 0;
 	virtual int getPositionX() = 0;
 	virtual int getPositionY() = 0;
-	//virtual Strategy* getStrategy() = 0;
+	//virtual StrategyN* getStrategy() = 0;
 
 	//character accessor methods
 	virtual int getAttacksPerRound() = 0;

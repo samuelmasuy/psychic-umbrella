@@ -1,5 +1,8 @@
 #pragma once
 #include "GameStateN.h"
+#include "ItemDecorator.h"
+#include "DiceRoller.h"
+#include "Monster.h"
 
 class StrategyN
 {
@@ -9,7 +12,6 @@ public:
 	virtual void execute(GameStateN*) = 0;
 	bool checkCell(Coord2D*, Map*, char);
 	Coord2D* identifyTargetCell(int, int, Map*, char);
-	void combat(Character*, Character*);
 	void move(Coord2D*, Map*, Character*);
 };
 

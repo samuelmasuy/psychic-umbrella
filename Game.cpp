@@ -14,6 +14,7 @@ void Game::play() {
 
   vector<Chest*> chests = createChestsFromMap();
 
+
   cout << "equiped items in game";
   vector<Item*> equiped = getCharacterEquipedItems();
   for (int i = 0; i <= equiped.size(); i++) {
@@ -28,6 +29,11 @@ void Game::play() {
   int characterPositionY = character->getPositionY();
   enemiesDefeated = false;
   enemiesDefeated = (_map->countMonsters() == 0);
+
+
+  while (_map->countMonsters() == 0) {
+  }
+
 
   printGameUsage();
 

@@ -7,7 +7,6 @@
 #include "Subject.h"
 #include "ItemContainer.h"
 #include "Character.h"
-//#include "Strategy.h"
 #include "Logger.h"
 
 const int MAX_ITEMS_EQUIPPED = 7;
@@ -37,8 +36,6 @@ public:
 	void addToBackpack(Item*);
 	void levelUp();
 	//saving and loading character
-	void saveCharacter();
-	void loadCharacter();
 	void setLevel(int);
 	void setPositionX(int);
 	void setPositionY(int);
@@ -50,7 +47,7 @@ public:
 	void setCharisma(int);
 	void setArmor();
 	void setHitPoints(int);
-	//void setStrategy(Strategy*);
+	//void setStrategy(StrategyN*);
 	void setAbilityScores(int, int);
 
 	//game accessor methods
@@ -66,7 +63,7 @@ public:
 	virtual int getIntelligence();
 	virtual int getWisdom();
 	virtual int getCharisma();
-	//Strategy* getStrategy();
+	//StrategyN* getStrategy();
 	int armorModifier();
 	int getAttacksPerRound();
 	string getCharacterType();
@@ -93,8 +90,6 @@ protected:
 	int experience, gold;
 	int* bonusAttack = new int (1);
 	int armor;
-	//Strategy* characterStrategy;
-
 private:
 	string characterType;
 	ItemContainer backpack;

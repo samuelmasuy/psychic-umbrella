@@ -9,8 +9,6 @@
 #include <iostream>
 #include <string>
 #include "Character.h"
-//#include "Strategy.h"
-
 /**
  * @brief Abstract decorator class - note that it extends the Character abstract class.
  */
@@ -75,23 +73,14 @@ class CharacterDecorator : public Character {
   void levelUp() {
     decoratedCharacter->levelUp();
   }
-/*void setStrategy(Strategy* inputStrategy){
-	  decoratedCharacter->setStrategy(inputStrategy);
-  }
+  //void setStrategy(StrategyN* inputStrategy){
+//	  decoratedCharacter->setStrategy(inputStrategy);
+  //}
 
-  Strategy* getStrategy(){
-	  return decoratedCharacter->getStrategy();
-  }
-  */
-  //saving and loading character
-/*
-  void saveCharacter() {
-    decoratedCharacter->saveCharacter();
-  }
-  void loadCharacter() {
-    decoratedCharacter->loadCharacter();
-  }
-*/
+  //StrategyN* getStrategy(){
+	 // return decoratedCharacter->getStrategy();
+  //}
+  
   void printEquippedItems();
   
   Item* retrieveItem(string);

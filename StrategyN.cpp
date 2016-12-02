@@ -47,8 +47,3 @@ void StrategyN::move(Coord2D* targetLocation, Map* inputMap, Character* mover){
 		mover->setPositionX(targetLocation->x);
 		mover->setPositionY(targetLocation->y);
 }
-
-
-void combat(Character*, Character*){
-
-}

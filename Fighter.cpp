@@ -63,9 +63,6 @@ void Fighter::setCharisma(int cha) {
   abilityScores[5] = cha;
 }
 
-/*void Fighter::setStrategy(Strategy *inputStrategy) {
-  characterStrategy = inputStrategy;
-}*/
 int Fighter::getHitPoints() {
   return currentHitPoints;
 }
@@ -88,9 +85,9 @@ int Fighter::getCharisma() {
   return abilityScores[5];
 }
 //
-/*Strategy* Fighter::getStrategy() {
-  return characterStrategy;
-}*/
+//StrategyN* Fighter::getStrategy() {
+//  return characterStrategy;
+//}
 
 Fighter::Fighter() {
   characterType = "fighter";
