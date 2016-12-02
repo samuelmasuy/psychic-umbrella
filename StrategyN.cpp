@@ -11,25 +11,43 @@ StrategyN::~StrategyN()
 {
 }
 
-vector<Coord2D> StrategyN::checkAdjacentCell(int inputX, int inputY, Map* inputMap, char type) {
+bool StrategyN::checkCell(Coord2D* inputCoord, Map* inputMap, char type) {
 	vector<Coord2D> outputLocation;
-	if (inputMap->ValidPos(inputX, inputY + 1) && inputMap->GetCell(inputX, inputY + 1) == type) {
-		outputLocation.push_back(Coord2D(inputX, inputY + 1));
+	if (inputMap->GetCell(inputCoord->x, inputCoord->y) == type) {
+		return true;
 	}
-	else if (inputMap->ValidPos(inputX, inputY - 1) && inputMap->GetCell(inputX, inputY - 1) == type) {
-		outputLocation.push_back(Coord2D(inputX, inputY - 1));
-	}
-	else if (inputMap->ValidPos(inputX + 1, inputY) && inputMap->GetCell(inputX + 1, inputY) == type) {
-		outputLocation.push_back(Coord2D(inputX + 1, inputY));
-	}
-	else if (inputMap->ValidPos(inputX - 1, inputY) && inputMap->GetCell(inputX - 1, inputY) == type) {
-		outputLocation.push_back(Coord2D(inputX - 1, inputY));
-	}
-	else {
-		outputLocation.push_back(Coord2D(-1, -1));
-	}
-	return outputLocation;
+	else return false;
 }
+
+Coord2D* StrategyN::identifyTargetCell(int inputX, int inputY, Map* inputMap, char type){
+	vector<Coord2D*> testCoords;
+	testCoords.push_back(new Coord2D(inputX + 1, inputY + 1));
+	testCoords.push_back(new Coord2D(inputX, inputY + 1));
+	testCoords.push_back(new Coord2D(inputX -1, inputY + 1));
+	testCoords.push_back(new Coord2D(inputX, inputY + 1));
+	testCoords.push_back(new Coord2D(inputX, inputY - 1));
+	testCoords.push_back(new Coord2D(inputX - 1, inputY + 1));
+	testCoords.push_back(new Coord2D(inputX - 1, inputY));
+	testCoords.push_back(new Coord2D(inputX - 1, inputY - 1));
+
+	Coord2D* identifiedCoord = nullptr;
+
+	for(int i = 0; i < testCoords.size(); i++){
+		if (checkCell(testCoords[i], inputMap, type))
+			return new Coord2D(testCoords[i]->x, testCoords[i]->y);
+	}
+
+	return identifiedCoord;
+}
+
+void StrategyN::move(Coord2D* targetLocation, Map* inputMap, Character* mover){
+		char oldCellType = inputMap->GetCell(mover->getPositionX(), mover->getPositionY());
+		inputMap->fillCell(mover->getPositionX(), mover->getPositionY(), CHAR_EMPTY);
+		inputMap->fillCell(targetLocation->x, targetLocation->y, oldCellType);
+		mover->setPositionX(targetLocation->x);
+		mover->setPositionY(targetLocation->y);
+}
+
 
 void combat(Character*, Character*){
 
