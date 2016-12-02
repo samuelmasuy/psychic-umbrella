@@ -1,5 +1,4 @@
-#ifndef CHARACTERBUILDER_H_
-#define CHARACTERBUILDER_H_
+#pragma once
 #include "Character.h"
 #include "Fighter.h"
 
@@ -14,6 +13,3 @@ public:
 protected:
 	Character* myCharacter;
 };
-
-
-#endif /* CHARACTERBUILDER_H_ */

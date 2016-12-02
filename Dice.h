@@ -5,6 +5,7 @@
  * @version 1.0
  * @date 2016-10-17
  */
+#pragma once
 #include <string>
 
 class Dice {

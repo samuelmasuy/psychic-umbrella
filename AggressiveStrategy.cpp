@@ -1,18 +1,10 @@
 #include "AggressiveStrategy.h"
 
-AggressiveStrategy::AggressiveStrategy()
-{
+AggressiveStrategy::AggressiveStrategy() {
 }
 
+AggressiveStrategy::~AggressiveStrategy() {
+}
 
-
-void AggressiveStrategy::execute(int moveX, int moveY, int attackX, int attackY, int action, Map inputMap)
-{
-	/* 
-	inputMap->getPlayerPos();
-	inputMap->setMonsterPos();
-	combat(inputMapGetPlayer());
-	*/
-	
-
+void AggressiveStrategy::execute(GameState* g) {
 }

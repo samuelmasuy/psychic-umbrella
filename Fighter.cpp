@@ -9,309 +9,268 @@
 #include <fstream>
 #include <iostream>
 
-
 using namespace std;
 
 const int  TOT_STATS = 6;
 const string filename = "characterSaved.dat";
 
 //! Constructor: passes values to each ability score and set hit points to 10
-Fighter::Fighter(int str, int dex, int con, int intel, int wis, int cha)
-{
-	abilityScores[0] = str;
-	abilityScores[1] = dex;
-	abilityScores[2] = con;
-	abilityScores[3] = intel;
-	abilityScores[4] = wis;
-	abilityScores[5] = cha;
+Fighter::Fighter(int str, int dex, int con, int intel, int wis, int cha) {
+  abilityScores[0] = str;
+  abilityScores[1] = dex;
+  abilityScores[2] = con;
+  abilityScores[3] = intel;
+  abilityScores[4] = wis;
+  abilityScores[5] = cha;
 
-
-	//and set hit points to 10
-	currentHitPoints = 10 + abilityModifier(2);
-	positionX = 0;
-	positionY = 0;
-	level = 1;
-	armor = 0;
-	attacksPerRound = 1;
-	gold = 0;
-	experience = 0;
-	bonusAttack[0] = 0;
-
-}
-int Fighter::getAbilityScore(int index){
-	return abilityScores[index];
+  //and set hit points to 10
+  currentHitPoints = 10 + abilityModifier(2);
+  positionX = 0;
+  positionY = 0;
+  level = 1;
+  armor = 0;
+  attacksPerRound = 1;
+  gold = 0;
+  experience = 0;
+  bonusAttack[0] = 0;
 }
 
-void Fighter::setAbilityScores(int i, int ability){
-	abilityScores[i] = ability;
+int Fighter::getAbilityScore(int index) {
+  return abilityScores[index];
+}
+
+void Fighter::setAbilityScores(int i, int ability) {
+  abilityScores[i] = ability;
 }
 
 
-void Fighter::setStrength(int str)
-{
-	abilityScores[0] = str;
+void Fighter::setStrength(int str) {
+  abilityScores[0] = str;
 }
-void Fighter::setDexterity(int dex)
-{
-	abilityScores[1] = dex;
+void Fighter::setDexterity(int dex) {
+  abilityScores[1] = dex;
 }
-void Fighter::setConstitution(int con)
-{
-	abilityScores[2] = con;
+void Fighter::setConstitution(int con) {
+  abilityScores[2] = con;
 }
-void Fighter::setIntelligence(int intel)
-{
-	abilityScores[3] = intel;
+void Fighter::setIntelligence(int intel) {
+  abilityScores[3] = intel;
 }
-void Fighter::setWisdom(int wis)
-{
-	abilityScores[4] = wis;
+void Fighter::setWisdom(int wis) {
+  abilityScores[4] = wis;
 }
-void Fighter::setCharisma(int cha)
-{
-	abilityScores[5] = cha;
+void Fighter::setCharisma(int cha) {
+  abilityScores[5] = cha;
 }
 
-//void Fighter::setStrategy(Strategy* inputStrategy) {
-//	characterStrategy = inputStrategy;
-//}
+void Fighter::setStrategy(Strategy *inputStrategy) {
+  characterStrategy = inputStrategy;
+}
 int Fighter::getHitPoints() {
-	return currentHitPoints;
+  return currentHitPoints;
 }
-int Fighter::getStrength()
-{
-	return abilityScores[0];
+int Fighter::getStrength() {
+  return abilityScores[0];
 }
-int Fighter::getDexterity()
-{
-	return abilityScores[1];
+int Fighter::getDexterity() {
+  return abilityScores[1];
 }
-int Fighter::getConstitution()
-{
-	return abilityScores[2];
+int Fighter::getConstitution() {
+  return abilityScores[2];
 }
-int Fighter::getIntelligence()
-{
-	return abilityScores[3];
+int Fighter::getIntelligence() {
+  return abilityScores[3];
 }
-int Fighter::getWisdom()
-{
-	return abilityScores[4];
+int Fighter::getWisdom() {
+  return abilityScores[4];
 }
-int Fighter::getCharisma()
-{
-	return abilityScores[5];
+int Fighter::getCharisma() {
+  return abilityScores[5];
 }
 //
-//Strategy* Fighter::getStrategy(){
-//	return characterStrategy;
-//}
+Strategy* Fighter::getStrategy() {
+  return characterStrategy;
+}
 
-Fighter::Fighter()
-{
-	characterType = "fighter";
+Fighter::Fighter() {
+  characterType = "fighter";
 
-	//generate stats for Fighter
-	for (int i = 0; i < TOT_STATS; i++)
-		abilityScores[i] = generateStats();
+  //generate stats for Fighter
+  for (int i = 0; i < TOT_STATS; i++)
+    abilityScores[i] = generateStats();
 
-	//and set hit points to 10
-	currentHitPoints = 10 + abilityModifier(2);
-	level = 1;
-	attacksPerRound = 1;
+  //and set hit points to 10
+  currentHitPoints = 10 + abilityModifier(2);
+  level = 1;
+  attacksPerRound = 1;
 
-	notify(); //notifies Fighter observer
+  notify(); //notifies Fighter observer
 }
 
 //! Implementation of the verification of a newly created Fighter
 //! @return bool value, true of the Fighter is valid (stats should be in the 3-18 range for a new Fighter), false if invalid.
-bool Fighter::validateNewCharacter()
-{
-	for (int i = 0; i <= 5; i++)
-	if (abilityScores[i]<3 || abilityScores[i]>18)
-		return false;
-	return true;
+bool Fighter::validateNewCharacter() {
+  for (int i = 0; i <= 5; i++)
+    if (abilityScores[i]<3 || abilityScores[i]>18)
+      return false;
+  return true;
 }
 
-void Fighter::setCharacterType(string type){
+void Fighter::setCharacterType(string type) {
 
-	characterType = type;
+  characterType = type;
 }
 
 string Fighter::getCharacterType() {
-	return characterType;
+  return characterType;
 }
 
 int* Fighter::getAbilityScores() {
 
-	return abilityScores;
+  return abilityScores;
 }
 
 //! Implementation of fill cell, set any cell to anything it might eventually contain
 //! @param damage: damage sustained by the Fighter
-void Fighter::hit(int damage)
-{
-	currentHitPoints = currentHitPoints - damage;
-	notify();
+void Fighter::hit(int damage) {
+  currentHitPoints = currentHitPoints - damage;
+  notify();
 }
 
-void Fighter::setHitPoints(int hp)
-{
-	currentHitPoints = hp;
+void Fighter::setHitPoints(int hp) {
+  currentHitPoints = hp;
 }
 
 //! Implementation of ability modifier method.
 //! @return int: value of modified ability score entered
-int Fighter::abilityModifier(int ability)
-{
+int Fighter::abilityModifier(int ability) {
 
-	return abilityScores[ability] / 2 - 5;
+  return abilityScores[ability] / 2 - 5;
 }
 
 //! Implementation of hit points of Fighter
 //! @param currentHitPoints: sets currentHitPoints according to ability modifier
-void Fighter::hpChange()
-{
-	if (abilityModifier(2) > 1)
-		currentHitPoints = 10 + (level - 1) * (10 / 2 + 1) + (abilityModifier(2) * 20);
-	else
-		currentHitPoints = 10 + (level - 1) * (10 / 2 + 1);
-	notify();
+void Fighter::hpChange() {
+  if (abilityModifier(2) > 1)
+    currentHitPoints = 10 + (level - 1) * (10 / 2 + 1) + (abilityModifier(2) * 20);
+  else
+    currentHitPoints = 10 + (level - 1) * (10 / 2 + 1);
+  notify();
 }
 
 //! Implementation of level of Fighter
 //! @param level: when level is changed the following stats must also change according to D20 rules.
-void Fighter::setLevel(int lvl)
-{
-	level = lvl;
-	hpChange();
-	if (level < 5)
-	{
-		attacksPerRound = 1;
-	}
-	else if (level > 5 && level < 11)
-	{
-		attacksPerRound = 2;
-	}
-	else if (level > 10 && level < 16)
-	{
-		attacksPerRound = 3;
-	}
-	else if (level > 15 && level < 21)
-	{
-		attacksPerRound = 4;
-	}
-	
-	setAttackBonus();
-	getDamageBonus();
-	notify();
+void Fighter::setLevel(int lvl) {
+  level = lvl;
+  hpChange();
+  if (level < 5) {
+    attacksPerRound = 1;
+  } else if (level > 5 && level < 11) {
+    attacksPerRound = 2;
+  } else if (level > 10 && level < 16) {
+    attacksPerRound = 3;
+  } else if (level > 15 && level < 21) {
+    attacksPerRound = 4;
+  }
+
+  setAttackBonus();
+  getDamageBonus();
+  notify();
 }
 
-void Fighter::setArmor()
-{
-	armor = 10 + abilityModifier(1);
+void Fighter::setArmor() {
+  armor = 10 + abilityModifier(1);
 }
 
 //! Implementation of armor modifier
 //! @return the modifier for armor according to D20 game rules
-int Fighter::armorModifier()
-{
-	//return 10 + abilityModifier(1);
-	return armor;
+int Fighter::armorModifier() {
+  //return 10 + abilityModifier(1);
+  return armor;
 
 }
 //! Implementation of damage bonus which depends on strength ability
 //! @return strength ability
-int Fighter::getDamageBonus()
-{
-	return abilityModifier(0);
+int Fighter::getDamageBonus() {
+  return abilityModifier(0);
 }
 //! Implementation of attack bonus according to D20 game rules
 //! @return attackBonus according d20 game
-void Fighter::setAttackBonus()
-{
+void Fighter::setAttackBonus() {
 
-	int bonusPerRound = level;
-	if (level % 5 == 1)
-	{
+  int bonusPerRound = level;
+  if (level % 5 == 1) {
 
-		attacksPerRound++;
-		bonusAttack = new int(attacksPerRound);
-	}
+    attacksPerRound++;
+    bonusAttack = new int(attacksPerRound);
+  }
 
 
-	for (int i = 0; i < attacksPerRound; i++)
-	{
-		if (bonusPerRound > 0)
-		{
-			bonusAttack[i] = bonusPerRound;
-			bonusPerRound -= 5;
-		}
+  for (int i = 0; i < attacksPerRound; i++) {
+    if (bonusPerRound > 0) {
+      bonusAttack[i] = bonusPerRound;
+      bonusPerRound -= 5;
+    }
 
-	}
+  }
 }
 
-int* Fighter::getAttackBonus()
-{
-	return bonusAttack;
+int* Fighter::getAttackBonus() {
+  return bonusAttack;
 }
 
-int Fighter::getAttacksPerRound()
-{
-	return ceil(level / 5.0);
+int Fighter::getAttacksPerRound() {
+  return ceil(level / 5.0);
 }
 
 
 //! Implementation of get level
 //! @return level: level f the Fighter
-int Fighter::getLevel(){
-	return level;
+int Fighter::getLevel() {
+  return level;
 }
 
 //! Implementation of level up
 //! @param level: increase level of Fighter upon level change
-void Fighter::levelUp(){
-	level++;
-	hpChange();
-	setAttackBonus();
-	getDamageBonus();
-	getAttacksPerRound();
-	notify();
+void Fighter::levelUp() {
+  level++;
+  hpChange();
+  setAttackBonus();
+  getDamageBonus();
+  getAttacksPerRound();
+  notify();
 }
 
 //! Implementation of stats generator
 //! @return total: random number generated
-int Fighter::generateStats()
-{
-	int score = 0;
-	int diceTurns[4] = {};
-	//score = rand() % 6 + 1;
-	int lowest = 6;
-	int total = 0;
-	// Random seed
-	random_device rd;
-	// Initialize Mersenne Twister pseudo-random number generator
-	mt19937 gen(rd());
-	// Generate pseudo-random numbers
-	// uniformly distributed in range (1, 6)
-	uniform_int_distribution<> rand(1, 6);
+int Fighter::generateStats() {
+  int score = 0;
+  int diceTurns[4] = {};
+  //score = rand() % 6 + 1;
+  int lowest = 6;
+  int total = 0;
+  // Random seed
+  random_device rd;
+  // Initialize Mersenne Twister pseudo-random number generator
+  mt19937 gen(rd());
+  // Generate pseudo-random numbers
+  // uniformly distributed in range (1, 6)
+  uniform_int_distribution<> rand(1, 6);
 
-	for (int i = 0; i < 4; i++)
-	{
-		score = rand(gen);;
-		diceTurns[i] = score;
+  for (int i = 0; i < 4; i++) {
+    score = rand(gen);;
+    diceTurns[i] = score;
 
-		if (diceTurns[i] < lowest)
-		{
-			lowest = diceTurns[i];
-		}
-		total += diceTurns[i];
-	}
-	total -= lowest;
+    if (diceTurns[i] < lowest) {
+      lowest = diceTurns[i];
+    }
+    total += diceTurns[i];
+  }
+  total -= lowest;
 
-	level = 1;
+  level = 1;
 
-	return total;
+  return total;
 }
 
 
@@ -420,7 +379,7 @@ int Fighter::generateStats()
 		ifs >> abilityScores[i];
 	}
 	ifs >> armor;
-	//ifs >> 
+	//ifs >>
 	ifs >> equippedSize;
 	if (equippedSize > 0)
 	{
@@ -474,160 +433,150 @@ int Fighter::generateStats()
 
 //! Implementation of player info
 //! @param print Fighter info on screen
-void Fighter::playerInfo()
-{
-	cout << "-------------------------------\n";
-	cout << "Class Type: " << characterType << endl;
-	cout << "Level: " << level << endl;
-	cout << "Total HP: " << currentHitPoints << endl;
-	cout << "Total armor: " << armorModifier() << endl;
-	cout << "Strenght: " << getStrength() << endl;
-	cout << "Dexterity: " << getDexterity() << endl;
-	cout << "Constituion: " << getConstitution() << endl;
-	cout << "Intelect: " << getIntelligence() << endl;
-	cout << "Wizdom: " << getWisdom() << endl;
-	cout << "Charisma: " << getCharisma() << endl;
-	cout << "Damange bonus: " << getDamageBonus() << endl;
-	cout << "Attack bonus: ";
-	if (attacksPerRound > 1)
-	{
-			for (int i = 0; i < attacksPerRound; i++)
-		{
-				cout << *(bonusAttack + i) << " ; ";
-		}
-			cout  << endl;
-	}
-	else
-		cout << *(bonusAttack + 0) << " ";
+void Fighter::playerInfo() {
+  cout << "-------------------------------\n";
+  cout << "Class Type: " << characterType << endl;
+  cout << "Level: " << level << endl;
+  cout << "Total HP: " << currentHitPoints << endl;
+  cout << "Total armor: " << armorModifier() << endl;
+  cout << "Strenght: " << getStrength() << endl;
+  cout << "Dexterity: " << getDexterity() << endl;
+  cout << "Constituion: " << getConstitution() << endl;
+  cout << "Intelect: " << getIntelligence() << endl;
+  cout << "Wizdom: " << getWisdom() << endl;
+  cout << "Charisma: " << getCharisma() << endl;
+  cout << "Damange bonus: " << getDamageBonus() << endl;
+  cout << "Attack bonus: ";
+  if (attacksPerRound > 1) {
+    for (int i = 0; i < attacksPerRound; i++) {
+      cout << *(bonusAttack + i) << " ; ";
+    }
+    cout  << endl;
+  } else
+    cout << *(bonusAttack + 0) << " ";
 
 
-	cout << "Attacks per/round: " << getAttacksPerRound() << endl;
-	cout << "-------------------------------\n";
-	if (ChLogger::isOn())
-	{
-		ChLogger::fout() << "-------------------------------\n";
-		ChLogger::fout() << "Class Type: " << getCharacterType() << endl;
-		ChLogger::fout() << "Level: " << getLevel() << endl;
-		ChLogger::fout() << "Total HP: " << currentHitPoints << endl;
-		ChLogger::fout() << "Ability scores: ";
-		ChLogger::fout() << " Strength: " << getStrength();
-		ChLogger::fout() << " , Dexterity: " << getDexterity();
-		ChLogger::fout() << " , Constitution: " << getConstitution();
-		ChLogger::fout() << " , Intellect: " << getIntelligence();
-		ChLogger::fout() << " , Wisdom: " << getWisdom();
-		ChLogger::fout() << " , Charisma: " << getCharisma();
-		ChLogger::fout() << endl;
-		ChLogger::fout() << "Damage bonus: " << getDamageBonus() << endl;
-		ChLogger::fout() << "Attacks per Round: " << getAttacksPerRound() << endl;
+  cout << "Attacks per/round: " << getAttacksPerRound() << endl;
+  cout << "-------------------------------\n";
+  if (ChLogger::isOn()) {
+    ChLogger::fout() << "-------------------------------\n";
+    ChLogger::fout() << "Class Type: " << getCharacterType() << endl;
+    ChLogger::fout() << "Level: " << getLevel() << endl;
+    ChLogger::fout() << "Total HP: " << currentHitPoints << endl;
+    ChLogger::fout() << "Ability scores: ";
+    ChLogger::fout() << " Strength: " << getStrength();
+    ChLogger::fout() << " , Dexterity: " << getDexterity();
+    ChLogger::fout() << " , Constitution: " << getConstitution();
+    ChLogger::fout() << " , Intellect: " << getIntelligence();
+    ChLogger::fout() << " , Wisdom: " << getWisdom();
+    ChLogger::fout() << " , Charisma: " << getCharisma();
+    ChLogger::fout() << endl;
+    ChLogger::fout() << "Damage bonus: " << getDamageBonus() << endl;
+    ChLogger::fout() << "Attacks per Round: " << getAttacksPerRound() << endl;
 
 
-		ChLogger::fout() << "-------------------------------\n";
-	}
+    ChLogger::fout() << "-------------------------------\n";
+  }
 }
 
 //! Implementation of printBackPackItems
 //! @param prints backpack items on screen
-void Fighter::printBackPackItems()
-{
-	backpack.printBackpack();
+void Fighter::printBackPackItems() {
+  backpack.printBackpack();
 }
 
-ItemContainer Fighter::getBackPack(){
-	return backpack;
+ItemContainer Fighter::getBackPack() {
+  return backpack;
 }
 
 //! Implementation of addToBackPack
 //! @param takes in an item and adds item to backpack
-void Fighter::addToBackpack(Item* newItem){
-	backpack.addItem(newItem);
+void Fighter::addToBackpack(Item* newItem) {
+  backpack.addItem(newItem);
 }
 
 //! Implementation of mutator method of setPositionX
 //! @param sets position X of Fighter
-void Fighter::setPositionX(int x){
-	positionX = x;
+void Fighter::setPositionX(int x) {
+  positionX = x;
 }
 
 //! Implementation of mutator method of  setPositionY
 //! @param sets position Y of Fighter
-void Fighter::setPositionY(int y){
-	positionY = y;
+void Fighter::setPositionY(int y) {
+  positionY = y;
 }
 
 //! Implementation of accessor method getPositionX
 //! @return positionX: gets position X of Fighter
-int Fighter::getPositionX(){
-	return positionX;
+int Fighter::getPositionX() {
+  return positionX;
 }
 
 //! Implementation of accessor method getPositionY
 //! @return positionY: gets position Y of Fighter
-int Fighter::getPositionY(){
-	return positionY;
+int Fighter::getPositionY() {
+  return positionY;
 }
 
 Item* Fighter::unEquip(string s) {
-	return nullptr;
+  return nullptr;
 }
 
 Item* Fighter::retrieveItem(string s) {
-	return nullptr;
+  return nullptr;
 }
 
 bool Fighter::isEquiped(string s) {
-	return false;
+  return false;
 }
 
 //! Implementation of printEquippedItems
 //! @param prints every item equipped onto screen
-void Fighter::printEquippedItems()
-{
-	cout << endl;
+void Fighter::printEquippedItems() {
+  cout << endl;
 }
 
 
-void Fighter::combat(Character* monster)
-{
-	int totalDmg;
-/*
-	for (int i = 0; i < attacksPerRound; i++)
-	{
-		//roll dice for dmg
-		int roll = diceRoll(20);
+void Fighter::combat(Character* monster) {
+  int totalDmg;
+  /*
+  	for (int i = 0; i < attacksPerRound; i++)
+  	{
+  		//roll dice for dmg
+  		int roll = diceRoll(20);
 
-		switch (attacksPerRound)
-		{
-			case 1:
-			{
-					playertotalDmg = bonusAttack[0] + getDamageBonus() + roll;
-					monsterTotDmg = monster->get
-					cout << "First blow: " << totalDmg << "dmg" << endl;
-					 monster->hit(totalDmg);
-			}break;
-			
-			case 2:
-			{
-					  totalDmg = bonusAttack[1] + getDamageBonus() + roll;
-					  cout << "Second blow: " << totalDmg << "dmg" << endl;
-					   monster->hit(totalDmg);
-			}break;
-			case 3:
-			{
-					  totalDmg = bonusAttack[2] + getDamageBonus() + roll;
-					  cout << "Third blow: " << totalDmg << "dmg" << endl;
-					  monster->hit(totalDmg);
-			}break;
-			case 4:
-			{	
-					  totalDmg = bonusAttack[3] + getDamageBonus() + roll;
-					  cout << "Forth blow: " << totalDmg << "dmg" << endl;
-					  monster->hit(totalDmg);
-			}break;
+  		switch (attacksPerRound)
+  		{
+  			case 1:
+  			{
+  					playertotalDmg = bonusAttack[0] + getDamageBonus() + roll;
+  					monsterTotDmg = monster->get
+  					cout << "First blow: " << totalDmg << "dmg" << endl;
+  					 monster->hit(totalDmg);
+  			}break;
 
-		}
-	}
-*/
+  			case 2:
+  			{
+  					  totalDmg = bonusAttack[1] + getDamageBonus() + roll;
+  					  cout << "Second blow: " << totalDmg << "dmg" << endl;
+  					   monster->hit(totalDmg);
+  			}break;
+  			case 3:
+  			{
+  					  totalDmg = bonusAttack[2] + getDamageBonus() + roll;
+  					  cout << "Third blow: " << totalDmg << "dmg" << endl;
+  					  monster->hit(totalDmg);
+  			}break;
+  			case 4:
+  			{
+  					  totalDmg = bonusAttack[3] + getDamageBonus() + roll;
+  					  cout << "Forth blow: " << totalDmg << "dmg" << endl;
+  					  monster->hit(totalDmg);
+  			}break;
+
+  		}
+  	}
+  */
 
 }
-=======
->>>>>>> c635bc621a57a254c18b766b348702ca1905a06f

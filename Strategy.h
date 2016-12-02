@@ -1,15 +1,17 @@
 #pragma once
+
+#include <vector>
 #include "GameState.h"
+#include "Character.h"
 
-class Strategy
-{
-public:
-	Strategy();
-	~Strategy();
-	virtual int execute(GameState*) = 0;
+using namespace std;
 
-private:
-	void combat(Character* monster);
-	vector<int> checkAdjacentCell(int, int, Map*);
+class Strategy {
+ public:
+  Strategy();
+  ~Strategy();
+  virtual void execute(GameState*) = 0;
+  //void combat(Character* monster);
+  //vector<int> checkAdjacentCell(int, int, Map*);
 };
 

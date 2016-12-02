@@ -4,11 +4,10 @@
  *  Created on: Nov 21, 2016
  *      Author: ahmad
  */
+#pragma once
 
-#ifndef TANKBUILDER_H
-#define TANKBUILDER_H
 #include "CharacterBuilder.h"
-namespace std {
+
 class TankBuilder: public CharacterBuilder {
 public:
     TankBuilder();
@@ -16,7 +15,3 @@ public:
     virtual void buildAbilityMods();
     virtual void buildType();
 };
-}
-
-#endif /* TANKBUILDER_H */
-

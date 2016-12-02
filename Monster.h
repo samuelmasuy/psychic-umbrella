@@ -4,9 +4,7 @@
  *  Created on: Nov 30, 2016
  *      Author: ahmad
  */
-
-#ifndef MONSTER_H_
-#define MONSTER_H_
+#pragma once
 #include "Fighter.h"
 
 namespace std {
@@ -37,5 +35,3 @@ private:
 };
 
 } /* namespace std */
-
-#endif /* MONSTER_H_ */

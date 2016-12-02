@@ -5,6 +5,7 @@
  * @version 1.0
  * @date 2016-10-18
  */
+#pragma once
 #include "Dice.h"
 #include <regex>
 #include <string>

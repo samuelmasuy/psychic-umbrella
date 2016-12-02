@@ -1,6 +1,4 @@
-#ifndef ITEM_H
-#define ITEM_H
-
+#pragma once
 #include <string>
 #include <vector>
 #include "Enhancement.h"
@@ -27,10 +25,3 @@ private:
 	string type;
 	vector<Enhancement> influence;
 };
-
-
-
-#endif
-
-
-

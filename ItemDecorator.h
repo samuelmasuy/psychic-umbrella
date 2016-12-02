@@ -40,6 +40,7 @@ class ItemDecorator: public CharacterDecorator {
   int getDexterity();
   Item* unEquip(string s);
   bool isEquiped(string s);
+
  private:
 	 Item *i;
 	 bool isEmpty;

@@ -1,15 +1,13 @@
 #pragma once
+#include "GameState.h"
 #include "Strategy.h"
 #include "Map.h"
 
-class FriendlyStrategy : public Strategy
-{
+using namespace std;
 
-public:
-	FriendlyStrategy();
-	~FriendlyStrategy();
-	void execute(int, int, bool, int, int, Map);
-
-private:
-
+class FriendlyStrategy : public Strategy {
+ public:
+  FriendlyStrategy();
+  ~FriendlyStrategy();
+  void execute(GameState*);
 };

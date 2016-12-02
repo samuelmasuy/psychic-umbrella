@@ -1,23 +1,23 @@
 #pragma once
-//#include "Character.h"
+#include <vector>
 #include "Map.h"
-#include "Monster.h"
+#include "Character.h"
 
-class GameState{
+using namespace std;
 
-public:
-	//GameState();
-	GameState(Character*, vector<Monster*>, Map*);
-	void setMap(Map*);
-	Map* getMap();
-	void setMainCharacter(Character*);
-	Character* getMainCharacter();
-	void setMonsters(vector<Monster*>);
-	vector<Monster*> getMonsters();
-	
-
-private:
-	Character* mainCharacter;
-	vector<Monster*> monsters;
-	Map* map; 
+class GameState {
+ public:
+  GameState() {}
+  ~GameState() {}
+  GameState(Character*, vector<Character*>, Map*);
+  void setMap(Map*);
+  Map* getMap();
+  void setMainCharacter(Character*);
+  Character* getMainCharacter();
+  void setMonsters(vector<Character*>);
+  vector<Character*> getMonsters();
+ private:
+  Character* mainCharacter;
+  vector<Character*> monsters;
+  Map* map;
 };

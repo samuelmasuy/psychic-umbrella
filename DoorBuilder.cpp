@@ -7,7 +7,5 @@
 DoorBuilder::DoorBuilder() {
 }
 
-
-
 DoorBuilder::~DoorBuilder() {
 }

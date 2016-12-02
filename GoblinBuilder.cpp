@@ -1,15 +1,13 @@
 #include "GoblinBuilder.h"
 
 
-GoblinBuilder::GoblinBuilder()
-{
+GoblinBuilder::GoblinBuilder() {
 }
 
 
-GoblinBuilder::~GoblinBuilder()
-{
+GoblinBuilder::~GoblinBuilder() {
 }
 
-void GoblinBuilder::buildType(){
-	myMonster->setCharacterType("Goblin");
+void GoblinBuilder::buildType() {
+  myMonster->setCharacterType("Goblin");
 }

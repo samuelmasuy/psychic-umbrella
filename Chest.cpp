@@ -5,42 +5,41 @@
 #include "Chest.h"
 
 
-Chest::Chest(){
-	positionX = 0;
-	positionY = 0;
+Chest::Chest() {
+  positionX = 0;
+  positionY = 0;
 }
 
-Chest::Chest(int inputPositionX, int inputPositionY, Item* inputChestContent){
-	positionX = inputPositionX;
-	positionY = inputPositionY;
-	chestContent = inputChestContent;
+Chest::Chest(int inputPositionX, int inputPositionY, Item* inputChestContent) {
+  positionX = inputPositionX;
+  positionY = inputPositionY;
+  chestContent = inputChestContent;
 }
 
-void Chest::setPositionX(int inputPositionX){
-	positionX = inputPositionX;
+void Chest::setPositionX(int inputPositionX) {
+  positionX = inputPositionX;
 }
 
-int Chest::getPositionX(){
-	return positionX;
+int Chest::getPositionX() {
+  return positionX;
 }
 
-void Chest::setPositionY(int inputPositionY){
-	positionY = inputPositionY;
+void Chest::setPositionY(int inputPositionY) {
+  positionY = inputPositionY;
 }
 
-int Chest::getPositionY(){
-	return positionY;
+int Chest::getPositionY() {
+  return positionY;
 }
 
-void Chest::setChestContent(Item* inputItem){
-	chestContent = inputItem;
+void Chest::setChestContent(Item* inputItem) {
+  chestContent = inputItem;
 }
 
-Item* Chest::getItem(){
-	return chestContent;
+Item* Chest::getItem() {
+  return chestContent;
 }
 
 
-Chest::~Chest()
-{
+Chest::~Chest() {
 }

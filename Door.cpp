@@ -4,34 +4,32 @@
  */
 #include "Door.h"
 
-
-Door::Door(){
-	positionX = 0;
-	positionY = 0;
+Door::Door() {
+  positionX = 0;
+  positionY = 0;
 }
 
-Door::Door(int inputPositionX, int inputPositionY){
-	positionX = inputPositionX;
-	positionY = inputPositionY;
+Door::Door(int inputPositionX, int inputPositionY) {
+  positionX = inputPositionX;
+  positionY = inputPositionY;
 }
 
-void Door::setPositionX(int inputPositionX){
-	positionX = inputPositionX;
+void Door::setPositionX(int inputPositionX) {
+  positionX = inputPositionX;
 }
 
-int Door::getPositionX(){
-	return positionX;
+int Door::getPositionX() {
+  return positionX;
 }
 
-void Door::setPositionY(int inputPositionY){
-	positionY = inputPositionY;
+void Door::setPositionY(int inputPositionY) {
+  positionY = inputPositionY;
 }
 
-int Door::getPositionY(){
-	return positionY;
+int Door::getPositionY() {
+  return positionY;
 }
 
 
-Door::~Door()
-{
+Door::~Door() {
 }

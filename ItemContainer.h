@@ -1,9 +1,9 @@
-#ifndef ITEMCONTAINER_H
-#define ITEMCONTAINER_H
-
+#pragma once
+#include <iostream>
 #include <string>
 #include <vector>
 #include "Item.h"
+
 using namespace std;
 
 /**
@@ -31,5 +31,3 @@ private:
 	vector<Item*> items;
 	int size;
 };
-
-#endif

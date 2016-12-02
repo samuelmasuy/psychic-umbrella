@@ -5,8 +5,7 @@
  *      Author: ahmad
  */
 
-#ifndef MONSTERBUILDER_H_
-#define MONSTERBUILDER_H_
+#pragma once
 #include "Character.h"
 #include "Monster.h"
 
@@ -23,5 +22,3 @@ protected:
 };
 
 } /* namespace std */
-
-#endif /* MOSNTERBUILDER_H_ */

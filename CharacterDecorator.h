@@ -9,7 +9,7 @@
 #include <iostream>
 #include <string>
 #include "Character.h"
-#include "map"
+#include "Strategy.h"
 
 /**
  * @brief Abstract decorator class - note that it extends the Character abstract class.

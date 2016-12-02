@@ -7,6 +7,5 @@
 DoorDirector::DoorDirector() {
 }
 
-
 DoorDirector::~DoorDirector() {
 }

@@ -121,7 +121,7 @@ int main(int argc, char const* argv[]) {
   character->playerInfo();
 
   //cout << "Unequiping the ring::" << endl;
-  //Item* r = character->unEquip("ring");  
+  //Item* r = character->unEquip("ring");
   //r->printItem();
   cout << endl;
   character->playerInfo();
@@ -164,12 +164,12 @@ int main(int argc, char const* argv[]) {
     MapBuilderB mb;
     if (mb.LoadMap(theCampaign.GetFileName(levels[i]).c_str(), levels[i]))
       continue;
-	if (Logger::isOn()) Logger::fout() << "Level #" << levels[i] << "(" << theCampaign.GetFileName(levels[i]).c_str() << ") has been loaded" << endl;
+    if (Logger::isOn()) Logger::fout() << "Level #" << levels[i] << "(" << theCampaign.GetFileName(levels[i]).c_str() << ") has been loaded" << endl;
 
     // set this builder to director
     d.SetBuilder(&mb);
     // get the map from director
-    d.GetMap(map); 
+    d.GetMap(map);
 
 
     GameBuilder* gb = new GameBuilder();
@@ -179,14 +179,14 @@ int main(int argc, char const* argv[]) {
     game->play();
     delete game;
     delete gb;
-	cout << "Map Completed! Press (y) to continue to the next phase or (n) to exit!-->";
-	cin >> choice;
-	if (choice == 'y') {
-		continue;
-	}
-	if (choice == 'n') {
-		return 0;
-	}
+    cout << "Map Completed! Press (y) to continue to the next phase or (n) to exit!-->";
+    cin >> choice;
+    if (choice == 'y') {
+      continue;
+    }
+    if (choice == 'n') {
+      return 0;
+    }
 
   }
   cout << "Game over!!! Press any key and then enter to exit! -->";

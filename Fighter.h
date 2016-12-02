@@ -50,7 +50,7 @@ public:
 	void setCharisma(int);
 	void setArmor();
 	void setHitPoints(int);
-//	void setStrategy(Strategy*);
+	void setStrategy(Strategy*);
 	void setAbilityScores(int, int);
 
 	//game accessor methods
@@ -66,7 +66,7 @@ public:
 	virtual int getIntelligence();
 	virtual int getWisdom();
 	virtual int getCharisma();
-	//Strategy* getStrategy();
+	Strategy* getStrategy();
 	int armorModifier();
 	int getAttacksPerRound();
 	string getCharacterType();
@@ -93,7 +93,7 @@ protected:
 	int experience, gold;
 	int* bonusAttack = new int (1);
 	int armor;
-	//Strategy* characterStrategy;
+	Strategy* characterStrategy;
 
 private:
 	string characterType;

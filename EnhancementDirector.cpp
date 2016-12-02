@@ -7,8 +7,8 @@ EnhancementDirector::EnhancementDirector() {
 EnhancementDirector::~EnhancementDirector() {
 }
 
-void EnhancementDirector::constructEnhancement(){
-	enhancementBuilder->createNewEnhancment();
-	enhancementBuilder->buildBonus();
-	enhancementBuilder->buildType();
+void EnhancementDirector::constructEnhancement() {
+  enhancementBuilder->createNewEnhancment();
+  enhancementBuilder->buildBonus();
+  enhancementBuilder->buildType();
 }

@@ -1,37 +1,31 @@
 #include "GameState.h"
 
-//GameState::GameState()
-//{
-//
-//}
-
-GameState::GameState(Character* inputCharacter, vector<Monster*> inputMonsters, Map* inputMap) {
-	mainCharacter = inputCharacter;
-	monsters=inputMonsters;
-	map = inputMap;
+GameState::GameState(Character* inputCharacter, vector<Character*> inputMonsters, Map* inputMap) {
+  mainCharacter = inputCharacter;
+  monsters = inputMonsters;
+  map = inputMap;
 }
 
-void GameState::setMainCharacter(Character* inputMainCharacter){
-	mainCharacter = inputMainCharacter;
+void GameState::setMainCharacter(Character* inputMainCharacter) {
+  mainCharacter = inputMainCharacter;
 }
 
-Character* GameState::getMainCharacter(){
-	return mainCharacter;
-
+Character* GameState::getMainCharacter() {
+  return mainCharacter;
 }
 
-void GameState::setMap(Map* inputMap){
-	map = inputMap;
+void GameState::setMap(Map* inputMap) {
+  map = inputMap;
 }
 
-Map* GameState::getMap(){
-	return map;
+Map* GameState::getMap() {
+  return map;
 }
 
-void GameState::setMonsters(vector<Monster*> inputMonsters){
-	monsters = inputMonsters;
+void GameState::setMonsters(vector<Character*> inputMonsters) {
+  monsters = inputMonsters;
 }
 
-vector<Monster*> GameState::getMonsters(){
-	return monsters;
+vector<Character*> GameState::getMonsters() {
+  return monsters;
 }

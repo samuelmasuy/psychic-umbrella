@@ -4,29 +4,24 @@
 using namespace std;
 
 
-MapOBS::MapOBS()
-{
+MapOBS::MapOBS() {
 }
 
-MapOBS::MapOBS(Map* theMap)
-{
-	this->theMap = theMap;
-	this->theMap->attach(this);
+MapOBS::MapOBS(Map* theMap) {
+  this->theMap = theMap;
+  this->theMap->attach(this);
 }
 
-void MapOBS::printMapInfo()
-{
-	system("CLS");
-	theMap->mapInfo();
+void MapOBS::printMapInfo() {
+  system("CLS");
+  theMap->mapInfo();
 }
 
-void MapOBS::update()
-{
-	printMapInfo();
+void MapOBS::update() {
+  printMapInfo();
 }
 
-MapOBS::~MapOBS()
-{
-	theMap->detach(this);
+MapOBS::~MapOBS() {
+  theMap->detach(this);
 }
 
