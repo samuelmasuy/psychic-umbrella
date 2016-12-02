@@ -20,6 +20,7 @@
 #include "CharacterDecorator.h"
 #include "ItemDecorator.h"
 #include "Logger.h"
+#include "Screen.h"
 
 using namespace std;
 
@@ -29,13 +30,28 @@ string get_filename();
 bool has_ending(string const &, string const &);
 
 int main(int argc, char const* argv[]) {
-  cout << "Dungeons And Dragons Game" <<  endl;
   Character* character = nullptr;
   //Character* monster = NULL;
   CharacterBuilder* cb = nullptr;
 
   CharacterDirector* cd = new CharacterDirector();
+  while (!screen::checkConsoleSize(150, 250))
+  {
+	  std::cout << "Console buffer needs to be set to the following settings: " << std::endl;
+	  std::cout << "Screen Buffer Size: " << std::endl;
+	  std::cout << "\tWidth: 150" << std::endl;
+	  std::cout << "\tHeight: 250" << std::endl;
+	  system("pause");
+  }
+  screen::cls();
 
+  screen::setCursorPosition(screen::COORD_INI_GAME_SCREEN);
+  cout << "   _                                                                      " << endl;
+  cout << "  | \     ._   _   _   _  ._   _    _. ._   _|    _| ._ _.  _   _  ._   _ " << endl;
+  cout << "  |_/ |_| | | (_| (/_ (_) | | _>   (_| | | (_|   (_| | (_| (_| (_) | | _> " << endl;
+  cout << "               _|                                           _|            " << endl;
+
+  screen::setCursorPosition(screen::COORD_INI_OBSERVER_SCREEN);
 
   /*
   cout << endl << "Do you want to load your character from a file?";
@@ -79,20 +95,22 @@ int main(int argc, char const* argv[]) {
   // for (int i = 0; i < 16; i++) {
   //   character->levelUp();
   // }
+  cout << "Here is your character stats:";
+  character->playerInfo();
+  system("pause");
+
+  screen::clsObserver();
 
   char choice;
 
+  cout << "Let's create an item!" << endl;
   // create items
   ItemDirector* id = new ItemDirector();
   id->setItemBuilder(new RingBuilder());
   id->makeItem();
   Item* item = id->getItem();
-  id->setItemBuilder(new BeltBuilder());
-  id->makeItem();
-  Item* item2 = id->getItem();
-  cout << "Here is a new Item: " << endl;
+  cout << "Here is the Item: " << endl;
   item->printItem();
-  item2->printItem();
   cout << endl;
 
   cout << "Would you like to edit this item? ('y'/'n'): ";
@@ -104,21 +122,29 @@ int main(int argc, char const* argv[]) {
     if (choice == 'y') {
       item->saveItem();
     }
+	screen::clsObserver();
   }
 
   cout << "Would you like your character to be equiped with this item? ('y'/'n'): ";
   cin >> choice;
   if (choice == 'y') {
-    character->playerInfo();
     character = new ItemDecorator(character, item);
-    character = new ItemDecorator(character, item2);
-    cout << endl << "Equiped Items::" << endl;
-    character->printEquippedItems();
   }
   delete id;
 
+  cout << endl << "Equiped Items::" << endl;
+  character->printEquippedItems();
+
+  system("pause");
+
+  screen::clsObserver();
+
   cout << "Here are the stats of your character" << endl;
   character->playerInfo();
+
+  system("pause");
+
+  screen::clsObserver();
 
   //cout << "Unequiping the ring::" << endl;
   //Item* r = character->unEquip("ring");
@@ -131,6 +157,9 @@ int main(int argc, char const* argv[]) {
   cout << endl;
   character->printBackPackItems();
   cout << endl;
+
+  system("pause");
+  screen::clsObserver();
 
   // ........... many more items
   cout << "Let's take care of the map." << endl;
