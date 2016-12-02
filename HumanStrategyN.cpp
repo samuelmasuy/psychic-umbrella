@@ -35,38 +35,65 @@ void HumanStrategyN::execute(GameStateN* inputGameState){
 	mainCharacter->setPositionX(xCoordinate);
 	mainCharacter->setPositionY(yCoordinate);
 
-	//openChest(chests, mainCharacter, map);
-	cout << "Current hit points for character " << mainCharacter->getHitPoints();
-	combat(mainCharacter, monsters, map);
-	cout << "Current hit points for character " << mainCharacter->getHitPoints();
+	Character* foundMonster = monsterPresence(mainCharacter, monsters, map);
+	Chest* foundChest = chestPresence(mainCharacter, chests, map);
+
+	char action;
+	if (foundMonster != nullptr && foundChest != nullptr) {
+		cout << "There is a chest and a monster beside you." << endl;
+		cout << "Do you want to (a)ttack or open the (c)hest?";
+		cin >> action;
+		if (action == 'a') {
+			cout << "Current hit points for monster " << foundMonster->getHitPoints();
+			cout << "Current hit points for character " << mainCharacter->getHitPoints();
+			combat(mainCharacter, foundMonster);
+			cout << "Current hit points for character " << mainCharacter->getHitPoints();
+		} else {
+			openChest(mainCharacter, foundChest, map);
+		}
+	} else if (foundMonster != nullptr){
+		cout << "Current hit points for monster " << foundMonster->getHitPoints();
+		cout << "Current hit points for character " << mainCharacter->getHitPoints();
+		combat(mainCharacter, foundMonster);
+		cout << "Current hit points for character " << mainCharacter->getHitPoints();
+	} else if (foundChest != nullptr){
+		openChest(mainCharacter, foundChest, map);
+	}
 }
 
-bool HumanStrategyN::openChest(vector<Chest*> inputChests, Character* mainPlayer, Map* inputMap) {
-	Coord2D * locationOfChest = identifyTargetCell(mainPlayer->getPositionX(), mainPlayer->getPositionY(), inputMap, CHAR_CHEST);
-	if (locationOfChest != nullptr) {
-		Chest* foundChest = nullptr;
-		for (auto const& chest : inputChests) {
-			if (chest->getPositionX() == locationOfChest->x && chest->getPositionY() == locationOfChest->y) {
-				foundChest = chest;
-				break;
-			}
-		}
-		Item* item = foundChest->getItem();
-		item->printItem();
-		cout << "Would you like your character to be equiped with this item? ('y'/'n'): ";
-		char choice;
-		cin >> choice;
-		if (choice == 'y') {
-			mainPlayer = new ItemDecorator(mainPlayer, item);
-			//if (Logger::isOn()) Logger::fout() << "Item Equipped is:" << item->getType() << endl;
-			inputMap->setCell(locationOfChest->x, locationOfChest->y, CHAR_EMPTY);
-			return true;
-		}
+bool HumanStrategyN::openChest(Character* c, Chest* chest, Map* m) {
+	Item* item = chest->getItem();
+	item->printItem();
+	cout << "Would you like your character to be equiped with this item? ('y'/'n'): ";
+	char choice;
+	cin >> choice;
+	if (choice == 'y') {
+		c = new ItemDecorator(c, item);
+		//if (Logger::isOn()) Logger::fout() << "Item Equipped is:" << item->getType() << endl;
+		m->setCell(chest->getPositionX(), chest->getPositionY(), CHAR_EMPTY);
+		return true;
 	}
 	return false;
 }
- 
-bool HumanStrategyN::combat(Character* fighter, vector<Character*> monsters, Map* map){
+
+Chest* HumanStrategyN::chestPresence(Character* fighter, vector<Chest*> chests, Map* map) {
+
+	Coord2D * locationOfChest = identifyTargetCell(fighter->getPositionX(), fighter->getPositionY(), map, CHAR_CHEST);
+	if (locationOfChest == nullptr) {
+		return nullptr;
+	}
+	Chest* foundChest = nullptr;
+	for (auto const& chest : chests) {
+		if (chest->getPositionX() == locationOfChest->x && chest->getPositionY() == locationOfChest->y) {
+			foundChest = chest;
+			break;
+		}
+	}
+
+	return foundChest;
+}
+
+Character* HumanStrategyN::monsterPresence(Character* fighter, vector<Character*> monsters, Map* map) {
 	Coord2D * locationOfMonster = identifyTargetCell(fighter->getPositionX(), fighter->getPositionY(), map, CHAR_ELF);
 	if (locationOfMonster == nullptr) {
 		Coord2D * locationOfMonster = identifyTargetCell(fighter->getPositionX(), fighter->getPositionY(), map, CHAR_GOBLIN);
@@ -79,7 +106,7 @@ bool HumanStrategyN::combat(Character* fighter, vector<Character*> monsters, Map
 					if (locationOfMonster == nullptr) {
 						Coord2D * locationOfMonster = identifyTargetCell(fighter->getPositionX(), fighter->getPositionY(), map, CHAR_VINE);
 						if (locationOfMonster == nullptr) {
-							return false;
+							return nullptr;
 						}
 					}
 				}
@@ -94,7 +121,11 @@ bool HumanStrategyN::combat(Character* fighter, vector<Character*> monsters, Map
 			break;
 		}
 	}
-	Monster *pMonster = (Monster *)&foundMonster;
+	return foundMonster;
+}
+ 
+bool HumanStrategyN::combat(Character* fighter, Character* monster){
+	Monster *pMonster = (Monster *)&monster;
 	int attacksPerRound = fighter->getAttacksPerRound();
 	int fighterDamage = fighter->getDamageBonus();
 	int monsterDamage = pMonster->getMonsterDamage();
@@ -103,7 +134,6 @@ bool HumanStrategyN::combat(Character* fighter, vector<Character*> monsters, Map
 	// create a new instance of DiceRoller
 	DiceRoller* dice_roller = new DiceRoller();
 
-	cout << "Current hit points for monster " << foundMonster->getHitPoints();
 	try {
 		// roll dice with valid query
 		result = dice_roller->roll("1d20[+0]");
@@ -123,8 +153,8 @@ bool HumanStrategyN::combat(Character* fighter, vector<Character*> monsters, Map
 			system("pause");
 		}
 		system("cls");
-		foundMonster->setHitPoints(pMonster->getHitPoints());
-		cout << "Current hit points for monster " << foundMonster->getHitPoints();
+		monster->setHitPoints(pMonster->getHitPoints());
+		cout << "Current hit points for monster " << monster->getHitPoints();
 		return true;
 	}
 	catch (std::exception& e) {
