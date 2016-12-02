@@ -27,6 +27,9 @@
 #include "VineBuilder.h"
 #include "ItemDecorator.h"
 #include "GameStateN.h"
+#include "AvatarSprite.h"
+#include "HumanStrategyN.h"
+
 
 
 using namespace std;

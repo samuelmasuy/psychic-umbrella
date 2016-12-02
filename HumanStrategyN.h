@@ -5,10 +5,12 @@
 #include "Monster.h"
 #include "Map.h"
 #include "Chest.h"
+#include "StrategyN.h"
+
 
 using namespace std;
 
-class HumanStrategyN {
+class HumanStrategyN : public StrategyN{
 public:
 	HumanStrategyN();
 	~HumanStrategyN();

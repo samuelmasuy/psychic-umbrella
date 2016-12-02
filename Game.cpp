@@ -14,6 +14,7 @@ void Game::play() {
 
   vector<Chest*> chests = createChestsFromMap();
 
+  AvatarSprite* avatar = new AvatarSprite(character, new HumanStrategyN());
 
   cout << "equiped items in game";
   vector<Item*> equiped = getCharacterEquipedItems();
