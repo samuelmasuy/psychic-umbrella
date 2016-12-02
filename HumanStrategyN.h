@@ -8,14 +8,18 @@
 #include "StrategyN.h"
 
 
+
 using namespace std;
 
-class HumanStrategyN : public StrategyN{
+class HumanStrategyN : public StrategyN {
+
 public:
 	HumanStrategyN();
 	~HumanStrategyN();
 	void execute(GameStateN*);
-	bool openChest(vector<Chest*>, Character*, Map*);
-	bool combat(Character*, vector<Character*>, Map*);
+	bool openChest(Character*, Chest*, Map*);
+	Character* monsterPresence(Character*, vector<Character*>, Map*);
+	Chest* chestPresence(Character*, vector<Chest*>, Map*);
+	bool combat(Character*, Character*);
 };
 
