@@ -174,6 +174,71 @@ void Game::play() {
   }
 }
 
+void Game::saveCharacter() {
+	string type = "";
+	string saveFile;
+	vector<Item*> equipment = getCharacterEquipedItems();
+
+
+
+	cout << "Enter name of file being saved: ";
+	cin >> saveFile;
+
+
+
+	ofstream ofs(saveFile);
+	ofs << "CharFile" << endl;	//define type of save file
+	ofs << character->getCharacterType() << endl;
+	ofs << character->getLevel() << endl;
+	ofs << character->getHitPoints() << endl;
+	for (int i = 0; i < 6; i++)
+		ofs << character->getAbilityScore(i) << endl;
+	//ofs << character->armorModifier() << endl;
+	//ofs << character->getDamageBonus() << endl;
+
+	ofs << equipment.size() << endl;
+
+
+	for (int i = 0; i < equipment.size(); i++)
+	{
+
+		type = equipment[i]->getType();
+		if (type != "")
+		{
+			ofs << equipment[i]->getType() << endl;
+			ofs << equipment[i]->getInfluences().size() << endl;
+			for (int j = 0; j < equipment[i]->getInfluences().size(); j++)
+			{
+				ofs << equipment[i]->getInfluences().at(0).getType() << endl;
+				ofs << equipment[i]->getInfluences().at(0).getBonus() << endl;
+			}
+		}
+
+	}
+
+	if (character->getBackPack().getSize() != 0) {
+		ofs << character->getBackPack().getSize() << endl;
+		for (int i = 0; i < character->getBackPack().getSize(); i++)
+		{
+
+			ofs << character->getBackPack().getItems().at(i)->getType() << endl;
+			ofs << character->getBackPack().getItems()[i]->getInfluences().size() << endl;
+			for (int j = 0; j < character->getBackPack().getItems()[i]->getInfluences().size(); j++)
+			{
+				ofs << character->getBackPack().getItems()[i]->getInfluences().at(j).getType() << endl;
+				ofs << character->getBackPack().getItems()[i]->getInfluences().at(j).getBonus() << endl;
+			}
+		}
+	}
+	else
+		ofs << 0;
+
+	ofs.close();
+
+
+
+}
+
 void Game::loadCharacter() {
   string loadFile;
   string Validation;
@@ -227,12 +292,12 @@ void Game::loadCharacter() {
     ifs >> ability;
     character->setAbilityScores(i, ability);
   }
-
+  Item* itemFromFile = nullptr;
+  Enhancement* itemEnhacement = nullptr;
   ifs >> equippedSize;
   if (equippedSize > 0) {
     for (int i = 0; i < equippedSize; i++) {		//save equipped items
-      Item* itemFromFile;
-      Enhancement* itemEnhacement;
+
 
       ifs >> type;
       itemFromFile->setType(type);

@@ -1,7 +1,8 @@
 #pragma once
 #include <vector>
-#include "Map.h"
 #include "Character.h"
+#include "Map.h"
+#include "Chest.h"
 
 using namespace std;
 

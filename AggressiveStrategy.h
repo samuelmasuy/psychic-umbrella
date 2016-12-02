@@ -1,7 +1,7 @@
 #pragma once
 
 #include "Strategy.h"
-#include "GameState.h"
+#include <iostream>
 
 using namespace std;
 
