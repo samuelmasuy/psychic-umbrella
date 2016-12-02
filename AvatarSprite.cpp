@@ -38,5 +38,5 @@ void AvatarSprite::setCharacter(Character* newC)
 
 void AvatarSprite::execute(GameStateN* gameState)
 {
-	s->execute(gameState);
+	s->execute(gameState, this->c);
 }

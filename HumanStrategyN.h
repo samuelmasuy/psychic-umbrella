@@ -16,10 +16,11 @@ class HumanStrategyN : public StrategyN {
 public:
 	HumanStrategyN();
 	~HumanStrategyN();
-	void execute(GameStateN*);
+	void execute(GameStateN*, Character*);
 	bool openChest(Character*, Chest*, Map*);
 	Character* monsterPresence(Character*, vector<Character*>, Map*);
 	Chest* chestPresence(Character*, vector<Chest*>, Map*);
-	bool combat(Character*, Character*);
+	bool moveHuman(Coord2D*, Map*, Character*, vector<Character*>);
+//	bool combat(Character*, Character*);
 };
 

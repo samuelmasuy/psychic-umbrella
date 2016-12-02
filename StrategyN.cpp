@@ -1,7 +1,5 @@
 #include "StrategyN.h"
 
-
-
 StrategyN::StrategyN()
 {
 }
@@ -46,4 +44,43 @@ void StrategyN::move(Coord2D* targetLocation, Map* inputMap, Character* mover){
 		inputMap->fillCell(targetLocation->x, targetLocation->y, oldCellType);
 		mover->setPositionX(targetLocation->x);
 		mover->setPositionY(targetLocation->y);
+}
+
+bool StrategyN::combat(Character* fighter, Character* monster){
+	Monster *pMonster = (Monster *)&monster;
+	int attacksPerRound = fighter->getAttacksPerRound();
+	int fighterDamage = fighter->getDamageBonus();
+	int monsterDamage = pMonster->getMonsterDamage();
+	int result = 0;
+	// create a new instance of DiceRoller
+	DiceRoller* dice_roller = new DiceRoller();
+
+	try {
+		// roll dice with valid query
+		result = dice_roller->roll("1d20[+0]");
+
+		fighterDamage += result;
+
+		cout << "  / _ /_  __/_  __/ _ |/ ___/ //_/ /" << endl;
+		cout << " / __ |/ /   / / / __ / /__/ ,< /_/ " << endl;
+		cout << "/_/ |_/_/   /_/ /_/ |_\\___/_/|_(_)  " << endl << endl;
+
+		for (int i = 1; i < attacksPerRound + 1; i++) {
+			cout << "Round " << i << endl;
+			cout << "You hit the monster for: " << fighterDamage << endl;
+			pMonster->hit(fighterDamage);
+			cout << "Monster hits you for: " << monsterDamage << endl;
+			fighter->hit(monsterDamage);
+			system("pause");
+		}
+		system("cls");
+		monster->setHitPoints(pMonster->getHitPoints());
+		cout << "Current hit points for monster " << monster->getHitPoints();
+		return true;
+	}
+	catch (std::exception& e) {
+		std::cout << e.what() << std::endl;
+		return false;
+	}
+	return false;
 }

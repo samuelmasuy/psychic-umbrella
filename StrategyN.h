@@ -2,6 +2,7 @@
 #include "GameStateN.h"
 #include "ItemDecorator.h"
 #include "DiceRoller.h"
+#include "Monster.h"
 
 
 
@@ -14,5 +15,6 @@ public:
 	bool checkCell(Coord2D*, Map*, char);
 	Coord2D* identifyTargetCell(int, int, Map*, char);
 	void move(Coord2D*, Map*, Character*);
+	bool combat(Character*, Character*);
 };
 

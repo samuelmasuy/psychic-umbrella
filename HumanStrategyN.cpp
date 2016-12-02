@@ -10,31 +10,30 @@ HumanStrategyN::~HumanStrategyN()
 {
 }
 
-void HumanStrategyN::execute(GameStateN* inputGameState){
-	Character* mainCharacter = inputGameState->getMainCharacter();
+void HumanStrategyN::execute(GameStateN* inputGameState, Character* c){
+	Character* mainCharacter = c;
 	Map* map = inputGameState->getMap();
 	vector<Character*> monsters = inputGameState->getMonsters();
 	vector<Chest*> chests = inputGameState->getChests();
 
 	int xCoordinate;
 	int yCoordinate;
+	Coord2D *moveTo = new Coord2D(0, 0);
 
 	do {
 		cout << "Indicate the x coordiante of where you would like to move to? ";
 		cin >> xCoordinate;
+		moveTo->x = xCoordinate;
 		cout << endl;
 		cout << "Indicate the y coordinate of where you woud like to move to? ";
 		cin >> yCoordinate;	
+		moveTo->y = yCoordinate;
 		cout << endl;
-		if (map->ValidPos(xCoordinate, yCoordinate)) {
-			break;
-		}
-		cout << "Invalid coordinate, please try again.";
+		moveHuman(moveTo, map, mainCharacter, monsters);
+
 	} while (true);
 
-	mainCharacter->setPositionX(xCoordinate);
-	mainCharacter->setPositionY(yCoordinate);
-
+	
 	Character* foundMonster = monsterPresence(mainCharacter, monsters, map);
 	Chest* foundChest = chestPresence(mainCharacter, chests, map);
 
@@ -123,7 +122,22 @@ Character* HumanStrategyN::monsterPresence(Character* fighter, vector<Character*
 	}
 	return foundMonster;
 }
- 
+
+bool HumanStrategyN::moveHuman(Coord2D* inputCoord, Map* inputMap, Character* mainPlayer, vector<Character*> monsters){
+	if (checkCell(inputCoord, inputMap, CHAR_EMPTY) || checkCell(inputCoord, inputMap, CHAR_ENTRY) || checkCell(inputCoord, inputMap, CHAR_DOOR) || (checkCell(inputCoord, inputMap, CHAR_EXIT) && monsters.size() == 0))
+	{
+		move(inputCoord, inputMap, mainPlayer);
+		return true;
+	}
+
+	else{
+		cout << "You cannot move to the location specified";
+		return false;
+	}
+
+}
+
+/*
 bool HumanStrategyN::combat(Character* fighter, Character* monster){
 	Monster *pMonster = (Monster *)&monster;
 	int attacksPerRound = fighter->getAttacksPerRound();
@@ -162,3 +176,4 @@ bool HumanStrategyN::combat(Character* fighter, Character* monster){
 	}
 	return false;
 }
+*/
