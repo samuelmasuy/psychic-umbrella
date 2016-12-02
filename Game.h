@@ -26,6 +26,7 @@
 #include "SkeletonBuilder.h"
 #include "VineBuilder.h"
 #include "ItemDecorator.h"
+#include "GameStateN.h"
 
 
 using namespace std;
