@@ -10,5 +10,6 @@ public:
 	HumanStrategyN();
 	~HumanStrategyN();
 	void execute(GameStateN*);
+	bool openChest(vector<Chest*>, Character*, Map*);
 };
 

@@ -23,9 +23,11 @@ void HumanStrategyN::execute(GameStateN* inputGameState){
 	cout << "Indicate the x coordiante of where you would like to move to?";
 	cin >> xCoordinate;
 	cout << "Indicate the y coordinate of where you woud like to move to?";
-	cin >> yCoordinate;
+	cin >> yCoordinate;	
 
-	vector<Coord2D> location = checkAdjacentCell(xCoordinate, yCoordinate, map, CHAR_EMPTY);
-	if (location[0].x > 0) {}
+}
 
+bool HumanStrategyN::openChest(vector<Chest*> inputChests, Character* mainPlayer, Map* inputMap){
+	Coord2D * locationOfChest = identifyTargetCell(mainPlayer->getPositionX(), mainPlayer->getPositionY(), inputMap, CHAR_CHEST);
+	return true;
 }
