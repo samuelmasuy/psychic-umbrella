@@ -11,7 +11,7 @@ class HumanStrategy : public Strategy
 public:
 	HumanStrategy();
 	~HumanStrategy();
-	void execute(*GameState);
+	int execute(GameState*);
 
 private:
 

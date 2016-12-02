@@ -1,15 +1,15 @@
 #include "HumanStrategy.h"
 
-Strategy::Strategy()
+HumanStrategy::HumanStrategy()
 {
 }
 
 
-Strategy::~Strategy()
+HumanStrategy::~HumanStrategy()
 {
 }
 
-int Strategy::execute(GameState* inputGameState){
+int HumanStrategy::execute(GameState* inputGameState){
 	
 	GameState* gameState = inputGameState;
 	Character* mainCharacter = gameState->getMainCharacter();
@@ -22,8 +22,9 @@ int Strategy::execute(GameState* inputGameState){
 	cout << "Specify the Y coordinate of where you would like to move?";
 	int yPosition;
 	cin >> yPosition;
-	if (map->ValidPos(xPosition, yPosition) && ((map->GetCell==CHAR_DOOR || map->GetCell==CHAR_EMPTY 
-		|| map->GetCell==CHAR_ENTRY || map->GetCell==CHAR_EXIT))){
+	int xx, yy = 0;
+	if (map->ValidPos(xPosition, yPosition) && ((map->FindItem(CHAR_DOOR, xx, yy) || map->FindItem (CHAR_EMPTY, xx,yy)
+		|| map->FindItem(CHAR_ENTRY,xx,yy) || map->FindItem(CHAR_EXIT,xx,yy)))){
 		mainCharacter->setPositionX(xPosition);
 		mainCharacter->setPositionY(yPosition);
 	}
@@ -32,5 +33,7 @@ int Strategy::execute(GameState* inputGameState){
 	bool attack;
 	cin >> attack;
 
-	cout << "Would you like to attack?"
+	cout << "Would you like to attack?";
+
+	return 0;
 }

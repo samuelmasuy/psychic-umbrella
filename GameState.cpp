@@ -1,8 +1,13 @@
 #include "GameState.h"
 
-GameState::GameState(Character* inputCharacter, vector<Character*> inputMonsters, Map* inputMap) {
+//GameState::GameState()
+//{
+//
+//}
+
+GameState::GameState(Character* inputCharacter, vector<Monster*> inputMonsters, Map* inputMap) {
 	mainCharacter = inputCharacter;
-	monsters = inputMonsters;
+	monsters=inputMonsters;
 	map = inputMap;
 }
 
@@ -23,10 +28,10 @@ Map* GameState::getMap(){
 	return map;
 }
 
-void GameState::setMonsters(vector<Character*> inputMonsters){
+void GameState::setMonsters(vector<Monster*> inputMonsters){
 	monsters = inputMonsters;
 }
 
-vector<Character*> GameState::getMonsters(){
+vector<Monster*> GameState::getMonsters(){
 	return monsters;
 }

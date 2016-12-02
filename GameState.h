@@ -1,23 +1,23 @@
 #pragma once
-#include "Character.h"
+//#include "Character.h"
 #include "Map.h"
-#include <vector>
+#include "Monster.h"
 
 class GameState{
+
 public:
-	GameState();
-	GameState(Character*, vector<Character*>, Map*);
-	~GameState();
+	//GameState();
+	GameState(Character*, vector<Monster*>, Map*);
 	void setMap(Map*);
 	Map* getMap();
 	void setMainCharacter(Character*);
 	Character* getMainCharacter();
-	void setMonsters(vector<Character*>);
-	vector<Character*> getMonsters();
+	void setMonsters(vector<Monster*>);
+	vector<Monster*> getMonsters();
 	
 
 private:
 	Character* mainCharacter;
-	vector<Character*> monsters;
-	Map* map
+	vector<Monster*> monsters;
+	Map* map; 
 };

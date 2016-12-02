@@ -1,5 +1,4 @@
 #pragma once
-#include "Character.h"
 #include "GameState.h"
 
 class Strategy
@@ -11,5 +10,6 @@ public:
 
 private:
 	void combat(Character* monster);
+	vector<int> checkAdjacentCell(int, int, Map*);
 };
 

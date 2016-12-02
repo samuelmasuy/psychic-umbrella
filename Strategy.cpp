@@ -11,18 +11,21 @@ Strategy::~Strategy()
 {
 }
 
-vector<int>* Strategy::checkAdjacentCell(int inputX, int inputY, Map* inputMap){
-	vector<int>* outputLocation;
+vector<int> Strategy::checkAdjacentCell(int inputX, int inputY, Map* inputMap){
+	vector<int> outputLocation;
 	if (inputMap->ValidPos(inputX + 1, inputY + 1) && inputMap->GetCell(inputX + 1, inputY + 1) == CHAR_CHEST){
-		outputLocation[0] = inputX;
-		outputLocation[1] = inputY;
+		outputLocation.push_back(inputX);
+		outputLocation.push_back(inputY);
 
-		{
+	}
+	return outputLocation;
+}
 
 
 void Strategy::combat(Character* monster)
 {
-	int totalDmg;
+	/*int totalDmg;
+
 
 	for (int i = 0; i < attacksPerRound; i++)
 	{
@@ -61,6 +64,6 @@ void Strategy::combat(Character* monster)
 
 	}
 	}
-
+	*/
 
 }
