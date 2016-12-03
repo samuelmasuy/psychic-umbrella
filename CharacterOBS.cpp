@@ -11,7 +11,6 @@ CharacterOBS::CharacterOBS(Character* theCharacter) {
   character->attach(this);
 }
 void CharacterOBS::printPlayerInfo() {
-  system("CLS");
   character->playerInfo();
 }
 
