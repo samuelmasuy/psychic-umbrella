@@ -19,6 +19,8 @@ void FriendlyStrategyN::execute(GameStateN* inputGameState, Character* monster){
 	vector<Chest*> chests = inputGameState->getChests();
 	
 	cout << "I am a friendly monster, you go your way. I will go mine" << endl;
+	if (Logger::isOn()) Logger::fout() << "Friendly Monster found, and left" <<  endl;
+
 	system("pause");
 	srand(time(NULL));
 

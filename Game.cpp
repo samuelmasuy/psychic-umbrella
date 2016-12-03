@@ -459,13 +459,13 @@ void Game::move(int old_x, int old_y, int new_x, int new_y) {
       _map->fillCell(new_y, new_x, CHAR_PLAYER);
       break;
     case CHAR_EXIT:
-      if (enemiesDefeated) {
+      //if (enemiesDefeated) {
         // set character location to the new cell
         character->setPositionX(new_x);
         character->setPositionY(new_y);
-      } else {
-        cout << "Cannot exit the map until all Monsters have been defeated" << endl;
-      }
+     // } else {
+       // cout << "Cannot exit the map until all Monsters have been defeated" << endl;
+      //}
 
       break;
     case CHAR_DOOR:
