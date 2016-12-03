@@ -50,90 +50,137 @@ _map->print();
 
       switch (choice) {
       case 'c':
-        system("cls");
+        screen::setCursorPosition(screen::COORD_INI_OBSERVER_SCREEN);
+        screen::clsObserver();
         character->playerInfo();
+        screen::setCursorPosition(screen::COORD_INI_GAME_SCREEN);
+        screen::clsGame();
         _map->print();
+        screen::setCursorPosition(screen::COORD_INI_OBSERVER_SCREEN);
         game->printGameUsage();
         break;
       case 'i':
-        system("cls");
         character->printEquippedItems();
         character->printBackPackItems();
+        screen::setCursorPosition(screen::COORD_INI_GAME_SCREEN);
+        screen::clsGame();
         _map->print();
+        screen::setCursorPosition(screen::COORD_INI_OBSERVER_SCREEN);
         game->printGameUsage();
         break;
       case 'e':
-        system("cls");
+        screen::setCursorPosition(screen::COORD_INI_OBSERVER_SCREEN);
+        screen::clsObserver();
         cout << "Enter level: ";
         cin >> level;
         character->setLevel(level);
+        screen::setCursorPosition(screen::COORD_INI_GAME_SCREEN);
+        screen::clsGame();
         _map->print();
+        screen::setCursorPosition(screen::COORD_INI_OBSERVER_SCREEN);
         game->printGameUsage();
         break;
       case 'u':
-        system("cls");
+        screen::setCursorPosition(screen::COORD_INI_OBSERVER_SCREEN);
+        screen::clsObserver();
         cout << "Enter item type to unequip: ";
         cin >> itemType;
         // unequip from character
         character->unEquip(itemType);
+        screen::setCursorPosition(screen::COORD_INI_GAME_SCREEN);
+        screen::clsGame();
         _map->print();
+        screen::setCursorPosition(screen::COORD_INI_OBSERVER_SCREEN);
         game->printGameUsage();
         break;
       case 'x':
-        system("cls");
+        screen::setCursorPosition(screen::COORD_INI_OBSERVER_SCREEN);
+        screen::clsObserver();
         saveCharacter();
+        screen::setCursorPosition(screen::COORD_INI_GAME_SCREEN);
+        screen::clsGame();
         _map->print();
+        screen::setCursorPosition(screen::COORD_INI_OBSERVER_SCREEN);
         game->printGameUsage();
         break;
       case 'l':
-        system("cls");
+        screen::setCursorPosition(screen::COORD_INI_OBSERVER_SCREEN);
+        screen::clsObserver();
         loadCharacter();
+        screen::setCursorPosition(screen::COORD_INI_GAME_SCREEN);
+        screen::clsGame();
         _map->print();
+        screen::setCursorPosition(screen::COORD_INI_OBSERVER_SCREEN);
         game->printGameUsage();
         break;
       case 'b':
-        system("cls");
+        screen::setCursorPosition(screen::COORD_INI_OBSERVER_SCREEN);
+        screen::clsObserver();
         cout << "Here are the items on the backpack" << endl;
         character->printBackPackItems();
         cout << "Enter item # to equip: ";
         cin >> itemIndexInBackpack;
         backpackItem = character->getBackPack().getItemAtIndex(itemIndexInBackpack);
         character = new ItemDecorator(character, backpackItem);
+        screen::setCursorPosition(screen::COORD_INI_GAME_SCREEN);
+        screen::clsGame();
         _map->print();
+        screen::setCursorPosition(screen::COORD_INI_OBSERVER_SCREEN);
         game->printGameUsage();
         break;
       case 'h':
-        system("cls");
+        screen::setCursorPosition(screen::COORD_INI_OBSERVER_SCREEN);
+        screen::clsObserver();
         printGameUsage();
         break;
       case '1':
-        system("cls");
+        screen::setCursorPosition(screen::COORD_INI_OBSERVER_SCREEN);
+        screen::clsObserver();
         Characterlog();
+        screen::setCursorPosition(screen::COORD_INI_GAME_SCREEN);
+        screen::clsGame();
         _map->print();
+        screen::setCursorPosition(screen::COORD_INI_OBSERVER_SCREEN);
         game->printGameUsage();
         break;
       case '2':
-        system("cls");
+        screen::setCursorPosition(screen::COORD_INI_OBSERVER_SCREEN);
+        screen::clsObserver();
         Gamelog();
+        screen::setCursorPosition(screen::COORD_INI_GAME_SCREEN);
+        screen::clsGame();
         _map->print();
+        screen::setCursorPosition(screen::COORD_INI_OBSERVER_SCREEN);
         game->printGameUsage();
         break;
       case '3':
-        system("cls");
+        screen::setCursorPosition(screen::COORD_INI_OBSERVER_SCREEN);
+        screen::clsObserver();
         AttackLog();
+        screen::setCursorPosition(screen::COORD_INI_GAME_SCREEN);
+        screen::clsGame();
         _map->print();
+        screen::setCursorPosition(screen::COORD_INI_OBSERVER_SCREEN);
         game->printGameUsage();
         break;
       case '4':
-        system("cls");
+        screen::setCursorPosition(screen::COORD_INI_OBSERVER_SCREEN);
+        screen::clsObserver();
         DiceLog();
+        screen::setCursorPosition(screen::COORD_INI_GAME_SCREEN);
+        screen::clsGame();
         _map->print();
+        screen::setCursorPosition(screen::COORD_INI_OBSERVER_SCREEN);
         game->printGameUsage();
         break;
       case '5':
-        system("cls");
+        screen::setCursorPosition(screen::COORD_INI_OBSERVER_SCREEN);
+        screen::clsObserver();
         AllLogs();
+        screen::setCursorPosition(screen::COORD_INI_GAME_SCREEN);
+        screen::clsGame();
         _map->print();
+        screen::setCursorPosition(screen::COORD_INI_OBSERVER_SCREEN);
         game->printGameUsage();
         break;
 	  case 'r':
@@ -152,7 +199,8 @@ _map->print();
 		  game->printGameUsage();
 		  break;
       case 'q':
-        system("cls");
+		  screen::clsObserver();
+		  screen::setCursorPosition(screen::COORD_INI_OBSERVER_SCREEN);
         cout << "Do you want to quit the game? ('y'/'n'): ";
         cin >> choice;
         if (choice == 'y') {

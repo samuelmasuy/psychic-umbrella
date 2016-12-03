@@ -13,7 +13,6 @@ MapOBS::MapOBS(Map* theMap) {
 }
 
 void MapOBS::printMapInfo() {
-  system("CLS");
   theMap->mapInfo();
 }
 

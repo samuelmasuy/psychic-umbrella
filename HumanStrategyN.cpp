@@ -171,7 +171,6 @@ bool HumanStrategyN::combat(Character* fighter, Character* monster){
 			fighter->hit(monsterDamage);
 			system("pause");
 		}
-		system("cls");
 		monster->setHitPoints(pMonster->getHitPoints());
 		cout << "Current hit points for monster " << monster->getHitPoints();
 		return true;
