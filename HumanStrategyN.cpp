@@ -10,7 +10,7 @@ HumanStrategyN::~HumanStrategyN()
 {
 }
 
-void HumanStrategyN::execute(GameStateN* inputGameState, Character* c){
+void HumanStrategyN::execute(GameStateN* inputGameState, Character* c){ 
 	Character* mainCharacter = c;
 	Map* map = inputGameState->getMap();
 	vector<Character*> monsters = inputGameState->getMonsters();
@@ -30,9 +30,13 @@ void HumanStrategyN::execute(GameStateN* inputGameState, Character* c){
 		moveTo->y = yCoordinate;
 		if (Logger::isOn())Logger::fout() << "Position: " << mainCharacter->getCharacterType() << " has moved: " << xCoordinate << "," << yCoordinate << endl;
 		cout << endl;
-		if (moveHuman(moveTo, map, mainCharacter, monsters)) {
-			break;
+		if (map->ValidPos(yCoordinate, xCoordinate))
+		{
+			if (moveHuman(moveTo, map, mainCharacter, monsters))
+				break;
 		}
+		else
+			cout << "Invalid position; try again" << endl;
 
 	} while (true);
 
@@ -44,7 +48,7 @@ void HumanStrategyN::execute(GameStateN* inputGameState, Character* c){
 	
 	Character* foundMonster = monsterPresence(mainCharacter, monsters, map);
 	Chest* foundChest = chestPresence(mainCharacter, chests, map);
-
+	
 	char action;
 	if (foundMonster != nullptr && foundChest != nullptr) {
 		cout << "There is a chest and a monster beside you." << endl;
@@ -96,6 +100,15 @@ void HumanStrategyN::execute(GameStateN* inputGameState, Character* c){
 	}
 	else {
 		cout << "Your path is clear.";
+		// in this moment, we can check the exit
+		/*int x, y;
+		map->GetExitPos(y, x);
+		if (mainCharacter->getPositionX() == x && mainCharacter->getPositionY() == y)
+		{
+			// go next level...
+			cout << "level completed" << endl; // we will remove it later...just for a test...
+			
+		}*/
 	}
 	system("pause");
 }
@@ -168,7 +181,13 @@ Character* HumanStrategyN::monsterPresence(Character* fighter, vector<Character*
 bool HumanStrategyN::moveHuman(Coord2D* inputCoord, Map* inputMap, Character* mainPlayer, vector<Character*> monsters){
 	if (checkCell(inputCoord, inputMap, CHAR_EMPTY) || checkCell(inputCoord, inputMap, CHAR_ENTRY) || checkCell(inputCoord, inputMap, CHAR_DOOR) || (checkCell(inputCoord, inputMap, CHAR_EXIT) && monsters.size() == 0))
 	{
-		move(inputCoord, inputMap, mainPlayer, CHAR_PLAYER);
+		if (checkCell(inputCoord, inputMap, CHAR_EXIT))
+		{
+			move(inputCoord, inputMap, mainPlayer, CHAR_PLAYER);
+			// who called moveHuman ??, when we put in coords i think, check
+		}
+		else
+			move(inputCoord, inputMap, mainPlayer, CHAR_PLAYER);
 		return true;
 	}
 
