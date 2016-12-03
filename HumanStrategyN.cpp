@@ -58,6 +58,8 @@ void HumanStrategyN::execute(GameStateN* inputGameState, Character* c){
 			cout << "Current hit points for character " << mainCharacter->getHitPoints();
 			if (AttLogger::isOn()) AttLogger::fout() << "Current hit points for Player:" << mainCharacter->getHitPoints() << endl;
 			combat(mainCharacter, foundMonster);
+			cout << "Current hit points for monster " << foundMonster->getHitPoints() << endl;
+			if (AttLogger::isOn()) AttLogger::fout() << "Current hit points for monster:" << foundMonster->getHitPoints() << endl;
 			cout << "Current hit points for character " << mainCharacter->getHitPoints();
 			if (AttLogger::isOn()) AttLogger::fout() << "Current hit points for Player:" << mainCharacter->getHitPoints() << endl;
 		} else {
@@ -74,7 +76,10 @@ void HumanStrategyN::execute(GameStateN* inputGameState, Character* c){
 			cout << "Current hit points for character " << mainCharacter->getHitPoints();
 			if (AttLogger::isOn()) AttLogger::fout() << "Current hit points for Player:" << mainCharacter->getHitPoints() << endl;
 			combat(mainCharacter, foundMonster);
-			cout << endl << "Current hit points for character " << mainCharacter->getHitPoints() << endl;
+			if (AttLogger::isOn()) AttLogger::fout() << "Current hit points for monster:" << foundMonster->getHitPoints() << endl;
+			cout << "Current hit points for monster " << foundMonster->getHitPoints() << endl;
+			if (AttLogger::isOn()) AttLogger::fout() << "Current hit points for Player:" << mainCharacter->getHitPoints() << endl;
+			cout << "Current hit points for character " << mainCharacter->getHitPoints() << endl;
 		}
 		if (AttLogger::isOn()) AttLogger::fout() << "Current hit points for Player:" << mainCharacter->getHitPoints() << endl;
 	}

@@ -32,9 +32,11 @@ void AgressiveStrategyN::execute(GameStateN* inputGameState, Character*  monster
 		map->print();
 		screen::setCursorPosition(screen::COORD_INI_OBSERVER_SCREEN);
 
+		cout << "Agressive monster is attacking you!" << endl;
 		cout << "Current hit points for monster " << theMonster->getHitPoints() << endl;
 		cout << "Current hit points for character " << mainCharacter->getHitPoints() << endl;
 		combat(mainCharacter, theMonster);
+		if (AttLogger::isOn()) AttLogger::fout() << "Current hit points for monster: " << monster->getHitPoints() << endl;
 		cout << "Current hit points for monster " << theMonster->getHitPoints() << endl;
 		cout << "Current hit points for character " << mainCharacter->getHitPoints() << endl;
 	}

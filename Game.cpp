@@ -12,13 +12,14 @@ void Game::play() {
 
   // AvatarSprite* avatar = new AvatarSprite(character, new HumanStrategyN());
 
-  cout << "equiped items in game";
+  cout << "Equiped items in game";
   vector<Item*> equiped;
   getCharacterEquipedItems(equiped);
   cout << "Size of equiped items: " << equiped.size() << endl;
   for (int i = 0; i < equiped.size(); i++) {
     equiped[i]->printItem();
   }
+  system("pause");
   screen::setCursorPosition(screen::COORD_INI_GAME_SCREEN);
   _map->reinitializeMap();
   initializeCharacterPositionOnMap();
@@ -61,6 +62,8 @@ _map->print();
         game->printGameUsage();
         break;
       case 'i':
+        screen::setCursorPosition(screen::COORD_INI_OBSERVER_SCREEN);
+        screen::clsObserver();
         character->printEquippedItems();
         character->printBackPackItems();
 		system("pause");

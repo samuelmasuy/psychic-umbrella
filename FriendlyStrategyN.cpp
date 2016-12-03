@@ -42,6 +42,7 @@ void FriendlyStrategyN::execute(GameStateN* inputGameState, Character* monster){
 		}
 	}while (true);
 
+	screen::clsObserver();
 	screen::setCursorPosition(screen::COORD_INI_GAME_SCREEN);
 	screen::clsGame();
 	map->print();
