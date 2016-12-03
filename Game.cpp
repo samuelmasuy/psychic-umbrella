@@ -666,3 +666,8 @@ void Game::createMonstersFromMap(vector<Character*> &monsters) {
   }
   delete md;
 }
+
+void Game::gameTurns()
+{
+
+}

@@ -82,19 +82,21 @@ public:
 	* @brief Print the game usage.
 	*/
 	void printGameUsage();
-
+	void gameTurns();
 	void saveCharacter();
 	void loadCharacter();
 private:
 	Map* _map;
 	Character* character;
 	Game* game;
+	vector<AvatarSprite*> avatarsOnMap;
 	bool enemiesDefeated;
 	void initializeCharacterPositionOnMap();
 	void getCharacterEquipedItems(vector<Item*> &equipedItems);
 	void createChestsFromMap(vector<Chest*> &chest);
 	void createMonstersFromMap(vector<Character*> &monsters);
 	void move(int, int, int, int);
+
 
 	/**
 	* @brief Open the ndoor
