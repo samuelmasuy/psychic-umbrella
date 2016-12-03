@@ -4,6 +4,7 @@
 #include "DiceRoller.h"
 #include "Monster.h"
 #include "Screen.h"
+#include "Logger.h"
 
 
 
