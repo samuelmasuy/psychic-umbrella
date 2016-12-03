@@ -28,6 +28,7 @@ void HumanStrategyN::execute(GameStateN* inputGameState, Character* c){
 		cout << "Indicate the y coordinate of where you woud like to move to? ";
 		cin >> yCoordinate;	
 		moveTo->y = yCoordinate;
+		if (Logger::isOn())Logger::fout() << "Position: " << mainCharacter->getCharacterType() << " has moved: " << xCoordinate << "," << yCoordinate << endl;
 		cout << endl;
 		if (moveHuman(moveTo, map, mainCharacter, monsters)) {
 			break;
@@ -42,21 +43,31 @@ void HumanStrategyN::execute(GameStateN* inputGameState, Character* c){
 	char action;
 	if (foundMonster != nullptr && foundChest != nullptr) {
 		cout << "There is a chest and a monster beside you." << endl;
+		if (Logger::isOn())Logger::fout() << "Player has found a chest and a monster beside them:" << endl;
 		cout << "Do you want to (a)ttack or open the (c)hest?";
 		cin >> action;
 		if (action == 'a') {
+			if (AttLogger::isOn()) AttLogger::fout() << "Monster Found" << endl;
 			cout << "Current hit points for monster " << foundMonster->getHitPoints();
+			if (AttLogger::isOn()) AttLogger::fout() << "Current hit points for monster:" << foundMonster->getHitPoints() << endl;
 			cout << "Current hit points for character " << mainCharacter->getHitPoints();
+			if (AttLogger::isOn()) AttLogger::fout() << "Current hit points for Player:" << mainCharacter->getHitPoints() << endl;
 			combat(mainCharacter, foundMonster);
 			cout << "Current hit points for character " << mainCharacter->getHitPoints();
+			if (AttLogger::isOn()) AttLogger::fout() << "Current hit points for Player:" << mainCharacter->getHitPoints() << endl;
 		} else {
 			openChest(mainCharacter, foundChest, map);
+			if (Logger::isOn()) Logger::fout() << "Chest Found" << endl;
 		}
 	} else if (foundMonster != nullptr){
 		cout << "Current hit points for monster " << foundMonster->getHitPoints();
+		if (AttLogger::isOn()) AttLogger::fout() << "Current hit points for monster:" << foundMonster->getHitPoints() << endl;
 		cout << "Current hit points for character " << mainCharacter->getHitPoints();
+		if (AttLogger::isOn()) AttLogger::fout() << "Current hit points for Player:" << mainCharacter->getHitPoints() << endl;
 		combat(mainCharacter, foundMonster);
 		cout << "Current hit points for character " << mainCharacter->getHitPoints();
+		if (AttLogger::isOn()) AttLogger::fout() << "Current hit points for Player:" << mainCharacter->getHitPoints() << endl;
+
 	}
 	else if (foundChest != nullptr){
 		openChest(mainCharacter, foundChest, map);
@@ -67,6 +78,7 @@ void HumanStrategyN::execute(GameStateN* inputGameState, Character* c){
 }
 
 bool HumanStrategyN::openChest(Character* c, Chest* chest, Map* m) {
+	if (Logger::isOn()) Logger::fout() << "Chest Found" << endl;
 	Item* item = chest->getItem();
 	item->printItem();
 	cout << "Would you like your character to be equiped with this item? ('y'/'n'): ";
@@ -74,7 +86,7 @@ bool HumanStrategyN::openChest(Character* c, Chest* chest, Map* m) {
 	cin >> choice;
 	if (choice == 'y') {
 		c = new ItemDecorator(c, item);
-		//if (Logger::isOn()) Logger::fout() << "Item Equipped is:" << item->getType() << endl;
+		if (Logger::isOn()) Logger::fout() << "Item Equipped is:" << item->getType() << endl;
 		m->setCell(chest->getPositionX(), chest->getPositionY(), CHAR_EMPTY);
 		return true;
 	}

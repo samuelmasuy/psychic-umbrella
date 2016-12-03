@@ -57,6 +57,8 @@ bool StrategyN::combat(Character* fighter, Character* monster){
 	try {
 		// roll dice with valid query
 		result = dice_roller->roll("1d20[+0]");
+		if (DiceLogger::isOn()) DiceLogger::fout() << "Dice Rolled: 1d20[+0]" << endl;
+		if (DiceLogger::isOn()) DiceLogger::fout() << "Result is:" << result << endl;
 
 		fighterDamage += result;
 
@@ -66,14 +68,19 @@ bool StrategyN::combat(Character* fighter, Character* monster){
 
 		for (int i = 1; i < attacksPerRound + 1; i++) {
 			cout << "Round " << i << endl;
+			if (AttLogger::isOn()) AttLogger::fout() << "Attack On, Round:" << i << endl;
 			cout << "You hit the monster for: " << fighterDamage << endl;
 			monster->hit(fighterDamage);
+			if (AttLogger::isOn()) AttLogger::fout() << "You hit the monster for:" << fighterDamage << endl;
 			cout << "Monster hits you for: " << monsterDamage << endl;
 			fighter->hit(monsterDamage);
+			if (AttLogger::isOn()) AttLogger::fout() << "Monster hits you for:" << monsterDamage << endl;
 			system("pause");
 		}
 		monster->setHitPoints(monster->getHitPoints());
 		cout << "Current hit points for monster " << monster->getHitPoints();
+		if (AttLogger::isOn()) AttLogger::fout() << "Current hit points for monster: " << monster->getHitPoints() << endl;
+
 		return true;
 	}
 	catch (std::exception& e) {

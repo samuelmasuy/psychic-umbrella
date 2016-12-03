@@ -20,6 +20,7 @@ void AgressiveStrategyN::execute(GameStateN* inputGameState, Character*  monster
 
 	cout << "I will avenge my ancestors!!" << endl;
 	Coord2D* moveTo = identifyTargetCell(mainCharacter->getPositionX(), mainCharacter->getPositionY(), map, CHAR_EMPTY);
+	if (AttLogger::isOn()) AttLogger::fout() << "Monster Found" << endl;
 
 	if (moveTo == nullptr)
 		cout << "Damn you are surrounded!" << endl;
