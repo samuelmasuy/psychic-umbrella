@@ -22,7 +22,7 @@ void Game::play() {
   vector<Item*> equiped;
   getCharacterEquipedItems(equiped);
   cout << "Size of equiped items: " << equiped.size() << endl;
-  for (int i = 0; i <= equiped.size(); i++) {
+  for (int i = 0; i < equiped.size(); i++) {
     equiped[i]->printItem();
   }
   screen::setCursorPosition(screen::COORD_INI_GAME_SCREEN);
@@ -34,6 +34,7 @@ void Game::play() {
   enemiesDefeated = false;
   enemiesDefeated = (_map->countMonsters() == 0);
 
+  screen::clsObserver();
   screen::setCursorPosition(screen::COORD_INI_OBSERVER_SCREEN);
   printGameUsage();
 
@@ -51,21 +52,36 @@ void Game::play() {
 
       switch (choice) {
       case 'd':
-        system("cls");
+		screen::clsObserver();
+		screen::setCursorPosition(screen::COORD_INI_OBSERVER_SCREEN);
         move(characterPositionX, characterPositionY, characterPositionX + 1, characterPositionY);
+		screen::clsGame();
+		screen::setCursorPosition(screen::COORD_INI_GAME_SCREEN);
         _map->print();
+		screen::clsObserver();
+		screen::setCursorPosition(screen::COORD_INI_OBSERVER_SCREEN);
         game->printGameUsage();
         break;
       case 'a':
-        system("cls");
+		screen::clsObserver();
+		screen::setCursorPosition(screen::COORD_INI_OBSERVER_SCREEN);
         move(characterPositionX, characterPositionY, characterPositionX - 1, characterPositionY);
+		screen::clsGame();
+		screen::setCursorPosition(screen::COORD_INI_GAME_SCREEN);
         _map->print();
+		screen::clsObserver();
+		screen::setCursorPosition(screen::COORD_INI_OBSERVER_SCREEN);
         game->printGameUsage();
         break;
       case 'w':
-        system("cls");
+		screen::clsObserver();
+		screen::setCursorPosition(screen::COORD_INI_OBSERVER_SCREEN);
         move(characterPositionX, characterPositionY, characterPositionX, characterPositionY - 1);
+		screen::clsGame();
+		screen::setCursorPosition(screen::COORD_INI_GAME_SCREEN);
         _map->print();
+		screen::clsObserver();
+		screen::setCursorPosition(screen::COORD_INI_OBSERVER_SCREEN);
         game->printGameUsage();
         break;
       case 's':

@@ -64,6 +64,7 @@ int main(int argc, char const* argv[]) {
   {
   */
 
+  screen::setCursorPosition(screen::COORD_INI_OBSERVER_SCREEN);
   cout << "Let's create a character, would you like to play with a nimble[1], a tank[2], or a bully[3]: " << endl;
 
   int character_choice = validate_choice(1, 3);
@@ -95,7 +96,7 @@ int main(int argc, char const* argv[]) {
   // for (int i = 0; i < 16; i++) {
   //   character->levelUp();
   // }
-  cout << "Here is your character stats:";
+  cout << "Here is your character stats:" << endl;
   character->playerInfo();
   system("pause");
 
