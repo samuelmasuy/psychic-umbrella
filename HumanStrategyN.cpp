@@ -21,16 +21,14 @@ void HumanStrategyN::execute(GameStateN* inputGameState, Character* c){
 	Coord2D *moveTo = new Coord2D(0, 0);
 
 	do {
-		cout << "Indicate the x coordinate of where you would like to move to? ";
-		cin >> xCoordinate;
+		xCoordinate = validate_this_choice(0, 80, "x");
 		moveTo->x = xCoordinate;
 		cout << endl;
-		cout << "Indicate the y coordinate of where you woud like to move to? ";
-		cin >> yCoordinate;	
+		yCoordinate = validate_this_choice(0, 80, "y");
 		moveTo->y = yCoordinate;
-		if (Logger::isOn())Logger::fout() << "Position: " << mainCharacter->getCharacterType() << " has moved: " << xCoordinate << "," << yCoordinate << endl;
 		cout << endl;
 		if (moveHuman(moveTo, map, mainCharacter, monsters)) {
+			if (Logger::isOn())Logger::fout() << "Position: " << mainCharacter->getCharacterType() << " has moved: " << xCoordinate << "," << yCoordinate << endl;
 			break;
 		}
 
@@ -174,6 +172,22 @@ bool HumanStrategyN::moveHuman(Coord2D* inputCoord, Map* inputMap, Character* ma
 		return false;
 	}
 
+}
+
+int HumanStrategyN::validate_this_choice(int min, int max, string coord) {
+  while (true) {
+	cout << "Indicate the " << coord << " coordinate of where you would like to move to: ";
+    string s;
+    getline(cin, s);
+    char *endp = 0;
+    int ret = strtol(s.c_str(), &endp, 10);
+    if (endp != s.c_str() && !*endp && ret >= min && ret <= max) {
+      return ret;
+    }
+    cout << "Invalid choice." << endl;
+	screen::setCursorPosition(screen::COORD_INI_OBSERVER_SCREEN);
+	screen::clsObserver();
+  }
 }
 
 /*

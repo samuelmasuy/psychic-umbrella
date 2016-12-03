@@ -21,6 +21,7 @@ public:
 	Character* monsterPresence(Character*, vector<Character*>, Map*);
 	Chest* chestPresence(Character*, vector<Chest*>, Map*);
 	bool moveHuman(Coord2D*, Map*, Character*, vector<Character*>);
-//	bool combat(Character*, Character*);
+private:
+	int validate_this_choice(int, int, string);
 };
 
