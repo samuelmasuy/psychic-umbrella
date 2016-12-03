@@ -134,17 +134,18 @@ Chest* HumanStrategyN::chestPresence(Character* fighter, vector<Chest*> chests, 
 }
 
 Character* HumanStrategyN::monsterPresence(Character* fighter, vector<Character*> monsters, Map* map) {
-	Coord2D * locationOfMonster = identifyTargetCell(fighter->getPositionX(), fighter->getPositionY(), map, CHAR_ELF);
+	Coord2D * locationOfMonster = nullptr;
+	locationOfMonster = identifyTargetCell(fighter->getPositionX(), fighter->getPositionY(), map, CHAR_ELF);
 	if (locationOfMonster == nullptr) {
-		Coord2D * locationOfMonster = identifyTargetCell(fighter->getPositionX(), fighter->getPositionY(), map, CHAR_GOBLIN);
+		locationOfMonster = identifyTargetCell(fighter->getPositionX(), fighter->getPositionY(), map, CHAR_GOBLIN);
 		if (locationOfMonster == nullptr) {
-			Coord2D * locationOfMonster = identifyTargetCell(fighter->getPositionX(), fighter->getPositionY(), map, CHAR_LIZARD);
+			locationOfMonster = identifyTargetCell(fighter->getPositionX(), fighter->getPositionY(), map, CHAR_LIZARD);
 			if (locationOfMonster == nullptr) {
-				Coord2D * locationOfMonster = identifyTargetCell(fighter->getPositionX(), fighter->getPositionY(), map, CHAR_SKELETON);
+				locationOfMonster = identifyTargetCell(fighter->getPositionX(), fighter->getPositionY(), map, CHAR_SKELETON);
 				if (locationOfMonster == nullptr) {
-					Coord2D * locationOfMonster = identifyTargetCell(fighter->getPositionX(), fighter->getPositionY(), map, CHAR_VINE);
+					locationOfMonster = identifyTargetCell(fighter->getPositionX(), fighter->getPositionY(), map, CHAR_VINE);
 					if (locationOfMonster == nullptr) {
-						Coord2D * locationOfMonster = identifyTargetCell(fighter->getPositionX(), fighter->getPositionY(), map, CHAR_VINE);
+						locationOfMonster = identifyTargetCell(fighter->getPositionX(), fighter->getPositionY(), map, CHAR_VINE);
 						if (locationOfMonster == nullptr) {
 							return nullptr;
 						}
