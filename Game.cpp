@@ -731,6 +731,7 @@ void Game::gameTurns()
 		screen::setCursorPosition(screen::COORD_INI_OBSERVER_SCREEN);
 		screen::clsObserver();
 		cout << "It is the " << avatarsOnMap[i]->getCharacter()->getCharacterType() << "'s turn" << endl;
+		system("pause");
 		avatarsOnMap[i]->execute(gameState);
 		system("pause");
 		setGameState();

@@ -166,13 +166,10 @@ Character* HumanStrategyN::monsterPresence(Character* fighter, vector<Character*
 }
 
 bool HumanStrategyN::moveHuman(Coord2D* inputCoord, Map* inputMap, Character* mainPlayer, vector<Character*> monsters){
-	if (checkCell(inputCoord, inputMap, CHAR_EMPTY) || checkCell(inputCoord, inputMap, CHAR_ENTRY) || checkCell(inputCoord, inputMap, CHAR_DOOR) || (checkCell(inputCoord, inputMap, CHAR_EXIT) && monsters.size() == 0))
-	{
+	if (checkCell(inputCoord, inputMap, CHAR_ENTRY) || checkCell(inputCoord, inputMap, CHAR_EMPTY) || checkCell(inputCoord, inputMap, CHAR_DOOR) || (monsters.size() == 0 && checkCell(inputCoord, inputMap, CHAR_EXIT))) {
 		move(inputCoord, inputMap, mainPlayer, CHAR_PLAYER);
 		return true;
-	}
-
-	else{
+	} else{
 		cout << "You cannot move to the location specified" <<endl;
 		return false;
 	}
