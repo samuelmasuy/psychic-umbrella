@@ -20,6 +20,11 @@ public:
 	void SetBuilder(MapBuilder *p);
 	
 	void GetMap(Map &m);
+	///
+	/// Returns pointer to the Map
+	///
+	Map *GetMapPtr();
+
 
 private:
 
