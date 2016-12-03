@@ -226,6 +226,7 @@ int main(int argc, char const* argv[]) {
     cout << "Map Completed! Press (y) to continue to the next phase or (n) to exit!-->";
     cin >> choice;
     if (choice == 'y') {
+	  if (Logger::isOn()) Logger::fout() << "Moved to next Map!" << endl;
 	  screen::clsObserver();
 	  screen::clsGame();
       continue;
@@ -236,6 +237,7 @@ int main(int argc, char const* argv[]) {
 
   }
   cout << "Game over!!! Press any key and then enter to exit! -->";
+	if (Logger::isOn()) Logger::fout() << "Game is over" << endl;
 	delete game;
 	delete gb;
   string aux;
