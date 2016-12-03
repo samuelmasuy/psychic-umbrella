@@ -21,7 +21,7 @@ void HumanStrategyN::execute(GameStateN* inputGameState, Character* c){
 	Coord2D *moveTo = new Coord2D(0, 0);
 
 	do {
-		cout << "Indicate the x coordiante of where you would like to move to? ";
+		cout << "Indicate the x coordinate of where you would like to move to? ";
 		cin >> xCoordinate;
 		moveTo->x = xCoordinate;
 		cout << endl;

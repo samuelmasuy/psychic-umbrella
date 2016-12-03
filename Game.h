@@ -9,6 +9,9 @@
 #include <cstdlib>
 #include <string>
 #include <map>
+#include <stdio.h>      /* printf, scanf, puts, NULL */
+#include <stdlib.h>     /* srand, rand */
+#include <time.h>  
 #include "Item.h"
 #include "Character.h"
 #include "Map.h"
@@ -30,7 +33,8 @@
 #include "AvatarSprite.h"
 #include "HumanStrategyN.h"
 #include "Screen.h"
-
+#include "FriendlyStrategyN.h"
+#include "AgressiveStrategyN.h"
 
 using namespace std;
 
@@ -83,6 +87,8 @@ public:
 	*/
 	void printGameUsage();
 	void gameTurns();
+	void setAvatarsOnMap();
+	void setGameState();
 	void saveCharacter();
 	void loadCharacter();
 private:
@@ -90,6 +96,7 @@ private:
 	Character* character;
 	Game* game;
 	vector<AvatarSprite*> avatarsOnMap;
+	GameStateN* gameState;
 	bool enemiesDefeated;
 	void initializeCharacterPositionOnMap();
 	void getCharacterEquipedItems(vector<Item*> &equipedItems);
