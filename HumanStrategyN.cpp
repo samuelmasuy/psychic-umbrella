@@ -124,7 +124,7 @@ Chest* HumanStrategyN::chestPresence(Character* fighter, vector<Chest*> chests, 
 	}
 	Chest* foundChest = nullptr;
 	for (auto const& chest : chests) {
-		if (chest->getPositionX() == locationOfChest->x && chest->getPositionY() == locationOfChest->y) {
+		if (chest->getPositionY() == locationOfChest->x && chest->getPositionX() == locationOfChest->y) {
 			foundChest = chest;
 			break;
 		}
