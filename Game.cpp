@@ -22,9 +22,9 @@ void Game::play() {
   vector<Item*> equiped;
   getCharacterEquipedItems(equiped);
   cout << "Size of equiped items: " << equiped.size() << endl;
-  //for (int i = 0; i <= equiped.size(); i++) {
-  //  equiped[i].printItem();
-  //}
+  for (int i = 0; i <= equiped.size(); i++) {
+    equiped[i]->printItem();
+  }
   screen::setCursorPosition(screen::COORD_INI_GAME_SCREEN);
   _map->reinitializeMap();
   initializeCharacterPositionOnMap();
@@ -560,7 +560,6 @@ void Game::getCharacterEquipedItems(vector<Item*> &equipedItems) {
     i = character->retrieveItem("armor");
     equipedItems.push_back(i);
   }
-  delete i;
 }
 
 void Game::createChestsFromMap(vector<Chest*> &chests ) {
