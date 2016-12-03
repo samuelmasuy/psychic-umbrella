@@ -72,7 +72,6 @@ bool StrategyN::combat(Character* fighter, Character* monster){
 			fighter->hit(monsterDamage);
 			system("pause");
 		}
-		system("cls");
 		monster->setHitPoints(monster->getHitPoints());
 		cout << "Current hit points for monster " << monster->getHitPoints();
 		return true;
