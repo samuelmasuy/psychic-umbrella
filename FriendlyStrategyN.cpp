@@ -32,7 +32,6 @@ void FriendlyStrategyN::execute(GameStateN* inputGameState, Character* monster){
 		
 		
 		// uniformly distributed in range (1, to # of Cols)
-		
 		coordinates->x = rand() % map->GetCols() + 1;
 		coordinates->y = rand() % map->GetRows() + 1;
 
