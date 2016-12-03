@@ -300,7 +300,8 @@ void Game::loadCharacter() {
   int equippedSize;
 
 
-
+  screen::clsObserver();
+  screen::setCursorPosition(screen::COORD_INI_OBSERVER_SCREEN);
 
   cout << "Load File: ";
   cin >> loadFile;
@@ -395,7 +396,8 @@ void Game::stop() {
   if (_map->retrieveCell(characterPositionX, characterPositionY) != CHAR_EXIT) {
     _map->fillCell(characterPositionY, characterPositionX, CHAR_EMPTY);
   }
-  system("CLS");
+  screen::clsObserver();
+  screen::setCursorPosition(screen::COORD_INI_OBSERVER_SCREEN);
   character->levelUp();
   cout << "Congratulations you finish the level!!" << endl;
   if (Logger::isOn()) Logger::fout() << "Level finished" << endl;
