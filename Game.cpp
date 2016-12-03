@@ -10,19 +10,22 @@ void Game::play() {
   // set Map observer
   MapOBS* observerMap = new MapOBS(_map);
 
-  vector<Character*> monsters = createMonstersFromMap();
+  vector<Character*> monsters;
+  createMonstersFromMap(monsters);
 
-  vector<Chest*> chests = createChestsFromMap();
+  vector<Chest*> chests;
+  createChestsFromMap(chests);
 
  // AvatarSprite* avatar = new AvatarSprite(character, new HumanStrategyN());
 
   cout << "equiped items in game";
-  vector<Item*> equiped = getCharacterEquipedItems();
-  for (int i = 0; i <= equiped.size(); i++) {
-    equiped[i]->printItem();
-  }
-
-
+  vector<Item*> equiped;
+  getCharacterEquipedItems(equiped);
+  cout << "Size of equiped items: " << equiped.size() << endl;
+  //for (int i = 0; i <= equiped.size(); i++) {
+  //  equiped[i].printItem();
+  //}
+  screen::setCursorPosition(screen::COORD_INI_GAME_SCREEN);
   _map->reinitializeMap();
   initializeCharacterPositionOnMap();
 
@@ -31,11 +34,7 @@ void Game::play() {
   enemiesDefeated = false;
   enemiesDefeated = (_map->countMonsters() == 0);
 
-
-  while (_map->countMonsters() == 0) {
-  }
-
-
+  screen::setCursorPosition(screen::COORD_INI_OBSERVER_SCREEN);
   printGameUsage();
 
   Item* backpackItem = nullptr;
@@ -184,7 +183,8 @@ void Game::play() {
 void Game::saveCharacter() {
 	string type = "";
 	string saveFile;
-	vector<Item*> equipment = getCharacterEquipedItems();
+	vector<Item*> equipment;
+	getCharacterEquipedItems(equipment);
 
 
 
@@ -525,9 +525,9 @@ void Game::printGameUsage() {
 }
 
 
-vector<Item*> Game::getCharacterEquipedItems() {
-  Item* i = nullptr;
-  vector<Item*> equipedItems;
+void Game::getCharacterEquipedItems(vector<Item*> &equipedItems) {
+	Item* i = nullptr;
+	equipedItems.clear();
   if (character->isEquiped("ring")) {
     i = character->retrieveItem("ring");
     equipedItems.push_back(i);
@@ -561,16 +561,16 @@ vector<Item*> Game::getCharacterEquipedItems() {
     equipedItems.push_back(i);
   }
   delete i;
-  return equipedItems;
 }
 
-vector<Chest*> Game::createChestsFromMap() {
+void Game::createChestsFromMap(vector<Chest*> &chests ) {
+	chests.clear();
+
   vector<Coord2D> chestCoords;
 
   _map->FindAll(CHAR_CHEST, chestCoords);
   // map get  all chests position _map
   int chest_size = chestCoords.size(); // number of chests
-  vector<Chest*> chests;
 
   ChestDirector* cg = new ChestDirector();
   Chest* mapChest = nullptr;
@@ -585,12 +585,10 @@ vector<Chest*> Game::createChestsFromMap() {
   }
   delete mapChest;
   delete cg;
-  return chests;
 }
 
-vector<Character*> Game::createMonstersFromMap() {
-  vector<Character*> monsters;
-
+void Game::createMonstersFromMap(vector<Character*> &monsters) {
+	monsters.clear();
   MonsterDirector* md = new MonsterDirector();
   MonsterBuilder* mb = nullptr;
   Character* monster = nullptr;
@@ -667,5 +665,4 @@ vector<Character*> Game::createMonstersFromMap() {
     }
   }
   delete md;
-  return monsters;
 }

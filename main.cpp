@@ -167,7 +167,7 @@ int main(int argc, char const* argv[]) {
   // map management
   manageMap();
 
-  cout << endl;
+  screen::clsObserver();
 
   cout << "TIME TO PLAY" << endl;
 
@@ -181,6 +181,7 @@ int main(int argc, char const* argv[]) {
     if (theCampaign.Load(campaignFilename.c_str()) == 0) {
       break;
     }
+	screen::clsObserver();
   } while (1);
 
   vector<int> levels;
@@ -200,17 +201,24 @@ int main(int argc, char const* argv[]) {
     // get the map from director
     d.GetMap(map);
 
-
     GameBuilder* gb = new GameBuilder();
     gb->constructGame();
     gb->setCharacterAndMap(character, &map);
     Game* game = gb->getGame();
+	screen::clsObserver();
+
+	cout << "The level is ready" << endl;
+
+	system("pause");
+	screen::clsObserver();
+
     game->play();
     delete game;
     delete gb;
     cout << "Map Completed! Press (y) to continue to the next phase or (n) to exit!-->";
     cin >> choice;
     if (choice == 'y') {
+	  screen::clsObserver();
       continue;
     }
     if (choice == 'n') {

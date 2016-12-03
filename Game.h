@@ -29,7 +29,7 @@
 #include "GameStateN.h"
 #include "AvatarSprite.h"
 #include "HumanStrategyN.h"
-
+#include "Screen.h"
 
 
 using namespace std;
@@ -91,9 +91,9 @@ private:
 	Game* game;
 	bool enemiesDefeated;
 	void initializeCharacterPositionOnMap();
-	vector<Item*> getCharacterEquipedItems();
-	vector<Chest*> createChestsFromMap();
-	vector<Character*> createMonstersFromMap();
+	void getCharacterEquipedItems(vector<Item*> &equipedItems);
+	void createChestsFromMap(vector<Chest*> &chest);
+	void createMonstersFromMap(vector<Character*> &monsters);
 	void move(int, int, int, int);
 
 	/**
