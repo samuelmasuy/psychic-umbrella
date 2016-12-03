@@ -40,6 +40,7 @@ void HumanStrategyN::execute(GameStateN* inputGameState, Character* c){
 	screen::clsGame();
 	map->print();
 	screen::setCursorPosition(screen::COORD_INI_OBSERVER_SCREEN);
+	screen::clsObserver();
 	
 	Character* foundMonster = monsterPresence(mainCharacter, monsters, map);
 	Chest* foundChest = chestPresence(mainCharacter, chests, map);
@@ -52,7 +53,7 @@ void HumanStrategyN::execute(GameStateN* inputGameState, Character* c){
 		cin >> action;
 		if (action == 'a') {
 			if (AttLogger::isOn()) AttLogger::fout() << "Monster Found" << endl;
-			cout << "Current hit points for monster " << foundMonster->getHitPoints();
+			cout << "Current hit points for monster " << foundMonster->getHitPoints() << endl;
 			if (AttLogger::isOn()) AttLogger::fout() << "Current hit points for monster:" << foundMonster->getHitPoints() << endl;
 			cout << "Current hit points for character " << mainCharacter->getHitPoints();
 			if (AttLogger::isOn()) AttLogger::fout() << "Current hit points for Player:" << mainCharacter->getHitPoints() << endl;
@@ -64,14 +65,15 @@ void HumanStrategyN::execute(GameStateN* inputGameState, Character* c){
 			if (Logger::isOn()) Logger::fout() << "Chest Found" << endl;
 		}
 	} else if (foundMonster != nullptr){
-		cout << "Current hit points for monster " << foundMonster->getHitPoints();
-		if (AttLogger::isOn()) AttLogger::fout() << "Current hit points for monster:" << foundMonster->getHitPoints() << endl;
-		cout << "Current hit points for character " << mainCharacter->getHitPoints();
-		if (AttLogger::isOn()) AttLogger::fout() << "Current hit points for Player:" << mainCharacter->getHitPoints() << endl;
+		cout << "There is a monster beside you." << endl;
 		cout << "Do you want to (a)ttack or do (n)othing?";
 		cin >> action;
 		if (action == 'a') {
-		combat(mainCharacter, foundMonster);
+			cout << "Current hit points for monster " << foundMonster->getHitPoints() << endl;
+			if (AttLogger::isOn()) AttLogger::fout() << "Current hit points for monster:" << foundMonster->getHitPoints() << endl;
+			cout << "Current hit points for character " << mainCharacter->getHitPoints();
+			if (AttLogger::isOn()) AttLogger::fout() << "Current hit points for Player:" << mainCharacter->getHitPoints() << endl;
+			combat(mainCharacter, foundMonster);
 			cout << endl << "Current hit points for character " << mainCharacter->getHitPoints() << endl;
 		}
 		if (AttLogger::isOn()) AttLogger::fout() << "Current hit points for Player:" << mainCharacter->getHitPoints() << endl;

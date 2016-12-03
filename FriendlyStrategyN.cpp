@@ -17,6 +17,8 @@ void FriendlyStrategyN::execute(GameStateN* inputGameState, Character* monster){
 	Character* theMonster = monster;
 	vector<Character*> monsters = inputGameState->getMonsters();
 	vector<Chest*> chests = inputGameState->getChests();
+	screen::setCursorPosition(screen::COORD_INI_OBSERVER_SCREEN);
+	screen::clsObserver();
 	
 	cout << "I am a friendly monster, you go your way. I will go mine" << endl;
 	if (Logger::isOn()) Logger::fout() << "Friendly Monster found, and left" <<  endl;
