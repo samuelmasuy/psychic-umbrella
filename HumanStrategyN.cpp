@@ -80,16 +80,19 @@ void HumanStrategyN::execute(GameStateN* inputGameState, Character* c){
 			cout << "Current hit points for monster " << foundMonster->getHitPoints() << endl;
 			if (AttLogger::isOn()) AttLogger::fout() << "Current hit points for Player:" << mainCharacter->getHitPoints() << endl;
 			cout << "Current hit points for character " << mainCharacter->getHitPoints() << endl;
+			if (foundMonster->getHitPoints() <= 0) {
+				cout << "The monster " << foundMonster->getCharacterType() << " died!!!" << endl;
+				map->fillCell(foundMonster->getPositionX(), foundMonster->getPositionY(), CHAR_EMPTY);
+			}
 		}
 		if (AttLogger::isOn()) AttLogger::fout() << "Current hit points for Player:" << mainCharacter->getHitPoints() << endl;
 	}
 	else if (foundChest != nullptr){
 		cout << "Do you want to (o)pen the chest or do (n)othing?";
 		cin >> action;
-		if (action == 'a') {
-			combat(mainCharacter, foundMonster);
+		if (action == 'o') {
+			openChest(mainCharacter, foundChest, map);
 		}
-		openChest(mainCharacter, foundChest, map);
 	}
 	else {
 		cout << "Your path is clear.";

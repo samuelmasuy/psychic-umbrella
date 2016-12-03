@@ -39,6 +39,10 @@ void AgressiveStrategyN::execute(GameStateN* inputGameState, Character*  monster
 		if (AttLogger::isOn()) AttLogger::fout() << "Current hit points for monster: " << monster->getHitPoints() << endl;
 		cout << "Current hit points for monster " << theMonster->getHitPoints() << endl;
 		cout << "Current hit points for character " << mainCharacter->getHitPoints() << endl;
+		if (theMonster->getHitPoints() <= 0) {
+			cout << "The monster " << theMonster->getCharacterType() << " died!!!" << endl;
+			map->fillCell(theMonster->getPositionX(), theMonster->getPositionY(), CHAR_EMPTY);
+		}
 	}
 
 }
