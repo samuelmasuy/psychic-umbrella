@@ -19,15 +19,11 @@ public:
 	void hpChange();
 	void levelUp();
 	void setLevel(int);
-	void setPositionX(int);
-	void setPositionY(int);
 	void setMonsterDamage();
 	int getMonsterDamage();
 
 private:
 	int currentHitPoints;
-	int positionX;
-	int positionY;
 	int level;
 	int damage;
 	string monsterType;

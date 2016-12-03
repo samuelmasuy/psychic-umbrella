@@ -48,14 +48,6 @@ void Monster::setLevel(int lvl) {
   level = lvl;
 }
 
-void Monster::setPositionX(int x) {
-  positionX = x;
-}
-
-void Monster::setPositionY(int y) {
-  positionY = y;
-}
-
 int Monster::getMonsterDamage() {
   if(level <= 5)
     return 7;

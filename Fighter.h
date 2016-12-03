@@ -90,9 +90,10 @@ protected:
 	int experience, gold;
 	int* bonusAttack = new int (1);
 	int armor;
+	int positionX;
+	int positionY;
 private:
 	string characterType;
 	ItemContainer backpack;
-	int positionX;
-	int positionY;
+
 };
