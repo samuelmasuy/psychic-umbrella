@@ -501,9 +501,16 @@ void Map::print() {
   m_scene[i0][j0] = CHAR_ENTRY;
 
   cout << endl;
+  cout << "  ";
+  for (int j = 0; j < m_cols; j++) {
+	  printf("%3d", j);
+  }
+  cout << endl;
   for (int i = 0; i < m_rows; i++) {
+	printf("%-3d", i);
+	cout << " ";
     for (int j = 0; j < m_cols; j++) {
-      cout << m_scene[i][j];
+      cout << m_scene[i][j] << "  ";
     }
     cout << endl;
   }
