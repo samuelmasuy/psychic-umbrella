@@ -46,11 +46,8 @@ _map->print();
     characterPositionX = character->getPositionX();
     characterPositionY = character->getPositionY();
     // check if character at the exit
-	int xExit, yExit;
-	_map->GetExitPos(yExit, xExit);
-    //if (_map->retrieveCell(characterPositionY, characterPositionX) != CHAR_EXIT) { 
-	if (xExit != characterPositionX || yExit != characterPositionY) {
-	  cin >> choice;
+    if (_map->retrieveCell(characterPositionY, characterPositionX) != CHAR_EXIT) {
+      cin >> choice;
 
       switch (choice) {
       case 'c':
@@ -406,11 +403,8 @@ void Game::loadCharacter() {
 void Game::stop() {
   int characterPositionX = character->getPositionX();
   int characterPositionY = character->getPositionY();
-  int xExit, yExit;
-  _map->GetExitPos(yExit, xExit);
-  //if (_map->retrieveCell(characterPositionY, characterPositionX) != CHAR_EXIT) {
-  if (characterPositionY != yExit || characterPositionX != xExit) {
-		  _map->fillCell(characterPositionY, characterPositionX, CHAR_EMPTY);
+  if (_map->retrieveCell(characterPositionX, characterPositionY) != CHAR_EXIT) {
+    _map->fillCell(characterPositionY, characterPositionX, CHAR_EMPTY);
   }
   screen::clsObserver();
   screen::setCursorPosition(screen::COORD_INI_OBSERVER_SCREEN);

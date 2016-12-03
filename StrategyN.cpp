@@ -11,7 +11,7 @@ StrategyN::~StrategyN()
 
 bool StrategyN::checkCell(Coord2D* inputCoord, Map* inputMap, char type) {
 	vector<Coord2D> outputLocation;
-	if (inputMap->GetCell(inputCoord->y, inputCoord->x) == type) {  
+	if (inputMap->GetCell(inputCoord->x, inputCoord->y) == type) {
 		return true;
 	}
 	else return false;
@@ -19,7 +19,7 @@ bool StrategyN::checkCell(Coord2D* inputCoord, Map* inputMap, char type) {
 
 Coord2D* StrategyN::identifyTargetCell(int inputX, int inputY, Map* inputMap, char type){
 	vector<Coord2D*> testCoords;
-	testCoords.push_back(new Coord2D(inputX + 1, inputY + 1)); 
+	testCoords.push_back(new Coord2D(inputX + 1, inputY + 1));
 	testCoords.push_back(new Coord2D(inputX, inputY + 1));
 	testCoords.push_back(new Coord2D(inputX -1, inputY + 1));
 	testCoords.push_back(new Coord2D(inputX, inputY + 1));
@@ -39,9 +39,9 @@ Coord2D* StrategyN::identifyTargetCell(int inputX, int inputY, Map* inputMap, ch
 }
 
 void StrategyN::move(Coord2D* targetLocation, Map* inputMap, Character* mover, char type){
-		char oldCellType = inputMap->GetCell(mover->getPositionY(), mover->getPositionX());
-		inputMap->fillCell(mover->getPositionY(), mover->getPositionX(), CHAR_EMPTY);
-		inputMap->fillCell(targetLocation->y, targetLocation->x, type); 
+		char oldCellType = inputMap->GetCell(mover->getPositionX(), mover->getPositionY());
+		inputMap->fillCell(mover->getPositionX(), mover->getPositionY(), CHAR_EMPTY);
+		inputMap->fillCell(targetLocation->x, targetLocation->y, type);
 		mover->setPositionX(targetLocation->x);
 		mover->setPositionY(targetLocation->y);
 }
