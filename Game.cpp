@@ -10,13 +10,7 @@ void Game::play() {
   // set Map observer
   MapOBS* observerMap = new MapOBS(_map);
 
-  vector<Character*> monsters;
-  createMonstersFromMap(monsters);
-
-  vector<Chest*> chests;
-  createChestsFromMap(chests);
-
- // AvatarSprite* avatar = new AvatarSprite(character, new HumanStrategyN());
+  // AvatarSprite* avatar = new AvatarSprite(character, new HumanStrategyN());
 
   cout << "equiped items in game";
   vector<Item*> equiped;
@@ -177,6 +171,18 @@ void Game::play() {
         _map->print();
         game->printGameUsage();
         break;
+	  case 'r':
+
+		  screen::setCursorPosition(screen::COORD_INI_OBSERVER_SCREEN);
+		  screen::clsObserver();
+		  gameTurns();
+		  screen::setCursorPosition(screen::COORD_INI_GAME_SCREEN);
+		  screen::clsGame();
+		  _map->print();
+		  screen::setCursorPosition(screen::COORD_INI_OBSERVER_SCREEN);
+		  screen::clsObserver();
+		  game->printGameUsage();
+		  break;
       case 'q':
         system("cls");
         cout << "Do you want to quit the game? ('y'/'n'): ";
@@ -524,7 +530,8 @@ Character* Game::getCharacter() {
 }
 
 void Game::printGameUsage() {
-  cout << "Use w, a, s, d to move your character." << endl;
+	cout << "Use r to play a round" << endl;
+	cout << "Use w, a, s, d to move your character." << endl;
   cout << "Use c to display the character statistics." << endl;
   cout << "Use i to display the items on the character." << endl;
   cout << "Use u to unequip an item from the character." << endl;
@@ -684,5 +691,54 @@ void Game::createMonstersFromMap(vector<Character*> &monsters) {
 
 void Game::gameTurns()
 {
+	setGameState();
+	setAvatarsOnMap();
+	for (int i = 0; i < avatarsOnMap.size(); i++)
+	{
+		avatarsOnMap[i]->execute(gameState);
+		setGameState();
+		if (gameState->getMainCharacter()->getHitPoints() < 0)
+		{
+			cout << "You died in battle. RIP\n";
+			cout << "GameOver";
+			stop();
+			break;
+		}
+	}
+	
+}
+
+void Game::setAvatarsOnMap()
+{
+	int rd = 0;
+	srand(time(NULL));
+
+	StrategyN* monsterStrategy = nullptr;
+	avatarsOnMap.push_back(new AvatarSprite(gameState->getMainCharacter(), new HumanStrategyN()));
+	for (int i = 0; i < gameState->getMonsters().size(); i++)
+	{
+		rd = rand() % 2 + 1;
+		if (rd == 1)
+			monsterStrategy = new FriendlyStrategyN();
+		else
+			monsterStrategy = new AgressiveStrategyN();
+
+		avatarsOnMap.push_back(new AvatarSprite(gameState->getMonsters()[i], monsterStrategy));
+		
+	}
+
+}
+void Game::setGameState()
+{
+	vector<Character*> monsters;
+	createMonstersFromMap(monsters);
+	vector<Chest*> chests;
+	createChestsFromMap(chests);
+	
+	gameState = new GameStateN();
+	gameState->setChests(chests);
+	gameState->setMonsters(monsters);
+	gameState->setMainCharacter(character);
+	gameState->setMap(_map);
 
 }
