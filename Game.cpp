@@ -49,45 +49,6 @@ _map->print();
       cin >> choice;
 
       switch (choice) {
-      case 'd':
-		screen::clsObserver();
-		screen::setCursorPosition(screen::COORD_INI_OBSERVER_SCREEN);
-        move(characterPositionX, characterPositionY, characterPositionX + 1, characterPositionY);
-		screen::clsGame();
-		screen::setCursorPosition(screen::COORD_INI_GAME_SCREEN);
-        _map->print();
-		screen::clsObserver();
-		screen::setCursorPosition(screen::COORD_INI_OBSERVER_SCREEN);
-        game->printGameUsage();
-        break;
-      case 'a':
-		screen::clsObserver();
-		screen::setCursorPosition(screen::COORD_INI_OBSERVER_SCREEN);
-        move(characterPositionX, characterPositionY, characterPositionX - 1, characterPositionY);
-		screen::clsGame();
-		screen::setCursorPosition(screen::COORD_INI_GAME_SCREEN);
-        _map->print();
-		screen::clsObserver();
-		screen::setCursorPosition(screen::COORD_INI_OBSERVER_SCREEN);
-        game->printGameUsage();
-        break;
-      case 'w':
-		screen::clsObserver();
-		screen::setCursorPosition(screen::COORD_INI_OBSERVER_SCREEN);
-        move(characterPositionX, characterPositionY, characterPositionX, characterPositionY - 1);
-		screen::clsGame();
-		screen::setCursorPosition(screen::COORD_INI_GAME_SCREEN);
-        _map->print();
-		screen::clsObserver();
-		screen::setCursorPosition(screen::COORD_INI_OBSERVER_SCREEN);
-        game->printGameUsage();
-        break;
-      case 's':
-        system("cls");
-        move(characterPositionX, characterPositionY, characterPositionX, characterPositionY + 1);
-        _map->print();
-        game->printGameUsage();
-        break;
       case 'c':
         system("cls");
         character->playerInfo();
@@ -537,8 +498,7 @@ Character* Game::getCharacter() {
 }
 
 void Game::printGameUsage() {
-	cout << "Use r to play a round" << endl;
-	cout << "Use w, a, s, d to move your character." << endl;
+  cout << "Use r to play a round" << endl;
   cout << "Use c to display the character statistics." << endl;
   cout << "Use i to display the items on the character." << endl;
   cout << "Use u to unequip an item from the character." << endl;
@@ -702,6 +662,9 @@ void Game::gameTurns()
 	setAvatarsOnMap();
 	for (int i = 0; i < avatarsOnMap.size(); i++)
 	{
+		screen::setCursorPosition(screen::COORD_INI_OBSERVER_SCREEN);
+		screen::clsObserver();
+		cout << "It is the " << avatarsOnMap[i]->getCharacter()->getCharacterType() << "'s turn" << endl;
 		avatarsOnMap[i]->execute(gameState);
 		setGameState();
 		if (gameState->getMainCharacter()->getHitPoints() < 0)
@@ -711,6 +674,8 @@ void Game::gameTurns()
 			stop();
 			break;
 		}
+
+		system("pause");
 	}
 	
 }

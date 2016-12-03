@@ -57,9 +57,13 @@ void HumanStrategyN::execute(GameStateN* inputGameState, Character* c){
 		cout << "Current hit points for character " << mainCharacter->getHitPoints();
 		combat(mainCharacter, foundMonster);
 		cout << "Current hit points for character " << mainCharacter->getHitPoints();
-	} else if (foundChest != nullptr){
+	}
+	else if (foundChest != nullptr){
 		openChest(mainCharacter, foundChest, map);
 	}
+	else
+		cout << "Your path is clear.";
+	system("pause");
 }
 
 bool HumanStrategyN::openChest(Character* c, Chest* chest, Map* m) {
@@ -133,7 +137,7 @@ bool HumanStrategyN::moveHuman(Coord2D* inputCoord, Map* inputMap, Character* ma
 	}
 
 	else{
-		cout << "You cannot move to the location specified";
+		cout << "You cannot move to the location specified" <<endl;
 		return false;
 	}
 

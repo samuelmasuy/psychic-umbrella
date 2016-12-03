@@ -47,10 +47,9 @@ void StrategyN::move(Coord2D* targetLocation, Map* inputMap, Character* mover){
 }
 
 bool StrategyN::combat(Character* fighter, Character* monster){
-	Monster *pMonster = (Monster *)&monster;
 	int attacksPerRound = fighter->getAttacksPerRound();
 	int fighterDamage = fighter->getDamageBonus();
-	int monsterDamage = pMonster->getMonsterDamage();
+	int monsterDamage = monster->getDamageBonus();
 	int result = 0;
 	// create a new instance of DiceRoller
 	DiceRoller* dice_roller = new DiceRoller();
@@ -68,13 +67,13 @@ bool StrategyN::combat(Character* fighter, Character* monster){
 		for (int i = 1; i < attacksPerRound + 1; i++) {
 			cout << "Round " << i << endl;
 			cout << "You hit the monster for: " << fighterDamage << endl;
-			pMonster->hit(fighterDamage);
+			monster->hit(fighterDamage);
 			cout << "Monster hits you for: " << monsterDamage << endl;
 			fighter->hit(monsterDamage);
 			system("pause");
 		}
 		system("cls");
-		monster->setHitPoints(pMonster->getHitPoints());
+		monster->setHitPoints(monster->getHitPoints());
 		cout << "Current hit points for monster " << monster->getHitPoints();
 		return true;
 	}
