@@ -33,6 +33,10 @@ _map->print();
   enemiesDefeated = false;
   enemiesDefeated = (_map->countMonsters() == 0);
 
+  int exitR = 0;
+  int exitC = 0;
+  _map->GetExitPos(exitR, exitC);
+
   screen::clsObserver();
   screen::setCursorPosition(screen::COORD_INI_OBSERVER_SCREEN);
   printGameUsage();
@@ -206,7 +210,14 @@ _map->print();
 		  _map->print();
 		  screen::setCursorPosition(screen::COORD_INI_OBSERVER_SCREEN);
 		  screen::clsObserver();
-		  game->printGameUsage();
+
+		  if (character->getPositionX() == exitR && character->getPositionY() == exitC && _map->countMonsters() == 0) {
+			  stop();
+			  return;
+		  }
+		  else {
+			  game->printGameUsage();
+		  }
 		  break;
       case 'q':
 		  screen::clsObserver();
@@ -730,11 +741,12 @@ void Game::gameTurns()
 		_map->print();
 		screen::setCursorPosition(screen::COORD_INI_OBSERVER_SCREEN);
 		screen::clsObserver();
-		cout << "It is the " << avatarsOnMap[i]->getCharacter()->getCharacterType() << "'s turn" << endl;
-		system("pause");
+		//cout << "It is the " << avatarsOnMap[i]->getCharacter()->getCharacterType() << "'s turn" << endl;
+		//system("pause");
 		avatarsOnMap[i]->execute(gameState);
 		system("pause");
 		setGameState();
+
 		if (gameState->getMainCharacter()->getHitPoints() <= 0)
 		{
 			cout << "You died in battle. RIP\n";

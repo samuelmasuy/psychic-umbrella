@@ -194,6 +194,8 @@ int main(int argc, char const* argv[]) {
 
   vector<int> levels;
   theCampaign.GetLevels(levels);
+  GameBuilder* gb = nullptr;
+  Game* game = nullptr;
   for (unsigned int i = 0; i < levels.size(); i++) {
     Map map;
     MapDirector d;
@@ -209,10 +211,10 @@ int main(int argc, char const* argv[]) {
     // get the map from director
     d.GetMap(map);
 
-    GameBuilder* gb = new GameBuilder();
+    gb = new GameBuilder();
     gb->constructGame();
     gb->setCharacterAndMap(character, &map);
-    Game* game = gb->getGame();
+    game = gb->getGame();
 	screen::clsObserver();
 
 	cout << "The level is ready" << endl;
@@ -221,12 +223,11 @@ int main(int argc, char const* argv[]) {
 	screen::clsObserver();
 
     game->play();
-    delete game;
-    delete gb;
     cout << "Map Completed! Press (y) to continue to the next phase or (n) to exit!-->";
     cin >> choice;
     if (choice == 'y') {
 	  screen::clsObserver();
+	  screen::clsGame();
       continue;
     }
     if (choice == 'n') {
@@ -235,6 +236,8 @@ int main(int argc, char const* argv[]) {
 
   }
   cout << "Game over!!! Press any key and then enter to exit! -->";
+	delete game;
+	delete gb;
   string aux;
   cin >> aux;
   return 0;

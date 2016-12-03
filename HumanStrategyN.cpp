@@ -110,7 +110,7 @@ bool HumanStrategyN::openChest(Character* c, Chest* chest, Map* m) {
 	if (choice == 'y') {
 		c = new ItemDecorator(c, item);
 		if (Logger::isOn()) Logger::fout() << "Item Equipped is:" << item->getType() << endl;
-		m->setCell(chest->getPositionX(), chest->getPositionY(), CHAR_EMPTY);
+		m->setCell(chest->getPositionY(), chest->getPositionX(), CHAR_EMPTY);
 		return true;
 	}
 	return false;
