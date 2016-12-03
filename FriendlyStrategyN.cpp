@@ -41,7 +41,9 @@ void FriendlyStrategyN::execute(GameStateN* inputGameState, Character* monster){
 		}
 	}while (true);
 
-
+	screen::setCursorPosition(screen::COORD_INI_GAME_SCREEN);
+	screen::clsGame();
+	screen::setCursorPosition(screen::COORD_INI_OBSERVER_SCREEN);
 }
 
 bool FriendlyStrategyN::moveMonster(Coord2D* inputCoord, Map* inputMap, Character* monster){

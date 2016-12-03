@@ -35,6 +35,10 @@ void HumanStrategyN::execute(GameStateN* inputGameState, Character* c){
 
 	} while (true);
 
+	screen::setCursorPosition(screen::COORD_INI_GAME_SCREEN);
+	screen::clsGame();
+	map->print();
+	screen::setCursorPosition(screen::COORD_INI_OBSERVER_SCREEN);
 	
 	Character* foundMonster = monsterPresence(mainCharacter, monsters, map);
 	Chest* foundChest = chestPresence(mainCharacter, chests, map);
@@ -45,24 +49,34 @@ void HumanStrategyN::execute(GameStateN* inputGameState, Character* c){
 		cout << "Do you want to (a)ttack or open the (c)hest?";
 		cin >> action;
 		if (action == 'a') {
-			cout << "Current hit points for monster " << foundMonster->getHitPoints();
-			cout << "Current hit points for character " << mainCharacter->getHitPoints();
+			cout << "Current hit points for monster " << foundMonster->getHitPoints() << endl;
+			cout << "Current hit points for character " << mainCharacter->getHitPoints() << endl;
 			combat(mainCharacter, foundMonster);
-			cout << "Current hit points for character " << mainCharacter->getHitPoints();
+			cout << "Current hit points for character " << mainCharacter->getHitPoints() << endl;
 		} else {
 			openChest(mainCharacter, foundChest, map);
 		}
 	} else if (foundMonster != nullptr){
-		cout << "Current hit points for monster " << foundMonster->getHitPoints();
-		cout << "Current hit points for character " << mainCharacter->getHitPoints();
-		combat(mainCharacter, foundMonster);
-		cout << "Current hit points for character " << mainCharacter->getHitPoints();
+		cout << "Current hit points for monster " << foundMonster->getHitPoints() << endl;
+		cout << "Current hit points for character " << mainCharacter->getHitPoints() << endl;
+		cout << "Do you want to (a)ttack or do (n)othing?";
+		cin >> action;
+		if (action == 'a') {
+			combat(mainCharacter, foundMonster);
+			cout << endl << "Current hit points for character " << mainCharacter->getHitPoints() << endl;
+		}
 	}
 	else if (foundChest != nullptr){
+		cout << "Do you want to (o)pen the chest or do (n)othing?";
+		cin >> action;
+		if (action == 'a') {
+			combat(mainCharacter, foundMonster);
+		}
 		openChest(mainCharacter, foundChest, map);
 	}
-	else
+	else {
 		cout << "Your path is clear.";
+	}
 	system("pause");
 }
 

@@ -60,6 +60,7 @@ bool StrategyN::combat(Character* fighter, Character* monster){
 
 		fighterDamage += result;
 
+		cout << endl;
 		cout << "  / _ /_  __/_  __/ _ |/ ___/ //_/ /" << endl;
 		cout << " / __ |/ /   / / / __ / /__/ ,< /_/ " << endl;
 		cout << "/_/ |_/_/   /_/ /_/ |_\\___/_/|_(_)  " << endl << endl;

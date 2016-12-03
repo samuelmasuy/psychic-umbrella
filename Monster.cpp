@@ -8,7 +8,6 @@
 #include "Monster.h"
 
 Monster::Monster() {
-  currentHitPoints = 10;
   positionX = 0;
   positionY = 0;
   monsterType = "monster";
@@ -17,7 +16,6 @@ Monster::Monster() {
 }
 
 Monster::Monster(int hp, int posX, int posY, int lvl, int dam) {
-  currentHitPoints = hp;
   positionX = posX;
   positionY = posY;
   monsterType = "monster";
@@ -32,35 +30,10 @@ void Monster::setCharacterType(string type) {
   monsterType = type;
 }
 
-void Monster::hit(int damage) {
-  currentHitPoints = currentHitPoints - damage;
-}
-
-void Monster::hpChange() {
-  currentHitPoints = 10 + (level - 1) * (10 / 2 + 1);
-}
-
 void Monster::levelUp() {
   level++;
 }
 
 void Monster::setLevel(int lvl) {
   level = lvl;
-}
-
-int Monster::getMonsterDamage() {
-  if(level <= 5)
-    return 7;
-  else if (level <= 10)
-    return 14;
-  else if (level <= 15)
-    return 21;
-  else if (level <= 20)
-    return 28;
-  else
-    return 35;
-}
-
-void Monster::setMonsterDamage() {
-  damage = getMonsterDamage();
 }

@@ -3,6 +3,7 @@
 #include "ItemDecorator.h"
 #include "DiceRoller.h"
 #include "Monster.h"
+#include "Screen.h"
 
 
 

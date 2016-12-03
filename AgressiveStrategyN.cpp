@@ -22,11 +22,20 @@ void AgressiveStrategyN::execute(GameStateN* inputGameState, Character*  monster
 	Coord2D* moveTo = identifyTargetCell(mainCharacter->getPositionX(), mainCharacter->getPositionY(), map, CHAR_EMPTY);
 
 	if (moveTo == nullptr)
-		cout << "Damn you are surrounded!" << endl;
+		cout << "You are surrounded!" << endl;
 	else
 	{
 		moveMonster(moveTo, map, theMonster);
+		screen::setCursorPosition(screen::COORD_INI_GAME_SCREEN);
+		screen::clsGame();
+		map->print();
+		screen::setCursorPosition(screen::COORD_INI_OBSERVER_SCREEN);
+
+		cout << "Current hit points for monster " << theMonster->getHitPoints() << endl;
+		cout << "Current hit points for character " << mainCharacter->getHitPoints() << endl;
 		combat(mainCharacter, theMonster);
+		cout << "Current hit points for monster " << theMonster->getHitPoints() << endl;
+		cout << "Current hit points for character " << mainCharacter->getHitPoints() << endl;
 	}
 
 }

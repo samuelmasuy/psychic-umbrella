@@ -15,15 +15,10 @@ public:
 	Monster(int, int, int, int, int);
 	virtual ~Monster();
 	void setCharacterType(string type);
-	void hit(int);
-	void hpChange();
 	void levelUp();
 	void setLevel(int);
-	void setMonsterDamage();
-	int getMonsterDamage();
 
 private:
-	int currentHitPoints;
 	int level;
 	int damage;
 	string monsterType;
