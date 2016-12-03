@@ -29,7 +29,9 @@ void HumanStrategyN::execute(GameStateN* inputGameState, Character* c){
 		cin >> yCoordinate;	
 		moveTo->y = yCoordinate;
 		cout << endl;
-		moveHuman(moveTo, map, mainCharacter, monsters);
+		if (moveHuman(moveTo, map, mainCharacter, monsters)) {
+			break;
+		}
 
 	} while (true);
 

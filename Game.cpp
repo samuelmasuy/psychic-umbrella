@@ -23,6 +23,10 @@ void Game::play() {
   _map->reinitializeMap();
   initializeCharacterPositionOnMap();
 
+screen::clsGame();
+screen::setCursorPosition(screen::COORD_INI_GAME_SCREEN);
+_map->print();
+
   int characterPositionX = character->getPositionX();
   int characterPositionY = character->getPositionY();
   enemiesDefeated = false;
@@ -172,10 +176,13 @@ void Game::play() {
         game->printGameUsage();
         break;
 	  case 'r':
-
+		  screen::setCursorPosition(screen::COORD_INI_GAME_SCREEN);
+		  screen::clsGame();
+		  _map->print();
 		  screen::setCursorPosition(screen::COORD_INI_OBSERVER_SCREEN);
 		  screen::clsObserver();
 		  gameTurns();
+		  system("pause");
 		  screen::setCursorPosition(screen::COORD_INI_GAME_SCREEN);
 		  screen::clsGame();
 		  _map->print();
