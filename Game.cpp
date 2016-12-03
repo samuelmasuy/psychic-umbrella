@@ -348,8 +348,8 @@ void Game::loadCharacter() {
     ifs >> ability;
     character->setAbilityScores(i, ability);
   }
-  Item* itemFromFile = nullptr;
-  Enhancement* itemEnhacement = nullptr;
+  Item* itemFromFile = new Item();
+  Enhancement* itemEnhacement = new Enhancement();
   ifs >> equippedSize;
   if (equippedSize > 0) {
     for (int i = 0; i < equippedSize; i++) {		//save equipped items
@@ -357,8 +357,7 @@ void Game::loadCharacter() {
 
       ifs >> type;
       itemFromFile->setType(type);
-      ifs >> bonus;
-
+    //  ifs >> bonus;
       ifs >> influenceSize;
       for (int j = 0; j < influenceSize; j++) {
         ifs >> type;
@@ -366,6 +365,7 @@ void Game::loadCharacter() {
       }
       itemEnhacement = new Enhancement(type, bonus);
       itemFromFile->setInfluences(*itemEnhacement);
+	  character = new ItemDecorator(character, itemFromFile);
     }
 
   }
