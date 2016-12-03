@@ -100,15 +100,7 @@ void HumanStrategyN::execute(GameStateN* inputGameState, Character* c){
 	}
 	else {
 		cout << "Your path is clear.";
-		// in this moment, we can check the exit
-		/*int x, y;
-		map->GetExitPos(y, x);
-		if (mainCharacter->getPositionX() == x && mainCharacter->getPositionY() == y)
-		{
-			// go next level...
-			cout << "level completed" << endl; // we will remove it later...just for a test...
-			
-		}*/
+	
 	}
 	system("pause");
 }
@@ -184,7 +176,6 @@ bool HumanStrategyN::moveHuman(Coord2D* inputCoord, Map* inputMap, Character* ma
 		if (checkCell(inputCoord, inputMap, CHAR_EXIT))
 		{
 			move(inputCoord, inputMap, mainPlayer, CHAR_PLAYER);
-			// who called moveHuman ??, when we put in coords i think, check
 		}
 		else
 			move(inputCoord, inputMap, mainPlayer, CHAR_PLAYER);
