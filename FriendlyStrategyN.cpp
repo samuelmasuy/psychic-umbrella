@@ -18,8 +18,8 @@ void FriendlyStrategyN::execute(GameStateN* inputGameState, Character* monster){
 	vector<Character*> monsters = inputGameState->getMonsters();
 	vector<Chest*> chests = inputGameState->getChests();
 	
-	cout << "I am a friendly monster, you go your way. I will go mine";
-
+	cout << "I am a friendly monster, you go your way. I will go mine" << endl;
+	system("pause");
 	srand(time(NULL));
 
 	/* generate secret number between 1 and 10: */
@@ -27,7 +27,7 @@ void FriendlyStrategyN::execute(GameStateN* inputGameState, Character* monster){
 	Coord2D* coordinates = new Coord2D(0, 0);
 
 	bool stationary = true;
-	while (stationary){
+	do{
 
 		
 		
@@ -35,8 +35,11 @@ void FriendlyStrategyN::execute(GameStateN* inputGameState, Character* monster){
 		coordinates->x = rand() % map->GetCols() + 1;
 		coordinates->y = rand() % map->GetRows() + 1;
 
-		stationary = moveMonster(coordinates, map, theMonster);
-	}
+		if (moveMonster(coordinates, map, theMonster))
+		{
+			break;
+		}
+	}while (true);
 
 
 }
@@ -50,17 +53,18 @@ bool FriendlyStrategyN::moveMonster(Coord2D* inputCoord, Map* inputMap, Characte
 		|| inputMap->GetCell(inputCoord->x - 1, inputCoord->y) == CHAR_DOOR
 		|| inputMap->GetCell(inputCoord->x - 1, inputCoord->y + 1) == CHAR_DOOR)
 	{
-		return true;
+		return false;
 	}
-	
+	char monsterType = inputMap->GetCell(monster->getPositionX(), monster->getPositionY());
+
 	if (checkCell(inputCoord, inputMap, CHAR_EMPTY) || checkCell(inputCoord, inputMap, CHAR_ENTRY) || checkCell(inputCoord, inputMap, CHAR_DOOR))
 	{
 
-		move(inputCoord, inputMap, monster);
-		return false;
+		move(inputCoord, inputMap, monster, monsterType);
+		return true;
 	}
 
 	else {
-		return true;
+		return false;
 	}
 }

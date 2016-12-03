@@ -38,10 +38,10 @@ Coord2D* StrategyN::identifyTargetCell(int inputX, int inputY, Map* inputMap, ch
 	return identifiedCoord;
 }
 
-void StrategyN::move(Coord2D* targetLocation, Map* inputMap, Character* mover){
+void StrategyN::move(Coord2D* targetLocation, Map* inputMap, Character* mover, char type){
 		char oldCellType = inputMap->GetCell(mover->getPositionX(), mover->getPositionY());
 		inputMap->fillCell(mover->getPositionX(), mover->getPositionY(), CHAR_EMPTY);
-		inputMap->fillCell(targetLocation->x, targetLocation->y, oldCellType);
+		inputMap->fillCell(targetLocation->x, targetLocation->y, type);
 		mover->setPositionX(targetLocation->x);
 		mover->setPositionY(targetLocation->y);
 }

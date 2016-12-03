@@ -662,10 +662,14 @@ void Game::gameTurns()
 	setAvatarsOnMap();
 	for (int i = 0; i < avatarsOnMap.size(); i++)
 	{
+		screen::setCursorPosition(screen::COORD_INI_GAME_SCREEN);
+		screen::clsGame();
+		_map->print();
 		screen::setCursorPosition(screen::COORD_INI_OBSERVER_SCREEN);
 		screen::clsObserver();
 		cout << "It is the " << avatarsOnMap[i]->getCharacter()->getCharacterType() << "'s turn" << endl;
 		avatarsOnMap[i]->execute(gameState);
+		system("pause");
 		setGameState();
 		if (gameState->getMainCharacter()->getHitPoints() < 0)
 		{
@@ -675,7 +679,7 @@ void Game::gameTurns()
 			break;
 		}
 
-		system("pause");
+		
 	}
 	
 }

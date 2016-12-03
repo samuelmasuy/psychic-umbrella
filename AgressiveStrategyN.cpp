@@ -42,11 +42,12 @@ bool AgressiveStrategyN::moveMonster(Coord2D* inputCoord, Map* inputMap, Charact
 	{
 		return true;
 	}
+	char monsterType = inputMap->GetCell(monster->getPositionX(), monster->getPositionY());
 
 	if (checkCell(inputCoord, inputMap, CHAR_EMPTY) || checkCell(inputCoord, inputMap, CHAR_ENTRY) || checkCell(inputCoord, inputMap, CHAR_DOOR))
 	{
 
-		move(inputCoord, inputMap, monster);
+		move(inputCoord, inputMap, monster, monsterType);
 		return false;
 	}
 
