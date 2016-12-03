@@ -1,7 +1,3 @@
-/**
-* @file Game.cpp
-* @brief Implementation of the Game walkthought.
-*/
 #include "Game.h"
 
 void Game::play() {
@@ -722,6 +718,9 @@ void Game::gameTurns()
 	setAvatarsOnMap();
 	for (int i = 0; i < avatarsOnMap.size(); i++)
 	{
+		if (avatarsOnMap[i]->getCharacter()->getHitPoints() <= 0) {
+			continue;
+		}
 		screen::setCursorPosition(screen::COORD_INI_GAME_SCREEN);
 		screen::clsGame();
 		_map->print();
@@ -731,17 +730,22 @@ void Game::gameTurns()
 		avatarsOnMap[i]->execute(gameState);
 		system("pause");
 		setGameState();
-		if (gameState->getMainCharacter()->getHitPoints() < 0)
+		if (gameState->getMainCharacter()->getHitPoints() <= 0)
 		{
 			cout << "You died in battle. RIP\n";
-			cout << "GameOver";
+			cout << " .oOOOo.     Oo    Oo      oO o.OOoOoo       .oOOOo.  o      'O o.OOoOoo `OooOOo.  " << endl;
+			cout << ".O     o    o  O   O O    o o  O            .O     o. O       o  O        o     `o " << endl;
+			cout << "o          O    o  o  o  O  O  o            O       o o       O  o        O      O " << endl;
+			cout << "O         oOooOoOo O   Oo   O  ooOO         o       O o       o  ooOO     o     .O " << endl;
+			cout << "O   .oOOo o      O O        o  O            O       o O      O'  O        OOooOO'  " << endl;
+			cout << "o.      O O      o o        O  o            o       O `o    o    o        o    o   " << endl;
+			cout << " O.    oO o      O o        O  O            `o     O'  `o  O     O        O     O  " << endl;
+			cout << "  `OooO'  O.     O O        o ooOooOoO       `OoooO'    `o'     ooOooOoO  O      o " << endl;
+			cout << "                                                                                   " << endl;
 			stop();
 			break;
 		}
-
-		
 	}
-	
 }
 
 void Game::setAvatarsOnMap()
@@ -760,7 +764,6 @@ void Game::setAvatarsOnMap()
 			monsterStrategy = new AgressiveStrategyN();
 
 		avatarsOnMap.push_back(new AvatarSprite(gameState->getMonsters()[i], monsterStrategy));
-		
 	}
 
 }
@@ -770,7 +773,7 @@ void Game::setGameState()
 	createMonstersFromMap(monsters);
 	vector<Chest*> chests;
 	createChestsFromMap(chests);
-	
+
 	gameState = new GameStateN();
 	gameState->setChests(chests);
 	gameState->setMonsters(monsters);

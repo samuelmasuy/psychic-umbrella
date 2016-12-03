@@ -63,9 +63,16 @@ bool StrategyN::combat(Character* fighter, Character* monster){
 		fighterDamage += result;
 
 		cout << endl;
-		cout << "  / _ /_  __/_  __/ _ |/ ___/ //_/ /" << endl;
-		cout << " / __ |/ /   / / / __ / /__/ ,< /_/ " << endl;
-		cout << "/_/ |_/_/   /_/ /_/ |_\\___/_/|_(_)  " << endl << endl;
+		cout << "    Oo    oOoOOoOOo oOoOOoOOo    Oo     .oOOOo. `o    O  " << endl;
+		cout << "   o  O       o         o       o  O   .O     o  o   O   " << endl;
+		cout << "  O    o      o         o      O    o  o         O  O    " << endl;
+		cout << " oOooOoOo     O         O     oOooOoOo o         oOo     " << endl;
+		cout << " o      O     o         o     o      O o         o  o    " << endl;
+		cout << " O      o     O         O     O      o O         O   O   " << endl;
+		cout << " o      O     O         O     o      O `o     .o o    o  " << endl;
+		cout << " O.     O     o'        o'    O.     O  `OoooO'  O     O " << endl;
+		cout << "                                                         " << endl;
+		cout << "                                                         " << endl;
 
 		for (int i = 1; i < attacksPerRound + 1; i++) {
 			cout << "Round " << i << endl;

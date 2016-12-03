@@ -46,10 +46,17 @@ int main(int argc, char const* argv[]) {
   screen::cls();
 
   screen::setCursorPosition(screen::COORD_INI_GAME_SCREEN);
-  cout << "   _                                                                      " << endl;
-  cout << "  | \     ._   _   _   _  ._   _    _. ._   _|    _| ._ _.  _   _  ._   _ " << endl;
-  cout << "  |_/ |_| | | (_| (/_ (_) | | _>   (_| | | (_|   (_| | (_| (_| (_) | | _> " << endl;
-  cout << "               _|                                           _|            " << endl;
+
+  cout << "o.OOOo.                                                                        o      o.OOOo.                                          " << endl;
+  cout << " O    `o                                                                      O        O    `o                                         " << endl;
+  cout << " o      O                                                                     o        o      O                                        " << endl;
+  cout << " O      o                                                                     o        O      o                                        " << endl;
+  cout << " o      O O   o  'OoOo. .oOoO .oOo. .oOo. 'OoOo. .oOo       .oOoO' 'OoOo. .oOoO        o      O `OoOo. .oOoO' .oOoO .oOo. 'OoOo. .oOo  " << endl;
+  cout << " O      o o   O   o   O o   O OooO' O   o  o   O `Ooo.      O   o   o   O o   O        O      o  o     O   o  o   O O   o  o   O `Ooo. " << endl;
+  cout << " o    .O' O   o   O   o O   o O     o   O  O   o     O      o   O   O   o O   o        o    .O'  O     o   O  O   o o   O  O   o     O " << endl;
+  cout << " OooOO'   `OoO'o  o   O `OoOo `OoO' `OoO'  o   O `OoO'      `OoO'o  o   O `OoO'o       OooOO'    o     `OoO'o `OoOo `OoO'  o   O `OoO' " << endl;
+  cout << "                            O                                                                                     O                    " << endl;
+  cout << "                         OoO'                                                                                  OoO'                    " << endl;
 
   screen::setCursorPosition(screen::COORD_INI_OBSERVER_SCREEN);
 
