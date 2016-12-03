@@ -8,5 +8,5 @@ ElfBuilder::~ElfBuilder() {
 }
 
 void ElfBuilder::buildType() {
-  myMonster->setCharacterType("Elt");
+  myMonster->setCharacterType("Elf");
 }
