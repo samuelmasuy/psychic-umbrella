@@ -32,9 +32,6 @@ void FriendlyStrategyN::execute(GameStateN* inputGameState, Character* monster){
 
 	bool stationary = true;
 	do{
-
-		
-		
 		// uniformly distributed in range (1, to # of Cols)
 		coordinates->x = rand() % map->GetCols() + 1;
 		coordinates->y = rand() % map->GetRows() + 1;
@@ -47,6 +44,7 @@ void FriendlyStrategyN::execute(GameStateN* inputGameState, Character* monster){
 
 	screen::setCursorPosition(screen::COORD_INI_GAME_SCREEN);
 	screen::clsGame();
+	map->print();
 	screen::setCursorPosition(screen::COORD_INI_OBSERVER_SCREEN);
 }
 
