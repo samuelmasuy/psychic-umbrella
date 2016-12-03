@@ -143,7 +143,7 @@ int MapBuilderB::LoadMap(const char *filename, int levelNumber) {
     if ((i != m_i0 || j != m_j0) && (i != m_i1 || j != m_j1) && (i != m_iPlayer || j != m_jPlayer)) {
       // adding a wall or enemy
       if (rand() & 1)
-        m_scene[i][j] = CHAR_CHEST;
+        m_scene[i][j] = NULL;
 
     }
   }
