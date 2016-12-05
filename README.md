@@ -4,11 +4,11 @@
 
 ## Authors
 
-* Cristian Ardelean 27498691
-* Nadia Sheikh 25644151
-* Ahamd Baiazid 27393016
-* Asma Laaribi 29326197
-* Samuel Masuy 26590624
+* Cristian Ardelean
+* Nadia Sheikh
+* Ahamd Baiazid
+* Asma Laaribi
+* Samuel Masuy
 
 ## Usage
 
