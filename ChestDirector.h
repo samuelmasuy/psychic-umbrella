@@ -10,9 +10,9 @@
  */
 class ChestDirector {
  public:
-   /**
-    * @brief Default Constructor for ChestDirector
-    */
+  /**
+   * @brief Default Constructor for ChestDirector
+   */
   ChestDirector();
 
   /**

@@ -10,18 +10,18 @@
 namespace std {
 
 class Monster: public Fighter {
-public:
-	Monster();
-	Monster(int, int, int, int, int);
-	virtual ~Monster();
-	void setCharacterType(string type);
-	void levelUp();
-	void setLevel(int);
+ public:
+  Monster();
+  Monster(int, int, int, int, int);
+  virtual ~Monster();
+  void setCharacterType(string type);
+  void levelUp();
+  void setLevel(int);
 
-private:
-	int level;
-	int damage;
-	string monsterType;
+ private:
+  int level;
+  int damage;
+  string monsterType;
 
 };
 

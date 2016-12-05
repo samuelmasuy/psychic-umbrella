@@ -11,7 +11,7 @@
 #include <map>
 #include <stdio.h>      /* printf, scanf, puts, NULL */
 #include <stdlib.h>     /* srand, rand */
-#include <time.h>  
+#include <time.h>
 #include "Item.h"
 #include "Character.h"
 #include "Map.h"
@@ -43,86 +43,86 @@ using namespace std;
 * characters and the map.
 */
 class Game {
-public:
-	/**
-	* @brief Start a new game.
-	*/
-	void play();
+ public:
+  /**
+  * @brief Start a new game.
+  */
+  void play();
 
-	/**
-	* @brief Stop a new game.
-	*/
-	void stop();
+  /**
+  * @brief Stop a new game.
+  */
+  void stop();
 
-	/**
-	* @brief Set map for the game play.
-	*
-	* @param Map
-	*/
-	void setMap(Map*);
+  /**
+  * @brief Set map for the game play.
+  *
+  * @param Map
+  */
+  void setMap(Map*);
 
-	/**
-	* @brief Set the character for the game play.
-	*
-	* @param Character
-	*/
-	void setCharacter(Character*);
+  /**
+  * @brief Set the character for the game play.
+  *
+  * @param Character
+  */
+  void setCharacter(Character*);
 
-	/**
-	* @brief Get map of the game.
-	*
-	* @return pointer to a Map.
-	*/
-	Map* getMap();
+  /**
+  * @brief Get map of the game.
+  *
+  * @return pointer to a Map.
+  */
+  Map* getMap();
 
-	/**
-	* @brief Get character of the game.
-	*
-	* @return pointer to a character.
-	*/
-	Character* getCharacter();
+  /**
+  * @brief Get character of the game.
+  *
+  * @return pointer to a character.
+  */
+  Character* getCharacter();
 
-	/**
-	* @brief Print the game usage.
-	*/
-	void printGameUsage();
-	void gameTurns();
-	void setAvatarsOnMap();
-	void setGameState();
-	void saveCharacter();
-	void loadCharacter();
-private:
-	Map* _map;
-	Character* character;
-	Game* game;
-	vector<AvatarSprite*> avatarsOnMap;
-	GameStateN* gameState;
-	bool enemiesDefeated;
-	void initializeCharacterPositionOnMap();
-	void getCharacterEquipedItems(vector<Item*> &equipedItems);
-	void createChestsFromMap(vector<Chest*> &chest);
-	void createMonstersFromMap(vector<Character*> &monsters);
-	void move(int, int, int, int);
+  /**
+  * @brief Print the game usage.
+  */
+  void printGameUsage();
+  void gameTurns();
+  void setAvatarsOnMap();
+  void setGameState();
+  void saveCharacter();
+  void loadCharacter();
+ private:
+  Map* _map;
+  Character* character;
+  Game* game;
+  vector<AvatarSprite*> avatarsOnMap;
+  GameStateN* gameState;
+  bool enemiesDefeated;
+  void initializeCharacterPositionOnMap();
+  void getCharacterEquipedItems(vector<Item*> &equipedItems);
+  void createChestsFromMap(vector<Chest*> &chest);
+  void createMonstersFromMap(vector<Character*> &monsters);
+  void move(int, int, int, int);
 
 
-	/**
-	* @brief Open the ndoor
-	*
-	* @return true if door was opened
-	*/
-	bool openDoor();
+  /**
+  * @brief Open the ndoor
+  *
+  * @return true if door was opened
+  */
+  bool openDoor();
 
-	/**
-	* @brief Open a chest
-	*
-	* @return true if chest was opened
-	*/
-	bool openChest();
-	/**
-	* @brief Fight with a monster
-	*/
-	void fightMonster();
-	ItemDirector* id;
+  /**
+  * @brief Open a chest
+  *
+  * @return true if chest was opened
+  */
+  bool openChest();
+  /**
+  * @brief Fight with a monster
+  */
+  void fightMonster();
+  ItemDirector* id;
 };
 
 /**

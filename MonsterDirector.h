@@ -22,8 +22,8 @@ class MonsterDirector {
   }
   void constructMonster() {
 
-	  myMonsterBuilder->createNewMonster();
-	  myMonsterBuilder->buildType();
+    myMonsterBuilder->createNewMonster();
+    myMonsterBuilder->buildType();
   }
 
  private:

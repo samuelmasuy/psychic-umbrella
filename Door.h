@@ -9,12 +9,12 @@
  */
 class Door {
  public:
-   /**
-    * @brief Constructor
-    */
+  /**
+   * @brief Constructor
+   */
   Door();
   /**
-   * @brief place Door 
+   * @brief place Door
    *
    * @param int positionX
    * @param int positionY

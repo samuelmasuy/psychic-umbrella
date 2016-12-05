@@ -9,9 +9,9 @@
 #include "CharacterBuilder.h"
 
 class TankBuilder: public CharacterBuilder {
-public:
-    TankBuilder();
-    virtual ~TankBuilder();
-    virtual void buildAbilityMods();
-    virtual void buildType();
+ public:
+  TankBuilder();
+  virtual ~TankBuilder();
+  virtual void buildAbilityMods();
+  virtual void buildType();
 };

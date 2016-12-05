@@ -10,11 +10,11 @@
 
 class GameBuilder {
  public:
-   /**
-    * @brief Get the game, once it has been constructed
-    *
-    * @return a game.
-    */
+  /**
+   * @brief Get the game, once it has been constructed
+   *
+   * @return a game.
+   */
   Game* getGame();
   /**
    * @brief Create a new Game.

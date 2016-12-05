@@ -10,9 +10,9 @@
  */
 class DoorDirector {
  public:
-   /**
-    * @brief Default Constructor for DoorDirector
-    */
+  /**
+   * @brief Default Constructor for DoorDirector
+   */
   DoorDirector();
 
   /**

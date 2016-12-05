@@ -12,13 +12,17 @@
 namespace std {
 
 class MonsterBuilder {
-public:
-	Fighter* getMonster(){return myMonster;}
-	void createNewMonster(){ myMonster = new Monster;}
-	virtual void buildType() = 0;
+ public:
+  Fighter* getMonster() {
+    return myMonster;
+  }
+  void createNewMonster() {
+    myMonster = new Monster;
+  }
+  virtual void buildType() = 0;
 
-protected:
-	Fighter* myMonster;
+ protected:
+  Fighter* myMonster;
 };
 
 } /* namespace std */

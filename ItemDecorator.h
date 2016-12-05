@@ -42,13 +42,13 @@ class ItemDecorator: public CharacterDecorator {
   bool isEquiped(string s);
 
  private:
-	 Item *i;
-	 bool isEmpty;
-	 bool isWearing;
-	 int intelligence;
-	 int wisdom;
-	 int strength;
-	 int constitution;
-	 int charisma;
-	 int dexterity;
+  Item *i;
+  bool isEmpty;
+  bool isWearing;
+  int intelligence;
+  int wisdom;
+  int strength;
+  int constitution;
+  int charisma;
+  int dexterity;
 };

@@ -10,9 +10,9 @@
  */
 class Chest {
  public:
-   /**
-    * @brief Constructor
-    */
+  /**
+   * @brief Constructor
+   */
   Chest();
   /**
    * @brief place chest with specific items with position

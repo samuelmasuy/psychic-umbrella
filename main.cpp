@@ -35,13 +35,12 @@ int main(int argc, char const* argv[]) {
   CharacterBuilder* cb = nullptr;
 
   CharacterDirector* cd = new CharacterDirector();
-  while (!screen::checkConsoleSize(150, 250))
-  {
-	  std::cout << "Console buffer needs to be set to the following settings: " << std::endl;
-	  std::cout << "Screen Buffer Size: " << std::endl;
-	  std::cout << "\tWidth: 150" << std::endl;
-	  std::cout << "\tHeight: 250" << std::endl;
-	  system("pause");
+  while (!screen::checkConsoleSize(150, 250)) {
+    std::cout << "Console buffer needs to be set to the following settings: " << std::endl;
+    std::cout << "Screen Buffer Size: " << std::endl;
+    std::cout << "\tWidth: 150" << std::endl;
+    std::cout << "\tHeight: 250" << std::endl;
+    system("pause");
   }
   screen::cls();
 
@@ -130,7 +129,7 @@ int main(int argc, char const* argv[]) {
     if (choice == 'y') {
       item->saveItem();
     }
-	screen::clsObserver();
+    screen::clsObserver();
   }
 
   cout << "Would you like your character to be equiped with this item? ('y'/'n'): ";
@@ -189,7 +188,7 @@ int main(int argc, char const* argv[]) {
     if (theCampaign.Load(campaignFilename.c_str()) == 0) {
       break;
     }
-	screen::clsObserver();
+    screen::clsObserver();
   } while (1);
 
   vector<int> levels;
@@ -215,20 +214,20 @@ int main(int argc, char const* argv[]) {
     gb->constructGame();
     gb->setCharacterAndMap(character, &map);
     game = gb->getGame();
-	screen::clsObserver();
+    screen::clsObserver();
 
-	cout << "The level is ready" << endl;
+    cout << "The level is ready" << endl;
 
-	system("pause");
-	screen::clsObserver();
+    system("pause");
+    screen::clsObserver();
 
     game->play();
     cout << "Map Completed! Press (y) to continue to the next phase or (n) to exit!-->";
     cin >> choice;
     if (choice == 'y') {
-	  if (Logger::isOn()) Logger::fout() << "Moved to next Map!" << endl;
-	  screen::clsObserver();
-	  screen::clsGame();
+      if (Logger::isOn()) Logger::fout() << "Moved to next Map!" << endl;
+      screen::clsObserver();
+      screen::clsGame();
       continue;
     }
     if (choice == 'n') {
@@ -237,9 +236,9 @@ int main(int argc, char const* argv[]) {
 
   }
   cout << "Game over!!! Press any key and then enter to exit! -->";
-	if (Logger::isOn()) Logger::fout() << "Game is over" << endl;
-	delete game;
-	delete gb;
+  if (Logger::isOn()) Logger::fout() << "Game is over" << endl;
+  delete game;
+  delete gb;
   string aux;
   cin >> aux;
   return 0;

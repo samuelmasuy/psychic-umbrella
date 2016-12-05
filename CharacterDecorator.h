@@ -63,7 +63,7 @@ class CharacterDecorator : public Character {
     decoratedCharacter->setAttackBonus();
   }
   void printBackPackItems() {
-	return decoratedCharacter->printBackPackItems();
+    return decoratedCharacter->printBackPackItems();
   }
 
   void addToBackpack(Item* i) {
@@ -78,11 +78,11 @@ class CharacterDecorator : public Character {
   //}
 
   //StrategyN* getStrategy(){
-	 // return decoratedCharacter->getStrategy();
+  // return decoratedCharacter->getStrategy();
   //}
-  
+
   void printEquippedItems();
-  
+
   Item* retrieveItem(string);
 
   void setLevel(int lvl) {
@@ -121,7 +121,7 @@ class CharacterDecorator : public Character {
   }
 
   int getAbilityScore(int ability) {
-	  return decoratedCharacter->getAbilityScore(ability);
+    return decoratedCharacter->getAbilityScore(ability);
   }
   int* getAttackBonus() {
     return decoratedCharacter->getAttackBonus();

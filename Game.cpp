@@ -24,9 +24,9 @@ void Game::play() {
   _map->reinitializeMap();
   initializeCharacterPositionOnMap();
 
-screen::clsGame();
-screen::setCursorPosition(screen::COORD_INI_GAME_SCREEN);
-_map->print();
+  screen::clsGame();
+  screen::setCursorPosition(screen::COORD_INI_GAME_SCREEN);
+  _map->print();
 
   int characterPositionX = character->getPositionX();
   int characterPositionY = character->getPositionY();
@@ -58,7 +58,7 @@ _map->print();
         screen::setCursorPosition(screen::COORD_INI_OBSERVER_SCREEN);
         screen::clsObserver();
         character->playerInfo();
-		system("pause");
+        system("pause");
         screen::setCursorPosition(screen::COORD_INI_GAME_SCREEN);
         screen::clsGame();
         _map->print();
@@ -70,7 +70,7 @@ _map->print();
         screen::clsObserver();
         character->printEquippedItems();
         character->printBackPackItems();
-		system("pause");
+        system("pause");
         screen::setCursorPosition(screen::COORD_INI_GAME_SCREEN);
         screen::clsGame();
         _map->print();
@@ -83,7 +83,7 @@ _map->print();
         cout << "Enter level: ";
         cin >> level;
         character->setLevel(level);
-		system("pause");
+        system("pause");
         screen::setCursorPosition(screen::COORD_INI_GAME_SCREEN);
         screen::clsGame();
         _map->print();
@@ -97,7 +97,7 @@ _map->print();
         cin >> itemType;
         // unequip from character
         character->unEquip(itemType);
-		system("pause");
+        system("pause");
         screen::setCursorPosition(screen::COORD_INI_GAME_SCREEN);
         screen::clsGame();
         _map->print();
@@ -108,7 +108,7 @@ _map->print();
         screen::setCursorPosition(screen::COORD_INI_OBSERVER_SCREEN);
         screen::clsObserver();
         saveCharacter();
-		system("pause");
+        system("pause");
         screen::setCursorPosition(screen::COORD_INI_GAME_SCREEN);
         screen::clsGame();
         _map->print();
@@ -119,7 +119,7 @@ _map->print();
         screen::setCursorPosition(screen::COORD_INI_OBSERVER_SCREEN);
         screen::clsObserver();
         loadCharacter();
-		system("pause");
+        system("pause");
         screen::setCursorPosition(screen::COORD_INI_GAME_SCREEN);
         screen::clsGame();
         _map->print();
@@ -135,7 +135,7 @@ _map->print();
         cin >> itemIndexInBackpack;
         backpackItem = character->getBackPack().getItemAtIndex(itemIndexInBackpack);
         character = new ItemDecorator(character, backpackItem);
-		system("pause");
+        system("pause");
         screen::setCursorPosition(screen::COORD_INI_GAME_SCREEN);
         screen::clsGame();
         _map->print();
@@ -197,31 +197,30 @@ _map->print();
         screen::setCursorPosition(screen::COORD_INI_OBSERVER_SCREEN);
         game->printGameUsage();
         break;
-	  case 'r':
-		  screen::setCursorPosition(screen::COORD_INI_GAME_SCREEN);
-		  screen::clsGame();
-		  _map->print();
-		  screen::setCursorPosition(screen::COORD_INI_OBSERVER_SCREEN);
-		  screen::clsObserver();
-		  gameTurns();
-		  system("pause");
-		  screen::setCursorPosition(screen::COORD_INI_GAME_SCREEN);
-		  screen::clsGame();
-		  _map->print();
-		  screen::setCursorPosition(screen::COORD_INI_OBSERVER_SCREEN);
-		  screen::clsObserver();
+      case 'r':
+        screen::setCursorPosition(screen::COORD_INI_GAME_SCREEN);
+        screen::clsGame();
+        _map->print();
+        screen::setCursorPosition(screen::COORD_INI_OBSERVER_SCREEN);
+        screen::clsObserver();
+        gameTurns();
+        system("pause");
+        screen::setCursorPosition(screen::COORD_INI_GAME_SCREEN);
+        screen::clsGame();
+        _map->print();
+        screen::setCursorPosition(screen::COORD_INI_OBSERVER_SCREEN);
+        screen::clsObserver();
 
-		  if (character->getPositionX() == exitR && character->getPositionY() == exitC && _map->countMonsters() == 0) {
-			  stop();
-			  return;
-		  }
-		  else {
-			  game->printGameUsage();
-		  }
-		  break;
+        if (character->getPositionX() == exitR && character->getPositionY() == exitC && _map->countMonsters() == 0) {
+          stop();
+          return;
+        } else {
+          game->printGameUsage();
+        }
+        break;
       case 'q':
-		  screen::clsObserver();
-		  screen::setCursorPosition(screen::COORD_INI_OBSERVER_SCREEN);
+        screen::clsObserver();
+        screen::setCursorPosition(screen::COORD_INI_OBSERVER_SCREEN);
         cout << "Do you want to quit the game? ('y'/'n'): ";
         cin >> choice;
         if (choice == 'y') {
@@ -240,66 +239,60 @@ _map->print();
 }
 
 void Game::saveCharacter() {
-	string type = "";
-	string saveFile;
-	vector<Item*> equipment;
-	getCharacterEquipedItems(equipment);
+  string type = "";
+  string saveFile;
+  vector<Item*> equipment;
+  getCharacterEquipedItems(equipment);
 
 
 
-	cout << "Enter name of file being saved: ";
-	cin >> saveFile;
+  cout << "Enter name of file being saved: ";
+  cin >> saveFile;
 
 
 
-	ofstream ofs(saveFile);
-	ofs << "CharFile" << endl;	//define type of save file
-	ofs << character->getCharacterType() << endl;
-	ofs << character->getLevel() << endl;
-	ofs << character->getHitPoints() << endl;
-	for (int i = 0; i < 6; i++)
-		ofs << character->getAbilityScore(i) << endl;
-	//ofs << character->armorModifier() << endl;
-	//ofs << character->getDamageBonus() << endl;
+  ofstream ofs(saveFile);
+  ofs << "CharFile" << endl;	//define type of save file
+  ofs << character->getCharacterType() << endl;
+  ofs << character->getLevel() << endl;
+  ofs << character->getHitPoints() << endl;
+  for (int i = 0; i < 6; i++)
+    ofs << character->getAbilityScore(i) << endl;
+  //ofs << character->armorModifier() << endl;
+  //ofs << character->getDamageBonus() << endl;
 
-	ofs << equipment.size() << endl;
+  ofs << equipment.size() << endl;
 
 
-	for (int i = 0; i < equipment.size(); i++)
-	{
+  for (int i = 0; i < equipment.size(); i++) {
 
-		type = equipment[i]->getType();
-		if (type != "")
-		{
-			ofs << equipment[i]->getType() << endl;
-			ofs << equipment[i]->getInfluences().size() << endl;
-			for (int j = 0; j < equipment[i]->getInfluences().size(); j++)
-			{
-				ofs << equipment[i]->getInfluences().at(0).getType() << endl;
-				ofs << equipment[i]->getInfluences().at(0).getBonus() << endl;
-			}
-		}
+    type = equipment[i]->getType();
+    if (type != "") {
+      ofs << equipment[i]->getType() << endl;
+      ofs << equipment[i]->getInfluences().size() << endl;
+      for (int j = 0; j < equipment[i]->getInfluences().size(); j++) {
+        ofs << equipment[i]->getInfluences().at(0).getType() << endl;
+        ofs << equipment[i]->getInfluences().at(0).getBonus() << endl;
+      }
+    }
 
-	}
+  }
 
-	if (character->getBackPack().getSize() != 0) {
-		ofs << character->getBackPack().getSize() << endl;
-		for (int i = 0; i < character->getBackPack().getSize(); i++)
-		{
+  if (character->getBackPack().getSize() != 0) {
+    ofs << character->getBackPack().getSize() << endl;
+    for (int i = 0; i < character->getBackPack().getSize(); i++) {
 
-			ofs << character->getBackPack().getItems().at(i)->getType() << endl;
-			ofs << character->getBackPack().getItems()[i]->getInfluences().size() << endl;
-			for (int j = 0; j < character->getBackPack().getItems()[i]->getInfluences().size(); j++)
-			{
-				ofs << character->getBackPack().getItems()[i]->getInfluences().at(j).getType() << endl;
-				ofs << character->getBackPack().getItems()[i]->getInfluences().at(j).getBonus() << endl;
-			}
-		}
-	}
-	else
-		ofs << 0;
+      ofs << character->getBackPack().getItems().at(i)->getType() << endl;
+      ofs << character->getBackPack().getItems()[i]->getInfluences().size() << endl;
+      for (int j = 0; j < character->getBackPack().getItems()[i]->getInfluences().size(); j++) {
+        ofs << character->getBackPack().getItems()[i]->getInfluences().at(j).getType() << endl;
+        ofs << character->getBackPack().getItems()[i]->getInfluences().at(j).getBonus() << endl;
+      }
+    }
+  } else
+    ofs << 0;
 
-	ofs.close();
+  ofs.close();
 
 
 
@@ -368,7 +361,7 @@ void Game::loadCharacter() {
 
       ifs >> type;
       itemFromFile->setType(type);
-    //  ifs >> bonus;
+      //  ifs >> bonus;
       ifs >> influenceSize;
       for (int j = 0; j < influenceSize; j++) {
         ifs >> type;
@@ -376,7 +369,7 @@ void Game::loadCharacter() {
       }
       itemEnhacement = new Enhancement(type, bonus);
       itemFromFile->setInfluences(*itemEnhacement);
-	  character = new ItemDecorator(character, itemFromFile);
+      character = new ItemDecorator(character, itemFromFile);
     }
 
   }
@@ -474,11 +467,11 @@ void Game::move(int old_x, int old_y, int new_x, int new_y) {
       break;
     case CHAR_EXIT:
       //if (enemiesDefeated) {
-        // set character location to the new cell
-        character->setPositionX(new_x);
-        character->setPositionY(new_y);
-     // } else {
-       // cout << "Cannot exit the map until all Monsters have been defeated" << endl;
+      // set character location to the new cell
+      character->setPositionX(new_x);
+      character->setPositionY(new_y);
+      // } else {
+      // cout << "Cannot exit the map until all Monsters have been defeated" << endl;
       //}
 
       break;
@@ -587,8 +580,8 @@ void Game::printGameUsage() {
 
 
 void Game::getCharacterEquipedItems(vector<Item*> &equipedItems) {
-	Item* i = nullptr;
-	equipedItems.clear();
+  Item* i = nullptr;
+  equipedItems.clear();
   if (character->isEquiped("ring")) {
     i = character->retrieveItem("ring");
     equipedItems.push_back(i);
@@ -624,7 +617,7 @@ void Game::getCharacterEquipedItems(vector<Item*> &equipedItems) {
 }
 
 void Game::createChestsFromMap(vector<Chest*> &chests ) {
-	chests.clear();
+  chests.clear();
 
   vector<Coord2D> chestCoords;
 
@@ -648,7 +641,7 @@ void Game::createChestsFromMap(vector<Chest*> &chests ) {
 }
 
 void Game::createMonstersFromMap(vector<Character*> &monsters) {
-	monsters.clear();
+  monsters.clear();
   MonsterDirector* md = new MonsterDirector();
   MonsterBuilder* mb = nullptr;
   Character* monster = nullptr;
@@ -727,74 +720,68 @@ void Game::createMonstersFromMap(vector<Character*> &monsters) {
   delete md;
 }
 
-void Game::gameTurns()
-{
-	setGameState();
-	setAvatarsOnMap();
-	for (int i = 0; i < avatarsOnMap.size(); i++)
-	{
-		if (avatarsOnMap[i]->getCharacter()->getHitPoints() <= 0) {
-			continue;
-		}
-		screen::setCursorPosition(screen::COORD_INI_GAME_SCREEN);
-		screen::clsGame();
-		_map->print();
-		screen::setCursorPosition(screen::COORD_INI_OBSERVER_SCREEN);
-		screen::clsObserver();
-		//cout << "It is the " << avatarsOnMap[i]->getCharacter()->getCharacterType() << "'s turn" << endl;
-		//system("pause");
-		avatarsOnMap[i]->execute(gameState);
-		system("pause");
-		setGameState();
+void Game::gameTurns() {
+  setGameState();
+  setAvatarsOnMap();
+  for (int i = 0; i < avatarsOnMap.size(); i++) {
+    if (avatarsOnMap[i]->getCharacter()->getHitPoints() <= 0) {
+      continue;
+    }
+    screen::setCursorPosition(screen::COORD_INI_GAME_SCREEN);
+    screen::clsGame();
+    _map->print();
+    screen::setCursorPosition(screen::COORD_INI_OBSERVER_SCREEN);
+    screen::clsObserver();
+    //cout << "It is the " << avatarsOnMap[i]->getCharacter()->getCharacterType() << "'s turn" << endl;
+    //system("pause");
+    avatarsOnMap[i]->execute(gameState);
+    system("pause");
+    setGameState();
 
-		if (gameState->getMainCharacter()->getHitPoints() <= 0)
-		{
-			cout << "You died in battle. RIP\n";
-			cout << " .oOOOo.     Oo    Oo      oO o.OOoOoo       .oOOOo.  o      'O o.OOoOoo `OooOOo.  " << endl;
-			cout << ".O     o    o  O   O O    o o  O            .O     o. O       o  O        o     `o " << endl;
-			cout << "o          O    o  o  o  O  O  o            O       o o       O  o        O      O " << endl;
-			cout << "O         oOooOoOo O   Oo   O  ooOO         o       O o       o  ooOO     o     .O " << endl;
-			cout << "O   .oOOo o      O O        o  O            O       o O      O'  O        OOooOO'  " << endl;
-			cout << "o.      O O      o o        O  o            o       O `o    o    o        o    o   " << endl;
-			cout << " O.    oO o      O o        O  O            `o     O'  `o  O     O        O     O  " << endl;
-			cout << "  `OooO'  O.     O O        o ooOooOoO       `OoooO'    `o'     ooOooOoO  O      o " << endl;
-			cout << "                                                                                   " << endl;
-			stop();
-			break;
-		}
-	}
+    if (gameState->getMainCharacter()->getHitPoints() <= 0) {
+      cout << "You died in battle. RIP\n";
+      cout << " .oOOOo.     Oo    Oo      oO o.OOoOoo       .oOOOo.  o      'O o.OOoOoo `OooOOo.  " << endl;
+      cout << ".O     o    o  O   O O    o o  O            .O     o. O       o  O        o     `o " << endl;
+      cout << "o          O    o  o  o  O  O  o            O       o o       O  o        O      O " << endl;
+      cout << "O         oOooOoOo O   Oo   O  ooOO         o       O o       o  ooOO     o     .O " << endl;
+      cout << "O   .oOOo o      O O        o  O            O       o O      O'  O        OOooOO'  " << endl;
+      cout << "o.      O O      o o        O  o            o       O `o    o    o        o    o   " << endl;
+      cout << " O.    oO o      O o        O  O            `o     O'  `o  O     O        O     O  " << endl;
+      cout << "  `OooO'  O.     O O        o ooOooOoO       `OoooO'    `o'     ooOooOoO  O      o " << endl;
+      cout << "                                                                                   " << endl;
+      stop();
+      break;
+    }
+  }
 }
 
-void Game::setAvatarsOnMap()
-{
-	int rd = 0;
-	srand(time(NULL));
+void Game::setAvatarsOnMap() {
+  int rd = 0;
+  srand(time(NULL));
 
-	StrategyN* monsterStrategy = nullptr;
-	avatarsOnMap.push_back(new AvatarSprite(gameState->getMainCharacter(), new HumanStrategyN()));
-	for (int i = 0; i < gameState->getMonsters().size(); i++)
-	{
-		rd = rand() % 2 + 1;
-		if (rd == 1)
-			monsterStrategy = new FriendlyStrategyN();
-		else
-			monsterStrategy = new AgressiveStrategyN();
+  StrategyN* monsterStrategy = nullptr;
+  avatarsOnMap.push_back(new AvatarSprite(gameState->getMainCharacter(), new HumanStrategyN()));
+  for (int i = 0; i < gameState->getMonsters().size(); i++) {
+    rd = rand() % 2 + 1;
+    if (rd == 1)
+      monsterStrategy = new FriendlyStrategyN();
+    else
+      monsterStrategy = new AgressiveStrategyN();
 
-		avatarsOnMap.push_back(new AvatarSprite(gameState->getMonsters()[i], monsterStrategy));
-	}
+    avatarsOnMap.push_back(new AvatarSprite(gameState->getMonsters()[i], monsterStrategy));
+  }
 
 }
-void Game::setGameState()
-{
-	vector<Character*> monsters;
-	createMonstersFromMap(monsters);
-	vector<Chest*> chests;
-	createChestsFromMap(chests);
+void Game::setGameState() {
+  vector<Character*> monsters;
+  createMonstersFromMap(monsters);
+  vector<Chest*> chests;
+  createChestsFromMap(chests);
 
-	gameState = new GameStateN();
-	gameState->setChests(chests);
-	gameState->setMonsters(monsters);
-	gameState->setMainCharacter(character);
-	gameState->setMap(_map);
+  gameState = new GameStateN();
+  gameState->setChests(chests);
+  gameState->setMonsters(monsters);
+  gameState->setMainCharacter(character);
+  gameState->setMap(_map);
 
 }
